@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== CSS 自定义属性（Design Tokens） ===== */
+:root {
+  /* 背景 */
+  --bg-base:  #0A0A0F;
+  --bg-mesh:  radial-gradient(ellipse 80% 60% at 20% 30%, rgba(201,168,76,0.07) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 40% at 80% 70%, rgba(201,168,76,0.04) 0%, transparent 55%),
+              radial-gradient(ellipse 100% 100% at 50% 50%, #0D0C14 0%, #0A0A0F 100%);
+
+  /* 玻璃面板 */
+  --surface-1:   rgba(255,255,255,0.05);
+  --surface-2:   rgba(255,255,255,0.08);
+  --surface-3:   rgba(255,255,255,0.12);
+  --border-soft: rgba(255,255,255,0.08);
+  --border-base: rgba(255,255,255,0.12);
+  --border-gold: rgba(201,168,76,0.35);
+
+  /* 金色 */
+  --gold-light: #E8C97A;
+  --gold-base:  #C9A84C;
+  --gold-dark:  #A8872E;
+  --gold-glow:  rgba(201,168,76,0.15);
+  --gold-grad:  linear-gradient(135deg, #A8872E 0%, #C9A84C 40%, #E8C97A 100%);
+
+  /* 文字 */
+  --text-primary:   #F0EDE6;
+  --text-secondary: rgba(240,237,230,0.60);
+  --text-muted:     rgba(240,237,230,0.35);
+  --text-disabled:  rgba(240,237,230,0.20);
+  --text-gold:      #C9A84C;
+
+  /* 语义 */
+  --success: #4CAF82;
+  --warning: #E8A838;
+  --error:   #E05454;
+  --info:    #5B8FE8;
+
+  /* 阴影 */
+  --shadow-glass:    0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  --shadow-gold:     0 0 32px rgba(201,168,76,0.18);
+  --shadow-elevated: 0 20px 60px rgba(0,0,0,0.6);
+}
+
+/* ===== 全局基础样式 ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 禁止横向滚动 */
+  overflow-x: hidden;
+}
+
+/* 纸质颗粒纹理（2% opacity，打破纯数字感） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
+/* ===== 工具类 ===== */
+.glass-panel {
+  background: var(--surface-1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-base);
+  border-radius: 16px;
+  box-shadow: var(--shadow-glass);
+}
+
+.report-module {
+  background: var(--surface-1);
+  border: 1px solid var(--border-gold);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-glass), var(--shadow-gold);
+  margin-bottom: 16px;
+}
+
+.report-section-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--text-gold);
+}
+
+/* 主按钮 */
+.btn-primary {
+  background: var(--gold-grad);
+  color: #1a1408;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: opacity 0.15s;
+}
+.btn-primary:active { opacity: 0.85; }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* 次按钮 */
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-base);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 12px 24px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.btn-secondary:hover {
+  border-color: var(--border-gold);
+  color: var(--text-gold);
+}
+
+/* 底部下划线输入框 */
+.input-underline {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-base);
+  color: var(--text-primary);
+  padding: 12px 0;
+  font-size: 15px;
+  width: 100%;
+  outline: none;
+  caret-color: var(--gold-base);
+}
+.input-underline:focus {
+  border-bottom-color: var(--gold-base);
+  box-shadow: 0 2px 0 rgba(201,168,76,0.4);
+}
+.input-underline::placeholder { color: var(--text-muted); }
+
+/* 数字字体 */
+.font-num {
+  font-family: 'Geist', 'Geist Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,33 @@
+# 环境变量（严禁提交）
+.env
+.env.*
+!.env.example
+
+# 微信支付私钥证书
+backend/certs/
+*.pem
+*.p12
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+
+# Node / Vite 构建产物
+node_modules/
+frontend/dist/
+admin/dist/
+frontend/node_modules/
+admin/node_modules/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
