@@ -3,18 +3,18 @@
 """
 import logging
 import httpx
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request
 from supabase import AuthApiError
 
 from config import settings
-from db.client import admin_client
+from db.client import get_admin_client
 from db.queries.users import (
     get_user_by_phone,
     create_user,
     get_user_by_invite_code,
     update_wechat_openid,
 )
-from middleware.rate_limit import check_sms_rate_limit
+from middleware.rate_limit import check_sms_rate_limit, check_admin_login_rate_limit
 from models.user import SendSmsRequest, LoginRequest, WechatLoginRequest
 from models.common import ok, fail
 from services.sms import send_sms_code, verify_sms_code
@@ -52,11 +52,11 @@ async def login(req: LoginRequest):
         # 已存在：直接通过 admin API 生成 session
         user_id = existing["id"]
         # 使用 admin.create_session 直接签发 token（无需发送验证码邮件）
-        token_data = await admin_client.auth.admin.create_session(user_id)
+        token_data = await get_admin_client().auth.admin.create_session(user_id)
     else:
         # 新用户：先在 auth.users 创建
         try:
-            auth_user = await admin_client.auth.admin.create_user(
+            auth_user = await get_admin_client().auth.admin.create_user(
                 {
                     "phone": req.phone,
                     "phone_confirm": True,
@@ -78,7 +78,7 @@ async def login(req: LoginRequest):
 
         # 在 public.users 和 wallets 创建记录
         await create_user(user_id, req.phone, referrer_id)
-        token_data = await admin_client.auth.admin.create_session(user_id)
+        token_data = await get_admin_client().auth.admin.create_session(user_id)
 
     access_token = token_data.session.access_token
     return ok(data={"access_token": access_token, "token_type": "bearer"})
@@ -117,7 +117,7 @@ async def wechat_login(req: WechatLoginRequest):
 
     # 查询是否已绑定
     result = await (
-        admin_client.table("users")
+        get_admin_client().table("users")
         .select("id")
         .eq("wechat_openid", openid)
         .maybe_single()
@@ -129,7 +129,7 @@ async def wechat_login(req: WechatLoginRequest):
         user_id = user_record["id"]
     else:
         # 新微信用户：创建 auth 用户 + 绑定 openid
-        auth_user = await admin_client.auth.admin.create_user(
+        auth_user = await get_admin_client().auth.admin.create_user(
             {"email": f"wx_{openid}@ideas.top", "email_confirm": True}
         )
         user_id = auth_user.user.id
@@ -141,15 +141,17 @@ async def wechat_login(req: WechatLoginRequest):
         new_user = await create_user(user_id, f"wx_{openid[:8]}", referrer_id)
         await update_wechat_openid(user_id, openid)
 
-    token_data = await admin_client.auth.admin.create_session(user_id)
+    token_data = await get_admin_client().auth.admin.create_session(user_id)
     return ok(data={"access_token": token_data.session.access_token, "token_type": "bearer"})
 
 
 @router.post("/admin/login")
-async def admin_login(body: dict):
+async def admin_login(request: Request, body: dict):
     """
     管理员账号密码登录（bcrypt 验证，签发独立 Admin JWT）
+    IP 限流：每分钟最多 5 次尝试，超限返回 429
     """
+    check_admin_login_rate_limit(request)
     username = body.get("username", "")
     password = body.get("password", "")
 

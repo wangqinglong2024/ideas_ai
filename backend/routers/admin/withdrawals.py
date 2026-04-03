@@ -3,7 +3,7 @@
 """
 from fastapi import APIRouter, Depends, HTTPException
 from dependencies import get_admin
-from db.client import admin_client
+from db.client import get_admin_client
 from db.queries.withdrawals import get_withdrawal_by_id, update_withdrawal_status
 from models.withdrawal import AdminWithdrawalAction
 from models.common import ok
@@ -21,7 +21,7 @@ async def list_withdrawals(
     """提现列表（默认 pending）"""
     offset = (page - 1) * page_size
     query = (
-        admin_client.table("withdrawals")
+        get_admin_client().table("withdrawals")
         .select("id,user_id,amount,payee_name,payee_account,payee_method,status,admin_note,created_at")
         .order("created_at", desc=True)
         .range(offset, offset + page_size - 1)
@@ -30,7 +30,7 @@ async def list_withdrawals(
         query = query.eq("status", status)
     result = await query.execute()
 
-    count_q = admin_client.table("withdrawals").select("id", count="exact")
+    count_q = get_admin_client().table("withdrawals").select("id", count="exact")
     if status:
         count_q = count_q.eq("status", status)
     count_result = await count_q.execute()
@@ -67,7 +67,7 @@ async def reject_withdrawal(
         raise HTTPException(status_code=400, detail="状态不可操作")
 
     # 退还余额
-    await admin_client.rpc(
+    await get_admin_client().rpc(
         "refund_wallet_balance",
         {"p_user_id": w["user_id"], "p_amount": float(w["amount"])},
     ).execute()
@@ -86,7 +86,7 @@ async def confirm_paid(withdrawal_id: str, _: None = Depends(get_admin)):
         raise HTTPException(status_code=400, detail="状态不可操作")
 
     # 累加 total_withdrawn
-    await admin_client.rpc(
+    await get_admin_client().rpc(
         "confirm_withdrawal_paid",
         {"p_user_id": w["user_id"], "p_amount": float(w["amount"])},
     ).execute()

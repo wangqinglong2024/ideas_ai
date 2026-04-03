@@ -17,3 +17,13 @@ async def init_clients() -> None:
     global anon_client, admin_client
     anon_client = await acreate_client(settings.supabase_url, settings.supabase_anon_key)
     admin_client = await acreate_client(settings.supabase_url, settings.supabase_service_role_key)
+
+
+def get_anon_client() -> AsyncClient:
+    """获取 anon 客户端（线程安全，用于路由函数内动态调用）"""
+    return anon_client  # type: ignore
+
+
+def get_admin_client() -> AsyncClient:
+    """获取 admin 客户端（线程安全，用于路由函数内动态调用）"""
+    return admin_client  # type: ignore

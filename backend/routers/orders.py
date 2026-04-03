@@ -4,7 +4,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Request
 from dependencies import get_current_user
 from db.queries.orders import create_order, get_order_by_id, get_orders_by_user
-from db.client import admin_client
+from db.client import get_admin_client
 from models.order import CreateOrderRequest
 from models.common import ok
 from services.payment import create_wechat_pay, create_alipay
@@ -26,7 +26,7 @@ async def create_new_order(
     """
     # 读取系统配置价格
     settings_row = await (
-        admin_client.table("settings")
+        get_admin_client().table("settings")
         .select("order_price")
         .eq("id", 1)
         .single()

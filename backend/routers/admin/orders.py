@@ -3,7 +3,7 @@
 """
 from fastapi import APIRouter, Depends, HTTPException
 from dependencies import get_admin
-from db.client import admin_client
+from db.client import get_admin_client
 from models.common import ok
 
 router = APIRouter(prefix="/admin/orders", tags=["admin-orders"])
@@ -19,7 +19,7 @@ async def list_orders(
     """订单列表（分页 + 按状态筛选）"""
     offset = (page - 1) * page_size
     query = (
-        admin_client.table("orders")
+        get_admin_client().table("orders")
         .select("id,user_id,category,status,amount,paid_at,created_at")
         .order("created_at", desc=True)
         .range(offset, offset + page_size - 1)
@@ -28,7 +28,7 @@ async def list_orders(
         query = query.eq("status", status)
 
     result = await query.execute()
-    count_query = admin_client.table("orders").select("id", count="exact")
+    count_query = get_admin_client().table("orders").select("id", count="exact")
     if status:
         count_query = count_query.eq("status", status)
     count_result = await count_query.execute()
@@ -40,7 +40,7 @@ async def list_orders(
 @router.get("/{order_id}")
 async def get_order(order_id: str, _: None = Depends(get_admin)):
     """订单详情（含报告内容）"""
-    result = await admin_client.table("orders").select("*").eq("id", order_id).maybe_single().execute()
+    result = await get_admin_client().table("orders").select("*").eq("id", order_id).maybe_single().execute()
     if not result.data:
         raise HTTPException(status_code=404, detail="订单不存在")
     return ok(data=result.data)
@@ -52,7 +52,7 @@ async def refund_order(order_id: str, _: None = Depends(get_admin)):
     退款（将订单标记为 refunded）
     实际退款需通过微信/支付宝 API 操作（MVP 手动处理）
     """
-    result = await admin_client.table("orders").select("status,payment_no").eq("id", order_id).maybe_single().execute()
+    result = await get_admin_client().table("orders").select("status,payment_no").eq("id", order_id).maybe_single().execute()
     if not result.data:
         raise HTTPException(status_code=404, detail="订单不存在")
 
@@ -60,5 +60,5 @@ async def refund_order(order_id: str, _: None = Depends(get_admin)):
     if current_status not in ("paid", "completed"):
         raise HTTPException(status_code=400, detail=f"当前状态 {current_status} 不可退款")
 
-    await admin_client.table("orders").update({"status": "refunded"}).eq("id", order_id).execute()
+    await get_admin_client().table("orders").update({"status": "refunded"}).eq("id", order_id).execute()
     return ok(message="订单已标记为退款")

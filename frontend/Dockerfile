@@ -9,7 +9,7 @@ FROM node:20-alpine AS frontend-builder
 
 WORKDIR /app/frontend
 COPY package.json package-lock.json* ./
-RUN npm ci --prefer-offline
+RUN npm install --prefer-offline
 COPY . .
 RUN npm run build
 
@@ -17,8 +17,8 @@ RUN npm run build
 FROM node:20-alpine AS admin-builder
 
 WORKDIR /app/admin
-COPY admin/package.json admin/package-lock.json* ./
-RUN npm ci --prefer-offline
+COPY admin/package.json ./
+RUN npm install
 COPY admin/ .
 RUN npm run build
 

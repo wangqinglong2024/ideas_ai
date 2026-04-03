@@ -3,7 +3,7 @@
 支付成功后立即触发，通过 Supabase RPC 原子执行
 """
 import logging
-from db.client import admin_client
+from db.client import get_admin_client
 from db.queries.users import get_user_by_id
 
 logger = logging.getLogger(__name__)
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 async def get_commission_ratio() -> float:
     """从系统配置表读取当前佣金比例"""
     result = await (
-        admin_client.table("settings")
+        get_admin_client().table("settings")
         .select("commission_ratio")
         .eq("id", 1)
         .single()
@@ -35,7 +35,7 @@ async def settle_after_payment(order_id: str, buyer_id: str, order_amount: float
     commission_amount = round(order_amount * commission_ratio, 2)
 
     try:
-        await admin_client.rpc(
+        await get_admin_client().rpc(
             "settle_commission",
             {
                 "p_order_id": order_id,

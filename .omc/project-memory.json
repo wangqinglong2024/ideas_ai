@@ -152,9 +152,51 @@
   },
   "hotPaths": [
     {
+      "path": "backend/routers/auth.py",
+      "accessCount": 7,
+      "lastAccessed": 1775184983963,
+      "type": "file"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "accessCount": 7,
+      "lastAccessed": 1775185580776,
+      "type": "file"
+    },
+    {
       "path": "frontend/src/App.tsx",
       "accessCount": 5,
       "lastAccessed": 1775140897883,
+      "type": "file"
+    },
+    {
+      "path": "backend/.env",
+      "accessCount": 5,
+      "lastAccessed": 1775184472382,
+      "type": "file"
+    },
+    {
+      "path": "frontend/Dockerfile",
+      "accessCount": 4,
+      "lastAccessed": 1775179972649,
+      "type": "file"
+    },
+    {
+      "path": "docker-compose.yml",
+      "accessCount": 4,
+      "lastAccessed": 1775184665430,
+      "type": "file"
+    },
+    {
+      "path": "backend/db/client.py",
+      "accessCount": 4,
+      "lastAccessed": 1775186260243,
+      "type": "file"
+    },
+    {
+      "path": "frontend/admin/index.html",
+      "accessCount": 3,
+      "lastAccessed": 1775184367879,
       "type": "file"
     },
     {
@@ -188,18 +230,6 @@
       "type": "file"
     },
     {
-      "path": "backend/requirements.txt",
-      "accessCount": 2,
-      "lastAccessed": 1775140479575,
-      "type": "file"
-    },
-    {
-      "path": "docker-compose.yml",
-      "accessCount": 2,
-      "lastAccessed": 1775140479827,
-      "type": "file"
-    },
-    {
       "path": "backend/config.py",
       "accessCount": 2,
       "lastAccessed": 1775140488858,
@@ -212,12 +242,6 @@
       "type": "file"
     },
     {
-      "path": "backend/routers/auth.py",
-      "accessCount": 2,
-      "lastAccessed": 1775140492982,
-      "type": "file"
-    },
-    {
       "path": "backend/routers/orders.py",
       "accessCount": 2,
       "lastAccessed": 1775140493389,
@@ -227,12 +251,6 @@
       "path": "backend/services/commission.py",
       "accessCount": 2,
       "lastAccessed": 1775140493885,
-      "type": "file"
-    },
-    {
-      "path": "backend/db/client.py",
-      "accessCount": 2,
-      "lastAccessed": 1775140494290,
       "type": "file"
     },
     {
@@ -278,21 +296,15 @@
       "type": "file"
     },
     {
-      "path": "backend/.env",
-      "accessCount": 2,
-      "lastAccessed": 1775140780995,
-      "type": "file"
-    },
-    {
       "path": "frontend/nginx.conf",
       "accessCount": 2,
       "lastAccessed": 1775140886299,
       "type": "file"
     },
     {
-      "path": "frontend/Dockerfile",
+      "path": "frontend/admin/src/api/stats.ts",
       "accessCount": 2,
-      "lastAccessed": 1775140926904,
+      "lastAccessed": 1775173584212,
       "type": "file"
     },
     {
@@ -410,12 +422,6 @@
       "type": "file"
     },
     {
-      "path": "frontend/admin/index.html",
-      "accessCount": 1,
-      "lastAccessed": 1775140906767,
-      "type": "file"
-    },
-    {
       "path": "frontend/admin/src/main.tsx",
       "accessCount": 1,
       "lastAccessed": 1775140912387,
@@ -434,9 +440,15 @@
       "type": "file"
     },
     {
-      "path": "frontend/admin/src/api/stats.ts",
+      "path": "frontend/admin/src/App.tsx",
       "accessCount": 1,
-      "lastAccessed": 1775140931617,
+      "lastAccessed": 1775173441953,
+      "type": "file"
+    },
+    {
+      "path": "frontend/admin/src/api/orders.ts",
+      "accessCount": 1,
+      "lastAccessed": 1775173443724,
       "type": "file"
     }
   ],

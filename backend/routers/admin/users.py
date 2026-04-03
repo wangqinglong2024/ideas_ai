@@ -3,7 +3,7 @@
 """
 from fastapi import APIRouter, Depends, HTTPException
 from dependencies import get_admin
-from db.client import admin_client
+from db.client import get_admin_client
 from db.queries.users import set_user_frozen
 from models.common import ok
 from utils.phone_mask import mask_phone
@@ -20,13 +20,13 @@ async def list_users(
     """用户列表（分页，按注册时间倒序）"""
     offset = (page - 1) * page_size
     result = await (
-        admin_client.table("users")
+        get_admin_client().table("users")
         .select("id,phone,invite_code,invited_by,is_frozen,created_at")
         .order("created_at", desc=True)
         .range(offset, offset + page_size - 1)
         .execute()
     )
-    total_result = await admin_client.table("users").select("id", count="exact").execute()
+    total_result = await get_admin_client().table("users").select("id", count="exact").execute()
     total = total_result.count or 0
 
     # 脱敏手机号
@@ -41,14 +41,14 @@ async def list_users(
 @router.get("/{user_id}")
 async def get_user_detail(user_id: str, _: None = Depends(get_admin)):
     """用户详情（含钱包余额和订单统计）"""
-    user_result = await admin_client.table("users").select("*").eq("id", user_id).maybe_single().execute()
+    user_result = await get_admin_client().table("users").select("*").eq("id", user_id).maybe_single().execute()
     user = user_result.data
     if not user:
         raise HTTPException(status_code=404, detail="用户不存在")
 
-    wallet_result = await admin_client.table("wallets").select("*").eq("user_id", user_id).maybe_single().execute()
+    wallet_result = await get_admin_client().table("wallets").select("*").eq("user_id", user_id).maybe_single().execute()
     wallet = wallet_result.data
-    order_count_result = await admin_client.table("orders").select("id", count="exact").eq("user_id", user_id).execute()
+    order_count_result = await get_admin_client().table("orders").select("id", count="exact").eq("user_id", user_id).execute()
     order_count = order_count_result.count
 
     if user.get("phone") and not user["phone"].startswith("wx_"):

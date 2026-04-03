@@ -4,7 +4,7 @@
 from datetime import datetime, timedelta, timezone
 from fastapi import APIRouter, Depends
 from dependencies import get_admin
-from db.client import admin_client
+from db.client import get_admin_client
 from models.common import ok
 
 router = APIRouter(prefix="/admin/stats", tags=["admin-stats"])
@@ -24,7 +24,7 @@ async def stats_overview(_: None = Depends(get_admin)):
 
     # 总收入和今日收入
     all_orders = await (
-        admin_client.table("orders")
+        get_admin_client().table("orders")
         .select("amount,paid_at,status")
         .in_("status", ["paid", "generating", "completed"])
         .execute()
@@ -37,12 +37,12 @@ async def stats_overview(_: None = Depends(get_admin)):
     )
 
     # 总用户数
-    users_count = await admin_client.table("users").select("id", count="exact").execute()
+    users_count = await get_admin_client().table("users").select("id", count="exact").execute()
     total_users = users_count.count or 0
 
     # 待审核提现
     pending_withdrawals = await (
-        admin_client.table("withdrawals")
+        get_admin_client().table("withdrawals")
         .select("id", count="exact")
         .eq("status", "pending")
         .execute()
@@ -50,7 +50,7 @@ async def stats_overview(_: None = Depends(get_admin)):
     pending_count = pending_withdrawals.count or 0
 
     # AI 成本估算
-    settings_row = await admin_client.table("settings").select("ai_cost_per_call").eq("id", 1).single().execute()
+    settings_row = await get_admin_client().table("settings").select("ai_cost_per_call").eq("id", 1).single().execute()
     ai_cost = float(settings_row.data["ai_cost_per_call"])
     completed_count = len([o for o in orders_data if o["status"] == "completed"])
     estimated_ai_cost = round(ai_cost * completed_count, 2)
@@ -74,7 +74,7 @@ async def revenue_chart(_: None = Depends(get_admin)):
     days = [(today - timedelta(days=i)).isoformat() for i in range(6, -1, -1)]
 
     result = await (
-        admin_client.table("orders")
+        get_admin_client().table("orders")
         .select("amount,paid_at")
         .in_("status", ["paid", "generating", "completed"])
         .gte("paid_at", days[0])
