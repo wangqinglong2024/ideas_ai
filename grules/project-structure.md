@@ -206,6 +206,7 @@ supabase/migrations/20260407120000_create_payments_table.sql
 ## 四、Docker 基础设施模板
 
 > 所有项目必须从这些模板出发，禁止从零随意编写。
+> 多环境部署详见 `deployment.md`（三环境 Docker Compose 覆盖文件方案）。
 
 ### 1. 前端 Dockerfile
 ```dockerfile
@@ -231,7 +232,7 @@ WORKDIR /app
 
 # 系统依赖（如需编译某些包）
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc libpq-dev && rm -rf /var/lib/apt/lists/*
+    gcc libpq-dev curl && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -242,27 +243,47 @@ EXPOSE 8000
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
-### 3. docker-compose.yml 标准模板
+### 3. docker-compose.yml（生产基础文件）
 ```yaml
-version: "3.8"
+# docker-compose.yml — 生产环境基础配置
+# 生产：docker compose up -d --build
+# dev：docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d --build
+# staging：docker compose -f docker-compose.yml -f docker-compose.stg.yml up -d --build
 
 services:
   frontend:
     build: ./frontend
-    container_name: ${PROJECT_NAME}-frontend
+    container_name: ${PROJECT_NAME}-fe
     restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 128M
     networks:
       - gateway_net
 
   backend:
     build: ./backend
-    container_name: ${PROJECT_NAME}-backend
+    container_name: ${PROJECT_NAME}-be
     restart: unless-stopped
+    env_file: .env.prod
     environment:
-      - SUPABASE_URL=${SUPABASE_URL}
-      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
-      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
-      - JWT_SECRET=${JWT_SECRET}
+      - APP_ENV=production
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "5"
     networks:
       - gateway_net
       - global-data-link
@@ -274,21 +295,66 @@ networks:
     external: true
 ```
 
+### 3b. docker-compose.dev.yml（dev 覆盖文件）
+```yaml
+# docker-compose.dev.yml — 覆盖端口 + 环境变量
+services:
+  frontend:
+    container_name: ${PROJECT_NAME}-dev-fe
+    ports:
+      - "${DEV_FE_PORT:-3100}:80"
+  backend:
+    container_name: ${PROJECT_NAME}-dev-be
+    ports:
+      - "${DEV_BE_PORT:-8100}:8000"
+    env_file: .env.dev
+    environment:
+      - APP_ENV=dev
+```
+
+### 3c. docker-compose.stg.yml（staging 覆盖文件）
+```yaml
+# docker-compose.stg.yml — 覆盖端口 + 环境变量
+services:
+  frontend:
+    container_name: ${PROJECT_NAME}-stg-fe
+    ports:
+      - "${STG_FE_PORT:-3200}:80"
+  backend:
+    container_name: ${PROJECT_NAME}-stg-be
+    ports:
+      - "${STG_BE_PORT:-8200}:8000"
+    env_file: .env.stg
+    environment:
+      - APP_ENV=staging
+```
+
 ### 4. .env.example 标准模板
 ```bash
 # 项目标识
 PROJECT_NAME=my-project
 
+# 环境标识（dev / staging / production）— 由 docker-compose 覆盖文件注入
+# APP_ENV=dev
+
 # Supabase（从 grules/env.md 获取实际值）
-SUPABASE_URL=https://supabase.ideas.top
+SUPABASE_URL=http://supabase-kong:8000
 SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 JWT_SECRET=
 
 # 前端（Vite 环境变量必须 VITE_ 前缀）
-VITE_SUPABASE_URL=https://supabase.ideas.top
+# dev/staging: http://115.159.109.23:{端口}
+# production: https://{域名}
+VITE_SUPABASE_URL=
 VITE_SUPABASE_ANON_KEY=
 VITE_API_BASE=
+
+# 端口（dev/staging 用，生产不暴露端口）
+# DEV_FE_PORT=3100
+# DEV_BE_PORT=8100
+# STG_FE_PORT=3200
+# STG_BE_PORT=8200
 
 # 可选：第三方服务
 # DIFY_API_KEY=

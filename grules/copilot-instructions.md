@@ -1,6 +1,6 @@
 # Copilot 项目级指令 (Copilot Instructions)
 
-> **版本**: v1.1 | **最后更新**: 2025-07-16
+> **版本**: v1.2 | **最后更新**: 2025-07-16
 >
 > **本文件用途**：当你在一个具体项目里开发时，把此文件复制到项目根目录 `.github/copilot-instructions.md`。
 > GitHub Copilot 会自动读取它，作为全局指令影响所有代码生成。
@@ -20,6 +20,14 @@
 - 对话、注释、文档：简体中文
 - 代码、变量名、技术术语：英文
 
+## 部署架构
+单服务器（115.159.109.23）三环境架构：
+- **dev**：`IP:端口` 访问，Schema `dev_{project}`
+- **staging**：`IP:端口` 访问，Schema `stg_{project}`
+- **production**：域名访问（ideas.top 等），Schema `public`
+- 基础设施（Supabase/Dify/NocoBase）仅一套，全环境共享
+- 环境由 `APP_ENV` 环境变量控制，代码中禁止硬编码环境判断
+
 ## 规范文件
 本项目的完整开发规范在 `grules/` 目录下，包含：
 - `rules.md` — 全局架构白皮书（设计理念、安全底线、UI 规范）
@@ -29,7 +37,7 @@
 - `qa-testing.md` — QA 测试规范（Browser MCP + Docker）
 - `task-workflow.md` — 任务拆解与开发流程（含 Stitch 原型审查前置阶段）
 - `product-design.md` — 产品需求优化规范 + Stitch 原型工作流
-- `deployment.md` — 部署与运维规范（Docker 部署、回滚、监控、备份、事故响应）
+- `deployment.md` — 单服务器三环境架构、端口规划、Docker 多环境部署、Schema 隔离、回滚、监控、备份
 - `operational-runbook.md` — 操作诊断与自愈运行手册（故障决策树、性能基准、缓存策略、自愈脚本）
 
 在写任何代码前，请先检查这些规范文件中的相关规则。
@@ -80,6 +88,7 @@
 - 完成代码后输出交付清单（新增/修改的文件 + 验收方式 + QA 测试结果）
 - 声明完成状态：✅完成 / ⚠️有顾虑 / 🚫阻塞 / ❓需要上下文
 - Docker 环境下测试，禁止宿主机直接安装依赖
+- 开发和测试在 dev 环境进行（`IP:端口`），生产部署走 `main` 分支 + 域名
 - 修 Bug 必须附带回归测试，一个 commit 一个修复
 
 ### 产品设计与 Stitch 原型

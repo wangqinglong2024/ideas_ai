@@ -1,8 +1,10 @@
 # 规范文件索引 (Standards Index)
 
-> **版本**: v1.1 | **最后更新**: 2025-07-16
+> **版本**: v1.2 | **最后更新**: 2025-07-16
 >
 > **AI 请先阅读此文件**，了解本项目的完整规范体系，然后按需深入阅读具体文件。
+>
+> **架构概要**：单服务器（`115.159.109.23`）三环境架构。基础设施（Supabase/Dify/NocoBase）仅一套，前后端按 dev/staging/prod 独立容器。
 
 ---
 
@@ -19,7 +21,7 @@
 | [task-workflow.md](task-workflow.md) | AI 驱动的任务拆解与开发流程（需求优化→原型审查→需求分析→拆任务→逐个开发→验收） | 新项目启动的完整流程 |
 | [product-design.md](product-design.md) | 产品需求文档全维度规范 + Stitch 原型工作流 + MCP API 调用手册 + 竞品分析/用户旅程/无障碍模板 | 写需求、审查原型、管理设计系统时 |
 | [copilot-instructions.md](copilot-instructions.md) | VS Code Copilot 项目级指令 + 使用技巧 | 配置新项目的 Copilot 时 |
-| [deployment.md](deployment.md) | 部署与运维规范（环境管理、Docker 部署、回滚、监控告警、数据库备份、事故响应） | 部署上线时 |
+| [deployment.md](deployment.md) | 单服务器三环境架构、端口规划、Docker 多环境部署、Schema 隔离、回滚、监控、备份、事故响应 | 部署上线、环境配置时 |
 | [operational-runbook.md](operational-runbook.md) | 操作诊断与自愈运行手册（故障决策树、按层排错、性能基准、缓存策略、自愈脚本） | 生产故障排查、性能优化时 |
 
 ---
@@ -42,8 +44,10 @@ AI 工作流：Dify
 
 ```
 1. 把 grules/ 整个目录复制到新项目（或保持在公共位置引用）
-2. 在新项目根目录创建 .github/copilot-instructions.md（从 copilot-instructions.md 中复制精简版）
-3. 在 product/ 目录写好产品需求文档（按 product-design.md 的规范优化）
-4. 如有 Stitch 原型，按 product-design.md 的流程审查
-5. 开始和 AI 对话，按 task-workflow.md 的流程推进
+2. 按 deployment.md 的端口规划分配新项目的 dev/staging 端口
+3. 创建 docker-compose.yml + dev/stg 覆盖文件 + .env.{dev,stg,prod}
+4. 在新项目根目录创建 .github/copilot-instructions.md
+5. 在 product/ 目录写好产品需求文档（按 product-design.md 规范优化）
+6. 如有 Stitch 原型，按 product-design.md 的流程审查
+7. 开始和 AI 对话，按 task-workflow.md 的流程推进
 ```
