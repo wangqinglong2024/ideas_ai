@@ -29,6 +29,8 @@
 - `qa-testing.md` — QA 测试规范（Browser MCP + Docker）
 - `task-workflow.md` — 任务拆解与开发流程（含 Stitch 原型审查前置阶段）
 - `product-design.md` — 产品需求优化规范 + Stitch 原型工作流
+- `deployment.md` — 部署与运维规范（Docker 部署、回滚、监控、备份、事故响应）
+- `operational-runbook.md` — 操作诊断与自愈运行手册（故障决策树、性能基准、缓存策略、自愈脚本）
 
 在写任何代码前，请先检查这些规范文件中的相关规则。
 

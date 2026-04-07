@@ -32,8 +32,78 @@
 * 在网格之上，必须叠加一层基于 Three.js 的粒子层。该 Canvas 的背景必须完全透明 (`alpha: true`，绝对不带有任何 `<color>` 属性屏蔽底层)。
 * **严格的分层顺序**：`z-0` (最底层：动态渐变网格) → `z-1` (中间层：Three.js 粒子特效) → `z-2` (顶层：所有毛玻璃业务内容层)。
 
+**渐变网格 Blob 动画精确参数（强制复制到 `animations.css`）**：
+```css
+/* ===== 三个 Mesh Gradient Blob 漂移动画 ===== */
+@keyframes mesh-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(80px, -60px) scale(1.05); }
+  50%      { transform: translate(-40px, 80px) scale(0.95); }
+  75%      { transform: translate(60px, 40px) scale(1.02); }
+}
+
+@keyframes mesh-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(-70px, 50px) scale(0.97); }
+  50%      { transform: translate(90px, -30px) scale(1.04); }
+  75%      { transform: translate(-50px, -70px) scale(1.01); }
+}
+
+@keyframes mesh-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(50px, 70px) scale(1.03); }
+  50%      { transform: translate(-80px, -40px) scale(0.96); }
+  75%      { transform: translate(30px, -60px) scale(1.06); }
+}
+
+/* 应用到 3 个 Blob 元素（错开延迟产生呼吸感） */
+.mesh-blob-1 {
+  animation: mesh-drift-1 22s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+.mesh-blob-2 {
+  animation: mesh-drift-2 25s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation-delay: -7s;   /* 负延迟：页面加载即已在运动中，避免 3 个 blob 齐步走 */
+}
+.mesh-blob-3 {
+  animation: mesh-drift-3 20s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  animation-delay: -13s;
+}
+
+/* ===== 装饰性浮动玻璃方块 ===== */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-20px) rotate(3deg); }
+}
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+/* ===== 无障碍：尊重用户减少动画偏好 ===== */
+@media (prefers-reduced-motion: reduce) {
+  .mesh-blob-1, .mesh-blob-2, .mesh-blob-3,
+  .animate-float-slow {
+    animation: none !important;
+  }
+}
+```
+
+**Three.js 粒子层技术规格**：
+* **粒子数量**：桌面端 80~120 个；移动端（`window.innerWidth < 768`）降至 30~50 个，保护帧率
+* **粒子大小**：1~3px 随机，颜色从 Rose/Sky/Amber 三色中随机选取，opacity 0.3~0.6
+* **运动模式**：布朗运动（random walk），每个粒子独立运动周期 3~5 秒，缓动 ease-in-out
+* **相机**：OrthographicCamera，Canvas 铺满视口，`alpha: true`（透明背景）
+* **性能红线**：Canvas 帧率不得低于 30fps；移动端检测 `navigator.hardwareConcurrency < 4` 时完全关闭粒子层
+* **React 集成**：封装为 `<ParticleBackground />` 组件，放在 `src/components/shared/` 目录，组件卸载时必须调用 `renderer.dispose()` 清理 WebGL 上下文
+* **Three.js 版本**：锁定 `three@^0.160.0`（与 `@react-three/fiber` 兼容）
+
 ### 2. 🧊 核心毛玻璃面板 (Frosted Glass Panels) 物理参数
 所有 UI 容器必须遵循严格的光学与物理属性设定：
+
+**⚠️ 移动端 `backdrop-filter` 性能警告**：
+* `backdrop-filter: blur()` 在移动端 GPU 开销极大。嵌套毛玻璃层（glass 内套 glass）会导致帧率暴跌。
+* **嵌套上限**：同一可视区域内毛玻璃层叠加不超过 2 层。需要第 3 层效果时用半透明纯色（`rgba()`，不带 blur）模拟。
+* **iOS Safari 特殊处理**：必须加 `-webkit-backdrop-filter` 前缀（Tailwind v4 `@apply` 会自动处理，手写时需注意）。
+* **性能降级**：检测到设备 `navigator.hardwareConcurrency < 4` 时，将 blur 从 24px 降至 12px，saturate 从 1.8 降至 1.2。
 * **面板透明度 (Opacity)**：Light 模式采用 `rgba(255, 255, 255, 0.20~0.35)`；Dark 模式大幅度克制，仅使用 `rgba(255, 255, 255, 0.05~0.10)`。
 * **光学模糊与色彩饱和 (Blur & Saturate)**：这是毛玻璃的灵魂。底层起步参数必须是 `backdrop-filter: blur(24px) saturate(1.8)`。
 * **边缘光泽 (Border Gloss)**：模拟真实玻璃的切边反光。Light 模式边框颜色为 `rgba(255,255,255,0.45)`；Dark 模式为 `rgba(255,255,255,0.12)`。

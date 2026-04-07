@@ -19,6 +19,8 @@
 | [task-workflow.md](task-workflow.md) | AI 驱动的任务拆解与开发流程（需求优化→原型审查→需求分析→拆任务→逐个开发→验收） | 新项目启动的完整流程 |
 | [product-design.md](product-design.md) | 产品需求文档全维度规范 + Stitch 原型工作流 + MCP API 调用手册 + 竞品分析/用户旅程/无障碍模板 | 写需求、审查原型、管理设计系统时 |
 | [copilot-instructions.md](copilot-instructions.md) | VS Code Copilot 项目级指令 + 使用技巧 | 配置新项目的 Copilot 时 |
+| [deployment.md](deployment.md) | 部署与运维规范（环境管理、Docker 部署、回滚、监控告警、数据库备份、事故响应） | 部署上线时 |
+| [operational-runbook.md](operational-runbook.md) | 操作诊断与自愈运行手册（故障决策树、按层排错、性能基准、缓存策略、自愈脚本） | 生产故障排查、性能优化时 |
 
 ---
 
