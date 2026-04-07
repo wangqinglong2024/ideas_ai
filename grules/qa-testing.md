@@ -1,5 +1,7 @@
 # QA 测试规范 (QA Testing Standards)
 
+> **版本**: v1.0 | **最后更新**: 2025-07-16
+>
 > **适用范围**：所有基于 Vite React/TS + FastAPI + Supabase + Docker 技术栈的项目。
 > **核心工具**：Browser MCP（Puppeteer）进行真实浏览器测试。
 > **铁律**：所有服务必须通过 Docker 启动后测试。禁止在宿主机安装 Python/Node 等运行时直接测试。

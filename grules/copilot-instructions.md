@@ -1,5 +1,7 @@
 # Copilot 项目级指令 (Copilot Instructions)
 
+> **版本**: v1.1 | **最后更新**: 2025-07-16
+>
 > **本文件用途**：当你在一个具体项目里开发时，把此文件复制到项目根目录 `.github/copilot-instructions.md`。
 > GitHub Copilot 会自动读取它，作为全局指令影响所有代码生成。
 > **注意**：此文件内容必须精简（建议 < 500 行），因为它会被注入到每次对话中。
@@ -25,7 +27,8 @@
 - `project-structure.md` — 项目目录结构标准
 - `api-design.md` — RESTful API 设计规约
 - `qa-testing.md` — QA 测试规范（Browser MCP + Docker）
-- `task-workflow.md` — 任务拆解与开发流程
+- `task-workflow.md` — 任务拆解与开发流程（含 Stitch 原型审查前置阶段）
+- `product-design.md` — 产品需求优化规范 + Stitch 原型工作流
 
 在写任何代码前，请先检查这些规范文件中的相关规则。
 
@@ -76,6 +79,13 @@
 - 声明完成状态：✅完成 / ⚠️有顾虑 / 🚫阻塞 / ❓需要上下文
 - Docker 环境下测试，禁止宿主机直接安装依赖
 - 修 Bug 必须附带回归测试，一个 commit 一个修复
+
+### 产品设计与 Stitch 原型
+- 用户提供的需求必须先按 product-design.md 优化为标准 PRD（8 维度：用户故事、边界条件、优先级、验收标准、数据流向、非功能需求、情感化设计、商业指标）
+- Stitch 原型审查必须对照 PRD + rules.md UI 规范，输出审查报告
+- Stitch 设计系统统一使用 "Cosmic Refraction"（Rose/Sky/Amber 毛玻璃暗色主题）
+- 设计系统变更必须同步到前端代码（CSS 变量、字体、色值）
+- PRD 和原型都通过门禁后才能进入开发阶段
 ```
 
 ---

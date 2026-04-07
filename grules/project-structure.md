@@ -1,5 +1,7 @@
 # 项目目录结构标准 (Project Structure Template)
 
+> **版本**: v1.0 | **最后更新**: 2025-07-16
+>
 > **适用范围**：所有基于 Vite React/TS + FastAPI + Supabase + Docker 技术栈的项目。
 > **使用方法**：新项目启动时，AI 按此模板生成目录骨架，再填充业务代码。
 
