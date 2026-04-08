@@ -32,6 +32,8 @@
 本项目的完整开发规范在 `grules/` 目录下，包含：
 - `rules.md` — 全局架构白皮书（设计理念、安全底线、UI 规范）
 - `coding-standards.md` — 编码规范（命名、文件组织、错误处理、安全审查）
+- `documentation-standards.md` — 代码注释与文档规范（注释语言、密度、格式、README/CHANGELOG 模板、AI 输出规范）
+- `ui-design.md` — UI/UE 设计规范（视觉体系、交互范式、动效、响应式、无障碍、设计交付）
 - `project-structure.md` — 项目目录结构标准
 - `api-design.md` — RESTful API 设计规约
 - `qa-testing.md` — QA 测试规范（Browser MCP + Docker）
