@@ -1,6 +1,6 @@
 # 世界地图插画 — 详细规格与 Flux 提示词
 
-> **关联文档**: [世界地图 PRD](../02-world-map.md) | [响应式布局](../10-responsive-layout.md)
+> **关联文档**: [世界地图 PRD](../04-world-map.md) | [响应式布局](../12-responsive-layout.md)
 
 ---
 

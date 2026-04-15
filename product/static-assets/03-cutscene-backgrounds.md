@@ -1,6 +1,6 @@
 # 过场动画背景 — 详细规格与 Flux 提示词
 
-> **关联文档**: [过场动画 PRD](../05-cutscenes.md) | [响应式布局 PRD](../10-responsive-layout.md)
+> **关联文档**: [过场动画 PRD](../07-cutscenes.md) | [响应式布局 PRD](../12-responsive-layout.md)
 
 ---
 

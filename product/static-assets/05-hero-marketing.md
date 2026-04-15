@@ -1,6 +1,6 @@
 # 落地页 & 营销素材 — 详细规格与 Flux 提示词
 
-> **关联文档**: [用户系统 PRD](../01-user-system.md) | [推荐返佣 PRD](../08-referral-commission.md)
+> **关联文档**: [用户系统 PRD](../01-user-system.md) | [推荐返佣 PRD](../10-referral-commission.md)
 
 ---
 

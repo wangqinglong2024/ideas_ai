@@ -1,6 +1,6 @@
 # 用户头像 — 详细规格与 Flux 提示词
 
-> **关联文档**: [用户系统 PRD](../01-user-system.md) | [成就荣誉 PRD](../09-achievement-honor.md)
+> **关联文档**: [用户系统 PRD](../01-user-system.md) | [成就荣誉 PRD](../11-achievement-honor.md)
 
 ---
 

@@ -1,6 +1,6 @@
 # 音频 & TTS 资源 — 详细规格
 
-> **关联文档**: [关卡系统 PRD](../03-level-system.md) | [迷你游戏 PRD](../04-mini-games.md) | [词汇 SRS PRD](../06-vocabulary-srs.md)
+> **关联文档**: [关卡系统 PRD](../05-level-system.md) | [迷你游戏 PRD](../06-mini-games.md) | [词汇 SRS PRD](../08-vocabulary-srs.md)
 
 ---
 

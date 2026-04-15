@@ -1,7 +1,7 @@
 # PlayLingo MVP — 推荐返佣系统需求
 
-> **文档编号**: PRD-08 | **优先级**: P0
-> **关联文档**: [总览](00-index.md) | [会员支付](07-membership-payment.md)
+> **文档编号**: PRD-10 | **优先级**: P0
+> **关联文档**: [总览](00-index.md) | [会员支付](09-membership-payment.md)
 
 ---
 
@@ -325,7 +325,7 @@ MVP 提供 1 个固定海报模板：
 | 首月 7 折 | 首次订阅任意方案享 30% 折扣（仅首月/首季/首年） |
 | 显示说明 | 订阅页面自动展示「Úu đãi giới thiệu: Giảm 30%」标签 |
 | 叠加规则 | 不与首月 $0.99 促销叠加（取价格更低的一个） |
-| 技术实现 | ref 参数绑定后生成 Stripe Coupon 自动应用 |
+| 技术实现 | ref 参数绑定后生成 Paddle Discount 自动应用 |
 
 ---
 
@@ -360,11 +360,11 @@ MVP 提供 1 个固定海报模板：
 FastAPI：
   1. 检查 ref 参数有效性（是否存在、是否过期、是否自推）
   2. 创建 referral_relations 记录（referrer_id + referred_id）
-  3. 为被推荐人生成 Stripe 30% off Coupon
+  3. 为被推荐人生成 Paddle 30% off Discount
   ↓
 被推荐人订阅付费
   ↓
-Stripe Webhook invoice.payment_succeeded：
+Paddle Webhook subscription.payment_succeeded：
   1. 查找 referral_relations
   2. 计算佣金金额（订单金额 × 当前阶梯比例）
   3. 创建 commission 记录（status=pending, available_at=now+30d）

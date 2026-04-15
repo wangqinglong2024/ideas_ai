@@ -1,7 +1,25 @@
 # PlayLingo MVP — 静态资源清单与 AI 生成指南
 
-> **文档编号**: PRD-11 | **优先级**: P0
-> **关联文档**: [总览](00-index.md) | [世界地图](02-world-map.md) | [过场动画](05-cutscenes.md) | [响应式布局](10-responsive-layout.md)
+> **文档编号**: PRD-13 | **优先级**: P0
+> **关联文档**: [总览](00-index.md) | [世界地图](04-world-map.md) | [过场动画](07-cutscenes.md) | [响应式布局](12-responsive-layout.md) | [管理后台](14-admin-backend.md)
+
+---
+
+## 零、资源归属说明
+
+> ⚠️ 本文档仅覆盖**代码内置静态资源**——即构建时打包到 `/public/assets/` 的资源，部署后不可通过管理后台修改。
+
+### 代码内置 vs 管理后台配置
+
+| 归属 | 资源类型 | 管理方式 | 更新方式 |
+|------|---------|---------|---------|
+| 🔧 **代码内置**（本文档） | 世界地图、角色立绘、过场背景、头像、游戏纹理、UI 图标、徽章、音效/BGM、游戏 TTS | 开发时 AI 生成，构建打包 | 需重新部署 |
+| 🖥️ **管理后台配置**（PRD-14） | 文章封面/配图/音频、课程图片/音频、过场对话音频、营销素材、证书模板 | 管理员在后台上传 | 即时生效，无需部署 |
+
+**不在本文档范围的资源**（由管理后台管理，详见 [PRD-14 §十一](14-admin-backend.md)）：
+- 发现中国：文章封面图(1200×675)、文章配图(800×auto)、文章音频(MP3)、词汇音频
+- 系统课程：Lesson 导入图、生词配图、课文音频、练习听力音频、证书模板
+- 营销素材：落地页主图、分享海报模板（v1.1 迁移至管理后台）
 
 ---
 
@@ -17,7 +35,7 @@
 | 预设头像 | 12 个 | FLUX 2 生成 | [04-avatars.md](static-assets/04-avatars.md) |
 | 落地页与营销素材 | 3 张 | FLUX 2 + 设计工具 | [05-hero-marketing.md](static-assets/05-hero-marketing.md) |
 | 游戏内贴图 | 约 50-60 张（含 3 张迷你游戏背景） | FLUX 2 + HTML/CSS | [06-game-textures.md](static-assets/06-game-textures.md) |
-| 徽章图标 | 25 个（6 类，对齐 PRD-09） | FLUX 2 生成 | [07-badges.md](static-assets/07-badges.md) |
+| 徽章图标 | 41 个（6 类，对齐 PRD-11） | FLUX 2 生成 | [07-badges.md](static-assets/07-badges.md) |
 | UI 图标 | 约 40 个 | SVG / Lucide React | [08-ui-icons.md](static-assets/08-ui-icons.md) |
 | 音效与 TTS 语音 | 19 音效 + 6 BGM + ~540 TTS | ElevenLabs SFX + Suno AI BGM + Azure TTS | [09-audio-tts.md](static-assets/09-audio-tts.md) |
 
@@ -104,7 +122,7 @@
 │   ├── avatar-tiger.webp
 │   ├── avatar-snake.webp
 │   └── avatar-moonrabbit.webp
-├── badges/                  ← 成就徽章（25 个，6 类）
+├── badges/                  ← 成就徽章（41 个，6 类）
 │   ├── badge-first-step.png
 │   ├── badge-pinyin-graduate.png
 │   ├── badge-hanzi-master.png
@@ -155,7 +173,7 @@
 │       ├── tts-word-*.mp3
 │       ├── tts-sentence-*.mp3
 │       └── tts-cutscene-*.mp3
-└── marketing/               ← 营销素材
+└── marketing/               ← 营销素材（MVP 代码内置，v1.1 迁移至管理后台）
     ├── hero-landing.webp
     ├── share-poster-template.webp
     └── og-share-image.webp

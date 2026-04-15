@@ -1,6 +1,6 @@
 # 角色立绘 — 详细规格与 Flux 提示词
 
-> **关联文档**: [过场动画 PRD](../05-cutscenes.md) | [关卡系统](../03-level-system.md)
+> **关联文档**: [过场动画 PRD](../07-cutscenes.md) | [关卡系统](../05-level-system.md)
 
 ---
 

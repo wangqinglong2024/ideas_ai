@@ -1,6 +1,6 @@
 # 游戏纹理 & 道具素材 — 详细规格与 Flux 提示词
 
-> **关联文档**: [迷你游戏 PRD](../04-mini-games.md) | [关卡系统 PRD](../03-level-system.md) | [响应式布局 PRD](../10-responsive-layout.md)
+> **关联文档**: [迷你游戏 PRD](../06-mini-games.md) | [关卡系统 PRD](../05-level-system.md) | [响应式布局 PRD](../12-responsive-layout.md)
 
 ---
 

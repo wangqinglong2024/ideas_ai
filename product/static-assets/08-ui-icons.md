@@ -1,6 +1,6 @@
 # UI 图标 — 详细规格
 
-> **关联文档**: [用户系统 PRD](../01-user-system.md) | [关卡系统 PRD](../03-level-system.md)
+> **关联文档**: [用户系统 PRD](../01-user-system.md) | [关卡系统 PRD](../05-level-system.md)
 
 ---
 

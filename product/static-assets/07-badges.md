@@ -1,7 +1,7 @@
 # 成就徽章 — 详细规格与 FLUX 2 提示词
 
-> **关联文档**: [成就荣誉 PRD](../09-achievement-honor.md)
-> **对齐版本**: 严格对齐 PRD-09 定义的 25 枚徽章
+> **关联文档**: [成就荣誉 PRD](../11-achievement-honor.md)
+> **对齐版本**: 严格对齐 PRD-11 定义的 41 枚徽章
 
 ---
 
@@ -423,6 +423,262 @@ Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, waterm
 
 ```
 A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Gold metallic circular frame border with rainbow-shimmer border effect. Inside the medal: a small ornate arching bridge spanning across, with four tiny flags planted on it — Vietnamese flag (red with yellow star), Chinese flag (red with stars), US/UK flag, and Indonesian flag (red and white). Below the bridge: a flowing river of glowing text characters from all four languages. Multicultural celebration atmosphere with warm inclusive colors. Clean cel-shaded illustration. Modern game achievement aesthetic.
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background, multiple icons
+```
 
+---
+
+## 六、发现中国类（7 枚） — v3.0 新增
+
+> 对齐 PRD-11 §3.1 A2 发现中国类
+
+### BADGE-26: 初次阅读（Người đọc đầu tiên）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-first-reader.webp` |
+| 等级 | 铜 |
+| 解锁条件 | 阅读完第 1 篇文化文章 |
+| 图标描述 | 一本打开的书页发出温暖光芒 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Bronze metallic circular frame border with warm copper-brown sheen. Inside the medal: an open book with golden glowing pages, warm light emanating from the pages like a magical reading moment, a single small Chinese character floating above the book. Cozy warm-toned gradient background from amber to cream. Clean cel-shaded illustration style, vibrant colors, readable at small sizes. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-27: 历史学家（Nhà sử học）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-historian.webp` |
+| 等级 | 银 |
+| 解锁条件 | 完成历史纵横板块全部文章 |
+| 图标描述 | 一卷展开的古代卷轴 + 历史建筑轮廓 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: an unrolled ancient Chinese scroll with elegant calligraphy, behind it a silhouette of the Great Wall and a pagoda. Rich warm red and gold accent colors on a deep burgundy gradient background. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-28: 地理学家（Nhà địa lý）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-geographer.webp` |
+| 等级 | 银 |
+| 解锁条件 | 完成地理风景板块全部文章 |
+| 图标描述 | 桂林山水 + 地图罗盘 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: iconic Guilin karst mountains reflected in water with a golden compass overlay. Serene blue-green gradient background with misty atmosphere. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-29: 文学家（Nhà văn học）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-literary.webp` |
+| 等级 | 银 |
+| 解锁条件 | 完成文学经典板块全部文章 |
+| 图标描述 | 毛笔书写 + 飘散的诗句 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: an elegant Chinese calligraphy brush writing on paper, with poetic characters floating and dissolving into golden sparkles. Ink splash artistic effect. Warm cream and ink-black gradient background. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-30: 成语大师（Bậc thầy thành ngữ）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-idiom-master.webp` |
+| 等级 | 银 |
+| 解锁条件 | 完成成语典故板块全部文章 |
+| 图标描述 | 中国红灯笼 + 四个方块组成成语 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: a beautiful red Chinese lantern in the center, surrounded by four small glowing square tiles arranged in a 2x2 grid (representing four-character idiom). Festive red and gold gradient background with subtle bokeh sparkles. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-31: 文化通（Nhà văn hóa）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-culture-expert.webp` |
+| 等级 | 金 |
+| 解锁条件 | 完成全部 8 个板块 |
+| 图标描述 | 中国国旗元素 + 8 个微型图标环绕 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Gold metallic circular frame border with brilliant glow and sparkle effect. Inside the medal: a central glowing Chinese knot symbol surrounded by 8 tiny cultural icons in a circle (scroll, mountain, brush, lantern, yin-yang, rocket, handshake, book). Rich red and gold gradient background with premium radiant glow. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-32: 测验满分（Quiz hoàn hảo）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-quiz-perfect.webp` |
+| 等级 | 银 |
+| 解锁条件 | 任意文章测验获得 5/5 |
+| 图标描述 | 100 分标志 + 闪光效果 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: a bold stylized "100" number with a checkmark, surrounded by sparkle and confetti effects, five small golden stars arranged in an arc above. Celebratory purple and gold gradient background. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+---
+
+## 七、系统课程类（7 枚） — v3.0 新增
+
+> 对齐 PRD-11 §3.1 A3 系统课程类
+
+### BADGE-33: 新学员（Sinh viên mới）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-new-student.webp` |
+| 等级 | 铜 |
+| 解锁条件 | 完成第 1 课 |
+| 图标描述 | 一支铅笔 + 笔记本 + 闪光 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Bronze metallic circular frame border with warm copper-brown sheen. Inside the medal: a cute pencil writing on a small notebook, with a sparkle effect and a tiny lightbulb floating above. Fresh green and cream gradient background suggesting new beginnings. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-34: L0 结业（Tốt nghiệp L0）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-graduate-l0.webp` |
+| 等级 | 银 |
+| 解锁条件 | 通过 L0 结业测试 |
+| 图标描述 | 拼音符号 "ā" + 毕业证书 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: a stylized pinyin letter "ā" with tone mark prominently displayed, overlaid on a small certificate/diploma with a red wax seal. Soft blue and white gradient background. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-35: L1 结业（Tốt nghiệp L1）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-graduate-l1.webp` |
+| 等级 | 银 |
+| 解锁条件 | 通过 L1 结业测试 |
+| 图标描述 | 绿色书本 + 基础汉字 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: a green textbook standing upright with simple Chinese characters 你好 on the cover, a small silver trophy beside it. Green and teal gradient background. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-36: L2 结业（Tốt nghiệp L2）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-graduate-l2.webp` |
+| 等级 | 银 |
+| 解锁条件 | 通过 L2 结业测试 |
+| 图标描述 | 蓝色书本 + 对话气泡 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: a blue textbook with two overlapping speech bubbles above it (one in Chinese characters, one in Vietnamese), symbolizing conversation ability. Blue and sky gradient background. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-37: L3 结业（Tốt nghiệp L3）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-graduate-l3.webp` |
+| 等级 | 金 |
+| 解锁条件 | 通过 L3 结业测试 |
+| 图标描述 | 橙色书本 + 毕业帽 + 金色光芒 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Gold metallic circular frame border with brilliant glow. Inside the medal: an orange textbook with a graduation cap on top, radiating golden light beams. A small HSK badge floating nearby. Warm orange and gold gradient background with premium sparkle effect. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-38: 全能学者（Học giả toàn diện）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-complete-scholar.webp` |
+| 等级 | 金 |
+| 解锁条件 | 通过全部 4 级结业测试 |
+| 图标描述 | 博士帽 + 四本叠放的书 + 王冠 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Gold metallic circular frame border with brilliant radiant glow and sparkle. Inside the medal: four stacked books in green, blue, orange, and red, topped with a doctoral graduation cap and a small golden crown. Radiant golden and red gradient background with premium celebration effect. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-39: 连续三星（3 sao liên tục）
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-consecutive-3star.webp` |
+| 等级 | 银 |
+| 解锁条件 | 连续 10 课获得 3 星 |
+| 图标描述 | 10 颗连成弧线的星星 + 流星尾迹 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Silver metallic circular frame border with bright silver sheen. Inside the medal: ten small golden stars arranged in a sweeping arc with a comet-like trail of sparkles behind them, creating a shooting star effect. Deep navy and gold gradient background. Clean cel-shaded illustration style. Modern mobile game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+---
+
+## 八、隐藏成就补充（2 枚） — v3.0 新增
+
+> 对齐 PRD-11 §3.1 F 新增的 2 枚跨模块隐藏徽章
+
+### BADGE-40: 探索家（Nhà thám hiểm）🔒
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-explorer.webp` |
+| 等级 | 金（隐藏） |
+| 解锁条件 | 同一天内使用全部三个模块（发现中国+课程+游戏） |
+| 图标描述 | 三个模块图标（书+课本+游戏手柄）组成三角 + 探索望远镜 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Gold metallic circular frame border with mysterious purple-shimmer border effect. Inside the medal: three small icons arranged in a triangle formation — an open book (culture), a textbook (course), and a game controller (game) — connected by glowing golden lines. A small telescope or compass in the center. Deep midnight blue and gold gradient background with subtle constellation sparkles. Clean cel-shaded illustration. Modern game achievement aesthetic.
+
+Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background
+```
+
+### BADGE-41: 知识串联（Liên kết tri thức）🔒
+
+| 属性 | 值 |
+|------|-----|
+| 文件名 | `badge-knowledge-link.webp` |
+| 等级 | 金（隐藏） |
+| 解锁条件 | 在文化文章中遇到课程学过的词汇 10 次 |
+| 图标描述 | 两个连接的拼图块 + 闪光链条 |
+
+```
+A circular game achievement medal icon, 256x256 pixels, transparent background outside the circle. Gold metallic circular frame border with mysterious purple-shimmer border effect. Inside the medal: two interlocking puzzle pieces — one with a book symbol (culture) and one with a Chinese character (course) — connected by a glowing golden chain link. Sparkle effects at the connection point. Deep teal and gold gradient background. Clean cel-shaded illustration. Modern game achievement aesthetic.
 Negative prompt: realistic photo, dark gloomy, blurry, low quality, text, watermark, non-circular shape, complex background, multiple icons
 ```
