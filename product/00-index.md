@@ -171,4 +171,134 @@
 
 ---
 
+## 七、非功能需求（全局）
+
+### 7.1 性能指标
+
+| 指标 | 目标 | 测量方式 |
+|------|------|---------|
+| 首屏加载时间（LCP） | ≤ 3 秒（越南 4G 网络） | Lighthouse / WebPageTest |
+| API 响应时间（P95） | ≤ 500ms | 后端 APM 监控 |
+| 游戏画布帧率 | ≥ 30fps（移动端） / ≥ 60fps（PC） | Phaser 内置统计 |
+| 页面交互响应 | ≤ 100ms 视觉反馈 | 用户感知测试 |
+| Stripe 支付回调 | ≤ 3 秒激活会员 | Webhook 日志 |
+| 数据库查询 | 单接口 ≤ 200ms | 慢查询日志 |
+
+### 7.2 可用性与并发
+
+| 指标 | 目标 |
+|------|------|
+| SLA | 99.9%（全年宕机 < 8.7 小时） |
+| MVP 预期峰值 | 500 并发用户 |
+| 数据库连接池 | 5-20 连接（asyncpg） |
+| CDN 缓存命中率 | ≥ 90%（静态资源） |
+| 离线可用 | PWA Service Worker 缓存 App Shell；会员用户缓存已完成关卡数据 |
+
+### 7.3 安全与隐私基线
+
+| 领域 | 要求 |
+|------|------|
+| **认证** | JWT 令牌（7 天有效期）+ Supabase Auth；密码 ≥ 8 位（含大小写+数字） |
+| **授权** | Supabase RLS 零信任：所有表启用行级安全策略 |
+| **传输** | 全站 HTTPS（TLS 1.2+），HSTS 开启 |
+| **支付** | PCI DSS 合规：不存储不处理卡号，全部由 Stripe 托管 |
+| **XSS/CSRF** | React 自动转义 + CSP header；API 使用 CORS 白名单 + SameSite Cookie |
+| **速率限制** | 登录接口：5 次/分钟（同 IP）；注册接口：3 次/分钟；API 通用：100 次/分钟 |
+| **数据存储** | 用户数据存储在新加坡（腾讯云），不回传中国大陆 |
+| **隐私合规** | 越南 PDPD 2023 + 新加坡 PDPA；AI 对话数据不用于模型训练 |
+| **日志** | 记录关键操作日志（登录/支付/提现），保留 90 天，脱敏处理 PII |
+
+### 7.4 法律文件（MVP 必备）
+
+上线前必须准备以下法律文件（越南语 + 英语双版本）：
+
+| 文件 | 内容要点 | 展示位置 |
+|------|---------|---------|
+| 服务条款 (Terms of Service) | 用户权利义务、账户管理、内容使用许可 | 注册页底部链接、设置页 |
+| 隐私政策 (Privacy Policy) | 数据收集范围、存储地点、第三方共享、用户权利 | 注册页底部链接、设置页 |
+| 订阅条款 (Subscription Terms) | 自动续费说明、取消政策、退款规则 | 支付页底部链接 |
+| 推广协议 (Referral Agreement) | 佣金规则、反作弊条款、处罚机制 | 推广中心首次进入时弹窗确认 |
+
+### 7.5 无障碍基线（WCAG 2.1 AA）
+
+| 规则 | 要求 |
+|------|------|
+| 色彩对比度 | 正文 ≥ 4.5:1，大标题 ≥ 3:1 |
+| 触控尺寸 | 可点击区域 ≥ 44×44px |
+| 键盘导航 | PC 端所有核心操作可通过 Tab + Enter 完成 |
+| 屏幕阅读器 | 装饰元素 `aria-hidden="true"`，交互元素有 `aria-label` |
+| 动效偏好 | 支持 `prefers-reduced-motion`，可关闭所有动画 |
+| 语义 HTML | 使用 `<button>`、`<nav>`、`<main>` 等语义标签 |
+
+### 7.6 国际化（i18n）
+
+| 项目 | 说明 |
+|------|------|
+| 默认语言 | 越南语（vi-VN） |
+| 可切换语言 | 英语（en-US） |
+| 切换入口 | 设置页 → 语言切换 |
+| 实现方式 | 前端 i18n JSON 文件（`/locales/vi.json`、`/locales/en.json`） |
+| 翻译范围 | 所有 UI 文案、Toast 提示、错误信息、法律文件 |
+| 不翻译 | 中文教学内容本身（汉字、拼音固定不变） |
+| 日期格式 | 越南语：dd/MM/yyyy；英语：MM/dd/yyyy |
+| 货币显示 | 主显 VND（越南盾），辅显 USD |
+
+### 7.7 数据埋点需求
+
+所有核心事件必须埋点以支持度量指标。MVP 最小埋点清单：
+
+| 事件名 | 触发时机 | 关键参数 |
+|--------|---------|---------|
+| `page_view` | 页面打开 | page_name, source |
+| `sign_up` | 注册成功 | method(google/fb/email), ref_code |
+| `sign_in` | 登录成功 | method |
+| `onboarding_complete` | 新手引导完成 | goal_type, avatar_id |
+| `level_start` | 进入关卡 | level_id, region, level_type |
+| `level_complete` | 关卡完成 | level_id, stars, score, duration_sec |
+| `level_fail` | 关卡失败 | level_id, fail_reason |
+| `minigame_start` | 进入小游戏 | game_type |
+| `minigame_complete` | 小游戏结束 | game_type, score, duration_sec |
+| `review_session` | 完成复习 | word_count, correct_count |
+| `paywall_view` | 付费墙展示 | trigger_source |
+| `subscribe_start` | 开始订阅流程 | plan_type |
+| `subscribe_success` | 订阅成功 | plan_type, amount_usd |
+| `subscribe_cancel` | 取消订阅 | reason(if provided) |
+| `referral_share` | 分享推荐链接 | share_method |
+| `achievement_unlock` | 解锁成就 | badge_id |
+| `streak_update` | Streak 变化 | streak_days, is_broken |
+
+---
+
+## 八、异常流与全局错误处理
+
+### 8.1 网络异常
+
+| 场景 | 处理 |
+|------|------|
+| 完全离线 | 顶部 Banner「Không có kết nối mạng」（无网络连接），缓存数据可浏览 |
+| 弱网（超时） | 自动重试 1 次 → 失败后提示「Kết nối chậm，vui lòng thử lại」+ 重试按钮 |
+| 恢复在线 | Banner 自动消失，静默刷新当前页数据 |
+| 游戏中断线 | 暂停游戏 → 提示重连 → 重连后恢复进度（系统每答一题自动保存） |
+
+### 8.2 支付异常
+
+| 场景 | 处理 |
+|------|------|
+| 卡被拒绝 | Stripe 返回原因 → 翻译为越南语 → 提示换卡重试 |
+| 支付超时 | 提示「请勿重复支付」→ 后台轮询 Stripe 状态 → 确认后激活 |
+| Webhook 延迟 | 前端显示「正在确认支付...」→ 最多等 30 秒 → 超时提示联系客服 |
+| 重复支付 | 幂等键（idempotency_key）防止重复扣款 |
+| 退款 | Stripe Webhook 触发 → 立即降级 → 佣金扣回 |
+
+### 8.3 账号异常
+
+| 场景 | 处理 |
+|------|------|
+| Token 过期 | 静默刷新 → 失败后跳转登录页 → 登录后回到之前页面 |
+| 多设备登录 | 允许（不互踢），数据取服务端最新版本 |
+| 账号被封 | 登录时拦截 → 显示封禁原因 + 申诉入口 |
+| 忘记密码 | 邮箱链接重置（Supabase Auth 内置） |
+
+---
+
 *本文档为 PlayLingo MVP 产品需求文档总览。各模块详细需求见对应子文档。*
