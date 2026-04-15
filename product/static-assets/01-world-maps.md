@@ -80,8 +80,8 @@ UI elements, watermark, signature, border, frame
 
 | 属性 | 值 |
 |------|-----|
-| 文件名 | `map-hanzi-valley.webp` |
-| 尺寸 | 1080 × 2880 px |
+| 文件名 | `map-hanzi-valley.webp` + `map-hanzi-valley@2x.webp` |
+| 尺寸 | 1x: 1080 × 2880 px / 2x: 2160 × 5760 px |
 | 使用位置 | 世界地图页面 → 汉字谷地区域背景 |
 | 承载关卡 | 15 个节点 + 1 个迷你游戏岛（部首大爆炸）+ 1 个 Boss 节点 |
 
@@ -130,8 +130,8 @@ low quality, blurry, text, letters, UI elements, watermark
 
 | 属性 | 值 |
 |------|-----|
-| 文件名 | `map-vocabulary-plains.webp` |
-| 尺寸 | 1080 × 2880 px |
+| 文件名 | `map-vocabulary-plains.webp` + `map-vocabulary-plains@2x.webp` |
+| 尺寸 | 1x: 1080 × 2880 px / 2x: 2160 × 5760 px |
 | 使用位置 | 世界地图页面 → 词汇平原区域背景 |
 | 承载关卡 | 15 个节点 + 1 个迷你游戏岛（拼音漂移）+ 1 个 Boss 节点 |
 
@@ -180,8 +180,8 @@ low quality, blurry, text, letters, UI elements, watermark
 
 | 属性 | 值 |
 |------|-----|
-| 文件名 | `map-grammar-fortress.webp` |
-| 尺寸 | 1080 × 1920 px |
+| 文件名 | `map-grammar-fortress.webp` + `map-grammar-fortress@2x.webp` |
+| 尺寸 | 1x: 1080 × 1920 px / 2x: 2160 × 3840 px |
 | 使用位置 | 世界地图页面 → 语法要塞区域背景（最终区域） |
 | 承载关卡 | 10 个节点 + 1 个 Boss 节点（终极 Boss） |
 
