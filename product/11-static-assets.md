@@ -15,11 +15,11 @@
 | 角色立绘 | 7 角色 × 3-4 表情 ≈ 24 张 | Flux AI 生成 | [02-characters.md](static-assets/02-characters.md) |
 | 过场动画背景 | 8 张（横屏 16:9） | Flux AI 生成 | [03-cutscene-backgrounds.md](static-assets/03-cutscene-backgrounds.md) |
 | 预设头像 | 12 个 | Flux AI 生成 | [04-avatars.md](static-assets/04-avatars.md) |
-| 落地页与营销素材 | 2 张 | Flux AI + 设计工具 | [05-hero-marketing.md](static-assets/05-hero-marketing.md) |
+| 落地页与营销素材 | 3 张 | Flux AI + 设计工具 | [05-hero-marketing.md](static-assets/05-hero-marketing.md) |
 | 游戏内贴图 | 约 30-50 张 | Flux AI + HTML/CSS | [06-game-textures.md](static-assets/06-game-textures.md) |
 | 徽章图标 | 25 个 | Flux AI 生成 | [07-badges.md](static-assets/07-badges.md) |
 | UI 图标 | 约 40 个 | SVG / 图标库 | [08-ui-icons.md](static-assets/08-ui-icons.md) |
-| 音效与 TTS 语音 | 15 音效 + 440 TTS | 音效库 + TTS API | [09-audio-tts.md](static-assets/09-audio-tts.md) |
+| 音效与 TTS 语音 | 15 音效 + 6 BGM + ~490 TTS | 音效库 + AI 音乐 + TTS API | [09-audio-tts.md](static-assets/09-audio-tts.md) |
 
 ### 1.2 横竖屏与响应式处理总策略
 
@@ -63,9 +63,14 @@
 │   ├── char-xiaolong-happy.png
 │   └── ...
 ├── backgrounds/             ← 过场动画横屏背景
-│   ├── bg-vietnam-street.webp
-│   ├── bg-pinyin-beach.webp
-│   └── ...
+│   ├── bg-cutscene-pinyin-overview.webp
+│   ├── bg-cutscene-tone-mountain.webp
+│   ├── bg-cutscene-hanzi-academy.webp
+│   ├── bg-cutscene-hanzi-seal-cave.webp
+│   ├── bg-cutscene-food-street.webp
+│   ├── bg-cutscene-market-square.webp
+│   ├── bg-cutscene-grammar-gate.webp
+│   └── bg-cutscene-grammar-throne.webp
 ├── avatars/                 ← 预设头像
 │   ├── avatar-panda.png
 │   ├── avatar-dragon.png
