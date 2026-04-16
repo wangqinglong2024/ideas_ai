@@ -1,7 +1,7 @@
 # 技术架构设计
 
 > 知语 Zhiyu 技术选型与系统设计
-> 版本：v6.0（终版） | 日期：2026-04-16
+> 版本：v8.0（终版） | 日期：2026-04-16
 
 ---
 
@@ -22,7 +22,7 @@
 | **数据库** | Supabase PostgreSQL | 托管 PostgreSQL + RLS 行级安全 |
 | **缓存** | Redis (Upstash) | Serverless Redis，排行榜/会话/限流 |
 | **内容引擎** | Dify | 知识库存储教学内容 + AI 工作流 |
-| **支付** | Stripe | 全球支付处理，支持中国公司签约 |
+| **支付** | Paddle MoR | Merchant of Record 模式，代处理全球税务，支持中国大陆公司签约 |
 | **CDN / 存储** | Cloudflare CDN + R2 | 全球加速 + 对象存储 |
 | **TTS** | Azure TTS（或备选） | 中文语音合成，支持多种声色 |
 | **部署** | PWA 优先 → Capacitor (Android/iOS) | 一套代码多端发布 |
@@ -91,9 +91,9 @@
 |------|------|
 | **用户服务** | 注册/登录/Profile/偏好设置/学习进度/成就系统 |
 | **课程服务** | 课程大纲/课时内容/练习题/考试/证书 |
-| **游戏服务** | 12 款 2D 游戏（Phaser 3）/实时 PK（WebSocket）/ELO 段位/匹配系统/积分/排行榜/皮肤 |
+| **游戏服务** | 12 款 2D 游戏（Phaser 3）/实时 PK（WebSocket）/星数段位/匹配系统/积分/排行榜/皮肤 |
 | **内容服务** | 发现中国文章/多语言内容/Dify 知识库接口 |
-| **支付服务** | Stripe Webhook/会员管理/订单记录/退款 |
+| **支付服务** | Paddle MoR Webhook/会员管理/订单记录/退款 |
 | **AI 服务** | 口语评测/写作批改/智能推题/SRS 调度 |
 
 ---
@@ -246,6 +246,9 @@ users
   ├── membership_expires_at
   ├── referral_code
   ├── referred_by
+  ├── zhiyu_coins (INTEGER, 知语币余额，1 币 = $0.01 等价值，不可提现)
+  ├── zhiyu_coins_earned_total (历史累计获得数)
+  ├── zhiyu_coins_spent_total (历史累计花费数)
   ├── created_at
   └── updated_at
 
@@ -282,8 +285,8 @@ game_records
   ├── mode (solo_classic/solo_timed/pk_1v1/multiplayer)
   ├── score
   ├── best_score
-  ├── elo_rating
-  ├── rank_tier (bronze/silver/gold/diamond/king/legend)
+  ├── star_count (总星数，1-91+)
+  ├── rank_tier (bronze/silver/gold/platinum/diamond/star/king)
   └── played_at
 
 -- SRS 复习表
@@ -302,7 +305,7 @@ srs_items
 orders
   ├── id (UUID, PK)
   ├── user_id (FK → users)
-  ├── stripe_payment_intent_id
+  ├── paddle_transaction_id
   ├── product_type (membership/skin/season_pass)
   ├── product_id
   ├── amount
@@ -315,10 +318,25 @@ referrals
   ├── id (UUID, PK)
   ├── referrer_id (FK → users)
   ├── referred_id (FK → users)
-  ├── commission_amount
-  ├── commission_status (pending/paid)
+  ├── trigger_order_id (FK → orders, 触发返佣的订单)
+  ├── commission_coins (INTEGER, 本次奖励的知语币数量)
+  ├── commission_status (pending/credited/reversed)
+  ├── credited_at
+  └── created_at
+
+-- 知语币流水表（虚拟币全流水账本，审计+防作弊）
+coin_transactions
+  ├── id (UUID, PK)
+  ├── user_id (FK → users)
+  ├── direction (credit/debit)
+  ├── amount (INTEGER, 正整数，单位：币)
+  ├── reason (referral_reward / signin_bonus / skin_purchase / membership_redeem / season_pass / admin_adjust)
+  ├── related_id (UUID, 关联订单/推荐记录/签到记录等)
+  ├── balance_after (INTEGER, 交易后余额快照)
   └── created_at
 ```
+
+> ⚠️ 知语币铁律：**所有余额变动必须通过 coin_transactions 表记录**，余额字段 zhiyu_coins 只是快照。绝不允许直接 UPDATE users.zhiyu_coins。退款/撤销时写反向流水，而非修改历史记录。
 
 ### 5.2 RLS 策略
 
