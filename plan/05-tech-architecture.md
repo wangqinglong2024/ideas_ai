@@ -22,7 +22,7 @@
 | **数据库** | Supabase PostgreSQL | 托管 PostgreSQL + RLS 行级安全 |
 | **缓存** | Redis (Upstash) | Serverless Redis，排行榜/会话/限流 |
 | **内容引擎** | Dify | 知识库存储教学内容 + AI 工作流 |
-| **支付** | Paddle (MoR) | 商户记录模式，处理全球税务 |
+| **支付** | Stripe | 全球支付处理，支持中国公司签约 |
 | **CDN / 存储** | Cloudflare CDN + R2 | 全球加速 + 对象存储 |
 | **TTS** | Azure TTS（或备选） | 中文语音合成，支持多种声色 |
 | **部署** | PWA 优先 → Capacitor (Android/iOS) | 一套代码多端发布 |
@@ -93,7 +93,7 @@
 | **课程服务** | 课程大纲/课时内容/练习题/考试/证书 |
 | **游戏服务** | 12 款 2D 游戏（Phaser 3）/实时 PK（WebSocket）/ELO 段位/匹配系统/积分/排行榜/皮肤 |
 | **内容服务** | 发现中国文章/多语言内容/Dify 知识库接口 |
-| **支付服务** | Paddle Webhook/会员管理/订单记录/退款 |
+| **支付服务** | Stripe Webhook/会员管理/订单记录/退款 |
 | **AI 服务** | 口语评测/写作批改/智能推题/SRS 调度 |
 
 ---
@@ -302,7 +302,7 @@ srs_items
 orders
   ├── id (UUID, PK)
   ├── user_id (FK → users)
-  ├── paddle_transaction_id
+  ├── stripe_payment_intent_id
   ├── product_type (membership/skin/season_pass)
   ├── product_id
   ├── amount
