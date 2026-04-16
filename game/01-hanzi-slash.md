@@ -2,7 +2,7 @@
 
 > 对应课程：Level 1（启蒙） | 优先级：P0 | 上线：M1-M2（MVP 首发游戏）
 > 版本：v6.0 | 日期：2026-04-16
-> **关联**: [游戏索引](00-index.md) | [游戏汇总](../04-game-design.md) | [L1 课程](../03-course-system.md)
+> **关联**: [游戏索引](00-index.md) | [游戏汇总](../plan/04-game-design.md) | [L1 课程](../plan/03-course-system.md)
 
 ---
 

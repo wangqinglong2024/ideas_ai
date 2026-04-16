@@ -2,7 +2,7 @@
 
 > 知语 Zhiyu 12 款 2D 学习游戏完整设计文档
 > 版本：v6.0（终版） | 日期：2026-04-16
-> **关联**: [游戏汇总](../04-game-design.md) | [课程体系](../03-course-system.md) | [技术架构](../05-tech-architecture.md)
+> **关联**: [游戏汇总](../plan/04-game-design.md) | [课程体系](../plan/03-course-system.md) | [技术架构](../plan/05-tech-architecture.md)
 
 ---
 
@@ -28,9 +28,9 @@
 | 4 | [04-grammar-chef.md](04-grammar-chef.md) | 语法大厨 | L4（篇章理解） | P1 | M5 |
 | 5 | [05-idiom-chain.md](05-idiom-chain.md) | 成语接龙大战 | L5（深度阅读） | P1 | M5-M6 |
 | 6 | [06-hanzi-puzzle.md](06-hanzi-puzzle.md) | 汉字华容道 | L6（综合提升） | P2 | M7 |
-| 7 | [07-poem-flyorder.md](07-poem-flyorder.md) | 古诗飞花令 | L7（文言入门） | P2 | M7-M8 |
+| 7 | [07-poem-flyorder.md](07-poem-flyorder.md) | 古诗飞花令 | L7（高级阅读） | P2 | M7-M8 |
 | 8 | [08-reading-detective.md](08-reading-detective.md) | 阅读侦探社 | L8（文学赏析） | P2 | M9 |
-| 9 | [09-wenyan-adventure.md](09-wenyan-adventure.md) | 文言大冒险 | L9（综合冲刺） | P2 | M10 |
+| 9 | [09-hsk-adventure.md](09-hsk-adventure.md) | HSK 大冒险 | L9（综合冲刺） | P2 | M10 |
 | 10 | [10-debate-arena.md](10-debate-arena.md) | 辩论擂台 | L10（高中语文） | P3 | M12 |
 | 11 | [11-poetry-contest.md](11-poetry-contest.md) | 诗词大会 | L11（学术深化） | P3 | M14 |
 | 12 | [12-literary-master.md](12-literary-master.md) | 文豪争霸 | L12（母语精通） | P3 | M16 |

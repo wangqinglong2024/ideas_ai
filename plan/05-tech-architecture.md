@@ -93,7 +93,7 @@
 | **课程服务** | 课程大纲/课时内容/练习题/考试/证书 |
 | **游戏服务** | 12 款 2D 游戏（Phaser 3）/实时 PK（WebSocket）/星数段位/匹配系统/积分/排行榜/皮肤 |
 | **内容服务** | 发现中国文章/多语言内容/Dify 知识库接口 |
-| **支付服务** | Paddle MoR Webhook/会员管理/订单记录/退款 |
+| **支付服务** | Paddle MoR Webhook/课程购买管理/订单记录/退款 |
 | **AI 服务** | 口语评测/写作批改/智能推题/SRS 调度 |
 
 ---
@@ -147,7 +147,7 @@ src/
 /profile/progress           # 学习进度
 /profile/achievements       # 成就
 /settings                   # 设置
-/membership                 # 会员
+/purchases                  # 课程购买
 /placement-test             # 入学测试
 ```
 
@@ -222,7 +222,7 @@ Token 过期 → Refresh Token 刷新 → 新 JWT
 - 版本化：`/api/v1/`
 - 统一响应格式：`{ code, message, data }`
 - 分页：`?page=1&size=20`
-- 限流：Redis 令牌桶（普通用户 60 次/分钟，会员 120 次/分钟）
+- 限流：Redis 令牌桶（普通用户 60 次/分钟，付费用户 120 次/分钟）
 
 ---
 
@@ -242,8 +242,8 @@ users
   ├── content_language_mode (pinyin_zh/zh_only)
   ├── explanation_language (vi/en/off)
   ├── current_level (1-12)
-  ├── membership_type (free/monthly/yearly/lifetime)
-  ├── membership_expires_at
+  ├── purchased_levels (INTEGER[], 已购买的课程级别列表)
+  ├── level_expires_at (JSONB, 各级别到期时间 {level: expires_at})
   ├── referral_code
   ├── referred_by
   ├── zhiyu_coins (INTEGER, 知语币余额，1 币 = $0.01 等价值，不可提现)
@@ -306,7 +306,7 @@ orders
   ├── id (UUID, PK)
   ├── user_id (FK → users)
   ├── paddle_transaction_id
-  ├── product_type (membership/skin/season_pass)
+  ├── product_type (course_level/skin/season_pass)
   ├── product_id
   ├── amount
   ├── currency
@@ -330,7 +330,7 @@ coin_transactions
   ├── user_id (FK → users)
   ├── direction (credit/debit)
   ├── amount (INTEGER, 正整数，单位：币)
-  ├── reason (referral_reward / signin_bonus / skin_purchase / membership_redeem / season_pass / admin_adjust)
+  ├── reason (referral_reward / signin_bonus / skin_purchase / course_redeem / season_pass / admin_adjust)
   ├── related_id (UUID, 关联订单/推荐记录/签到记录等)
   ├── balance_after (INTEGER, 交易后余额快照)
   └── created_at
@@ -490,7 +490,7 @@ function calculateNextReview(easeFactor: number, interval: number, quality: numb
 ```
 Phase 1: PWA (Web) — 首发，覆盖所有平台
 Phase 2: Android (Capacitor 打包) — 上架 Google Play
-Phase 3: iOS (Capacitor 打包) — 上架 App Store（Web 订阅优先，规避苹果 30% 抽成）
+Phase 3: iOS (Capacitor 打包) — 上架 App Store（Web 购买优先，规避苹果 30% 抽成）
 ```
 
 ### 9.2 CI/CD
