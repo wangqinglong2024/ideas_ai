@@ -34,31 +34,31 @@
 | 文件 | 内容 | 什么时候读 |
 |------|------|-----------|
 | **本文件 index.md** | 规范索引 + AI 行为契约 + 开发流水线 | **每次对话开始时** |
-| [rules.md](rules.md) | 全局架构白皮书（技术栈声明 + Cosmic Refraction 设计系统技术参数 + Supabase/Express/测试哲学） | **每个项目启动时必读** |
+| [01-rules.md](01-rules.md) | 全局架构白皮书（技术栈声明 + Cosmic Refraction 设计系统技术参数 + Supabase/Express/测试哲学） | **每个项目启动时必读** |
 | [env.md](env.md) | 项目凭证与配置（Supabase/Dify/微信支付等） | 需要配置连接信息时 |
 
 ### 🟠 L1 — 产品与设计阶段
 
 | 文件 | 内容 | 什么时候读 |
 |------|------|-----------|
-| [product-design.md](product-design.md) | PRD 全维度规范 + Stitch 原型工作流 + MCP 调用手册 + 竞品/旅程模板 | 写需求、审查原型、管理设计系统时 |
-| [ui-design.md](ui-design.md) | UI/UE 设计规范（视觉/交互/动效/响应式/无障碍） | 设计页面、审查 UI、评审原型时 |
+| [03-product-design.md](03-product-design.md) | PRD 全维度规范 + Stitch 原型工作流 + MCP 调用手册 + 竞品/旅程模板 | 写需求、审查原型、管理设计系统时 |
+| [06-ui-design.md](06-ui-design.md) | UI/UE 设计规范（视觉/交互/动效/响应式/无障碍） | 设计页面、审查 UI、评审原型时 |
 
 ### 🟡 L2 — 编码与开发阶段
 
 | 文件 | 内容 | 什么时候读 |
 |------|------|-----------|
-| [coding-standards.md](coding-standards.md) | 编码规范 + 安全纵深体系 + 支付资金安全 + 数据库铁律 + 审查检查表 | **写任何代码前必读** |
-| [task-workflow.md](task-workflow.md) | **AI 任务执行工作流**（任务拆解 + Story File + 上下文工程 + 执行协议 + 质量门禁） | **开始开发任务前必读** |
-| [documentation-standards.md](documentation-standards.md) | 代码注释与文档规范 + AI 生成内容规范 | 写代码/生成文档/交付任务时 |
-| [api-design.md](api-design.md) | RESTful API 设计规约 | 设计或开发 API 时 |
-| [project-structure.md](project-structure.md) | 项目目录结构标准模板 | 创建新项目或新模块时 |
+| [05-coding-standards.md](05-coding-standards.md) | 编码规范 + 安全纵深体系 + 支付资金安全 + 数据库铁律 + 审查检查表 | **写任何代码前必读** |
+| [09-task-workflow.md](09-task-workflow.md) | **AI 任务执行工作流**（任务拆解 + Story File + 上下文工程 + 执行协议 + 质量门禁） | **开始开发任务前必读** |
+| [07-documentation-standards.md](07-documentation-standards.md) | 代码注释与文档规范 + AI 生成内容规范 | 写代码/生成文档/交付任务时 |
+| [04-api-design.md](04-api-design.md) | RESTful API 设计规约 | 设计或开发 API 时 |
+| [02-project-structure.md](02-project-structure.md) | 项目目录结构标准模板 | 创建新项目或新模块时 |
 
 ### 🟢 L3 — 测试与质量阶段
 
 | 文件 | 内容 | 什么时候读 |
 |------|------|-----------|
-| [qa-testing.md](qa-testing.md) | QA 测试规范 + Browser MCP + Docker 强制 + 健康评分 + AI 自验证协议 | 测试任何功能时必读 |
+| [08-qa-testing.md](08-qa-testing.md) | QA 测试规范 + Browser MCP + Docker 强制 + 健康评分 + AI 自验证协议 | 测试任何功能时必读 |
 
 ---
 

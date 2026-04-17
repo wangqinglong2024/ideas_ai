@@ -11,16 +11,16 @@
 
 | 层级 | 技术 | 说明 |
 |------|------|------|
-| **前端框架** | React 18+ / TypeScript | 组件化、生态成熟 |
+| **前端框架** | React 19 / TypeScript 5.x | 组件化、生态成熟 |
 | **样式方案** | Tailwind CSS v4 | 原子化 CSS，开发效率高 |
 | **状态管理** | Zustand | 轻量、简洁，适合中型项目 |
 | **数据请求** | React Query (TanStack Query) | 缓存、重试、乐观更新 |
 | **国际化** | i18next + react-i18next | 多语言切换（zh/en/vi → 后续 id/th/ms） |
 | **PWA** | Workbox | 离线缓存、推送通知 |
-| **后端框架** | Node.js + TypeScript (Hono/Fastify) | 异步高并发、全栈 TS 统一 |
+| **后端框架** | Node.js 22+ / Express + TypeScript | 异步高并发、全栈 TS 统一 |
 | **认证** | Supabase Auth + JWT | 邮箱/手机/OAuth 登录 |
 | **数据库** | Supabase PostgreSQL | 托管 PostgreSQL + RLS 行级安全 |
-| **缓存** | Redis (Upstash) | Serverless Redis，排行榜/会话/限流 |
+| **缓存** | Redis（开发 Docker / 生产 Upstash） | 排行榜/会话/限流 |
 | **内容引擎** | Dify | AI 内容生产工具（生成后写入 Supabase） |
 | **支付** | Paddle MoR | Merchant of Record 模式，代处理全球税务，支持中国大陆公司签约 |
 | **CDN / 存储** | Cloudflare CDN + R2 | 全球加速 + 对象存储 |
@@ -80,7 +80,7 @@
 │                Data Layer                       │
 │  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │
 │  │ Supabase │  │  Redis   │  │    Dify      │  │
-│  │PostgreSQL│  │ (Upstash)│  │  知识库+AI    │  │
+│  │PostgreSQL│  │          │  │  知识库+AI    │  │
 │  └──────────┘  └──────────┘  └──────────────┘  │
 └─────────────────────────────────────────────────┘
 ```
