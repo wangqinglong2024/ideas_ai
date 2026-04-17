@@ -1,12 +1,16 @@
 # 产品设计全流程规范 (Product Design Standards)
 
-> **版本**: v2.0 | **最后更新**: 2025-07-16
+> **版本**: v3.0 | **最后更新**: 2026-04-17
 >
 > **本文件是整套规范体系中「产品设计阶段」的权威文档**。
 > 覆盖：PRD 撰写 → 信息架构 → 交互设计 → 原型审查 → Stitch MCP 操作手册 → 设计系统同步。
 > 它是编码开发的"上游"，确保需求清晰、原型可验证、设计与开发完全一致后再进入开发阶段。
 >
 > **参考来源**：Apple HIG、Google Material Design 3、Atlassian Design System、Ant Design Pro 最佳实践。
+> **关联文件**：
+> - AI 任务拆解和执行 → `task-workflow.md`（从 PRD 到任务卡片的转化流程）
+> - 视觉和交互规范 → `ui-design.md`（设计决策的"宪法"）
+> - 技术实现参数 → `rules.md` §一（CSS 变量、动画帧）
 
 ---
 

@@ -1,9 +1,13 @@
 # 项目目录结构标准 (Project Structure Template)
 
-> **版本**: v1.0 | **最后更新**: 2025-07-16
+> **版本**: v2.0 | **最后更新**: 2026-04-17
 >
 > **适用范围**：所有基于 Vite React/TS + Express/TS/Node.js + Supabase + Docker 技术栈的项目。
 > **使用方法**：新项目启动时，AI 按此模板生成目录骨架，再填充业务代码。
+> **关联文件**：
+> - 编码规范（命名约定）→ `coding-standards.md` §一.2
+> - Docker 配置 → `env.md`（端口映射、环境变量）
+> - 任务执行协议 → `task-workflow.md`（新模块添加时的上下文加载）
 
 ---
 

@@ -1,10 +1,14 @@
 # QA 测试规范 (QA Testing Standards)
 
-> **版本**: v2.0 | **最后更新**: 2026-04-17
+> **版本**: v3.0 | **最后更新**: 2026-04-17
 >
 > **适用范围**：所有基于 Vite React/TS + Express/TS/Node.js + Supabase + Docker 技术栈的项目。
 > **核心工具**：Browser MCP（Puppeteer）进行真实浏览器测试；gstack `/browse` + `/qa` 技能。
 > **铁律**：所有服务必须通过 Docker 启动后测试。禁止在宿主机安装 Node.js 等运行时直接测试。
+> **关联文件**：
+> - 编码安全规范 → `coding-standards.md` §六（安全自检项）
+> - 任务执行协议 → `task-workflow.md`（增量验证策略 + 质量门禁）
+> - 设计质量审查 → `ui-design.md` §八（视觉/交互/响应式/无障碍检查清单）
 
 ---
 

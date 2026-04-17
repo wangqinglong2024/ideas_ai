@@ -1,10 +1,14 @@
 # 编码规范手册 (Coding Standards)
 
-> **版本**: v2.0 | **最后更新**: 2026-04-17
+> **版本**: v3.0 | **最后更新**: 2026-04-17
 >
 > **适用范围**：所有基于 Vite React/TS + Express/TS/Node.js + Supabase + Docker 技术栈的项目。
 > **使用方法**：新项目启动时，将此文件喂给 AI，作为生成代码时必须遵守的铁律。
-> **关联文件**：代码审查检查表、完成状态协议、先查后建原则 → 见 `rules.md` §五
+> **关联文件**：
+> - 代码审查自检清单 → `rules.md` §五 + `task-workflow.md` §五.2
+> - 任务执行协议 → `task-workflow.md`（上下文工程 + Story File + 增量验证）
+> - API 设计规约 → `api-design.md`
+> - 文档注释规范 → `documentation-standards.md`
 
 ---
 
@@ -34,12 +38,15 @@
 
 ### 3. 禁止事项（红线清单）
 - ❌ 禁止 `any` 类型（TypeScript），必须给出明确类型
-- ❤ 禁止 `// @ts-ignore`（后端 TypeScript），必须修正类型问题
+- ❌ 禁止 `// @ts-ignore` 或 `@ts-expect-error`（后端 TypeScript），必须修正类型问题
 - ❌ 禁止硬编码魔法数字/字符串，必须提取为命名常量
 - ❌ 禁止 `console.log` / `print` 残留在提交代码中（调试用完即删）
 - ❌ 禁止在前端代码中出现 `SERVICE_ROLE_KEY`
 - ❌ 禁止使用 `var`（JS/TS），只用 `const` 和 `let`
-- ❤ 禁止同步阻塞调用（Node.js 后端），所有 I/O 必须 `async/await`
+- ❌ 禁止同步阻塞调用（Node.js 后端），所有 I/O 必须 `async/await`
+- ❌ 禁止不加 `try/catch` 的顶层 `await`（后端入口）
+- ❌ 禁止在循环内发起数据库查询（N+1 问题），用 `IN` 或 `JOIN` 代替
+- ❌ 禁止捕获错误后静默吞掉（`catch(e) {}`），必须记录日志或重新抛出
 
 ---
 
@@ -116,6 +123,15 @@ export const useUser = (userId: string) => {
 - 页面级错误使用 React Error Boundary 兜底
 - 表单验证使用 Zod schema，禁止手写 if-else 校验
 - 所有用户输入必须做前端校验 + 后端二次校验（双重保险）
+- **乐观更新**：非关键操作可先更新 UI 再等 API（失败时回滚 + Toast 提示）
+- **重试策略**：TanStack Query 默认重试 3 次，间隔指数递增（1s → 2s → 4s）
+
+### 7. AI 生成前端代码的特殊约束
+- 生成组件时必须同时提供 Props 类型定义（不允许裸 `any`）
+- 生成页面时必须覆盖 7 种状态（空/加载/首次/成功/错误/部分/离线，见 `ui-design.md` §三.2）
+- 生成表单时必须同时提供 Zod Schema + 错误展示逻辑
+- 每个生成的组件必须包含 `displayName`（方便 React DevTools 调试）
+- 禁止生成超过 150 行的单文件组件——超过则拆分
 
 ---
 
@@ -221,6 +237,13 @@ export type UserUpdate = z.infer<typeof UserUpdateSchema>
 - 日志级别：debug（开发调试）、info（关键业务节点）、warn（异常但可恢复）、error（需人工介入）
 - 每条日志必须包含：`userId`（如有）、`requestId`、关键业务参数
 - 敏感信息（密码、Token）禁止出现在日志中
+
+### 8. AI 生成后端代码的特殊约束
+- 生成路由时必须同时包含 Zod 请求校验 + 统一响应格式 + 错误传递
+- 生成 Service 时必须同时考虑成功路径和所有失败路径（余额不足、权限不够、记录不存在等）
+- 生成 Repository 时必须确认表结构存在（先查后写，禁止凭空捏造字段名）
+- 每个新路由必须声明鉴权级别（0-3 级，见 `api-design.md` §六）
+- 涉及状态流转的逻辑必须用状态机模式，禁止 if-else 链判断当前状态
 
 ---
 
@@ -712,4 +735,5 @@ updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()           -- 更新时间
 ---
 
 > **代码审查检查表、完成状态协议、先查后建原则** 已统一移至 `rules.md` §五「AI 开发纪律与质量闭环」。
-> 编码时请同时参照 `rules.md` 中的自检清单。
+> **任务执行协议、上下文工程、Story File** 见 `task-workflow.md`。
+> 编码时请同时参照 `rules.md` 中的自检清单和 `task-workflow.md` 中的增量验证策略。
