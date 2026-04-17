@@ -35,26 +35,28 @@
 
 ### 应用端（9 轮）
 
-| 轮次 | 提示词文件 | 输出文件 | 覆盖范围 |
-|------|----------|---------|---------|
-| 1 | `01-global-framework.md` | `apps/01-global-framework.md` | Tab 导航、登录注册、语言设置、主题切换、推送处理、全局状态、通用组件 |
-| 2 | `02-discover-china.md` | `apps/02-discover-china.md` | 发现中国类目首页、每日金句、文章列表、文章详情、收藏/分享/选词 |
-| 3 | `03-course-learning.md` | `apps/03-course-learning.md` | 入学测试、Level 地图、单元列表、课时学习页、SRS 复习 |
-| 4 | `04-course-assessment.md` | `apps/04-course-assessment.md` | 课时小测验、单元测评、级别综合考核、证书系统、补考机制 |
-| 5 | `05-game-common.md` | `apps/05-game-common.md` | 游戏大厅、模式选择、匹配流程、结算页、段位系统、排行榜、皮肤商城 |
-| 6 | `06-games-g1-g4.md` | `apps/06-games-g1-g4.md` | G1 汉字切切切、G2 拼音泡泡龙、G3 词语消消乐、G4 语法大厨 |
-| 7 | `07-games-g5-g8.md` | `apps/07-games-g5-g8.md` | G5 成语接龙大战、G6 汉字华容道、G7 古诗飞花令、G8 阅读侦探社 |
-| 8 | `08-games-g9-g12.md` | `apps/08-games-g9-g12.md` | G9 HSK 大冒险、G10 辩论擂台、G11 诗词大会、G12 文豪争霸 |
-| 9 | `09-personal-payment.md` | `apps/09-personal-payment.md` | 个人中心首页、我的课程、收藏、知语币、课程购买、证书、设置、推荐系统 |
+> **输出规则**：每轮生成一个**文件夹**，文件夹内包含 `00-index.md`（索引+功能总览）和若干按模块拆分的子文件，避免单文件过大。
+
+| 轮次 | 提示词文件 | 输出文件夹 | 覆盖范围 |
+|------|----------|-----------|---------|
+| 1 | `01-global-framework.md` | `apps/01-global-framework/` | Tab 导航、登录注册、语言设置、主题切换、推送处理、全局状态、通用组件 |
+| 2 | `02-discover-china.md` | `apps/02-discover-china/` | 发现中国类目首页、每日金句、文章列表、文章详情、收藏/分享/选词 |
+| 3 | `03-course-learning.md` | `apps/03-course-learning/` | 入学测试、Level 地图、单元列表、课时学习页、SRS 复习 |
+| 4 | `04-course-assessment.md` | `apps/04-course-assessment/` | 课时小测验、单元测评、级别综合考核、证书系统、补考机制 |
+| 5 | `05-game-common.md` | `apps/05-game-common/` | 游戏大厅、模式选择、匹配流程、结算页、段位系统、排行榜、皮肤商城 |
+| 6 | `06-games-g1-g4.md` | `apps/06-games-g1-g4/` | G1 汉字切切切、G2 拼音泡泡龙、G3 词语消消乐、G4 语法大厨 |
+| 7 | `07-games-g5-g8.md` | `apps/07-games-g5-g8/` | G5 成语接龙大战、G6 汉字华容道、G7 古诗飞花令、G8 阅读侦探社 |
+| 8 | `08-games-g9-g12.md` | `apps/08-games-g9-g12/` | G9 HSK 大冒险、G10 辩论擂台、G11 诗词大会、G12 文豪争霸 |
+| 9 | `09-personal-payment.md` | `apps/09-personal-payment/` | 个人中心首页、我的课程、收藏、知语币、课程购买、证书、设置、推荐系统 |
 
 ### 管理后台（4 轮）
 
-| 轮次 | 提示词文件 | 输出文件 | 覆盖范围 |
-|------|----------|---------|---------|
-| 10 | `10-admin-dashboard.md` | `admin/01-admin-dashboard.md` | 后台登录、角色权限、数据看板、快捷操作 |
-| 11 | `11-admin-content.md` | `admin/02-admin-content.md` | 发现中国文章管理、课程内容管理、每日金句管理 |
-| 12 | `12-admin-user-order.md` | `admin/03-admin-user-order.md` | 用户管理、订单管理、退款处理、知语币管理 |
-| 13 | `13-admin-game-system.md` | `admin/04-admin-game-system.md` | 皮肤管理、赛季配置、推送管理、多语言管理、管理员管理、系统日志 |
+| 轮次 | 提示词文件 | 输出文件夹 | 覆盖范围 |
+|------|----------|-----------|---------|
+| 10 | `10-admin-dashboard.md` | `admin/01-admin-dashboard/` | 后台登录、角色权限、数据看板、快捷操作 |
+| 11 | `11-admin-content.md` | `admin/02-admin-content/` | 发现中国文章管理、课程内容管理、每日金句管理 |
+| 12 | `12-admin-user-order.md` | `admin/03-admin-user-order/` | 用户管理、订单管理、退款处理、知语币管理 |
+| 13 | `13-admin-game-system.md` | `admin/04-admin-game-system/` | 皮肤管理、赛季配置、推送管理、多语言管理、管理员管理、系统日志 |
 
 ---
 
@@ -109,21 +111,113 @@ product/
   00-product-overview.md              ← 已有（总纲索引）
   admin/
     00-admin-overview.md              ← 已有（后台概述）
-    01-admin-dashboard.md             ← 第 10 轮生成
-    02-admin-content.md               ← 第 11 轮生成
-    03-admin-user-order.md            ← 第 12 轮生成
-    04-admin-game-system.md           ← 第 13 轮生成
+    01-admin-dashboard/               ← 第 10 轮生成
+      00-index.md
+      01-login.md
+      02-permissions.md
+      03-navigation.md
+      04-dashboard.md
+      05-data-nonfunctional.md
+    02-admin-content/                 ← 第 11 轮生成
+      00-index.md
+      01-article-management.md
+      02-course-management.md
+      03-daily-quote.md
+      04-data-nonfunctional.md
+    03-admin-user-order/              ← 第 12 轮生成
+      00-index.md
+      01-user-list.md
+      02-user-detail.md
+      03-user-ban.md
+      04-order-management.md
+      05-refund.md
+      06-coin-management.md
+      07-data-nonfunctional.md
+    04-admin-game-system/             ← 第 13 轮生成
+      00-index.md
+      01-skin-management.md
+      02-season-management.md
+      03-leaderboard.md
+      04-push-management.md
+      05-i18n-management.md
+      06-admin-management.md
+      07-system-logs.md
   apps/
     00-apps-overview.md               ← 已有（应用端概述）
-    01-global-framework.md            ← 第 1 轮生成
-    02-discover-china.md              ← 第 2 轮生成
-    03-course-learning.md             ← 第 3 轮生成
-    04-course-assessment.md           ← 第 4 轮生成
-    05-game-common.md                 ← 第 5 轮生成
-    06-games-g1-g4.md                 ← 第 6 轮生成
-    07-games-g5-g8.md                 ← 第 7 轮生成
-    08-games-g9-g12.md                ← 第 8 轮生成
-    09-personal-payment.md            ← 第 9 轮生成
+    01-global-framework/              ← 第 1 轮生成
+      00-index.md
+      01-tab-navigation.md
+      02-auth-system.md
+      03-language-system.md
+      04-theme-mode.md
+      05-push-notification.md
+      06-global-states.md
+      07-common-components.md
+      08-pwa.md
+      09-nonfunctional.md
+    02-discover-china/                ← 第 2 轮生成
+      00-index.md
+      01-category-homepage.md
+      02-article-list.md
+      03-article-detail.md
+      04-share-system.md
+      05-favorite-system.md
+      06-data-nonfunctional.md
+    03-course-learning/               ← 第 3 轮生成
+      00-index.md
+      01-course-homepage.md
+      02-placement-test.md
+      03-paywall.md
+      04-level-detail.md
+      05-lesson-page.md
+      06-srs-review.md
+      07-data-nonfunctional.md
+    04-course-assessment/             ← 第 4 轮生成
+      00-index.md
+      01-question-types.md
+      02-lesson-quiz.md
+      03-unit-test.md
+      04-level-exam.md
+      05-certificate.md
+      06-data-nonfunctional.md
+    05-game-common/                   ← 第 5 轮生成
+      00-index.md
+      01-game-hall.md
+      02-mode-select.md
+      03-matching.md
+      04-settlement.md
+      05-rank-system.md
+      06-leaderboard.md
+      07-skin-shop.md
+      08-hud-landscape.md
+    06-games-g1-g4/                   ← 第 6 轮生成
+      00-index.md
+      01-g1-hanzi-slash.md
+      02-g2-pinyin-bubble.md
+      03-g3-word-match.md
+      04-g4-grammar-chef.md
+    07-games-g5-g8/                   ← 第 7 轮生成
+      00-index.md
+      01-g5-idiom-chain.md
+      02-g6-hanzi-puzzle.md
+      03-g7-poem-flyorder.md
+      04-g8-reading-detective.md
+    08-games-g9-g12/                  ← 第 8 轮生成
+      00-index.md
+      01-g9-hsk-adventure.md
+      02-g10-debate-arena.md
+      03-g11-poetry-contest.md
+      04-g12-literary-master.md
+    09-personal-payment/              ← 第 9 轮生成
+      00-index.md
+      01-personal-center.md
+      02-my-courses.md
+      03-favorites-certificates.md
+      04-zhiyu-coins.md
+      05-purchase-payment.md
+      06-referral.md
+      07-settings.md
+      08-data-nonfunctional.md
   prompt/
     00-prompt-guide.md                ← 本文件
     01-global-framework.md            ← 第 1 轮提示词
