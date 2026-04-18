@@ -13,7 +13,7 @@
 |------|------|------|
 | **前端框架** | React 19 / TypeScript 5.x | 组件化、生态成熟 |
 | **样式方案** | Tailwind CSS v4 | 原子化 CSS，开发效率高 |
-| **状态管理** | Zustand | 轻量、简洁，适合中型项目 |
+| **状态管理** | Zustand | 轻量、简洁，适合中型项目（客户端状态） |
 | **数据请求** | React Query (TanStack Query) | 缓存、重试、乐观更新 |
 | **国际化** | i18next + react-i18next | 多语言切换（zh/en/vi → 后续 id/th/ms） |
 | **PWA** | Workbox | 离线缓存、推送通知 |
@@ -191,7 +191,7 @@ server/
   │     │     ├── payments.ts
   │     │     └── admin.ts
   │     ├── services/           # 业务逻辑层
-  │     ├── models/             # 数据模型（Drizzle ORM / Prisma）
+  │     ├── models/             # 数据模型（Drizzle ORM）
   │     ├── schemas/            # Zod 校验 schemas
   │     ├── middleware/         # 中间件
   │     ├── ws/                 # WebSocket 对战服务

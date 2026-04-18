@@ -73,7 +73,9 @@
 AI 工作流：Dify
 原型设计：Stitch（通过 MCP 集成）
 数据校验：Zod（前后端共享 Schema）
-状态管理：TanStack Query + React Context
+状态管理：Zustand（客户端状态） + TanStack Query（服务端数据缓存）
+国际化：i18next + react-i18next（UI 三语 zh/en/vi）
+ORM：Drizzle ORM（TypeScript 原生，类型安全）
 ```
 
 ---

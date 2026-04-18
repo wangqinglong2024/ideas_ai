@@ -89,10 +89,10 @@ export const UserCard: FC<UserCardProps> = ({ userId, onEdit }) => {
 
 ### 3. 状态管理规则
 - 本组件私有状态：`useState`
-- 跨组件共享状态：React Context + useReducer
+- 跨组件共享状态：Zustand store（轻量、简洁、TypeScript 友好）
 - 服务端数据缓存：TanStack Query（React Query）
 - URL 状态：`useSearchParams`
-- 禁止 prop drilling 超过 2 层，超过就用 Context
+- 禁止 prop drilling 超过 2 层，超过就用 Zustand store
 
 ### 4. 样式规则（Tailwind CSS v4）
 - 全局样式类（`.glass`, `.glass-card` 等）在全局 CSS 中统一定义

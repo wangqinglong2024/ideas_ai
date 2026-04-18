@@ -19,7 +19,7 @@
   - §五: Partial 部分加载 — 已加载内容保留 + 失败区域重试
   - §六: Offline 离线状态 — 顶部离线 Banner + 仅展示缓存内容
   - §七: Success 正常状态 — 内容展示
-- 编码规范: `grules/05-coding-standards.md` §二.3 — 状态管理（Context + TanStack Query）
+- 编码规范: `grules/05-coding-standards.md` §二.3 — 状态管理（Zustand + TanStack Query）
 - 设计规范: `grules/06-ui-design.md` §三.3 — 骨架屏与加载态规范
 - 关联任务: T02-004（auth 登录）→ T02-007（i18n）→ T02-008（theme）→ 本任务
 

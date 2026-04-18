@@ -14,7 +14,7 @@
 - 产品需求: `product/apps/01-global-framework/02-auth-system.md` §一 — 登录墙触发场景清单（5 个场景）
 - 产品总纲: `product/00-product-overview.md` §三.1 — 三层用户权限（未登录访客/登录免费/付费用户）
 - 产品需求: `product/apps/01-global-framework/01-tab-navigation.md` §二.2 — 未登录用户 Tab 切换行为
-- 编码规范: `grules/05-coding-standards.md` §二.3 — 状态管理规则（Context + useReducer）
+- 编码规范: `grules/05-coding-standards.md` §二.3 — 状态管理规则（Zustand + TanStack Query）
 - 关联任务: T02-004（登录弹窗 AuthModal 已实现）→ 本任务 → T02-010（全局状态整合）
 
 ## 技术方案

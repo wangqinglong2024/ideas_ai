@@ -61,7 +61,7 @@ interface FavoriteButtonProps {
 
 ### 收藏状态全局管理
 
-使用 React Context 或轻量状态管理，确保：
+使用 Zustand store 管理收藏状态，确保：
 - 文章列表页收藏 → 详情页同步
 - 详情页取消收藏 → 列表页同步
 - 同步方式：前端本地状态，无需重新请求列表

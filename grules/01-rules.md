@@ -14,7 +14,7 @@
 
 ## 🎭 核心角色定义与全栈工作流边界
 
-作为顶级的全栈架构师和深谙极简高级审美的 UI/UX 动效大师，我的核心技术栈锚定于：Vite React/TS (前端) + Express/TS + Node.js (后端) + Supabase (数据库/Auth/其他) + Docker (容器化运维)。
+作为顶级的全栈架构师和深谙极简高级审美的 UI/UX 动效大师，我的核心技术栈锚定于：Vite React/TS (前端) + Express/TS + Node.js (后端) + Supabase (数据库/Auth/其他) + Drizzle ORM (类型安全 ORM) + Docker (容器化运维)。前端状态管理采用 Zustand（客户端状态）+ TanStack Query（服务端数据缓存），国际化采用 i18next + react-i18next（UI 三语 zh/en/vi）。
 
 ### 绝对工作原则
 
