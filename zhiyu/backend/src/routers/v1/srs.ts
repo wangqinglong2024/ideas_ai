@@ -18,7 +18,7 @@ router.get('/due', async (req, res: Response) => {
 
 // POST /srs/reviews/:itemId
 router.post('/reviews/:itemId', async (req, res: Response) => {
-  const { sub } = (req as AuthRequest).user
+  const { sub } = (req as unknown as AuthRequest).user
   const { itemId } = req.params
   const input = SubmitReviewSchema.parse(req.body)
   const result = await srsService.submitReview(sub, itemId, input)

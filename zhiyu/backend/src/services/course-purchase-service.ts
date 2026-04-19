@@ -1,6 +1,6 @@
 import * as purchaseRepo from '../repositories/course-purchase-repository'
 import * as courseRepo from '../repositories/course-repository'
-import { BadRequest, NotFound, Forbidden } from '../core/exceptions'
+import { BadRequest, NotFound } from '../core/exceptions'
 import { AppException } from '../core/exceptions'
 import type { PurchaseStatus } from '../models/course-purchase'
 

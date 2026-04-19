@@ -88,7 +88,7 @@ async function onLessonCompleted(userId: string, unitId: string, levelId: string
   })
 
   // 更新 Level 进度
-  const totalCompleted = await progressRepo.countCompletedLessons(userId)
+  void progressRepo.countCompletedLessons(userId)
   const level = await courseRepo.findLevelById(levelId)
   if (!level) return
 

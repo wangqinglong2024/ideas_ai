@@ -35,7 +35,7 @@ router.get('/', async (req, res: Response) => {
 // GET /course-purchases/levels/:levelId/status
 router.get('/levels/:levelId/status', async (req, res: Response) => {
   const { levelId } = LevelIdParamSchema.parse(req.params)
-  const { sub } = (req as AuthRequest).user
+  const { sub } = (req as unknown as AuthRequest).user
   const status = await purchaseService.getLevelPurchaseStatus(sub, levelId)
   success(res, status)
 })

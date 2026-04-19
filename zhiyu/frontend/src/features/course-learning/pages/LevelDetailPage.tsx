@@ -1,4 +1,4 @@
-import { type FC, useState } from 'react'
+import { type FC } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ChevronLeft, ChevronRight, Lock, Check, BookOpen } from 'lucide-react'
 import { useUnits, useUnlockStatus, useLevelPreview } from '../hooks/useCourse'

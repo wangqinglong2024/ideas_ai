@@ -17,16 +17,16 @@ router.post('/start', async (req, res: Response) => {
 
 // POST /placement-tests/:testId/submit
 router.post('/:testId/submit', async (req, res: Response) => {
-  const { sub } = (req as AuthRequest).user
+  const { sub } = (req as unknown as AuthRequest).user
   const { testId } = req.params
-  const { answer, question_id } = SubmitAnswerSchema.parse(req.body)
-  const result = await ptService.submitAndGetNext(sub, testId, answer, question_id)
+  const { previous_answer, previous_question_id } = SubmitAnswerSchema.parse(req.body)
+  const result = await ptService.submitAndGetNext(sub, testId, previous_answer, previous_question_id)
   success(res, result)
 })
 
 // POST /placement-tests/:testId/complete
 router.post('/:testId/complete', async (req, res: Response) => {
-  const { sub } = (req as AuthRequest).user
+  const { sub } = (req as unknown as AuthRequest).user
   const { testId } = req.params
   const result = await ptService.completeTest(sub, testId)
   success(res, result)

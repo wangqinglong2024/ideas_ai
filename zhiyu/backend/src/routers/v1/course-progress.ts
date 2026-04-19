@@ -12,7 +12,7 @@ router.use(authMiddleware)
 // PUT /course-progress/lessons/:lessonId
 router.put('/lessons/:lessonId', async (req, res: Response) => {
   const { lessonId } = LessonIdParamSchema.parse(req.params)
-  const { sub } = (req as AuthRequest).user
+  const { sub } = (req as unknown as AuthRequest).user
   const input = SaveProgressSchema.parse(req.body)
   const result = await progressService.saveLessonProgress(sub, lessonId, input)
   success(res, result)
@@ -21,7 +21,7 @@ router.put('/lessons/:lessonId', async (req, res: Response) => {
 // PATCH /course-progress/lessons/:lessonId/status
 router.patch('/lessons/:lessonId/status', async (req, res: Response) => {
   const { lessonId } = LessonIdParamSchema.parse(req.params)
-  const { sub } = (req as AuthRequest).user
+  const { sub } = (req as unknown as AuthRequest).user
   const { status } = UpdateLessonStatusSchema.parse(req.body)
   const result = await progressService.updateLessonStatus(sub, lessonId, status)
   success(res, result)
@@ -37,7 +37,7 @@ router.get('/overview', async (req, res: Response) => {
 // GET /course-progress/levels/:levelId/unlock-status
 router.get('/levels/:levelId/unlock-status', async (req, res: Response) => {
   const { levelId } = LevelIdParamSchema.parse(req.params)
-  const { sub } = (req as AuthRequest).user
+  const { sub } = (req as unknown as AuthRequest).user
   const status = await progressService.getUnlockStatus(sub, levelId)
   success(res, status)
 })

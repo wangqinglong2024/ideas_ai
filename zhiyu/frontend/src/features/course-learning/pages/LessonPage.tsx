@@ -106,16 +106,16 @@ export const LessonPage: FC = () => {
           const s = section as Record<string, unknown>
           return (
             <div key={i} className="space-y-2">
-              {s.title && (
+              {s.title ? (
                 <h2 className="font-semibold text-base">{String(s.title)}</h2>
-              )}
-              {s.content_zh && (
+              ) : null}
+              {s.content_zh ? (
                 <p className="text-sm leading-relaxed">{String(s.content_zh)}</p>
-              )}
-              {s.content_en && (
+              ) : null}
+              {s.content_en ? (
                 <p className="text-xs text-[var(--color-text-tertiary)] leading-relaxed">{String(s.content_en)}</p>
-              )}
-              {s.audio_url && (
+              ) : null}
+              {s.audio_url ? (
                 <button
                   onClick={() => playAudio(String(s.audio_url))}
                   className="flex items-center gap-1.5 text-xs text-[#0284c7] mt-1"
@@ -127,7 +127,7 @@ export const LessonPage: FC = () => {
                   )}
                   播放音频
                 </button>
-              )}
+              ) : null}
             </div>
           )
         })}
@@ -143,19 +143,19 @@ export const LessonPage: FC = () => {
                   <div key={i} className="glass-card p-4 min-w-[240px] snap-start shrink-0 space-y-1">
                     <div className="flex items-center justify-between">
                       <span className="text-lg font-bold">{String(v.word || v.hanzi || '')}</span>
-                      {v.audio_url && (
+                      {v.audio_url ? (
                         <button onClick={() => playAudio(String(v.audio_url))} className="p-1">
                           <Volume2 className="w-4 h-4 text-[#0284c7]" />
                         </button>
-                      )}
+                      ) : null}
                     </div>
-                    {v.pinyin && <p className="text-xs text-[#e11d48]">{String(v.pinyin)}</p>}
-                    {v.en && <p className="text-xs text-[var(--color-text-secondary)]">{String(v.en)}</p>}
-                    {v.example_zh && (
+                    {v.pinyin ? <p className="text-xs text-[#e11d48]">{String(v.pinyin)}</p> : null}
+                    {v.en ? <p className="text-xs text-[var(--color-text-secondary)]">{String(v.en)}</p> : null}
+                    {v.example_zh ? (
                       <p className="text-xs text-[var(--color-text-tertiary)] mt-2 border-t border-[var(--color-border)] pt-2">
                         {String(v.example_zh)}
                       </p>
-                    )}
+                    ) : null}
                   </div>
                 )
               })}

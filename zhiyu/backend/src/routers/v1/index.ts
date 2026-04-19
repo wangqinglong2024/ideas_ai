@@ -11,6 +11,10 @@ import courseProgressRouter from './course-progress'
 import coursePurchasesRouter from './course-purchases'
 import srsRouter from './srs'
 import placementTestsRouter from './placement-tests'
+import lessonQuizRouter from './assessment/lesson-quiz'
+import unitTestRouter from './assessment/unit-test'
+import levelExamRouter from './assessment/level-exam'
+import certificatesRouter from './assessment/certificates'
 import paddleWebhookRouter from './webhooks/paddle'
 import adminI18nRouter from './admin/i18n'
 import adminPushRouter from './admin/push'
@@ -33,6 +37,10 @@ router.use('/course-progress', courseProgressRouter)
 router.use('/course-purchases', coursePurchasesRouter)
 router.use('/srs', srsRouter)
 router.use('/placement-tests', placementTestsRouter)
+router.use('/', lessonQuizRouter)
+router.use('/', unitTestRouter)
+router.use('/', levelExamRouter)
+router.use('/certificates', certificatesRouter)
 router.use('/webhooks', paddleWebhookRouter)
 
 // 管理后台路由

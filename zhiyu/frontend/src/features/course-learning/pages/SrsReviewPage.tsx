@@ -1,8 +1,7 @@
 import { type FC, useState, useRef, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ChevronLeft, Check, X, Zap, Trophy } from 'lucide-react'
-import { useSrsDue, useSubmitReview, useSrsStats } from '../hooks/useCourse'
-import type { SrsReviewItem, ReviewResult } from '../services/api'
+import { ChevronLeft, Check, X, Trophy } from 'lucide-react'
+import { useSrsDue, useSubmitReview } from '../hooks/useCourse'
 
 export const SrsReviewPage: FC = () => {
   const navigate = useNavigate()
@@ -44,8 +43,8 @@ export const SrsReviewPage: FC = () => {
     />
   }
 
-  const front = currentItem.card_front as Record<string, unknown>
-  const back = currentItem.card_back as Record<string, unknown>
+  const front = currentItem!.card_front as Record<string, unknown>
+  const back = currentItem!.card_back as Record<string, unknown>
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -81,9 +80,9 @@ export const SrsReviewPage: FC = () => {
             {front.type === 'vocabulary' ? (
               <>
                 <p className="text-3xl font-bold mb-2">{String(front.word || '')}</p>
-                {front.pinyin && (
+                {front.pinyin ? (
                   <p className="text-sm text-[#e11d48]">{String(front.pinyin)}</p>
-                )}
+                ) : null}
               </>
             ) : (
               <p className="text-xl font-semibold">{JSON.stringify(front)}</p>
@@ -93,11 +92,11 @@ export const SrsReviewPage: FC = () => {
           {/* 反面 */}
           {showBack ? (
             <div className="border-t border-[var(--color-border)] pt-4 w-full space-y-2">
-              {back.en && <p className="text-sm">{String(back.en)}</p>}
-              {back.vi && <p className="text-xs text-[var(--color-text-tertiary)]">{String(back.vi)}</p>}
-              {back.example && (
+              {back.en ? <p className="text-sm">{String(back.en)}</p> : null}
+              {back.vi ? <p className="text-xs text-[var(--color-text-tertiary)]">{String(back.vi)}</p> : null}
+              {back.example ? (
                 <p className="text-xs text-[var(--color-text-secondary)] mt-2">{String(back.example)}</p>
-              )}
+              ) : null}
             </div>
           ) : (
             <p className="text-xs text-[var(--color-text-tertiary)] mt-4">点击翻转</p>
@@ -109,7 +108,7 @@ export const SrsReviewPage: FC = () => {
               <div
                 key={i}
                 className={`w-2 h-2 rounded-full ${
-                  i <= currentItem.interval_stage
+                  i <= currentItem!.interval_stage
                     ? 'bg-[#0284c7]'
                     : 'bg-[var(--color-bg-tertiary)]'
                 }`}

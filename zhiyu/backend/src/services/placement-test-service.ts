@@ -8,7 +8,7 @@ import {
 } from '../models/placement-test'
 
 const STARTING_DIFFICULTY = 3
-const COIN_REWARD = 100
+// COIN_REWARD = 100 (used in TODO below)
 
 /**
  * 开始入学测试
@@ -46,10 +46,9 @@ export async function submitAndGetNext(
   if (test.status !== 'in_progress') throw BadRequest('测试已结束')
 
   // 查找题目验证答案
-  const questions = await ptRepo.findQuestionsByDifficulty(1, [], 100) // 获取全部题目用于查找
+  void ptRepo.findQuestionsByDifficulty(1, [], 100)
   // 实际应按 ID 查，这里简化
   const answers = (test.answers as unknown[]) || []
-  const prevQuestion = answers.length > 0 ? null : null // 从题库查找
 
   // 计算本题是否正确
   // 简化: 使用数据库查找题目
@@ -191,7 +190,7 @@ export async function getTestHistory(userId: string) {
 
 // ===== 内部辅助 =====
 
-async function getNextQuestion(testId: string, difficulty: number, excludeIds: string[]) {
+async function getNextQuestion(_testId: string, difficulty: number, excludeIds: string[]) {
   // 尝试当前难度
   let questions = await ptRepo.findQuestionsByDifficulty(difficulty, excludeIds, 1)
 

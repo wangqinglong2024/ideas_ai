@@ -14,6 +14,13 @@ import { LessonPage } from '../features/course-learning/pages/LessonPage'
 import { SrsReviewPage } from '../features/course-learning/pages/SrsReviewPage'
 import { PaywallPage } from '../features/course-learning/pages/PaywallPage'
 import { PlacementTestPage } from '../features/course-learning/pages/PlacementTestPage'
+import {
+  LessonQuizPage,
+  UnitTestPage,
+  LevelExamPage,
+  CertificatePage,
+  CertificateListPage,
+} from '../pages/assessment'
 
 export const AppRouter = () => {
   return (
@@ -31,6 +38,11 @@ export const AppRouter = () => {
       <Route path="courses/levels/:levelId" element={<LevelDetailPage />} />
       <Route path="courses/units/:unitId/lessons" element={<LessonListPage />} />
       <Route path="courses/lessons/:lessonId" element={<LessonPage />} />
+      <Route path="courses/lessons/:lessonId/quiz" element={<LessonQuizPage />} />
+      <Route path="courses/units/:unitId/test" element={<UnitTestPage />} />
+      <Route path="courses/levels/:levelId/exam" element={<LevelExamPage />} />
+      <Route path="courses/certificates" element={<CertificateListPage />} />
+      <Route path="courses/certificates/:certificateNo" element={<CertificatePage />} />
       <Route path="courses/srs-review" element={<SrsReviewPage />} />
       <Route path="courses/paywall/:levelId" element={<PaywallPage />} />
       <Route path="courses/placement-test" element={<PlacementTestPage />} />
