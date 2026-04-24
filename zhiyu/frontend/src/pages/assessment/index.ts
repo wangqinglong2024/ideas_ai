@@ -1,5 +1,0 @@
-export { LessonQuizPage } from './LessonQuizPage'
-export { UnitTestPage } from './UnitTestPage'
-export { LevelExamPage } from './LevelExamPage'
-export { CertificatePage } from './CertificatePage'
-export { CertificateListPage } from './CertificateListPage'
