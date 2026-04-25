@@ -20,7 +20,7 @@
 | 11 | 营销文案 / 直播话术 | HSK 6-7 |
 | 12 | 行业深度 / 案例 | HSK 7+ |
 
-> 详见 [`/course/ecommerce/`](../../../course/ecommerce/)
+> 详见 [`/course/ecommerce/`](../../../content/course/ecommerce/)
 
 ### 1.2 工厂轨道（factory）
 > 面向中资工厂工人、组长、HR
@@ -40,7 +40,7 @@
 | 11 | 5S / 6 西格玛 / 精益生产 | HSK 6-7 |
 | 12 | 跨厂沟通 / 高级管理 | HSK 7+ |
 
-> 详见 [`/course/factory/`](../../../course/factory/)
+> 详见 [`/course/factory/`](../../../content/course/factory/)
 
 ### 1.3 HSK 轨道
 > 面向 HSK 应试 / 留学 / 学位
@@ -60,7 +60,7 @@
 | 11 | 模考（HSK 4 / 6 / 9 各 1 套） |
 | 12 | 真题精讲（近 5 年） |
 
-> 详见 [`/course/hsk/`](../../../course/hsk/)
+> 详见 [`/course/hsk/`](../../../content/course/hsk/)
 
 ### 1.4 日常轨道（daily）
 > 面向兴趣学习者、留学生、文化爱好者
@@ -80,7 +80,7 @@
 | 11 | 工作 / 职场（简历 / 面试） |
 | 12 | 高级表达 / 成语 / 俗语 |
 
-> 详见 [`/course/daily/`](../../../course/daily/)
+> 详见 [`/course/daily/`](../../../content/course/daily/)
 
 ## 二、内容颗粒度规格
 

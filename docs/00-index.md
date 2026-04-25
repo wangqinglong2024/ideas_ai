@@ -46,10 +46,11 @@
 
 ## 四、与现有资产的衔接
 
-- 课程体系已就绪：[`/course/`](../course/00-index.md)（4 轨道 × 12 阶段 × 12 章 × 12 节 × 12 知识点）
-- 文化内容已就绪：[`/china/`](../china/00-index.md)（12 类目，文章短文形式）
-- 游戏规划已就绪：[`/games/`](../games/00-index.md)（12 款游戏，强制横屏）
-- 小说规划已就绪：[`/novels/`](../novels/00-index.md)（12 类目，分篇章节形式）
+- 内容资产总索引：[`/content/`](../content/00-index.md)
+- 课程体系已就绪：[`/content/course/`](../content/course/00-index.md)（4 轨道 × 12 阶段 × 12 章 × 12 节 × 12 知识点）
+- 文化内容已就绪：[`/content/china/`](../content/china/00-index.md)（12 类目，文章短文形式）
+- 游戏规划已就绪：[`/content/games/`](../content/games/00-index.md)（12 款游戏，强制横屏）
+- 小说规划已就绪：[`/content/novels/`](../content/novels/00-index.md)（12 类目，分篇章节形式）
 - 推广方案已就绪：[`/research/`](../research/市场调研.md)（TikTok / Facebook / YouTube 三平台）
 
 > 本套文档负责把上述"内容资产 + 已有想法" 沉淀为可执行的战略与技术蓝图，供后续 PRD、架构、Sprint 拆解使用。

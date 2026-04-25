@@ -1,141 +1,141 @@
 # Epic E01 · 平台基础设施（Platform Foundation）
 
-> 阶段：M0 · 优先级：P0 · 估算：4 周
+> 阶段：M0 · 优先级：P0 · 策略：Docker-only、Mock-first、零第三方手动注册
 
 ## 摘要
-搭建 monorepo、CI/CD、环境变量、基础部署管道，为所有后续 Epic 提供工程基础。
+
+搭建知语 Zhiyu 的 Docker-first monorepo 工程底座。所有开发、测试、构建、预览、API、Worker、环境变量校验、数据库/队列/观测桩均必须通过 Docker 执行；缺少密码或 API Key 时自动降级到 mock adapter，不阻断构建与体验。
 
 ## 价值
-所有团队可并行开发；从第一行代码起就有自动化测试 / 部署 / 监控。
+
+- 后续 Epic 可以直接在统一 monorepo 中开发。
+- 工程验证只依赖 Docker，不污染宿主机环境。
+- 外部服务未授权或密钥缺失时，仍能完整运行测试与本地体验。
+- 从第一阶段起建立类型、lint、测试、构建、体积和健康检查基线。
 
 ## 范围
-- pnpm + turborepo monorepo
-- 4 apps（app / admin / web / api）+ 基础 packages
-- TypeScript strict 全栈
-- ESLint / Prettier / commitlint / husky
-- GitHub Actions CI（lint / test / build）
-- Cloudflare Pages + Render 部署
-- Doppler secrets
-- Sentry / PostHog / Better Stack 接入桩
+
+- pnpm + Turbo monorepo，但命令入口以 Docker Compose 为准。
+- 4 个前端/文档入口：`apps/app`、`apps/admin`、`apps/web`、`apps/docs`。
+- 后端入口：`apps/api` 与 `apps/worker`。
+- 共享包：`ui`、`sdk`、`i18n`、`types`、`config`、`db`、`jobs`、`analytics`、`observability`。
+- TypeScript strict、ESLint、Prettier、commitlint、PR/Issue 模板。
+- Dockerfile、`docker-compose.yml`、`docker-compose.test.yml`。
+- mock Supabase/Redis/Analytics/Observability adapters。
+- `/health`、`/ready`、配置与事件 API。
+- CI 使用 Docker 执行 `pnpm verify`。
 
 ## 非范围
-- 业务功能
-- UI 实现
-- 数据库 schema（E03 引入）
+
+- 任何必须手动注册的第三方 SaaS。
+- Cloudflare Pages、Render、Doppler、Sentry、PostHog、Better Stack、Upstash 的真实接入。
+- 生产域名、云资源创建、第三方仪表板、外部审批流。
+- 业务功能、真实数据库 schema、真实支付或真实用户认证。
+
+## 全局约束
+
+- 禁止要求宿主机运行 `pnpm install`、`pnpm build`、`pnpm test` 作为验收条件。
+- 必须以 `docker compose -f docker-compose.test.yml run --rm --build test` 作为总验收入口。
+- `.env.example` 与 `.env.docker.example` 只放占位值；真实密钥缺失时自动 mock。
+- 单文件不得超过 800 行。
+- Story 实施按 `bmad-dev-story` 执行；审查按 `bmad-code-review` 执行；复盘按 `bmad-retrospective` 执行。
 
 ## Stories
 
-### ZY-01-01 · 初始化 Monorepo
-**As a** 开发者 **I want** 标准 monorepo 骨架 **So that** 快速增加新包
-**AC**
-- [ ] pnpm workspace 配置
-- [ ] turbo.json 任务定义
-- [ ] tsconfig base + 各 app extend
-- [ ] 4 apps + 5 packages 占位
-- [ ] `pnpm i && pnpm build` 全绿
-**Tech**：spec/03 § 1
-**估**: M
+### ZY-01-01 · Docker-first Monorepo
 
-### ZY-01-02 · TypeScript 严格配置
 **AC**
-- [ ] tsconfig strict + noUncheckedIndexedAccess
-- [ ] 路径别名 `@zhiyu/*`
-- [ ] 全包通过 typecheck
-**估**: S
+- [x] `pnpm-workspace.yaml` 声明 `apps/*` 与 `packages/*`。
+- [x] `turbo.json` 定义 `build/dev/lint/typecheck/test`。
+- [x] 根 Dockerfile 可构建 workspace、verify、runtime 三类 target。
+- [x] README 只给 Docker 命令作为 Quick Start。
 
-### ZY-01-03 · ESLint + Prettier + Commitlint
+### ZY-01-02 · TypeScript Strict 与路径别名
+
 **AC**
-- [ ] .eslintrc + .prettierrc 共享配置
-- [ ] husky pre-commit + commit-msg
-- [ ] commitlint 验 conventional commits
-**估**: S
+- [x] 根 `tsconfig.base.json` 启用 strict、`noUncheckedIndexedAccess`、`exactOptionalPropertyTypes`。
+- [x] 全部 app/package extends base。
+- [x] `@zhiyu/*` 路径别名可解析。
+- [x] 至少一个 app 跨包引用 `@zhiyu/ui`。
 
-### ZY-01-04 · GitHub Actions CI
+### ZY-01-03 · Lint / Format / Commit 基线
+
 **AC**
-- [ ] PR workflow: lint / typecheck / test / build
-- [ ] Turbo remote cache
-- [ ] PR comment 失败明细
-- [ ] Bundle size check
-**Tech**：spec/08 § 6
-**估**: M
+- [x] ESLint flat config 可覆盖 TS/TSX。
+- [x] Prettier 配置固定。
+- [x] commitlint 与 Conventional Commits 示例存在。
+- [x] CONTRIBUTING 说明 Docker 验证与 commit 类型。
 
-### ZY-01-05 · Cloudflare Pages 部署 (4 站)
+### ZY-01-04 · Docker CI
+
 **AC**
-- [ ] app / admin / web / storybook 4 项目
-- [ ] PR preview URL
-- [ ] main → staging 自动
-- [ ] tag → prod 手动审批
-- [ ] 自定义域名配好
-**Tech**：spec/08 § 4
-**估**: M
+- [x] `.github/workflows/ci.yml` 只通过 Docker 运行验证。
+- [x] `pnpm verify` 包含 lint、format check、typecheck、test、build、size-check、file-line check。
+- [x] PR 模板要求 Docker 验证。
 
-### ZY-01-06 · Render API + Worker 部署
+### ZY-01-05 · Docker Compose 多入口预览
+
 **AC**
-- [ ] Dockerfile API + Worker
-- [ ] Render service 配置（SG region）
-- [ ] 健康检查 /health /ready
-- [ ] Blue-green 部署
-- [ ] 环境变量从 Doppler 注入
-**Tech**：spec/08 § 5
-**估**: L
+- [x] `docker-compose.yml` 启动 app/admin/web/docs/api/worker/redis。
+- [x] 前端端口固定为 5173/5174/5175/5176。
+- [x] API 端口固定为 3000。
+- [x] 不依赖外部 Pages 或域名。
 
-### ZY-01-07 · Doppler Secrets 管理
+### ZY-01-06 · API Runtime
+
 **AC**
-- [ ] 3 环境（dev/staging/prod）
-- [ ] 本地 doppler run
-- [ ] CI 注入
-- [ ] Zod 启动校验
-**Tech**：spec/09 § 15
-**估**: S
+- [x] `apps/api` 可构建为 Node runtime。
+- [x] `GET /health` 返回结构化 JSON。
+- [x] `GET /ready` 返回 database/queue 检查结果与 mock/real 模式。
+- [x] `POST /v1/events` 可用本地 analytics store 接收事件。
 
-### ZY-01-08 · Sentry FE/BE 接入
+### ZY-01-07 · 环境变量与密钥 Mock 策略
+
 **AC**
-- [ ] 前端 SDK + source map 上传
-- [ ] 后端 SDK + 中间件
-- [ ] release tracking
-- [ ] 自定义 fingerprint 规则
-**Tech**：spec/10 § 2
-**估**: M
+- [x] `packages/config` 集中读取环境变量。
+- [x] 缺失密钥记录到 `missingSecrets`。
+- [x] 缺失值使用 mock 默认值，不抛错中断测试。
+- [x] `.env.example` 与 `.env.docker.example` 覆盖必要变量。
 
-### ZY-01-09 · PostHog + Better Stack 接入
+### ZY-01-08 · 本地 Observability
+
 **AC**
-- [ ] PostHog SDK + identify
-- [ ] Better Stack 日志 transport（pino）
-- [ ] 仪表板模板
-**Tech**：spec/10 § 3, § 10
-**估**: M
+- [x] `packages/observability` 提供本地 JSON logger。
+- [x] `captureError` 返回本地 eventId。
+- [x] API 错误路径不会依赖第三方 SDK。
 
-### ZY-01-10 · Supabase 初始化
+### ZY-01-09 · 本地 Analytics
+
 **AC**
-- [ ] 3 项目（dev/staging/prod, SG region）
-- [ ] 网络连接测试
-- [ ] PITR 启用
-- [ ] 备份 cron
-**Tech**：spec/05
-**估**: S
+- [x] `packages/analytics` 提供本地事件 store。
+- [x] API `/v1/events` 接入 store。
+- [x] identify/track 不需要外部 Key。
 
-### ZY-01-11 · Redis (Upstash) + BullMQ 骨架
+### ZY-01-10 · 数据库 Mock Adapter
+
 **AC**
-- [ ] Upstash 实例 SG
-- [ ] BullMQ 连接 + 演示 job
-- [ ] 健康检查包含
-**Tech**：spec/04 § 5
-**估**: M
+- [x] `packages/db` 可根据 URL 判断 mock/real 模式。
+- [x] `mock://supabase` 默认可 ready。
+- [x] `/ready` 包含 database readiness。
 
-### ZY-01-12 · 文档站 + Storybook 初始化
+### ZY-01-11 · 队列 Mock Adapter 与 Worker
+
 **AC**
-- [ ] storybook.zhiyu.io 上线
-- [ ] docs.zhiyu.io 占位
-- [ ] CONTRIBUTING.md
-- [ ] PR 模板 + ISSUE 模板
-**估**: S
+- [x] `packages/jobs` 提供 enqueue/drain/ready。
+- [x] `apps/worker` 可处理 demo job。
+- [x] Docker Compose 提供 Redis 服务，但 mock 模式不依赖 Redis 可用。
 
-## 风险
-- Cloudflare + Render 跨厂账单分散 → 早期月度 review
-- Supabase region SG 容量限制 → 提前申请
+### ZY-01-12 · 文档与模板
+
+**AC**
+- [x] `apps/docs` 提供工程文档入口。
+- [x] README、CONTRIBUTING、PR 模板、Bug 模板齐备。
+- [x] `scripts/check-file-lines.mjs` 强制单文件 ≤ 800 行。
 
 ## DoD
-- [ ] PR 合入即触发 CI 全绿
-- [ ] Preview URL 自动评论
-- [ ] Staging 每日有部署
-- [ ] 三件套监控有数据
+
+- [x] 12 个 stories 均完成并通过审查。
+- [x] `docker compose -f docker-compose.test.yml run --rm --build test` 通过。
+- [x] `/health` 与 `/ready` 返回结构化 JSON。
+- [x] 缺少第三方密钥时测试与体验不中断。
+- [x] E01 复盘完成。

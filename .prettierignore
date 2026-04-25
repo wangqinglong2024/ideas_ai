@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+coverage
+.turbo
+.git
+env.md
+content
+planning
+docs
+_bmad
+.github/skills

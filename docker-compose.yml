@@ -1,0 +1,63 @@
+services:
+  api:
+    build:
+      context: .
+      target: runtime
+    env_file:
+      - .env.docker.example
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "node", "scripts/healthcheck.mjs", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+
+  worker:
+    build:
+      context: .
+      target: workspace
+    command: pnpm --filter @zhiyu/worker dev
+    env_file:
+      - .env.docker.example
+    depends_on:
+      - redis
+
+  app:
+    build:
+      context: .
+      target: workspace
+    command: pnpm --filter @zhiyu/app dev --host 0.0.0.0
+    ports:
+      - "5173:5173"
+
+  admin:
+    build:
+      context: .
+      target: workspace
+    command: pnpm --filter @zhiyu/admin dev --host 0.0.0.0
+    ports:
+      - "5174:5174"
+
+  web:
+    build:
+      context: .
+      target: workspace
+    command: pnpm --filter @zhiyu/web dev --host 0.0.0.0
+    ports:
+      - "5175:5175"
+
+  docs:
+    build:
+      context: .
+      target: workspace
+    command: pnpm --filter @zhiyu/docs dev --host 0.0.0.0
+    ports:
+      - "5176:5176"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"

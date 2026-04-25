@@ -8,7 +8,7 @@
 - [03-acceptance-criteria.md](./03-acceptance-criteria.md) — 验收准则
 - [04-v1-launch-titles.md](./04-v1-launch-titles.md) — **v1 五部启动小说选题 + 12 类目排期 + 内容审查标准（2026-04-25 补全）**
 
-## 12 类目（参考 `/novels/`）
+## 12 类目（参考 [`/content/novels/`](../../../content/novels/00-index.md)）
 都市言情 / 古代言情 / 仙侠修真 / 玄幻奇幻 / 穿越重生 / 武侠 / 历史架空 / 悬疑推理 / 恐怖盗墓 / 科幻末世 / 电竞游戏 / 耽美 BL
 
 ## 关键决策

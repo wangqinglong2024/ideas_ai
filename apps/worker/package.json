@@ -1,0 +1,19 @@
+{
+  "name": "@zhiyu/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx --conditions=development src/index.ts",
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@zhiyu/config": "workspace:*",
+    "@zhiyu/jobs": "workspace:*",
+    "@zhiyu/observability": "workspace:*"
+  }
+}

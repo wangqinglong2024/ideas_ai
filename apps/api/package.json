@@ -1,0 +1,22 @@
+{
+  "name": "@zhiyu/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/server.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx --conditions=development src/server.ts",
+    "lint": "eslint src --max-warnings=0",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@zhiyu/analytics": "workspace:*",
+    "@zhiyu/config": "workspace:*",
+    "@zhiyu/db": "workspace:*",
+    "@zhiyu/jobs": "workspace:*",
+    "@zhiyu/observability": "workspace:*",
+    "@zhiyu/types": "workspace:*"
+  }
+}

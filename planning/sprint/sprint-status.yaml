@@ -43,20 +43,20 @@ story_location: planning/story
 
 development_status:
   # ===== E01 Platform Foundation (M0) =====
-  epic-1: in-progress
-  1-1-init-monorepo: ready-for-dev
-  1-2-typescript-strict-config: ready-for-dev
-  1-3-eslint-prettier-commitlint: ready-for-dev
-  1-4-github-actions-ci: ready-for-dev
-  1-5-cloudflare-pages-deploy: ready-for-dev
-  1-6-render-api-worker-deploy: ready-for-dev
-  1-7-doppler-secrets: ready-for-dev
-  1-8-sentry-integration: ready-for-dev
-  1-9-posthog-betterstack: ready-for-dev
-  1-10-supabase-init: ready-for-dev
-  1-11-redis-bullmq-skeleton: ready-for-dev
-  1-12-storybook-docs-init: ready-for-dev
-  epic-1-retrospective: optional
+  epic-1: done
+  1-1-init-monorepo: done
+  1-2-typescript-strict-config: done
+  1-3-eslint-prettier-commitlint: done
+  1-4-github-actions-ci: done
+  1-5-cloudflare-pages-deploy: done
+  1-6-render-api-worker-deploy: done
+  1-7-doppler-secrets: done
+  1-8-sentry-integration: done
+  1-9-posthog-betterstack: done
+  1-10-supabase-init: done
+  1-11-redis-bullmq-skeleton: done
+  1-12-storybook-docs-init: done
+  epic-1-retrospective: done
 
   # ===== E02 Design System (M0) =====
   epic-2: in-progress

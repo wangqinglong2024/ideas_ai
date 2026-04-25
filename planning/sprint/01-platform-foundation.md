@@ -1,99 +1,77 @@
 # Sprint S01 · 平台基础设施（Platform Foundation）
 
-> Epic：[E01](../epics/01-platform-foundation.md) · 阶段：M0 · 周期：W1-W4（4 周） · 优先级：P0
-> Story 数：12 · 估算合计：~M-L 12 ≈ 30 person-days
-> 状态文件：[sprint-status.yaml](./sprint-status.yaml#epic-1)
+> Epic：[E01](../epics/01-platform-foundation.md) · 阶段：M0 · 优先级：P0 · 策略：Docker-only
 > Story 文件夹：[planning/story/01-platform-foundation/](../story/01-platform-foundation/)
 
 ## Sprint 目标
-搭建 monorepo、CI/CD、环境变量、部署管道与基础监控接入，为 E02-E20 全部 epic 提供工程基础。
+
+完成 Docker-first monorepo、严格类型、质量门禁、Docker CI、多入口预览、API/Worker runtime、mock-first 环境/数据/队列/观测/分析能力，为 E02-E20 提供无需宿主机环境、无需第三方手动注册的工程基础。
 
 ## 成功度量
-- PR 合入即触发 CI 全绿（lint / typecheck / test / build / bundle-size）
-- Preview URL 自动评论
-- Staging 每日有部署
-- Sentry / PostHog / Better Stack 三件套有数据
-- `pnpm i && pnpm build` < 5 min
+
+- `docker compose -f docker-compose.test.yml run --rm --build test` 全绿。
+- `docker compose up --build` 可启动 app/admin/web/docs/api/worker/redis。
+- API `/health` 与 `/ready` 返回 200 与结构化 JSON。
+- 缺少外部密码或 API Key 时，系统记录缺失项并自动 mock。
+- 全仓单文件 ≤ 800 行。
 
 ## Story 列表与执行顺序
 
-| 序 | Story Key | 标题 | 估 | 依赖 | 周次 |
-|:-:|---|---|:-:|---|:-:|
-| 1 | [1-1-init-monorepo](../story/01-platform-foundation/1-1-init-monorepo.md) | 初始化 Monorepo | M | - | W1 |
-| 2 | [1-2-typescript-strict-config](../story/01-platform-foundation/1-2-typescript-strict-config.md) | TS 严格配置 | S | 1-1 | W1 |
-| 3 | [1-3-eslint-prettier-commitlint](../story/01-platform-foundation/1-3-eslint-prettier-commitlint.md) | Lint/Prettier/Commit | S | 1-1 | W1 |
-| 4 | [1-4-github-actions-ci](../story/01-platform-foundation/1-4-github-actions-ci.md) | GitHub Actions CI | M | 1-2,1-3 | W2 |
-| 5 | [1-5-cloudflare-pages-deploy](../story/01-platform-foundation/1-5-cloudflare-pages-deploy.md) | CF Pages 部署 4 站 | M | 1-4 | W2 |
-| 6 | [1-7-doppler-secrets](../story/01-platform-foundation/1-7-doppler-secrets.md) | Doppler Secrets | S | 1-4 | W2 |
-| 7 | [1-10-supabase-init](../story/01-platform-foundation/1-10-supabase-init.md) | Supabase 初始化 | S | 1-7 | W2 |
-| 8 | [1-6-render-api-worker-deploy](../story/01-platform-foundation/1-6-render-api-worker-deploy.md) | Render API/Worker | L | 1-5,1-7,1-10 | W3 |
-| 9 | [1-11-redis-bullmq-skeleton](../story/01-platform-foundation/1-11-redis-bullmq-skeleton.md) | Redis + BullMQ | M | 1-7 | W3 |
-| 10 | [1-8-sentry-integration](../story/01-platform-foundation/1-8-sentry-integration.md) | Sentry FE/BE | M | 1-5,1-6 | W3 |
-| 11 | [1-9-posthog-betterstack](../story/01-platform-foundation/1-9-posthog-betterstack.md) | PostHog + Better Stack | M | 1-5,1-6 | W4 |
-| 12 | [1-12-storybook-docs-init](../story/01-platform-foundation/1-12-storybook-docs-init.md) | Storybook + Docs 占位 | S | 1-5 | W4 |
+| 序 | Story Key | 标题 | 依赖 |
+|:-:|---|---|---|
+| 1 | [1-1-init-monorepo](../story/01-platform-foundation/1-1-init-monorepo.md) | Docker-first Monorepo | - |
+| 2 | [1-2-typescript-strict-config](../story/01-platform-foundation/1-2-typescript-strict-config.md) | TypeScript Strict 与路径别名 | 1-1 |
+| 3 | [1-3-eslint-prettier-commitlint](../story/01-platform-foundation/1-3-eslint-prettier-commitlint.md) | Lint / Format / Commit 基线 | 1-1 |
+| 4 | [1-4-github-actions-ci](../story/01-platform-foundation/1-4-github-actions-ci.md) | Docker CI | 1-2, 1-3 |
+| 5 | [1-5-cloudflare-pages-deploy](../story/01-platform-foundation/1-5-cloudflare-pages-deploy.md) | Docker Compose 多入口预览 | 1-4 |
+| 6 | [1-6-render-api-worker-deploy](../story/01-platform-foundation/1-6-render-api-worker-deploy.md) | API Runtime | 1-2, 1-7 |
+| 7 | [1-7-doppler-secrets](../story/01-platform-foundation/1-7-doppler-secrets.md) | 环境变量与密钥 Mock 策略 | 1-2 |
+| 8 | [1-10-supabase-init](../story/01-platform-foundation/1-10-supabase-init.md) | 数据库 Mock Adapter | 1-7 |
+| 9 | [1-11-redis-bullmq-skeleton](../story/01-platform-foundation/1-11-redis-bullmq-skeleton.md) | 队列 Mock Adapter 与 Worker | 1-7 |
+| 10 | [1-8-sentry-integration](../story/01-platform-foundation/1-8-sentry-integration.md) | 本地 Observability | 1-6 |
+| 11 | [1-9-posthog-betterstack](../story/01-platform-foundation/1-9-posthog-betterstack.md) | 本地 Analytics | 1-6 |
+| 12 | [1-12-storybook-docs-init](../story/01-platform-foundation/1-12-storybook-docs-init.md) | 文档与模板 | 1-5 |
 
-## 周次计划
+## 执行计划
 
-### W1 · 工程地基（5 工作日）
-- 1-1：pnpm workspace + turbo.json + 4 apps + 5 packages 占位
-- 1-2：tsconfig strict + 路径别名
-- 1-3：ESLint + Prettier + husky + commitlint
-- **W1 验收**：`pnpm i && pnpm build && pnpm typecheck && pnpm lint` 全绿
+### 工程地基
 
-### W2 · CI/CD + 环境（5 工作日）
-- 1-4：GitHub Actions（PR / main / tag 三条流水线 + Turbo remote cache）
-- 1-5：Cloudflare Pages 4 项目（app/admin/web/storybook）+ PR preview
-- 1-7：Doppler 三环境（dev/staging/prod）+ CI 注入
-- 1-10：Supabase 三项目（SG region）创建
-- **W2 验收**：PR 自动评论 4 个 preview URL；staging 每日构建
+- 1-1：workspace、Turbo、Dockerfile、Compose、README。
+- 1-2：strict tsconfig、references、路径别名、跨包导入。
+- 1-3：ESLint、Prettier、commitlint、CONTRIBUTING。
 
-### W3 · 后端运行时 + 错误监控（5 工作日）
-- 1-6：API + Worker Dockerfile + Render 服务 + Blue-green
-- 1-11：Upstash Redis + BullMQ 骨架 + 演示 job
-- 1-8：Sentry FE source map + BE 中间件 + release tracking
-- **W3 验收**：API `/health /ready` 返回 200；Sentry 抓到测试错误
+### 自动验证
 
-### W4 · 行为分析 + 文档（5 工作日）
-- 1-9：PostHog identify + Better Stack pino transport
-- 1-12：Storybook + docs 站上线 + 模板（CONTRIBUTING / PR / Issue）
-- 缓冲：1 天用于回归与文档完善
-- **W4 验收**：DAU 仪表板能看到内部测试事件；PR/Issue 模板生效
+- 1-4：Docker CI、`pnpm verify`、PR/Issue 模板。
+- 1-5：Docker Compose 多入口预览，替代外部 Pages/域名。
 
-## 依赖关系图
+### 运行时与 Mock
 
-```
-1-1 ─┬─ 1-2
-     ├─ 1-3
-     └─ 1-4 ─┬─ 1-5 ─┬─ 1-8
-             │       ├─ 1-9
-             │       └─ 1-12
-             └─ 1-7 ─┬─ 1-10
-                     ├─ 1-6 ── 1-8
-                     └─ 1-11
-```
+- 1-7：集中配置与 mock fallback。
+- 1-10：数据库 mock adapter。
+- 1-11：队列 mock adapter 与 worker。
+- 1-6：API `/health`、`/ready`、`/v1/events`。
 
-## 风险
+### 可观测与文档
 
-| 风险 | 概率 | 影响 | 缓解 |
-|---|:-:|:-:|---|
-| Cloudflare + Render 跨厂账单分散 | M | M | 早期建立月度成本 review |
-| Supabase SG region 容量限制 | L | H | 提前申请；准备 Tokyo 备份 region |
-| Render Blue-green 切流不熟 | M | M | 先在 dev 做 3 次切换演练 |
-| Doppler 学习曲线 | L | L | W1 末尾 1h workshop |
-| Turbo remote cache 配置错误 | M | L | 文档化 + 验收 cache hit ratio ≥ 70% |
+- 1-8：本地 observability。
+- 1-9：本地 analytics。
+- 1-12：docs app、模板、单文件行数检查。
 
-## DoD（Definition of Done）
+## 风险与处理
 
-- [ ] 所有 12 story 状态 = done 并通过 code-review
-- [ ] PR 合入触发 CI 全绿，含 bundle-size check
-- [ ] Preview URL 自动评论（4 站）
-- [ ] Staging 自动部署 ≥ 7 天连续无失败
-- [ ] Prod 通过 tag + 手动审批可发布
-- [ ] Sentry / PostHog / Better Stack 三件套均能在仪表板看到事件
-- [ ] 健康检查 `/health /ready` 返回结构化 JSON
-- [ ] `_bmad/repo/frontend-patterns.md` 同步 + CONTRIBUTING.md 完整
-- [ ] Retrospective（`epic-1-retrospective`）完成
+| 风险 | 处理 |
+|---|---|
+| Docker 镜像首次构建慢 | 使用单一 workspace 镜像与 Docker layer cache |
+| 外部密钥缺失 | `packages/config` 收集 missingSecrets 并启用 mock 默认值 |
+| 第三方服务阻塞体验 | E01 不引入必须授权的第三方 SDK |
+| 文件持续膨胀 | `scripts/check-file-lines.mjs` 强制 ≤ 800 行 |
 
-## 退出标准（进入 S02 设计系统）
-- 1-5 (CF Pages) + 1-12 (Storybook) 完成 → S02 即可启动
-- 其余 stories 与 S02 并行进行无阻塞
+## DoD
+
+- [x] 所有 12 story 状态 = done 并通过 code-review。
+- [x] Docker 总验证全绿。
+- [x] Docker Compose 可启动所有本地服务。
+- [x] API 健康检查与 ready 检查通过。
+- [x] 缺密钥自动 mock，不中断体验。
+- [x] Retrospective 完成。

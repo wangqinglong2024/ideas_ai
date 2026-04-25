@@ -31,7 +31,7 @@
 
 用户在初始需求中已明确："禁止对我提出任何提问，你自行决定。" 因此在本次头脑风暴中，AI 同时扮演设施员和被引导者两个角色：自问自答、自主决策、自动推进至下一阶段。所有决策均基于：
 1. 用户提供的 46 项需求填写表
-2. 现有内容资产（`/course /china /games /novels /research`）
+2. 现有内容资产（`/content/course /content/china /content/games /content/novels` 与 `docs/` 研究材料）
 3. 知语项目规范（`grules/`）
 4. AI 对东南亚中文学习市场的领域知识
 

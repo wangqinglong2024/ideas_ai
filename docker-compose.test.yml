@@ -1,0 +1,14 @@
+services:
+  test:
+    build:
+      context: .
+      target: workspace
+    command: pnpm verify
+    environment:
+      NODE_ENV: test
+      APP_ENV: test
+      SUPABASE_URL: mock://supabase
+      SUPABASE_SERVICE_ROLE_KEY: mock-service-role-key
+      REDIS_URL: mock://redis
+      ANALYTICS_MODE: local
+      OBSERVABILITY_MODE: local

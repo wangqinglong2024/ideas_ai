@@ -6,15 +6,15 @@
 
 | Story | 标题 | 估 | 状态 |
 |---|---|:-:|:-:|
-| [1.1](./1-1-init-monorepo.md) | 初始化 Monorepo | M | ready-for-dev |
-| [1.2](./1-2-typescript-strict-config.md) | TypeScript 严格配置 | S | ready-for-dev |
-| [1.3](./1-3-eslint-prettier-commitlint.md) | ESLint + Prettier + Commitlint | S | ready-for-dev |
-| [1.4](./1-4-github-actions-ci.md) | GitHub Actions CI | M | ready-for-dev |
-| [1.5](./1-5-cloudflare-pages-deploy.md) | Cloudflare Pages 部署 4 站 | M | ready-for-dev |
-| [1.6](./1-6-render-api-worker-deploy.md) | Render API + Worker 部署 | L | ready-for-dev |
-| [1.7](./1-7-doppler-secrets.md) | Doppler Secrets 管理 | S | ready-for-dev |
-| [1.8](./1-8-sentry-integration.md) | Sentry FE/BE 接入 | M | ready-for-dev |
-| [1.9](./1-9-posthog-betterstack.md) | PostHog + Better Stack 接入 | M | ready-for-dev |
-| [1.10](./1-10-supabase-init.md) | Supabase 初始化 | S | ready-for-dev |
-| [1.11](./1-11-redis-bullmq-skeleton.md) | Redis + BullMQ 骨架 | M | ready-for-dev |
-| [1.12](./1-12-storybook-docs-init.md) | Storybook + 文档站 | S | ready-for-dev |
+| [1.1](./1-1-init-monorepo.md) | Docker-first Monorepo | M | done |
+| [1.2](./1-2-typescript-strict-config.md) | TypeScript Strict 与路径别名 | S | done |
+| [1.3](./1-3-eslint-prettier-commitlint.md) | Lint / Format / Commit 基线 | S | done |
+| [1.4](./1-4-github-actions-ci.md) | Docker CI | M | done |
+| [1.5](./1-5-cloudflare-pages-deploy.md) | Docker Compose 多入口预览 | M | done |
+| [1.6](./1-6-render-api-worker-deploy.md) | API Runtime | L | done |
+| [1.7](./1-7-doppler-secrets.md) | 环境变量与密钥 Mock 策略 | S | done |
+| [1.8](./1-8-sentry-integration.md) | 本地 Observability | M | done |
+| [1.9](./1-9-posthog-betterstack.md) | 本地 Analytics | M | done |
+| [1.10](./1-10-supabase-init.md) | 数据库 Mock Adapter | S | done |
+| [1.11](./1-11-redis-bullmq-skeleton.md) | 队列 Mock Adapter 与 Worker | M | done |
+| [1.12](./1-12-storybook-docs-init.md) | 文档与模板 | S | done |
