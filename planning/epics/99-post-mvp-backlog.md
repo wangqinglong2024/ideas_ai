@@ -22,6 +22,26 @@
 
 详见 [16-content-factory.md](./16-content-factory.md)。
 
+## E10 · 游戏专区扩展（v1.5 + v2）
+
+> 详见 [10-games-v1.md](./10-games-v1.md)，v1.0 W0 在 /games 列表以 coming_soon 占位卡片展示。
+
+### v1.5（M+3 → M+4，4 stories）
+| Story | 说明 | 估算 |
+|---|---|---|
+| ZY-10-11 | 汉字忍者（hanzi-ninja）| L |
+| ZY-10-12 | 汉字俄罗斯方块（hanzi-tetris）| L |
+| ZY-10-13 | 拼音塔防（pinyin-defense）| L |
+| ZY-10-19 | 游戏内购（道具 / 复活 / 解锁）| M |
+
+### v2（M+8 → M+10，4 stories）
+| Story | 说明 | 估算 |
+|---|---|---|
+| ZY-10-14 | 汉字贪吃蛇（hanzi-snake）| M |
+| ZY-10-15 | 汉字节奏（hanzi-rhythm）| L |
+| ZY-10-16 | 汉字跑酷（hanzi-runner）| L |
+| ZY-10-17 | 汉字弹弓（hanzi-slingshot）| M |
+
 ## v1.5 其他候选
 - AI 助理 IM（半自动客服）
 - 高级会员档（$20/月）

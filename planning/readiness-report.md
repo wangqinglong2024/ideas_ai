@@ -22,7 +22,8 @@
 | 佣金 L1=L2=20% | ✅ | RF-FR-006 公式更新 |
 | **佣金以 ZC 发放，不支持现金提现** | ✅ | RF-FR-008 改为自动入账；移除 withdrawals 表 / 提现 API |
 | 内容工厂 → v1.5（手工写库为 MVP 路径）| ✅ | 14-content-factory/00-index 标 Post-MVP；E16 推迟 |
-| Sprint 重排 | ✅ | s05-07/09/12 移除 ZY-16-xx；s16-17 重排 ZY-14-xx |
+| **游戏 12 款全规划**（v1=5 / v1.5=3 / v2=4）| ✅ | E10 重写为 19 stories；v1.0 上线列表 12 款，7 款 coming_soon |
+| Sprint 重排 | ✅ | s05-07/09/12 移除 ZY-16-xx；s10/s11 代码修正为 v1 5 款正确 ID；s16-17 重排 ZY-14-xx |
 | spec/05 数据模型同步 | ✅ | commissions 改 amount_coins；删 withdrawals |
 | spec/04 backend 同步 | ✅ | 12.1/12.2 更新 |
 | 12-admin AC | ✅ | AD-AC-008/011 改写 |
@@ -31,12 +32,16 @@
 ## 三、范围与优先级（v1）
 
 ### P0 必交付（Epic）
-E01-E15, E17-E20（共 19 epics ≈ 196 stories）
+E01-E15, E17-E20（共 19 epics ≈ 197 v1 stories；E10 v1=11 stories，4 stories 推迟 v1.5，4 stories 推迟 v2）
 
 ### v1.5 推迟
 - E16 内容工厂 12 stories（保留完整规划文档，进入 99-post-mvp-backlog）
+- E10 游戏附加 4 stories（汉字忍者 / 俄罗斯方块 / 拼音塔防 / 游戏内购）
 - AI 助理 IM
 - 高级会员档
+
+### v2 推迟
+- E10 游戏附加 4 stories（贪吃蛇 / 节奏 / 跑酷 / 弹弓）
 
 ## 四、依赖与风险
 

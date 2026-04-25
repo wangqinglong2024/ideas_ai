@@ -27,7 +27,7 @@ inputDocuments:
 | E07 | 学习引擎 | 07 | 12 | P0 | M2 | [07-learning-engine.md](./07-learning-engine.md) |
 | E08 | 课程模块 | 03 | 10 | P0 | M3 | [08-courses.md](./08-courses.md) |
 | E09 | 游戏引擎共享层 | spec/11 | 10 | P0 | M3 | [09-game-engine.md](./09-game-engine.md) |
-| E10 | 游戏 v1（5 款）| 04 v1 | 10 | P0 | M4 | [10-games-v1.md](./10-games-v1.md) |
+| E10 | 游戏专区（12 款）| 04 | 19 | P0/P1/P2 | M4/M+3/M+8 | [10-games-v1.md](./10-games-v1.md) |
 | E11 | 小说阅读 | 05 | 10 | P0 | M4 | [11-novels.md](./11-novels.md) |
 | E12 | 知语币与商城 | 08 | 10 | P0 | M5 | [12-economy.md](./12-economy.md) |
 | E13 | 支付与订阅 | 10 | 10 | P0 | M5 | [13-payment.md](./13-payment.md) |
@@ -39,10 +39,11 @@ inputDocuments:
 | E19 | 可观测与运维 | spec/10 | 10 | P0 | M0-M6 | [19-observability.md](./19-observability.md) |
 | E20 | 上线与发布 | spec/08 | 10 | P0 | M6 | [20-launch.md](./20-launch.md) |
 
-合计 **20 Epics × ~10 Stories ≈ 200+ Stories**
+合计 **20 Epics × ~10 Stories ≈ 210+ Stories**
 
-> **MVP（v1）实际交付**：E01-E15 + E17-E20 共 19 Epics（约 190 stories）
-> **Post-MVP（v1.5）**：E16 内容工厂自动化（保留全部 12 stories 规划）
+> **MVP（v1）实际交付**：E01-E15 + E17-E20 共 19 Epics（约 196 stories），其中 E10 交付 5 款游戏 + 12 款全列表占位
+> **Post-MVP（v1.5）**：E16 内容工厂 12 stories + E10 v1.5 增 4 stories（3 游戏 + 游戏内购）
+> **v2**：E10 v2 增 4 stories（4 游戏）
 
 ---
 
