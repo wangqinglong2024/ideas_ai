@@ -1,6 +1,7 @@
-# shared · 回合制循环与状态机
+# shared · 回合制循环与状态机（无限连玩 · 固定 60 秒）
 
 > 12 款游戏统一遵守此状态机；玩法差异只在 `Round.tick()` 内部实现。
+> **核心规则**：每局固定 60 秒；**无关卡 / 无章节 / 无下一关**；结束后只能「再玩一局」或「返回大厅」。
 
 ---
 
@@ -24,14 +25,14 @@
                ▼
         ┌──────────────┐  pause/resume
         │  Round       │◄────────────┐
-        │  (gameplay)  │             │
+        │  (60s gameplay) │          │
         └──────┬───────┘             │
-               │ all items done OR timeUp
+               │ 60s timeUp（唯一退出条件）
                ▼                     │
         ┌──────────────┐             │
-        │  Settle      │  星级结算 + SRS 回传 + 排行榜
+        │  Settle      │  得分 + SRS 回传（不发奖励、无三星、无排行榜）
         └──────┬───────┘             │
-               │ playAgain ──────────┘
+               │ playAgain（无限连玩）─┘
                │ exit
                ▼
             Lobby
@@ -43,10 +44,10 @@
 
 ```ts
 interface RoundConfig {
-  items: GameItem[];      // ContentAdapter 输出
+  items: GameItem[];        // ContentAdapter 输出（按 60s 节奏循环抽取）
   distractors: GameItem[];
-  durationMs?: number;    // 可选：限时模式
-  perItemMs?: number;     // 可选：单题限时
+  durationMs: 60_000;       // 固定 60 秒；不允许自定义
+  perItemMs?: number;       // 可选：单题限时
 }
 
 abstract class GameRound {
@@ -64,8 +65,10 @@ abstract class GameRound {
     this.combo = ok ? this.combo + 1 : 0;
     this.score += scoring.calc(item, ok, this.combo, ms);
     this.log.push({ ...buildLog(item, ok, ms) });
-    if (++this.index >= this.config.items.length) this.end();
+    // 60s 倒计时归零才结束；items 不够时 ContentAdapter 自动循环补题
   }
+
+  // 60s 倒计时由引擎统一驱动；时间到 → end()，无关卡推进。
 }
 ```
 

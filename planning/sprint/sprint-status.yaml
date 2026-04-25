@@ -1,5 +1,5 @@
 # generated: 2026-04-25
-# last_updated: 2026-04-25
+# last_updated: 2026-04-25  # E13/E14/E15 stories created
 # project: ideas_ai (知语 Zhiyu)
 # project_key: ZY
 # tracking_system: file-system
@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-04-25
-last_updated: 2026-04-25
+last_updated: 2026-04-26  # E07/E08/E09 stories created
 project: ideas_ai
 project_key: ZY
 tracking_system: file-system
@@ -129,142 +129,142 @@ development_status:
   epic-6-retrospective: optional
 
   # ===== E07 Learning Engine (M2) =====
-  epic-7: backlog
-  7-1-enrollments-progress-mistakes-tables: backlog
-  7-2-course-enrollment-api: backlog
-  7-3-step-progression-api: backlog
-  7-4-lesson-completion-settlement: backlog
-  7-5-srs-review-engine: backlog
-  7-6-vocabulary-book: backlog
-  7-7-mistake-book: backlog
-  7-8-xp-and-levels: backlog
-  7-9-streak-system: backlog
-  7-10-hsk-self-assessment: backlog
-  7-11-hsk-auto-assessment-stub: backlog
-  7-12-personal-learning-dashboard: backlog
+  epic-7: in-progress
+  7-1-enrollments-progress-mistakes-tables: ready-for-dev
+  7-2-course-enrollment-api: ready-for-dev
+  7-3-step-progression-api: ready-for-dev
+  7-4-lesson-completion-settlement: ready-for-dev
+  7-5-srs-review-engine: ready-for-dev
+  7-6-vocabulary-book: ready-for-dev
+  7-7-mistake-book: ready-for-dev
+  7-8-xp-and-levels: ready-for-dev
+  7-9-streak-system: ready-for-dev
+  7-10-hsk-self-assessment: ready-for-dev
+  7-11-hsk-auto-assessment-stub: ready-for-dev
+  7-12-personal-learning-dashboard: ready-for-dev
   epic-7-retrospective: optional
 
   # ===== E08 Courses (M3) =====
-  epic-8: backlog
-  8-1-course-tables-migration: backlog
-  8-2-step-type-spec: backlog
-  8-3-courses-list-detail-api: backlog
-  8-4-lesson-learning-api: backlog
-  8-5-courses-list-page: backlog
-  8-6-stage-detail-page: backlog
-  8-7-lesson-learning-page: backlog
-  8-8-ten-step-components: backlog
-  8-9-lesson-completion-screen: backlog
-  8-10-paywall-lesson-level: backlog
+  epic-8: in-progress
+  8-1-course-tables-migration: ready-for-dev
+  8-2-step-type-spec: ready-for-dev
+  8-3-courses-list-detail-api: ready-for-dev
+  8-4-lesson-learning-api: ready-for-dev
+  8-5-courses-list-page: ready-for-dev
+  8-6-stage-detail-page: ready-for-dev
+  8-7-lesson-learning-page: ready-for-dev
+  8-8-ten-step-components: ready-for-dev
+  8-9-lesson-completion-screen: ready-for-dev
+  8-10-paywall-lesson-level: ready-for-dev
   epic-8-retrospective: optional
 
   # ===== E09 Game Engine (M3 · MVP 优先) =====
-  epic-9: backlog
+  epic-9: in-progress
   # MVP 子集 (W15-W16)
-  9-1-game-engine-package-skeleton: backlog
-  9-2-pixijs-application-wrapper: backlog
-  9-3-scene-manager-mvp: backlog
-  9-4-asset-loader-mvp: backlog
-  9-5-input-manager-mvp: backlog
-  9-9-landscape-fullscreen: backlog
+  9-1-game-engine-package-skeleton: ready-for-dev
+  9-2-pixijs-application-wrapper: ready-for-dev
+  9-3-scene-manager-mvp: ready-for-dev
+  9-4-asset-loader-mvp: ready-for-dev
+  9-5-input-manager-mvp: ready-for-dev
+  9-9-landscape-fullscreen: ready-for-dev
   # V1 增强 (W17-W18)
-  9-5-input-manager-v1: backlog
-  9-6-audio-manager: backlog
-  9-7-physics-world: backlog
-  9-8-wordpack-pinyin-renderer: backlog
-  9-10-analytics-leaderboard: backlog
+  9-5-input-manager-v1: ready-for-dev
+  9-6-audio-manager: ready-for-dev
+  9-7-physics-world: ready-for-dev
+  9-8-wordpack-pinyin-renderer: ready-for-dev
+  9-10-analytics-leaderboard: ready-for-dev
   epic-9-retrospective: optional
 
   # ===== E10 Games (12 款 · MVP 单阶段) =====
-  epic-10: backlog
+  epic-10: in-progress
   # 通用基础设施 A
-  10-a1-games-hub-entry: backlog
-  10-a2-wordpack-selector: backlog
-  10-a3-landscape-force: backlog
+  10-a1-games-hub-entry: ready-for-dev
+  10-a2-wordpack-selector: ready-for-dev
+  10-a3-landscape-force: ready-for-dev
   # 12 款游戏 MVP
-  10-g1-pinyin-shooter: backlog
-  10-g2-tone-bubbles: backlog
-  10-g3-whack-hanzi: backlog
-  10-g4-hanzi-match3: backlog
-  10-g5-memory-match: backlog
-  10-g6-hanzi-ninja: backlog
-  10-g7-hanzi-tetris: backlog
-  10-g8-pinyin-defense: backlog
-  10-g9-hanzi-snake: backlog
-  10-g10-hanzi-rhythm: backlog
-  10-g11-hanzi-runner: backlog
-  10-g12-hanzi-slingshot: backlog
+  10-g1-pinyin-shooter: ready-for-dev
+  10-g2-tone-bubbles: ready-for-dev
+  10-g3-whack-hanzi: ready-for-dev
+  10-g4-hanzi-match3: ready-for-dev
+  10-g5-memory-match: ready-for-dev
+  10-g6-hanzi-ninja: ready-for-dev
+  10-g7-hanzi-tetris: ready-for-dev
+  10-g8-pinyin-defense: ready-for-dev
+  10-g9-hanzi-snake: ready-for-dev
+  10-g10-hanzi-rhythm: ready-for-dev
+  10-g11-hanzi-runner: ready-for-dev
+  10-g12-hanzi-slingshot: ready-for-dev
   epic-10-retrospective: optional
 
   # ===== E11 Novels (M4) =====
-  epic-11: backlog
-  11-1-novels-tables: backlog
-  11-2-novels-list-detail-api: backlog
-  11-3-chapter-content-paywall-api: backlog
-  11-4-novels-bookshelf-page: backlog
-  11-5-novel-detail-page: backlog
-  11-6-chapter-reader: backlog
-  11-7-chapter-unlock-payment: backlog
-  11-8-update-notifications: backlog
-  11-9-reading-preferences: backlog
-  11-10-five-launch-novels-content: backlog
+  epic-11: in-progress
+  11-1-novels-tables: ready-for-dev
+  11-2-novels-list-detail-api: ready-for-dev
+  11-3-chapter-content-paywall-api: ready-for-dev
+  11-4-novels-bookshelf-page: ready-for-dev
+  11-5-novel-detail-page: ready-for-dev
+  11-6-chapter-reader: ready-for-dev
+  11-7-chapter-unlock-payment: ready-for-dev
+  11-8-update-notifications: ready-for-dev
+  11-9-reading-preferences: ready-for-dev
+  11-10-five-launch-novels-content: ready-for-dev
   epic-11-retrospective: optional
 
   # ===== E12 Economy (M5) =====
-  epic-12: backlog
-  12-1-coins-balances-ledger-tables: backlog
-  12-2-earning-rules-engine: backlog
-  12-3-spend-api-idempotency: backlog
-  12-4-recharge-flow: backlog
-  12-5-shop-items-api: backlog
-  12-6-shop-page: backlog
-  12-7-ledger-personal-page: backlog
-  12-8-seven-day-checkin: backlog
-  12-9-admin-rule-config: backlog
-  12-10-anti-cheat: backlog
+  epic-12: in-progress
+  12-1-coins-balances-ledger-tables: ready-for-dev
+  12-2-earning-rules-engine: ready-for-dev
+  12-3-spend-api-idempotency: ready-for-dev
+  12-4-recharge-flow: ready-for-dev
+  12-5-shop-items-api: ready-for-dev
+  12-6-shop-page: ready-for-dev
+  12-7-ledger-personal-page: ready-for-dev
+  12-8-seven-day-checkin: ready-for-dev
+  12-9-admin-rule-config: ready-for-dev
+  12-10-anti-cheat: ready-for-dev
   epic-12-retrospective: optional
 
   # ===== E13 Payment (M5) =====
-  epic-13: backlog
-  13-1-plans-subscriptions-orders-tables: backlog
-  13-2-paddle-checkout-integration: backlog
-  13-3-paddle-webhook: backlog
-  13-4-lemonsqueezy-backup: backlog
-  13-5-plan-selection-ui: backlog
-  13-6-subscription-management: backlog
-  13-7-refund-flow: backlog
-  13-8-coupon-system: backlog
-  13-9-renewal-reminders: backlog
-  13-10-financial-reconciliation: backlog
+  epic-13: in-progress
+  13-1-plans-subscriptions-orders-tables: ready-for-dev
+  13-2-paddle-checkout-integration: ready-for-dev
+  13-3-paddle-webhook: ready-for-dev
+  13-4-lemonsqueezy-backup: ready-for-dev
+  13-5-plan-selection-ui: ready-for-dev
+  13-6-subscription-management: ready-for-dev
+  13-7-refund-flow: ready-for-dev
+  13-8-coupon-system: ready-for-dev
+  13-9-renewal-reminders: ready-for-dev
+  13-10-financial-reconciliation: ready-for-dev
   epic-13-retrospective: optional
 
   # ===== E14 Referral (M5-M6) =====
-  epic-14: backlog
-  14-1-referral-tables-rls: backlog
-  14-2-invitation-code-generation: backlog
-  14-3-share-link-asset-center: backlog
-  14-4-referral-landing-page: backlog
-  14-5-parent-binding-anti-cheat: backlog
-  14-6-commission-calc-webhook: backlog
-  14-7-fourteen-day-confirmation-cron: backlog
-  14-8-refund-commission-reverse: backlog
-  14-9-referral-dashboard: backlog
-  14-10-anti-cheat-monitoring: backlog
-  14-11-notifications-leaderboard: backlog
+  epic-14: in-progress
+  14-1-referral-tables-rls: ready-for-dev
+  14-2-invitation-code-generation: ready-for-dev
+  14-3-share-link-asset-center: ready-for-dev
+  14-4-referral-landing-page: ready-for-dev
+  14-5-parent-binding-anti-cheat: ready-for-dev
+  14-6-commission-calc-webhook: ready-for-dev
+  14-7-fourteen-day-confirmation-cron: ready-for-dev
+  14-8-refund-commission-reverse: ready-for-dev
+  14-9-referral-dashboard: ready-for-dev
+  14-10-anti-cheat-monitoring: ready-for-dev
+  14-11-notifications-leaderboard: ready-for-dev
   epic-14-retrospective: optional
 
   # ===== E15 Customer Service (M6) =====
-  epic-15: backlog
-  15-1-cs-tables-rls: backlog
-  15-2-websocket-gateway: backlog
-  15-3-agent-dispatch-service: backlog
-  15-4-user-im-ui: backlog
-  15-5-agent-im-workbench: backlog
-  15-6-ticket-flow: backlog
-  15-7-faq-self-service: backlog
-  15-8-ai-assist-v1: backlog
-  15-9-offline-fallback-email: backlog
-  15-10-cs-sla-dashboard: backlog
+  epic-15: in-progress
+  15-1-cs-tables-rls: ready-for-dev
+  15-2-websocket-gateway: ready-for-dev
+  15-3-agent-dispatch-service: ready-for-dev
+  15-4-user-im-ui: ready-for-dev
+  15-5-agent-im-workbench: ready-for-dev
+  15-6-ticket-flow: ready-for-dev
+  15-7-faq-self-service: ready-for-dev
+  15-8-ai-assist-v1: ready-for-dev
+  15-9-offline-fallback-email: ready-for-dev
+  15-10-cs-sla-dashboard: ready-for-dev
   epic-15-retrospective: optional
 
   # ===== E16 Content Factory (v1.5) =====

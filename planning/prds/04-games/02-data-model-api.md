@@ -1,5 +1,7 @@
 # 4.2 · 游戏 · 数据模型与 API
 
+> **MVP 收敛（60s 无限连玩）**：仅保留 `games` / `game_sessions` / `game_user_stats` 三张表的最小子集。`game_leaderboards` 、所有 HMAC / 反作弊 / 日上限发币 全部迁入 `99-post-mvp-backlog.md`。
+
 ## 一、数据模型
 
 ```sql
