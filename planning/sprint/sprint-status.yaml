@@ -1,0 +1,341 @@
+# generated: 2026-04-25
+# last_updated: 2026-04-25
+# project: ideas_ai (知语 Zhiyu)
+# project_key: ZY
+# tracking_system: file-system
+# story_location: planning/story
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - Developer typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-04-25
+last_updated: 2026-04-25
+project: ideas_ai
+project_key: ZY
+tracking_system: file-system
+story_location: planning/story
+
+development_status:
+  # ===== E01 Platform Foundation (M0) =====
+  epic-1: in-progress
+  1-1-init-monorepo: ready-for-dev
+  1-2-typescript-strict-config: ready-for-dev
+  1-3-eslint-prettier-commitlint: ready-for-dev
+  1-4-github-actions-ci: ready-for-dev
+  1-5-cloudflare-pages-deploy: ready-for-dev
+  1-6-render-api-worker-deploy: ready-for-dev
+  1-7-doppler-secrets: ready-for-dev
+  1-8-sentry-integration: ready-for-dev
+  1-9-posthog-betterstack: ready-for-dev
+  1-10-supabase-init: ready-for-dev
+  1-11-redis-bullmq-skeleton: ready-for-dev
+  1-12-storybook-docs-init: ready-for-dev
+  epic-1-retrospective: optional
+
+  # ===== E02 Design System (M0) =====
+  epic-2: backlog
+  2-1-design-tokens: backlog
+  2-2-tailwind-v4-config: backlog
+  2-3-glassmorphism-css: backlog
+  2-4-theme-switching: backlog
+  2-5-fonts-typography: backlog
+  2-6-core-components: backlog
+  2-7-feedback-components: backlog
+  2-8-layout-components: backlog
+  2-9-microinteractions: backlog
+  2-10-storybook-visual-regression: backlog
+  epic-2-retrospective: optional
+
+  # ===== E03 User Account (M1) =====
+  epic-3: backlog
+  3-1-users-sessions-tables: backlog
+  3-2-register-email-verification: backlog
+  3-3-login-jwt: backlog
+  3-4-oauth-google-apple: backlog
+  3-5-forgot-password: backlog
+  3-6-profile-avatar: backlog
+  3-7-settings-center: backlog
+  3-8-device-session-management: backlog
+  3-9-account-deletion-gdpr: backlog
+  3-10-account-frontend-pages: backlog
+  epic-3-retrospective: optional
+
+  # ===== E04 i18n (M1) =====
+  epic-4: backlog
+  4-1-i18next-integration: backlog
+  4-2-four-language-resources: backlog
+  4-3-icu-message-format: backlog
+  4-4-fonts-by-language: backlog
+  4-5-number-date-currency: backlog
+  4-6-content-translations-api: backlog
+  4-7-translation-admin: backlog
+  4-8-translation-import-export: backlog
+  4-9-rtl-readiness: backlog
+  4-10-translation-quality-monitor: backlog
+  epic-4-retrospective: optional
+
+  # ===== E05 App Shell (M1) =====
+  epic-5: backlog
+  5-1-pwa-manifest-icons: backlog
+  5-2-service-worker: backlog
+  5-3-tanstack-router: backlog
+  5-4-tanstack-query: backlog
+  5-5-bottom-navigation: backlog
+  5-6-top-bar-search: backlog
+  5-7-global-search-modal: backlog
+  5-8-discover-skeleton: backlog
+  5-9-notification-center: backlog
+  5-10-app-responsive-container: backlog
+  epic-5-retrospective: optional
+
+  # ===== E06 Discover China (M2) =====
+  epic-6: backlog
+  6-1-categories-articles-tables: backlog
+  6-2-articles-list-page: backlog
+  6-3-article-detail-immersive: backlog
+  6-4-sentence-audio-player: backlog
+  6-5-character-popup: backlog
+  6-6-favorites-notes: backlog
+  6-7-reading-progress-time: backlog
+  6-8-multilingual-toggle: backlog
+  6-9-article-fulltext-search: backlog
+  6-10-mobile-desktop-optimization: backlog
+  epic-6-retrospective: optional
+
+  # ===== E07 Learning Engine (M2) =====
+  epic-7: backlog
+  7-1-enrollments-progress-mistakes-tables: backlog
+  7-2-course-enrollment-api: backlog
+  7-3-step-progression-api: backlog
+  7-4-lesson-completion-settlement: backlog
+  7-5-srs-review-engine: backlog
+  7-6-vocabulary-book: backlog
+  7-7-mistake-book: backlog
+  7-8-xp-and-levels: backlog
+  7-9-streak-system: backlog
+  7-10-hsk-self-assessment: backlog
+  7-11-hsk-auto-assessment-stub: backlog
+  7-12-personal-learning-dashboard: backlog
+  epic-7-retrospective: optional
+
+  # ===== E08 Courses (M3) =====
+  epic-8: backlog
+  8-1-course-tables-migration: backlog
+  8-2-step-type-spec: backlog
+  8-3-courses-list-detail-api: backlog
+  8-4-lesson-learning-api: backlog
+  8-5-courses-list-page: backlog
+  8-6-stage-detail-page: backlog
+  8-7-lesson-learning-page: backlog
+  8-8-ten-step-components: backlog
+  8-9-lesson-completion-screen: backlog
+  8-10-paywall-lesson-level: backlog
+  epic-8-retrospective: optional
+
+  # ===== E09 Game Engine (M3) =====
+  epic-9: backlog
+  9-1-game-engine-package-skeleton: backlog
+  9-2-pixijs-application-wrapper: backlog
+  9-3-scene-manager: backlog
+  9-4-asset-loader: backlog
+  9-5-input-manager: backlog
+  9-6-audio-manager: backlog
+  9-7-physics-world: backlog
+  9-8-wordpack-pinyin-renderer: backlog
+  9-9-landscape-fullscreen: backlog
+  9-10-analytics-leaderboard: backlog
+  epic-9-retrospective: optional
+
+  # ===== E10 Games (M4 / v1.5 / v2) =====
+  epic-10: backlog
+  10-1-pinyin-shooter: backlog
+  10-2-tone-bubbles: backlog
+  10-3-whack-hanzi: backlog
+  10-4-hanzi-match3: backlog
+  10-5-memory-match: backlog
+  10-6-games-hub-entry: backlog
+  10-7-wordpack-selector: backlog
+  10-8-leaderboard: backlog
+  10-9-game-tutorial: backlog
+  10-10-landscape-desktop-adapt: backlog
+  10-11-hanzi-ninja: backlog
+  10-12-hanzi-tetris: backlog
+  10-13-pinyin-defense: backlog
+  10-14-hanzi-snake: backlog
+  10-15-hanzi-rhythm: backlog
+  10-16-hanzi-runner: backlog
+  10-17-hanzi-slingshot: backlog
+  10-18-coming-soon-cards: backlog
+  10-19-game-iap: backlog
+  epic-10-retrospective: optional
+
+  # ===== E11 Novels (M4) =====
+  epic-11: backlog
+  11-1-novels-tables: backlog
+  11-2-novels-list-detail-api: backlog
+  11-3-chapter-content-paywall-api: backlog
+  11-4-novels-bookshelf-page: backlog
+  11-5-novel-detail-page: backlog
+  11-6-chapter-reader: backlog
+  11-7-chapter-unlock-payment: backlog
+  11-8-update-notifications: backlog
+  11-9-reading-preferences: backlog
+  11-10-five-launch-novels-content: backlog
+  epic-11-retrospective: optional
+
+  # ===== E12 Economy (M5) =====
+  epic-12: backlog
+  12-1-coins-balances-ledger-tables: backlog
+  12-2-earning-rules-engine: backlog
+  12-3-spend-api-idempotency: backlog
+  12-4-recharge-flow: backlog
+  12-5-shop-items-api: backlog
+  12-6-shop-page: backlog
+  12-7-ledger-personal-page: backlog
+  12-8-seven-day-checkin: backlog
+  12-9-admin-rule-config: backlog
+  12-10-anti-cheat: backlog
+  epic-12-retrospective: optional
+
+  # ===== E13 Payment (M5) =====
+  epic-13: backlog
+  13-1-plans-subscriptions-orders-tables: backlog
+  13-2-paddle-checkout-integration: backlog
+  13-3-paddle-webhook: backlog
+  13-4-lemonsqueezy-backup: backlog
+  13-5-plan-selection-ui: backlog
+  13-6-subscription-management: backlog
+  13-7-refund-flow: backlog
+  13-8-coupon-system: backlog
+  13-9-renewal-reminders: backlog
+  13-10-financial-reconciliation: backlog
+  epic-13-retrospective: optional
+
+  # ===== E14 Referral (M5-M6) =====
+  epic-14: backlog
+  14-1-referral-tables-rls: backlog
+  14-2-invitation-code-generation: backlog
+  14-3-share-link-asset-center: backlog
+  14-4-referral-landing-page: backlog
+  14-5-parent-binding-anti-cheat: backlog
+  14-6-commission-calc-webhook: backlog
+  14-7-fourteen-day-confirmation-cron: backlog
+  14-8-refund-commission-reverse: backlog
+  14-9-referral-dashboard: backlog
+  14-10-anti-cheat-monitoring: backlog
+  14-11-notifications-leaderboard: backlog
+  epic-14-retrospective: optional
+
+  # ===== E15 Customer Service (M6) =====
+  epic-15: backlog
+  15-1-cs-tables-rls: backlog
+  15-2-websocket-gateway: backlog
+  15-3-agent-dispatch-service: backlog
+  15-4-user-im-ui: backlog
+  15-5-agent-im-workbench: backlog
+  15-6-ticket-flow: backlog
+  15-7-faq-self-service: backlog
+  15-8-ai-assist-v1: backlog
+  15-9-offline-fallback-email: backlog
+  15-10-cs-sla-dashboard: backlog
+  epic-15-retrospective: optional
+
+  # ===== E16 Content Factory (v1.5) =====
+  epic-16: backlog
+  16-1-prompt-templates-admin: backlog
+  16-2-langgraph-checkpointer: backlog
+  16-3-anthropic-deepseek-clients: backlog
+  16-4-article-generation-flow: backlog
+  16-5-lesson-generation-flow: backlog
+  16-6-novel-chapter-generation-flow: backlog
+  16-7-wordpack-generation-flow: backlog
+  16-8-deepseek-tts: backlog
+  16-9-translation-node-five-langs: backlog
+  16-10-auto-evaluator: backlog
+  16-11-human-review-ui: backlog
+  16-12-cost-quality-dashboard: backlog
+  epic-16-retrospective: optional
+
+  # ===== E17 Admin (M3-M5) =====
+  epic-17: backlog
+  17-1-admin-users-roles-permissions: backlog
+  17-2-admin-login-totp: backlog
+  17-3-rbac-middleware: backlog
+  17-4-admin-app-shell: backlog
+  17-5-user-management: backlog
+  17-6-content-mgmt-articles: backlog
+  17-7-content-mgmt-courses: backlog
+  17-8-content-mgmt-novels-games-wordpacks: backlog
+  17-9-cms-publish-console-factory-placeholder: backlog
+  17-10-orders-refunds-referral: backlog
+  17-11-reports-bi: backlog
+  17-12-feature-flags-system-settings: backlog
+  epic-17-retrospective: optional
+
+  # ===== E18 Security (M0-M6) =====
+  epic-18: backlog
+  18-1-password-token-baseline: backlog
+  18-2-input-validation-rate-limit: backlog
+  18-3-security-http-headers: backlog
+  18-4-data-encryption: backlog
+  18-5-audit-logs: backlog
+  18-6-privacy-tos: backlog
+  18-7-data-export-delete-gdpr: backlog
+  18-8-vuln-scanning-deps: backlog
+  18-9-waf-bot-protection: backlog
+  18-10-incident-response: backlog
+  epic-18-retrospective: optional
+
+  # ===== E19 Observability (M0-M6) =====
+  epic-19: backlog
+  19-1-pino-logging-betterstack: backlog
+  19-2-sentry-fe-be-integration: backlog
+  19-3-posthog-event-tracking: backlog
+  19-4-health-ready-metrics: backlog
+  19-5-business-metrics-dashboard: backlog
+  19-6-alerts-rules-channels: backlog
+  19-7-status-page: backlog
+  19-8-web-vitals-rum: backlog
+  19-9-backup-recovery-drill: backlog
+  19-10-deployment-events-postmortem: backlog
+  epic-19-retrospective: optional
+
+  # ===== E20 Launch (M6) =====
+  epic-20: backlog
+  20-1-marketing-site: backlog
+  20-2-seo-optimization: backlog
+  20-3-app-store-pwa-twa: backlog
+  20-4-cross-platform-smoke-tests: backlog
+  20-5-canary-release: backlog
+  20-6-growth-pixels-integration: backlog
+  20-7-launch-campaign: backlog
+  20-8-cs-knowledge-base-training: backlog
+  20-9-legal-compliance-review: backlog
+  20-10-launch-day-postmortem: backlog
+  epic-20-retrospective: optional
