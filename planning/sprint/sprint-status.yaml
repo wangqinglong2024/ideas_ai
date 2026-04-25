@@ -87,45 +87,45 @@ development_status:
   epic-3-retrospective: optional
 
   # ===== E04 i18n (M1) =====
-  epic-4: backlog
-  4-1-i18next-integration: backlog
-  4-2-four-language-resources: backlog
-  4-3-icu-message-format: backlog
-  4-4-fonts-by-language: backlog
-  4-5-number-date-currency: backlog
-  4-6-content-translations-api: backlog
-  4-7-translation-admin: backlog
-  4-8-translation-import-export: backlog
-  4-9-rtl-readiness: backlog
-  4-10-translation-quality-monitor: backlog
+  epic-4: in-progress
+  4-1-i18next-integration: ready-for-dev
+  4-2-four-language-resources: ready-for-dev
+  4-3-icu-message-format: ready-for-dev
+  4-4-fonts-by-language: ready-for-dev
+  4-5-number-date-currency: ready-for-dev
+  4-6-content-translations-api: ready-for-dev
+  4-7-translation-admin: ready-for-dev
+  4-8-translation-import-export: ready-for-dev
+  4-9-rtl-readiness: ready-for-dev
+  4-10-translation-quality-monitor: ready-for-dev
   epic-4-retrospective: optional
 
   # ===== E05 App Shell (M1) =====
-  epic-5: backlog
-  5-1-pwa-manifest-icons: backlog
-  5-2-service-worker: backlog
-  5-3-tanstack-router: backlog
-  5-4-tanstack-query: backlog
-  5-5-bottom-navigation: backlog
-  5-6-top-bar-search: backlog
-  5-7-global-search-modal: backlog
-  5-8-discover-skeleton: backlog
-  5-9-notification-center: backlog
-  5-10-app-responsive-container: backlog
+  epic-5: in-progress
+  5-1-pwa-manifest-icons: ready-for-dev
+  5-2-service-worker: ready-for-dev
+  5-3-tanstack-router: ready-for-dev
+  5-4-tanstack-query: ready-for-dev
+  5-5-bottom-navigation: ready-for-dev
+  5-6-top-bar-search: ready-for-dev
+  5-7-global-search-modal: ready-for-dev
+  5-8-discover-skeleton: ready-for-dev
+  5-9-notification-center: ready-for-dev
+  5-10-app-responsive-container: ready-for-dev
   epic-5-retrospective: optional
 
   # ===== E06 Discover China (M2) =====
-  epic-6: backlog
-  6-1-categories-articles-tables: backlog
-  6-2-articles-list-page: backlog
-  6-3-article-detail-immersive: backlog
-  6-4-sentence-audio-player: backlog
-  6-5-character-popup: backlog
-  6-6-favorites-notes: backlog
-  6-7-reading-progress-time: backlog
-  6-8-multilingual-toggle: backlog
-  6-9-article-fulltext-search: backlog
-  6-10-mobile-desktop-optimization: backlog
+  epic-6: in-progress
+  6-1-categories-articles-tables: ready-for-dev
+  6-2-articles-list-page: ready-for-dev
+  6-3-article-detail-immersive: ready-for-dev
+  6-4-sentence-audio-player: ready-for-dev
+  6-5-character-popup: ready-for-dev
+  6-6-favorites-notes: ready-for-dev
+  6-7-reading-progress-time: ready-for-dev
+  6-8-multilingual-toggle: ready-for-dev
+  6-9-article-fulltext-search: ready-for-dev
+  6-10-mobile-desktop-optimization: ready-for-dev
   epic-6-retrospective: optional
 
   # ===== E07 Learning Engine (M2) =====
@@ -175,65 +175,25 @@ development_status:
   9-10-analytics-leaderboard: backlog
   epic-9-retrospective: optional
 
-  # ===== E10 Games (12 款 · MVP → V1 → V1.5 三阶段迭代) =====
+  # ===== E10 Games (12 款 · MVP 单阶段) =====
   epic-10: backlog
   # 通用基础设施 A
-  10-a1-games-hub-entry-mvp: backlog
-  10-a2-wordpack-selector-mvp: backlog
-  10-a3-landscape-force-mvp: backlog
-  10-a4-game-tutorial-v1: backlog
-  10-a5-leaderboard-v1: backlog
-  10-a6-iap-common-v15: backlog
-  10-a7-coming-soon-cards: backlog
-  10-a8-share-cards-v15: backlog
-  # G1 拼音射击
-  10-g1-pinyin-shooter-mvp: backlog
-  10-g1-pinyin-shooter-v1: backlog
-  10-g1-pinyin-shooter-v15: backlog
-  # G2 声调泡泡
-  10-g2-tone-bubbles-mvp: backlog
-  10-g2-tone-bubbles-v1: backlog
-  10-g2-tone-bubbles-v15: backlog
-  # G3 打地鼠
-  10-g3-whack-hanzi-mvp: backlog
-  10-g3-whack-hanzi-v1: backlog
-  10-g3-whack-hanzi-v15: backlog
-  # G4 汉字消消乐
-  10-g4-hanzi-match3-mvp: backlog
-  10-g4-hanzi-match3-v1: backlog
-  10-g4-hanzi-match3-v15: backlog
-  # G5 翻牌记忆
-  10-g5-memory-match-mvp: backlog
-  10-g5-memory-match-v1: backlog
-  10-g5-memory-match-v15: backlog
-  # G6 汉字忍者
-  10-g6-hanzi-ninja-mvp: backlog
-  10-g6-hanzi-ninja-v1: backlog
-  10-g6-hanzi-ninja-v15: backlog
-  # G7 汉字俄罗斯方块
-  10-g7-hanzi-tetris-mvp: backlog
-  10-g7-hanzi-tetris-v1: backlog
-  10-g7-hanzi-tetris-v15: backlog
-  # G8 拼音塔防
-  10-g8-pinyin-defense-mvp: backlog
-  10-g8-pinyin-defense-v1: backlog
-  10-g8-pinyin-defense-v15: backlog
-  # G9 汉字贪吃蛇
-  10-g9-hanzi-snake-mvp: backlog
-  10-g9-hanzi-snake-v1: backlog
-  10-g9-hanzi-snake-v15: backlog
-  # G10 汉字节奏
-  10-g10-hanzi-rhythm-mvp: backlog
-  10-g10-hanzi-rhythm-v1: backlog
-  10-g10-hanzi-rhythm-v15: backlog
-  # G11 汉字跑酷
-  10-g11-hanzi-runner-mvp: backlog
-  10-g11-hanzi-runner-v1: backlog
-  10-g11-hanzi-runner-v15: backlog
-  # G12 汉字弹弓
-  10-g12-hanzi-slingshot-mvp: backlog
-  10-g12-hanzi-slingshot-v1: backlog
-  10-g12-hanzi-slingshot-v15: backlog
+  10-a1-games-hub-entry: backlog
+  10-a2-wordpack-selector: backlog
+  10-a3-landscape-force: backlog
+  # 12 款游戏 MVP
+  10-g1-pinyin-shooter: backlog
+  10-g2-tone-bubbles: backlog
+  10-g3-whack-hanzi: backlog
+  10-g4-hanzi-match3: backlog
+  10-g5-memory-match: backlog
+  10-g6-hanzi-ninja: backlog
+  10-g7-hanzi-tetris: backlog
+  10-g8-pinyin-defense: backlog
+  10-g9-hanzi-snake: backlog
+  10-g10-hanzi-rhythm: backlog
+  10-g11-hanzi-runner: backlog
+  10-g12-hanzi-slingshot: backlog
   epic-10-retrospective: optional
 
   # ===== E11 Novels (M4) =====
