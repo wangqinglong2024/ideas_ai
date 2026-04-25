@@ -1,5 +1,5 @@
 # generated: 2026-04-25
-# last_updated: 2026-04-25  # E13/E14/E15 stories created
+# last_updated: 2026-04-25  # E10/E11/E12/E16/E17/E18/E19/E20 stories created
 # project: ideas_ai (知语 Zhiyu)
 # project_key: ZY
 # tracking_system: file-system
@@ -35,7 +35,7 @@
 # - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
 
 generated: 2026-04-25
-last_updated: 2026-04-26  # E07/E08/E09 stories created
+last_updated: 2026-04-26  # E07/E08/E09/E16/E17/E18 stories created
 project: ideas_ai
 project_key: ZY
 tracking_system: file-system
@@ -268,75 +268,75 @@ development_status:
   epic-15-retrospective: optional
 
   # ===== E16 Content Factory (v1.5) =====
-  epic-16: backlog
-  16-1-prompt-templates-admin: backlog
-  16-2-langgraph-checkpointer: backlog
-  16-3-anthropic-deepseek-clients: backlog
-  16-4-article-generation-flow: backlog
-  16-5-lesson-generation-flow: backlog
-  16-6-novel-chapter-generation-flow: backlog
-  16-7-wordpack-generation-flow: backlog
-  16-8-deepseek-tts: backlog
-  16-9-translation-node-five-langs: backlog
-  16-10-auto-evaluator: backlog
-  16-11-human-review-ui: backlog
-  16-12-cost-quality-dashboard: backlog
+  epic-16: in-progress
+  16-1-prompt-templates-admin: ready-for-dev
+  16-2-langgraph-checkpointer: ready-for-dev
+  16-3-anthropic-deepseek-clients: ready-for-dev
+  16-4-article-generation-flow: ready-for-dev
+  16-5-lesson-generation-flow: ready-for-dev
+  16-6-novel-chapter-generation-flow: ready-for-dev
+  16-7-wordpack-generation-flow: ready-for-dev
+  16-8-deepseek-tts: ready-for-dev
+  16-9-translation-node-five-langs: ready-for-dev
+  16-10-auto-evaluator: ready-for-dev
+  16-11-human-review-ui: ready-for-dev
+  16-12-cost-quality-dashboard: ready-for-dev
   epic-16-retrospective: optional
 
   # ===== E17 Admin (M3-M5) =====
-  epic-17: backlog
-  17-1-admin-users-roles-permissions: backlog
-  17-2-admin-login-totp: backlog
-  17-3-rbac-middleware: backlog
-  17-4-admin-app-shell: backlog
-  17-5-user-management: backlog
-  17-6-content-mgmt-articles: backlog
-  17-7-content-mgmt-courses: backlog
-  17-8-content-mgmt-novels-games-wordpacks: backlog
-  17-9-cms-publish-console-factory-placeholder: backlog
-  17-10-orders-refunds-referral: backlog
-  17-11-reports-bi: backlog
-  17-12-feature-flags-system-settings: backlog
+  epic-17: in-progress
+  17-1-admin-users-roles-permissions: ready-for-dev
+  17-2-admin-login-totp: ready-for-dev
+  17-3-rbac-middleware: ready-for-dev
+  17-4-admin-app-shell: ready-for-dev
+  17-5-user-management: ready-for-dev
+  17-6-content-mgmt-articles: ready-for-dev
+  17-7-content-mgmt-courses: ready-for-dev
+  17-8-content-mgmt-novels-games-wordpacks: ready-for-dev
+  17-9-cms-publish-console-factory-placeholder: ready-for-dev
+  17-10-orders-refunds-referral: ready-for-dev
+  17-11-reports-bi: ready-for-dev
+  17-12-feature-flags-system-settings: ready-for-dev
   epic-17-retrospective: optional
 
   # ===== E18 Security (M0-M6) =====
-  epic-18: backlog
-  18-1-password-token-baseline: backlog
-  18-2-input-validation-rate-limit: backlog
-  18-3-security-http-headers: backlog
-  18-4-data-encryption: backlog
-  18-5-audit-logs: backlog
-  18-6-privacy-tos: backlog
-  18-7-data-export-delete-gdpr: backlog
-  18-8-vuln-scanning-deps: backlog
-  18-9-waf-bot-protection: backlog
-  18-10-incident-response: backlog
+  epic-18: in-progress
+  18-1-password-token-baseline: ready-for-dev
+  18-2-input-validation-rate-limit: ready-for-dev
+  18-3-security-http-headers: ready-for-dev
+  18-4-data-encryption: ready-for-dev
+  18-5-audit-logs: ready-for-dev
+  18-6-privacy-tos: ready-for-dev
+  18-7-data-export-delete-gdpr: ready-for-dev
+  18-8-vuln-scanning-deps: ready-for-dev
+  18-9-waf-bot-protection: ready-for-dev
+  18-10-incident-response: ready-for-dev
   epic-18-retrospective: optional
 
   # ===== E19 Observability (M0-M6) =====
   epic-19: backlog
-  19-1-pino-logging-betterstack: backlog
-  19-2-sentry-fe-be-integration: backlog
-  19-3-posthog-event-tracking: backlog
-  19-4-health-ready-metrics: backlog
-  19-5-business-metrics-dashboard: backlog
-  19-6-alerts-rules-channels: backlog
-  19-7-status-page: backlog
-  19-8-web-vitals-rum: backlog
-  19-9-backup-recovery-drill: backlog
-  19-10-deployment-events-postmortem: backlog
+  19-1-pino-logging-betterstack: ready-for-dev
+  19-2-sentry-fe-be-integration: ready-for-dev
+  19-3-posthog-event-tracking: ready-for-dev
+  19-4-health-ready-metrics: ready-for-dev
+  19-5-business-metrics-dashboard: ready-for-dev
+  19-6-alerts-rules-channels: ready-for-dev
+  19-7-status-page: ready-for-dev
+  19-8-web-vitals-rum: ready-for-dev
+  19-9-backup-recovery-drill: ready-for-dev
+  19-10-deployment-events-postmortem: ready-for-dev
   epic-19-retrospective: optional
 
   # ===== E20 Launch (M6) =====
   epic-20: backlog
-  20-1-marketing-site: backlog
-  20-2-seo-optimization: backlog
-  20-3-app-store-pwa-twa: backlog
-  20-4-cross-platform-smoke-tests: backlog
-  20-5-canary-release: backlog
-  20-6-growth-pixels-integration: backlog
-  20-7-launch-campaign: backlog
-  20-8-cs-knowledge-base-training: backlog
-  20-9-legal-compliance-review: backlog
-  20-10-launch-day-postmortem: backlog
+  20-1-marketing-site: ready-for-dev
+  20-2-seo-optimization: ready-for-dev
+  20-3-app-store-pwa-twa: ready-for-dev
+  20-4-cross-platform-smoke-tests: ready-for-dev
+  20-5-canary-release: ready-for-dev
+  20-6-growth-pixels-integration: ready-for-dev
+  20-7-launch-campaign: ready-for-dev
+  20-8-cs-knowledge-base-training: ready-for-dev
+  20-9-legal-compliance-review: ready-for-dev
+  20-10-launch-day-postmortem: ready-for-dev
   epic-20-retrospective: optional
