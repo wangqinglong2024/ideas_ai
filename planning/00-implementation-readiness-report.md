@@ -17,9 +17,9 @@
 | `docs/` | 43 | brainstorming → domain → market → tech → product brief | ✅ | bmad 五段式规划产物完整 |
 | `games/` | 19 | 12 游戏 × prd.md + shared (6 规范) | ✅ | 12 款游戏 PRD 全部到位 |
 | `novels/` | 13 | 12 小说品类 + 索引 | ✅ | 12 个题材模块全覆盖 |
-| `planning/` | 380 | 700 行（spec/05-data-model.md） | ✅ | epics 20 + prds 15 + spec 13 + ux 17 + sprint 21 + story 200+ |
+| `planning/` | 381 | 700 行（spec/05-data-model.md） | ✅ | epics 20 + prds 15 + spec 13 + ux 17 + sprint 21 + story 200+ |
 | `research/` | 15 | 市场调研 + 推广方案 13 篇 | ✅ | 推广 SOP 完整 |
-| **合计** | **542** | **700**（最大文件） | ✅ | 无文件超过 800 行硬上限 |
+| **合计** | **543** | **700**（最大文件） | ✅ | 无文件超过 800 行硬上限 |
 
 ---
 
@@ -34,11 +34,13 @@
 | Code fence 配对 | ✅ | 0 个未闭合代码块 |
 | UTF-8 无 BOM | ✅ | 0 个 BOM 文件 |
 | 占位符泄露（待补/TBD） | ✅ | 0 个真正占位（"TODO/Tasks" 关键字均为业务上下文使用） |
-| 跨文件相对链接可解析 | ✅ | 941 条相对链接全部可达（修复 2 条后） |
+| 跨文件相对链接可解析 | ✅ | 813 条真实相对链接全部可达；代码片段中的伪链接已排除 |
 
 ### 修复记录（本次）
 1. `docs/05-product-brief/03-target-users-personas.md` — 链接 `03-policies-regulation.md` → `03-policy-regulation.md`（修正文件名拼写）
 2. `planning/ux/00-index.md` — 倒置的 `[/memories/...](repo memory)` → 改为内联文本 + 反引号路径
+3. `planning/story/04-i18n/00-index.md` — 删除重复 Story 索引块，保留第二个信息更完整的版本
+4. `course/{daily,ecommerce,factory,hsk}/00-index.md` — 补充 12 个阶段文件显式入口
 
 ---
 
@@ -105,7 +107,7 @@ overview · tech-stack · frontend · backend · data-model · ai-factory · int
 ## 四、内容模块就绪度
 
 ### 4.1 `china/` — 发现中国（Tab1 内容池）
-12 个文化大类（历史/美食/景观/民俗/艺术/音乐戏曲/古典文学/成语典故/哲学智慧/现代中国/汉字趣味/神话传说），与 [`docs/04-technical-research/05-data-model-content.md`](04-technical-research/05-data-model-content.md) 中的内容数据模型对齐，可作为 AI Factory 首批写作种子。
+12 个文化大类（历史/美食/景观/民俗/艺术/音乐戏曲/古典文学/成语典故/哲学智慧/现代中国/汉字趣味/神话传说），与 [`docs/04-technical-research/05-data-model-content.md`](../docs/04-technical-research/05-data-model-content.md) 中的内容数据模型对齐，可作为 AI Factory 首批写作种子。
 
 ### 4.2 `course/` — 系统课程（Tab2）
 4 个主题轨道（日常 / 电商 / 工厂 / HSK）× 12 阶段 (S1–S12)，每阶段独立文件 (≤ 225 行)，配套 `shared/` 6 个全局规范（阶段框架、知识点格式、题型库、课时模板、题库定义）。Stage-01 类样板已成型，可驱动 Story 8.x 实现。
@@ -117,7 +119,7 @@ overview · tech-stack · frontend · backend · data-model · ai-factory · int
 12 个题材（都市言情 / 古言 / 仙侠 / 玄幻 / 穿越重生 / 武侠 / 历史 / 悬疑 / 盗墓恐怖 / 科幻末世 / 电竞 / 耽美），与 [`planning/prds/05-novels/04-v1-launch-titles.md`](prds/05-novels/04-v1-launch-titles.md) 首发清单对齐。
 
 ### 4.5 `docs/` — bmad 规划产物
-brainstorming(5) / domain-research(4) / market-research(6) / technical-research(9) / product-brief(10) — 五段式输入完整，[`docs/05-product-brief/10-llm-distillate.md`](05-product-brief/10-llm-distillate.md) 可作为下游 Agent 单一上下文输入。
+brainstorming(5) / domain-research(4) / market-research(6) / technical-research(9) / product-brief(10) — 五段式输入完整，[`docs/05-product-brief/10-llm-distillate.md`](../docs/05-product-brief/10-llm-distillate.md) 可作为下游 Agent 单一上下文输入。
 
 ### 4.6 `research/` — 推广 SOP
 1 篇市场调研主文档 + 14 篇推广方案（平台矩阵、TikTok/YT/Zalo/LINE 合规与运营、4 主题内容矩阵、90 天执行方案、内容生产 SOP、风险预案），可直接进入 GTM 执行。
@@ -152,12 +154,12 @@ brainstorming(5) / domain-research(4) / market-research(6) / technical-research(
 
 1. **跨模块索引**：`docs/00-index.md`、`china/00-index.md`、`course/00-index.md`、`novels/00-index.md`、`games/00-index.md` 中提到的兄弟模块（如 docs 提到 china/novels/games）当前未通过相对链接连通；如需统一门户体验，可在 workspace 根新增一个 `00-index.md` 串联（非阻塞，不影响开发）。
 2. **接近 800 行的文件**（700 / 487 / 450 / 399）建议在下一次扩写前评估是否拆分，预留余量：
-   - [planning/spec/05-data-model.md](planning/spec/05-data-model.md) — 700 行
-   - [planning/prds/04-games/04-extended-games-spec.md](planning/prds/04-games/04-extended-games-spec.md) — 487 行
-   - [planning/spec/03-frontend.md](planning/spec/03-frontend.md) — 450 行
-   - [docs/04-technical-research/05-data-model-content.md](docs/04-technical-research/05-data-model-content.md) — 399 行
+   - [planning/spec/05-data-model.md](spec/05-data-model.md) — 700 行
+   - [planning/prds/04-games/04-extended-games-spec.md](prds/04-games/04-extended-games-spec.md) — 487 行
+   - [planning/spec/03-frontend.md](spec/03-frontend.md) — 450 行
+   - [docs/04-technical-research/05-data-model-content.md](../docs/04-technical-research/05-data-model-content.md) — 399 行
 3. **代码内联中的伪链接**：少量文档行内代码包含 `[xxx](yyy)` 形式（如 `validators[stepType](payload, response)`），已确认被反引号包裹不会被渲染为链接，无需处理。
 
 ---
 
-_报告由自主代理生成。无阻塞问题，所有内容文档、规划文档、技术规范、用户体验、Story 与 Sprint 已就绪，可立即启动开发。_
+_报告由自主代理生成。目标范围共 543 个文件，其中 542 个 Markdown 文件、1 个 YAML 状态文件。无阻塞问题，所有内容文档、规划文档、技术规范、用户体验、Story 与 Sprint 已就绪，可立即启动开发。_
