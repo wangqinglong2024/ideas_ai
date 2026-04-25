@@ -8,7 +8,7 @@ export interface DatabaseClient {
 }
 
 export function createDatabaseClient(config: AppConfig): DatabaseClient {
-  const mode = isMockUrl(config.supabaseUrl) ? 'mock' : 'real';
+  const mode = isMockUrl(config.databaseUrl) ? 'mock' : 'real';
 
   return {
     mode,
@@ -17,7 +17,7 @@ export function createDatabaseClient(config: AppConfig): DatabaseClient {
         name: 'database',
         ok: true,
         mode,
-        message: mode === 'mock' ? 'mock database adapter active' : 'supabase url configured',
+        message: mode === 'mock' ? 'mock database adapter active' : 'database url configured',
       };
     },
     async query<T>(sql: string) {

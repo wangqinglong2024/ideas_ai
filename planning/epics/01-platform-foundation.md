@@ -19,16 +19,16 @@
 - 4 个前端/文档入口：`apps/app`、`apps/admin`、`apps/web`、`apps/docs`。
 - 后端入口：`apps/api` 与 `apps/worker`。
 - 共享包：`ui`、`sdk`、`i18n`、`types`、`config`、`db`、`jobs`、`analytics`、`observability`。
-- TypeScript strict、ESLint、Prettier、commitlint、PR/Issue 模板。
+- TypeScript strict、ESLint、Prettier、本地 Docker 验证脚本。
 - Dockerfile、`docker-compose.yml`、`docker-compose.test.yml`。
-- mock Supabase/Redis/Analytics/Observability adapters。
+- mock Database/Redis/Analytics/Observability adapters。
 - `/health`、`/ready`、配置与事件 API。
-- CI 使用 Docker 执行 `pnpm verify`。
+- 本地 Docker Compose 使用 mock 环境执行 `pnpm verify`。
 
 ## 非范围
 
 - 任何必须手动注册的第三方 SaaS。
-- Cloudflare Pages、Render、Doppler、Sentry、PostHog、Better Stack、Upstash 的真实接入。
+- 任何需要手动注册、授权、配置远端账号的外部 SaaS 真实接入。
 - 生产域名、云资源创建、第三方仪表板、外部审批流。
 - 业务功能、真实数据库 schema、真实支付或真实用户认证。
 
@@ -58,20 +58,19 @@
 - [x] `@zhiyu/*` 路径别名可解析。
 - [x] 至少一个 app 跨包引用 `@zhiyu/ui`。
 
-### ZY-01-03 · Lint / Format / Commit 基线
+### ZY-01-03 · Lint / Format 基线
 
 **AC**
 - [x] ESLint flat config 可覆盖 TS/TSX。
 - [x] Prettier 配置固定。
-- [x] commitlint 与 Conventional Commits 示例存在。
-- [x] CONTRIBUTING 说明 Docker 验证与 commit 类型。
+- [x] CONTRIBUTING 说明 Docker 验证与 mock 策略。
 
-### ZY-01-04 · Docker CI
+### ZY-01-04 · 本地 Docker 验证
 
 **AC**
-- [x] `.github/workflows/ci.yml` 只通过 Docker 运行验证。
+- [x] `docker-compose.test.yml` 只通过 Docker 运行验证。
 - [x] `pnpm verify` 包含 lint、format check、typecheck、test、build、size-check、file-line check。
-- [x] PR 模板要求 Docker 验证。
+- [x] 不依赖远端服务、外部 token 或远端缓存。
 
 ### ZY-01-05 · Docker Compose 多入口预览
 
@@ -115,7 +114,7 @@
 
 **AC**
 - [x] `packages/db` 可根据 URL 判断 mock/real 模式。
-- [x] `mock://supabase` 默认可 ready。
+- [x] `mock://database` 默认可 ready。
 - [x] `/ready` 包含 database readiness。
 
 ### ZY-01-11 · 队列 Mock Adapter 与 Worker
@@ -129,7 +128,7 @@
 
 **AC**
 - [x] `apps/docs` 提供工程文档入口。
-- [x] README、CONTRIBUTING、PR 模板、Bug 模板齐备。
+- [x] README、CONTRIBUTING、本地验证说明齐备。
 - [x] `scripts/check-file-lines.mjs` 强制单文件 ≤ 800 行。
 
 ## DoD

@@ -3,20 +3,8 @@
 所有工程验证默认在 Docker 中执行：
 
 ```bash
-docker compose -f docker-compose.test.yml run --rm test
+docker compose -f docker-compose.test.yml run --rm --build test
 ```
-
-## Commit 格式
-
-使用 Conventional Commits：
-
-```text
-feat(app): add onboarding shell
-fix(api): handle missing event name
-docs: update docker usage
-```
-
-允许类型：`feat`、`fix`、`chore`、`docs`、`refactor`、`test`、`perf`、`build`、`ci`。
 
 ## 密钥策略
 

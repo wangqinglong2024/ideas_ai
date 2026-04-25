@@ -7,9 +7,9 @@ describe('loadConfig', () => {
     const config = loadConfig({ APP_ENV: 'test' });
 
     expect(config.appEnv).toBe('test');
-    expect(config.supabaseUrl).toBe('mock://supabase');
+    expect(config.databaseUrl).toBe('mock://database');
     expect(config.redisUrl).toBe('mock://redis');
-    expect(config.missingSecrets).toContain('SUPABASE_URL');
+    expect(config.missingSecrets).toContain('DATABASE_URL');
   });
 
   it('detects mock urls', () => {

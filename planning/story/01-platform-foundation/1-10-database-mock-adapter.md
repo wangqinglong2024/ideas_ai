@@ -11,7 +11,7 @@ so that 缺少真实数据库密钥时 API readiness 与测试不被阻断。
 ## Acceptance Criteria
 
 1. `packages/db` 提供 `createDatabaseClient()`。
-2. `mock://supabase` 自动进入 mock 模式。
+2. `mock://database` 自动进入 mock 模式。
 3. `ready()` 返回 `ReadinessResult`。
 4. `query()` 在 mock 模式返回空 rows 与 sql 回显。
 5. API `/ready` 包含 database 检查。
@@ -42,7 +42,7 @@ GitHub Copilot
 ### Completion Notes List
 
 - Replaced external database initialization with mock adapter boundary.
-- `mock://supabase` enters mock mode and returns readiness without credentials.
+- `mock://database` enters mock mode and returns readiness without credentials.
 - API readiness includes database check result.
 
 ### File List

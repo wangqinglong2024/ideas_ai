@@ -18,6 +18,7 @@ inputDocuments:
 
 | # | 文件 | 内容 | 状态 |
 |:---:|---|---|:---:|
+| P0 | [00-docker-first-policy.md](./00-docker-first-policy.md) | Docker-only、mock-first、本地验收硬约束；优先级高于旧第三方规划 | ✅ |
 | 00 | [00-index.md](./00-index.md) | 总目录 | ✅ |
 | 01 | [01-overview.md](./01-overview.md) | 系统总览、上下文图、关键架构决策（ADR 索引） | ✅ |
 | 02 | [02-tech-stack.md](./02-tech-stack.md) | 技术选型矩阵 + 版本锁定 + 替代方案理由 | ✅ |
@@ -35,6 +36,8 @@ inputDocuments:
 ---
 
 ## 关键架构决策（ADR 索引）
+
+> 当前实现以 [Docker-first 开发约束](./00-docker-first-policy.md) 为最高优先级。下方历史 ADR 中涉及托管数据库、远端 CI/CD、CDN/WAF、外部监控或托管 Redis 的条目，在开发前必须改写为 Docker 本地可运行、mock-first、真实 key 可选的方案。
 
 | ADR # | 决策 | 理由 |
 |:---:|---|---|

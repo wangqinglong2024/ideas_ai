@@ -46,16 +46,16 @@ development_status:
   epic-1: done
   1-1-init-monorepo: done
   1-2-typescript-strict-config: done
-  1-3-eslint-prettier-commitlint: done
-  1-4-github-actions-ci: done
-  1-5-cloudflare-pages-deploy: done
-  1-6-render-api-worker-deploy: done
-  1-7-doppler-secrets: done
-  1-8-sentry-integration: done
-  1-9-posthog-betterstack: done
-  1-10-supabase-init: done
-  1-11-redis-bullmq-skeleton: done
-  1-12-storybook-docs-init: done
+  1-3-eslint-prettier: done
+  1-4-local-docker-verification: done
+  1-5-docker-compose-preview: done
+  1-6-api-worker-runtime: done
+  1-7-mock-first-config: done
+  1-8-local-observability: done
+  1-9-local-analytics: done
+  1-10-database-mock-adapter: done
+  1-11-queue-mock-adapter-worker: done
+  1-12-local-docs: done
   epic-1-retrospective: done
 
   # ===== E02 Design System (M0) =====

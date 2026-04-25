@@ -7,7 +7,7 @@ ENV TURBO_TELEMETRY_DISABLED=1
 RUN corepack enable && corepack prepare pnpm@9.15.4 --activate
 
 COPY package.json pnpm-workspace.yaml turbo.json tsconfig.base.json vitest.config.ts .npmrc ./
-COPY eslint.config.mjs .prettierrc.json .prettierignore commitlint.config.cjs ./
+COPY eslint.config.mjs .prettierrc.json .prettierignore ./
 COPY apps ./apps
 COPY packages ./packages
 COPY scripts ./scripts
@@ -15,7 +15,6 @@ COPY scripts ./scripts
 RUN pnpm install --lockfile=false
 
 COPY README.md CONTRIBUTING.md .env.example .env.docker.example ./
-COPY .github ./.github
 COPY content ./content
 COPY docs ./docs
 COPY planning ./planning

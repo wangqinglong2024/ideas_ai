@@ -7,8 +7,8 @@ services:
     environment:
       NODE_ENV: test
       APP_ENV: test
-      SUPABASE_URL: mock://supabase
-      SUPABASE_SERVICE_ROLE_KEY: mock-service-role-key
+      DATABASE_URL: mock://database
+      DATABASE_SERVICE_KEY: mock-database-service-key
       REDIS_URL: mock://redis
       ANALYTICS_MODE: local
       OBSERVABILITY_MODE: local

@@ -5,8 +5,8 @@ export interface AppConfig {
   nodeEnv: string;
   port: number;
   publicAppName: string;
-  supabaseUrl: string;
-  supabaseServiceRoleKey: string;
+  databaseUrl: string;
+  databaseServiceKey: string;
   redisUrl: string;
   analyticsMode: 'local' | 'disabled';
   observabilityMode: 'local' | 'disabled';
@@ -60,11 +60,11 @@ export function loadConfig(source: EnvSource = process.env): AppConfig {
     nodeEnv: source.NODE_ENV ?? 'development',
     port: readNumber(source.PORT, 3000),
     publicAppName: source.PUBLIC_APP_NAME ?? 'Zhiyu',
-    supabaseUrl: readSecret(source, 'SUPABASE_URL', 'mock://supabase', missingSecrets),
-    supabaseServiceRoleKey: readSecret(
+    databaseUrl: readSecret(source, 'DATABASE_URL', 'mock://database', missingSecrets),
+    databaseServiceKey: readSecret(
       source,
-      'SUPABASE_SERVICE_ROLE_KEY',
-      'mock-service-role-key',
+      'DATABASE_SERVICE_KEY',
+      'mock-database-service-key',
       missingSecrets,
     ),
     redisUrl: readSecret(source, 'REDIS_URL', 'mock://redis', missingSecrets),

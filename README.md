@@ -22,3 +22,13 @@ Local services after `docker compose up --build`:
 | API     | http://localhost:3000/health |
 
 Missing external credentials never block local verification. Use `.env.example` or `.env.docker.example`; values that are not supplied fall back to local mock adapters.
+
+## Deployment stance
+
+E01 does not require GitHub Actions or any external SaaS account. The pass/fail gate is local Docker:
+
+```bash
+docker compose -f docker-compose.test.yml run --rm --build test
+```
+
+Services that need real API keys in later epics must keep mock defaults so tests continue without secrets. The current foundation uses generic `DATABASE_URL` and `REDIS_URL` adapters; no database tables are created in E01.

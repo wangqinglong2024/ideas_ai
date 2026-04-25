@@ -5,7 +5,7 @@
 
 ## Sprint 目标
 
-完成 Docker-first monorepo、严格类型、质量门禁、Docker CI、多入口预览、API/Worker runtime、mock-first 环境/数据/队列/观测/分析能力，为 E02-E20 提供无需宿主机环境、无需第三方手动注册的工程基础。
+完成 Docker-first monorepo、严格类型、质量门禁、本地 Docker 验证、多入口预览、API/Worker runtime、mock-first 环境/数据/队列/观测/分析能力，为 E02-E20 提供无需宿主机环境、无需第三方手动注册的工程基础。
 
 ## 成功度量
 
@@ -21,16 +21,16 @@
 |:-:|---|---|---|
 | 1 | [1-1-init-monorepo](../story/01-platform-foundation/1-1-init-monorepo.md) | Docker-first Monorepo | - |
 | 2 | [1-2-typescript-strict-config](../story/01-platform-foundation/1-2-typescript-strict-config.md) | TypeScript Strict 与路径别名 | 1-1 |
-| 3 | [1-3-eslint-prettier-commitlint](../story/01-platform-foundation/1-3-eslint-prettier-commitlint.md) | Lint / Format / Commit 基线 | 1-1 |
-| 4 | [1-4-github-actions-ci](../story/01-platform-foundation/1-4-github-actions-ci.md) | Docker CI | 1-2, 1-3 |
-| 5 | [1-5-cloudflare-pages-deploy](../story/01-platform-foundation/1-5-cloudflare-pages-deploy.md) | Docker Compose 多入口预览 | 1-4 |
-| 6 | [1-6-render-api-worker-deploy](../story/01-platform-foundation/1-6-render-api-worker-deploy.md) | API Runtime | 1-2, 1-7 |
-| 7 | [1-7-doppler-secrets](../story/01-platform-foundation/1-7-doppler-secrets.md) | 环境变量与密钥 Mock 策略 | 1-2 |
-| 8 | [1-10-supabase-init](../story/01-platform-foundation/1-10-supabase-init.md) | 数据库 Mock Adapter | 1-7 |
-| 9 | [1-11-redis-bullmq-skeleton](../story/01-platform-foundation/1-11-redis-bullmq-skeleton.md) | 队列 Mock Adapter 与 Worker | 1-7 |
-| 10 | [1-8-sentry-integration](../story/01-platform-foundation/1-8-sentry-integration.md) | 本地 Observability | 1-6 |
-| 11 | [1-9-posthog-betterstack](../story/01-platform-foundation/1-9-posthog-betterstack.md) | 本地 Analytics | 1-6 |
-| 12 | [1-12-storybook-docs-init](../story/01-platform-foundation/1-12-storybook-docs-init.md) | 文档与模板 | 1-5 |
+| 3 | [1-3-eslint-prettier](../story/01-platform-foundation/1-3-eslint-prettier.md) | Lint / Format 基线 | 1-1 |
+| 4 | [1-4-local-docker-verification](../story/01-platform-foundation/1-4-local-docker-verification.md) | 本地 Docker 验证 | 1-2, 1-3 |
+| 5 | [1-5-docker-compose-preview](../story/01-platform-foundation/1-5-docker-compose-preview.md) | Docker Compose 多入口预览 | 1-4 |
+| 6 | [1-6-api-worker-runtime](../story/01-platform-foundation/1-6-api-worker-runtime.md) | API Runtime | 1-2, 1-7 |
+| 7 | [1-7-mock-first-config](../story/01-platform-foundation/1-7-mock-first-config.md) | 环境变量与密钥 Mock 策略 | 1-2 |
+| 8 | [1-10-database-mock-adapter](../story/01-platform-foundation/1-10-database-mock-adapter.md) | 数据库 Mock Adapter | 1-7 |
+| 9 | [1-11-queue-mock-adapter-worker](../story/01-platform-foundation/1-11-queue-mock-adapter-worker.md) | 队列 Mock Adapter 与 Worker | 1-7 |
+| 10 | [1-8-local-observability](../story/01-platform-foundation/1-8-local-observability.md) | 本地 Observability | 1-6 |
+| 11 | [1-9-local-analytics](../story/01-platform-foundation/1-9-local-analytics.md) | 本地 Analytics | 1-6 |
+| 12 | [1-12-local-docs](../story/01-platform-foundation/1-12-local-docs.md) | 本地文档入口 | 1-5 |
 
 ## 执行计划
 
@@ -38,11 +38,11 @@
 
 - 1-1：workspace、Turbo、Dockerfile、Compose、README。
 - 1-2：strict tsconfig、references、路径别名、跨包导入。
-- 1-3：ESLint、Prettier、commitlint、CONTRIBUTING。
+- 1-3：ESLint、Prettier、CONTRIBUTING。
 
 ### 自动验证
 
-- 1-4：Docker CI、`pnpm verify`、PR/Issue 模板。
+- 1-4：本地 Docker 验证、`pnpm verify`、体积与行数门禁。
 - 1-5：Docker Compose 多入口预览，替代外部 Pages/域名。
 
 ### 运行时与 Mock
@@ -56,7 +56,7 @@
 
 - 1-8：本地 observability。
 - 1-9：本地 analytics。
-- 1-12：docs app、模板、单文件行数检查。
+- 1-12：docs app、README、CONTRIBUTING、单文件行数检查。
 
 ## 风险与处理
 

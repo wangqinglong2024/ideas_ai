@@ -1,4 +1,7 @@
 .git
+.github
+.agents
+.claude
 node_modules
 .pnpm-store
 .turbo

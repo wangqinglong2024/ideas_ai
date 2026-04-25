@@ -1,37 +1,34 @@
-# Story 1.3: Lint / Format / Commit 基线
+# Story 1.3: Lint / Format 基线
 
 Status: done
 
 ## Story
 
 As a 开发者,
-I want 统一 lint、format 与 commit 规范,
+I want 统一 lint 与 format 规范,
 so that Docker 验证能在代码进入评审前拦截低价值问题。
 
 ## Acceptance Criteria
 
 1. 根 `eslint.config.mjs` 可检查 TS/TSX。
 2. 根 `.prettierrc.json` 固定格式规则。
-3. `commitlint.config.cjs` 使用 Conventional Commits。
-4. `CONTRIBUTING.md` 说明 Docker 验证与 commit 类型。
-5. `pnpm verify` 包含 lint 与 format check。
+3. `CONTRIBUTING.md` 说明 Docker 验证与 mock 策略。
+4. `pnpm verify` 包含 lint 与 format check。
 
 ## Tasks / Subtasks
 
-- [x] Task 1: ESLint（AC: #1, #5）
+- [x] Task 1: ESLint（AC: #1, #4）
   - [x] `eslint.config.mjs`
-- [x] Task 2: Prettier（AC: #2, #5）
+- [x] Task 2: Prettier（AC: #2, #4）
   - [x] `.prettierrc.json`
   - [x] `.prettierignore`
-- [x] Task 3: Commit 规范（AC: #3, #4）
-  - [x] `commitlint.config.cjs`
-  - [x] `scripts/check-commit.mjs`
+- [x] Task 3: 本地协作说明（AC: #3）
   - [x] `CONTRIBUTING.md`
 
 ## Dev Notes
 
 - 不要求用户安装 hook 或在宿主机执行命令。
-- commit 示例通过脚本与文档表达，不依赖手工演示。
+- 不增加与运行、构建、测试无关的提交钩子或远端流程。
 
 ## Dev Agent Record
 
@@ -45,7 +42,7 @@ GitHub Copilot
 
 ### Completion Notes List
 
-- Added ESLint flat config, Prettier config, commitlint config and commit example script.
+- Added ESLint flat config and Prettier config.
 - Fixed Node/browser globals so Docker lint runs cleanly.
 - Documented Docker-only contributor workflow.
 
@@ -54,10 +51,8 @@ GitHub Copilot
 - `eslint.config.mjs`
 - `.prettierrc.json`
 - `.prettierignore`
-- `commitlint.config.cjs`
-- `scripts/check-commit.mjs`
 - `CONTRIBUTING.md`
 
 ### Change Log
 
-- 2026-04-25: Implemented lint, format and commit quality baseline.
+- 2026-04-25: Implemented lint and format quality baseline.
