@@ -1,0 +1,19 @@
+node_modules/
+dist/
+build/
+.next/
+.turbo/
+.cache/
+coverage/
+*.log
+.DS_Store
+
+# secrets
+.env
+.env.local
+.env.*.local
+docker/.env
+
+# editor
+.vscode/
+.idea/

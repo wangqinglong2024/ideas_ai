@@ -1,0 +1,23 @@
+{
+  "name": "@zhiyu/worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node --enable-source-maps dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@zhiyu/config": "workspace:*",
+    "bullmq": "^5.7.0",
+    "ioredis": "^5.4.1",
+    "pino": "^9.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.5"
+  }
+}

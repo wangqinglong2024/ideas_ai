@@ -1,0 +1,54 @@
+# syntax=docker/dockerfile:1.7
+
+# ===== deps =====
+FROM node:20-alpine AS deps
+WORKDIR /app
+RUN corepack enable && corepack prepare pnpm@9.12.0 --activate
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml* .npmrc tsconfig.base.json ./
+COPY packages/config/package.json packages/config/
+COPY packages/sdk/package.json packages/sdk/
+COPY packages/db/package.json packages/db/
+COPY packages/ui/package.json packages/ui/
+COPY packages/i18n/package.json packages/i18n/
+COPY apps/api/package.json apps/api/
+COPY apps/admin-api/package.json apps/admin-api/
+COPY apps/worker/package.json apps/worker/
+COPY apps/web/package.json apps/web/
+COPY apps/admin/package.json apps/admin/
+RUN pnpm install --filter "@zhiyu/api..." --no-frozen-lockfile
+
+# ===== build =====
+FROM deps AS build
+COPY tsconfig.base.json ./
+COPY packages ./packages
+COPY apps/api ./apps/api
+RUN pnpm --filter @zhiyu/api build
+
+# ===== runtime =====
+FROM node:20-alpine AS runtime
+WORKDIR /app
+RUN corepack enable && corepack prepare pnpm@9.12.0 --activate \
+  && addgroup -S app && adduser -S app -G app \
+  && apk add --no-cache wget ca-certificates
+ENV NODE_ENV=production PORT=8080
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/packages ./packages
+COPY --from=build /app/apps/api ./apps/api
+COPY --from=build /app/package.json /app/pnpm-workspace.yaml ./
+USER app
+EXPOSE 8080
+HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=4 \
+  CMD wget -qO- http://127.0.0.1:8080/health || exit 1
+WORKDIR /app/apps/api
+CMD ["sh", "-c", "node ./node_modules/tsx/dist/cli.mjs ./scripts/migrate.ts && node ./node_modules/tsx/dist/cli.mjs ./src/index.ts"]
+
+# ===== dev (hot-reload) =====
+FROM deps AS dev
+WORKDIR /app
+COPY tsconfig.base.json ./
+COPY packages ./packages
+COPY apps/api ./apps/api
+ENV NODE_ENV=development PORT=8080
+EXPOSE 8080
+WORKDIR /app/apps/api
+CMD ["sh", "-c", "pnpm exec tsx ./scripts/migrate.ts && pnpm dev"]

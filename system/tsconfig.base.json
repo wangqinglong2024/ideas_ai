@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@zhiyu/config/*": ["packages/config/src/*"],
+      "@zhiyu/sdk": ["packages/sdk/src/index.ts"],
+      "@zhiyu/sdk/*": ["packages/sdk/src/*"],
+      "@zhiyu/ui": ["packages/ui/src/index.ts"],
+      "@zhiyu/ui/*": ["packages/ui/src/*"],
+      "@zhiyu/i18n": ["packages/i18n/src/index.ts"],
+      "@zhiyu/i18n/*": ["packages/i18n/src/*"],
+      "@zhiyu/db": ["packages/db/src/index.ts"],
+      "@zhiyu/db/*": ["packages/db/src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "build", ".turbo"]
+}

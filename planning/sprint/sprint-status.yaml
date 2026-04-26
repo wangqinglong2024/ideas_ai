@@ -20,16 +20,16 @@ epics:
 
   - id: E01
     name: 平台基础与 DevOps
-    status: ready-for-dev
+    status: done
     sprint: S01
     story_count: 6
     stories:
-      - { id: ZY-01-01, title: 初始化 monorepo 与 Turborepo,            status: ready-for-dev }
-      - { id: ZY-01-02, title: 代码规范与 git hooks,                     status: ready-for-dev }
-      - { id: ZY-01-03, title: docker-compose 一键开发环境,              status: ready-for-dev }
-      - { id: ZY-01-04, title: Secrets 与 zod env 校验,                  status: ready-for-dev }
-      - { id: ZY-01-05, title: Supabase self-hosted 初始化,              status: ready-for-dev }
-      - { id: ZY-01-06, title: Redis + BullMQ + healthz/metrics + 日志,  status: ready-for-dev }
+      - { id: ZY-01-01, title: 初始化 monorepo 与 Turborepo,            status: done }
+      - { id: ZY-01-02, title: 代码规范与 git hooks,                     status: done }
+      - { id: ZY-01-03, title: docker-compose 一键开发环境,              status: done }
+      - { id: ZY-01-04, title: Secrets 与 zod env 校验,                  status: done }
+      - { id: ZY-01-05, title: Supabase self-hosted 初始化,              status: done }
+      - { id: ZY-01-06, title: Redis + BullMQ + healthz/metrics + 日志,  status: done }
 
   - id: E02
     name: 设计系统与 UI 工具库

@@ -1,0 +1,133 @@
+name: zhiyu
+
+networks:
+  gateway_net:
+    external: true
+  supabase_default:
+    external: true
+  zhiyu-internal:
+    driver: bridge
+
+services:
+  zhiyu-redis:
+    image: redis:7-alpine
+    container_name: zhiyu-redis
+    restart: unless-stopped
+    networks: [zhiyu-internal]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    command: ["redis-server", "--appendonly", "yes", "--save", "60", "1"]
+    volumes:
+      - zhiyu-redis-data:/data
+
+  zhiyu-app-be:
+    container_name: zhiyu-app-be
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.api
+      target: runtime
+    image: zhiyu/app-be:dev
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SERVICE_NAME: zhiyu-app-be
+      PORT: 8080
+    ports:
+      - "8100:8080"
+    networks: [gateway_net, supabase_default, zhiyu-internal]
+    depends_on:
+      zhiyu-redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 25s
+
+  zhiyu-admin-be:
+    container_name: zhiyu-admin-be
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.admin-api
+      target: runtime
+    image: zhiyu/admin-be:dev
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SERVICE_NAME: zhiyu-admin-be
+      PORT: 8080
+    ports:
+      - "9100:8080"
+    networks: [gateway_net, supabase_default, zhiyu-internal]
+    depends_on:
+      zhiyu-redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 4
+      start_period: 25s
+
+  zhiyu-worker:
+    container_name: zhiyu-worker
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.worker
+      target: runtime
+    image: zhiyu/worker:dev
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      SERVICE_NAME: zhiyu-worker
+    networks: [supabase_default, zhiyu-internal]
+    depends_on:
+      zhiyu-redis:
+        condition: service_healthy
+
+  zhiyu-app-fe:
+    container_name: zhiyu-app-fe
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.web
+      target: runtime
+      args:
+        VITE_API_BASE: ${VITE_API_BASE:-http://115.159.109.23:8100}
+        VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-http://115.159.109.23:8000}
+        VITE_SUPABASE_ANON_KEY: ${VITE_SUPABASE_ANON_KEY}
+    image: zhiyu/app-fe:dev
+    restart: unless-stopped
+    ports:
+      - "3100:80"
+    networks: [gateway_net]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 15s
+      timeout: 3s
+      retries: 4
+
+  zhiyu-admin-fe:
+    container_name: zhiyu-admin-fe
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.admin
+      target: runtime
+      args:
+        VITE_ADMIN_API_BASE: ${VITE_ADMIN_API_BASE:-http://115.159.109.23:9100}
+    image: zhiyu/admin-fe:dev
+    restart: unless-stopped
+    ports:
+      - "4100:80"
+    networks: [gateway_net]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 15s
+      timeout: 3s
+      retries: 4
+
+volumes:
+  zhiyu-redis-data:

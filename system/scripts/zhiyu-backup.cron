@@ -1,0 +1,4 @@
+# Drop in /etc/cron.d/zhiyu-backup (root-owned). Daily at 03:17 server time.
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+17 3 * * * root /opt/projects/zhiyu/system/scripts/backup.sh >> /var/log/zhiyu-backup.log 2>&1

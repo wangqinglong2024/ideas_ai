@@ -1,0 +1,32 @@
+# non-runtime assets — strictly excluded from images
+.git
+.github
+.agents
+.claude
+_bmad
+planning
+docs
+china
+course
+games
+novels
+research
+
+# build / cache
+**/node_modules
+**/dist
+**/build
+**/.next
+**/.turbo
+**/coverage
+**/*.log
+
+# secrets — keep example only
+**/.env
+**/.env.*
+!**/.env.example
+
+# editor
+.vscode
+.idea
+.DS_Store
