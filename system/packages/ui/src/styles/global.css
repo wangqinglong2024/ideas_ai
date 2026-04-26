@@ -4,6 +4,14 @@
 
 @import 'tailwindcss';
 
+/* Tailwind v4 by default skips node_modules. The @zhiyu/ui package is
+ * consumed directly from its source (workspace symlink) and contains the
+ * majority of utility classes for components like Card/Button/PageShell.
+ * Tell Tailwind to scan our own packages so every consuming app
+ * (web, admin, future) gets a complete utility set. */
+@source "../**/*.{ts,tsx}";
+@source "../../../tokens/src/**/*.{ts,tsx}";
+
 @import '@zhiyu/tokens/tokens.css';
 @import '@zhiyu/tokens/preset.css';
 @import '@zhiyu/tokens/glass.css';

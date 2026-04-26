@@ -6,9 +6,16 @@ import {
 } from '@zhiyu/i18n';
 import { changeLocale, getCurrentLocale, useT } from '@zhiyu/i18n/client';
 import { loadFontsFor } from '@zhiyu/i18n/fonts';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@zhiyu/ui';
 
 /**
- * Compact radiogroup language picker (matches ThemeMenu visual language).
+ * Compact dropdown language picker. Shows the current locale code as the
+ * trigger; the popover lists all supported locales with their native labels.
  * Persists via i18next (localStorage) and triggers font preload for the
  * picked locale.
  */
@@ -28,35 +35,37 @@ export function LangSwitcher(): JSX.Element {
   };
 
   return (
-    <div
-      role="radiogroup"
-      aria-label={t('nav.language')}
-      className="inline-flex gap-1 rounded-full glass-subtle p-1"
-      data-testid="lang-switcher"
-    >
-      {UI_LOCALES.map((lng) => {
-        const active = lng === current;
-        return (
-          <button
-            key={lng}
-            type="button"
-            role="radio"
-            aria-checked={active}
-            onClick={() => {
-              void onPick(lng);
-            }}
-            className={[
-              'inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm transition',
-              active ? 'bg-rose-600 text-white shadow-sm' : 'text-text-secondary hover:text-text-primary',
-            ].join(' ')}
-            data-testid={`lang-option-${lng}`}
-            lang={lng}
-          >
-            <span className="uppercase">{lng}</span>
-            <span className="hidden md:inline text-xs opacity-80">{LOCALE_LABEL[lng]}</span>
-          </button>
-        );
-      })}
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        aria-label={t('nav.language')}
+        data-testid="lang-switcher"
+        className="inline-flex h-9 items-center gap-1.5 rounded-full glass-subtle px-3 text-sm text-text-secondary hover:text-text-primary transition outline-none"
+      >
+        <span className="uppercase font-medium">{current}</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="min-w-44">
+        {UI_LOCALES.map((lng) => {
+          const active = lng === current;
+          return (
+            <DropdownMenuItem
+              key={lng}
+              data-testid={`lang-option-${lng}`}
+              lang={lng}
+              onSelect={() => {
+                void onPick(lng);
+              }}
+              className={active ? 'bg-rose-500/10 text-rose-700' : ''}
+            >
+              <span className="w-7 uppercase text-xs font-semibold tracking-wider">{lng}</span>
+              <span>{LOCALE_LABEL[lng]}</span>
+              {active && <span className="ms-auto text-rose-600">●</span>}
+            </DropdownMenuItem>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
