@@ -1,5 +1,6 @@
 # Story 10 索引 · 游戏专区（Games · 12 款一次性首发 · MVP）
 
+> 顶层约束：[planning/00-rules.md](../../00-rules.md)
 > Epic：[E10 Games](../../epics/10-games.md) · Sprint：[S10](../../sprint/10-games.md) · 阶段：M3
 
 ## A · 通用基础设施（3）

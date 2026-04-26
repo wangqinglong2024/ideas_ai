@@ -1,24 +1,14 @@
-# Story 13 索引 · 支付与订阅（Payment & Subscription）
+# Story Index · E13 支付与订阅
 
-> Epic：[E13 Payment](../../epics/13-payment.md) · Sprint：[S13](../../sprint/13-payment.md) · 阶段：M5 · 周期：W27-W30
+> 顶层约束：[planning/00-rules.md](../../00-rules.md)。Story 数量按需 6。一律走 PaymentAdapter，**不**直接 import paddle/lemonsqueezy/stripe SDK。
 
-## Story 列表
+| ID | 标题 | 估 | 状态 |
+|---|---|---|---|
+| [ZY-13-01](./13-1-tables-plans-orders.md) | plans / subscriptions / payment_orders / entitlements 表 | M | ready-for-dev |
+| [ZY-13-02](./13-2-payment-adapter-fake.md) | PaymentAdapter 接口 + FakeProvider | L | ready-for-dev |
+| [ZY-13-03](./13-3-pricing-checkout.md) | 套餐选择 UI + Checkout | M | ready-for-dev |
+| [ZY-13-04](./13-4-subscription-mgmt-coupon.md) | 订阅管理 + 退款 + 优惠券 | L | ready-for-dev |
+| [ZY-13-05](./13-5-renewal-grace.md) | 续费提醒 + grace period | S | ready-for-dev |
+| [ZY-13-06](./13-6-finance-reconciliation.md) | 财务对账视图（后台） | M | ready-for-dev |
 
-| Story | 标题 | 状态 |
-|---|---|---|
-| [13-1](./13-1-plans-subscriptions-orders-tables.md) | plans / subscriptions / payment_orders 表 | ready-for-dev |
-| [13-2](./13-2-paddle-checkout-integration.md) | Paddle 集成 + Checkout | ready-for-dev |
-| [13-3](./13-3-paddle-webhook.md) | Paddle Webhook | ready-for-dev |
-| [13-4](./13-4-lemonsqueezy-backup.md) | LemonSqueezy 备份集成 | ready-for-dev |
-| [13-5](./13-5-plan-selection-ui.md) | 套餐选择 UI | ready-for-dev |
-| [13-6](./13-6-subscription-management.md) | 订阅管理（个人页） | ready-for-dev |
-| [13-7](./13-7-refund-flow.md) | 退款流程 | ready-for-dev |
-| [13-8](./13-8-coupon-system.md) | 优惠券系统 v1 | ready-for-dev |
-| [13-9](./13-9-renewal-reminders.md) | 续费提醒 | ready-for-dev |
-| [13-10](./13-10-financial-reconciliation.md) | 财务对账 | ready-for-dev |
-
-## DoD
-- 支付链路全跑通（Paddle + LemonSqueezy 双链）
-- 退款 + 续费 + 取消 + 升降级 OK
-- 财务对账每日自动 + 差异告警
-- 退款触发 commission_reversed（联通 S14）
+Epic：[../../epics/13-payment.md](../../epics/13-payment.md)

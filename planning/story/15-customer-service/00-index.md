@@ -1,24 +1,15 @@
-# Story 15 索引 · 客服 IM 与工单（Customer Service）
+# Story Index · E15 客服 IM 与工单
 
-> Epic：[E15 Customer Service](../../epics/15-customer-service.md) · Sprint：[S15](../../sprint/15-customer-service.md) · 阶段：M6 · 周期：W33-W36
+> 顶层约束：[planning/00-rules.md](../../00-rules.md)。Story 数量按需 7。**实时通道走 Supabase Realtime**，禁用 Socket.io 与第三方 IM SaaS。
 
-## Story 列表
+| ID | 标题 | 估 | 状态 |
+|---|---|---|---|
+| [ZY-15-01](./15-1-tables-rls.md) | conversations / messages / tickets / faq 表 + RLS | M | ready-for-dev |
+| [ZY-15-02](./15-2-realtime-dispatch.md) | Realtime 通道 + 派单服务 | L | ready-for-dev |
+| [ZY-15-03](./15-3-user-im-ui.md) | 用户端 IM UI | L | ready-for-dev |
+| [ZY-15-04](./15-4-agent-workbench.md) | 客服后台 IM 工作台 | L | ready-for-dev |
+| [ZY-15-05](./15-5-ticket-flow.md) | 工单流 | M | ready-for-dev |
+| [ZY-15-06](./15-6-faq-ai-fake.md) | FAQ 自助 + AI 辅助（fake） | M | ready-for-dev |
+| [ZY-15-07](./15-7-sla-offline.md) | SLA 仪表板 + 离线兜底 | M | ready-for-dev |
 
-| Story | 标题 | 状态 |
-|---|---|---|
-| [15-1](./15-1-cs-tables-rls.md) | conversations / messages / tickets / faq 表 + RLS | ready-for-dev |
-| [15-2](./15-2-websocket-gateway.md) | WS 网关（Socket.io+Redis） | ready-for-dev |
-| [15-3](./15-3-agent-dispatch-service.md) | 派单服务 + 转接 | ready-for-dev |
-| [15-4](./15-4-user-im-ui.md) | 用户端 IM UI | ready-for-dev |
-| [15-5](./15-5-agent-im-workbench.md) | 客服后台 IM 工作台 | ready-for-dev |
-| [15-6](./15-6-ticket-flow.md) | 工单流（提交 / 分类 / 派单） | ready-for-dev |
-| [15-7](./15-7-faq-self-service.md) | FAQ 自助 | ready-for-dev |
-| [15-8](./15-8-ai-assist-v1.md) | AI 辅助（FAQ 匹配 + 建议） | ready-for-dev |
-| [15-9](./15-9-offline-fallback-email.md) | 离线邮件兜底 | ready-for-dev |
-| [15-10](./15-10-cs-sla-dashboard.md) | SLA 仪表板 | ready-for-dev |
-
-## DoD
-- IM 实时通畅（P95 < 500ms）
-- 派单 + 转接 + 升级 OK
-- FAQ 命中率 ≥ 60%（首月数据）
-- SLA 监控（响应 / 时长 / 满意度）
+Epic：[../../epics/15-customer-service.md](../../epics/15-customer-service.md)

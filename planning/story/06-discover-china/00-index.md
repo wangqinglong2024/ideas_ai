@@ -1,23 +1,14 @@
-# Story 6 索引 · 中国发现（Discover China）
+# Story Index · E06 中国发现
 
-> Epic：[E06 Discover China](../../epics/06-discover-china.md) · Sprint：[S06](../../sprint/06-discover-china.md) · 阶段：M2
+> 顶层约束：[planning/00-rules.md](../../00-rules.md)。Story 数量按需 6。
 
-## Story 列表
+| ID | 标题 | 估 | 状态 |
+|---|---|---|---|
+| [ZY-06-01](./6-1-categories-articles-tables.md) | 分类 / 文章 / 句子 表 + CRUD | M | ready-for-dev |
+| [ZY-06-02](./6-2-articles-list-page.md) | 文章列表页 | M | ready-for-dev |
+| [ZY-06-03](./6-3-article-immersive-reader.md) | 文章详情沉浸阅读 + 音频 | L | ready-for-dev |
+| [ZY-06-04](./6-4-character-popup-favorites.md) | 单字弹窗 + 收藏 / 笔记 | M | ready-for-dev |
+| [ZY-06-05](./6-5-reading-progress-i18n.md) | 阅读进度 + 多语切换 | M | ready-for-dev |
+| [ZY-06-06](./6-6-fulltext-search-jieba.md) | 全文搜索（Postgres FTS + jieba） | L | ready-for-dev |
 
-| Story | 标题 | 状态 |
-|---|---|---|
-| [6-1](./6-1-categories-articles-tables.md) | 分类与文章表 + API | ready-for-dev |
-| [6-2](./6-2-articles-list-page.md) | 文章列表页 | ready-for-dev |
-| [6-3](./6-3-article-detail-immersive.md) | 文章详情（沉浸阅读） | ready-for-dev |
-| [6-4](./6-4-sentence-audio-player.md) | 句子音频播放 | ready-for-dev |
-| [6-5](./6-5-character-popup.md) | 单字弹窗 | ready-for-dev |
-| [6-6](./6-6-favorites-notes.md) | 收藏 / 笔记 | ready-for-dev |
-| [6-7](./6-7-reading-progress-time.md) | 阅读进度 / 时长 | ready-for-dev |
-| [6-8](./6-8-multilingual-toggle.md) | 多语言切换 | ready-for-dev |
-| [6-9](./6-9-article-fulltext-search.md) | 文章全文搜索 | ready-for-dev |
-| [6-10](./6-10-mobile-desktop-optimization.md) | 移动 / 桌面优化 | ready-for-dev |
-
-## DoD
-- 12 类各 ≥ 5 篇可读
-- 4 语翻译完整
-- 阅读体验流畅 60fps
+Epic：[../../epics/06-discover-china.md](../../epics/06-discover-china.md)
