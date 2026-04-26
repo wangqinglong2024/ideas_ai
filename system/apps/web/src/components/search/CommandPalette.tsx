@@ -202,7 +202,7 @@ export function CommandPalette(): JSX.Element | null {
                     key={s.id}
                     type="button"
                     onClick={() => onSelect(s.url)}
-                    className="rounded-md border border-glass-border px-3 py-2 text-small hover:bg-white/40"
+                    className="rounded-md border border-glass-border px-3 py-2 text-small hover:bg-bg-elevated/60"
                   >
                     {s.title}
                   </button>

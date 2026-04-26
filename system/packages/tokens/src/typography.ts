@@ -27,7 +27,7 @@ export const fontWeight = {
 } as const;
 
 export const fontFamily = {
-  en: "'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+  en: "'Noto Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
   zh: "'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif",
   ar: "'Noto Sans Arabic', 'Tahoma', sans-serif",
   th: "'Noto Sans Thai', 'Sarabun', system-ui, sans-serif",

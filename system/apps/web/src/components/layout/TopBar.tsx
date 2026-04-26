@@ -1,7 +1,7 @@
 /**
- * ZY-05-03 / ZY-05-04 / ZY-05-06 — Top app bar with brand, lang switcher,
- * search trigger (opens CommandPalette), notification bell (opens center)
- * and theme menu.
+ * ZY-05-03 / ZY-05-04 / ZY-05-06 — 顶部应用栏：品牌标识、语言切换、
+ * 搜索触发（打开 CommandPalette）、通知铃铛、主题菜单。
+ * 遵循 03-glassmorphism-system.md 第四层 glass-floating。
  */
 import { Link } from '@tanstack/react-router';
 import { Button, ThemeMenu } from '@zhiyu/ui';
@@ -38,57 +38,61 @@ export function TopBar(): JSX.Element {
   const openNotif = useNotificationCenter((s) => s.open);
   const unread = useUnreadCount();
   return (
-    <header className="sticky top-0 z-30 backdrop-blur-md bg-bg-overlay/60 border-b border-glass-border">
+    <header className="glass-floating sticky top-0 z-30 border-b border-glass-border">
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-2 px-4">
         <Link to="/" className="text-title font-semibold tracking-tight text-text-primary shrink-0">
-          <span className="bg-gradient-to-r from-rose-600 to-amber-500 bg-clip-text text-transparent">知语</span>{' '}
-          {t('brand.name')}
+          <span className="text-rose-600">知语</span>{' '}
+          <span className="text-body-lg text-text-secondary">{t('brand.name')}</span>
         </Link>
 
         <div className="flex items-center gap-1.5">
+          {/* 桌面端搜索框 */}
           <button
             type="button"
             onClick={openSearch}
             data-testid="topbar-search"
-            className="hidden sm:flex items-center gap-2 rounded-full border border-glass-border bg-white/40 px-3 py-1.5 text-small text-text-secondary hover:bg-white/60 transition-colors"
+            className="hidden sm:flex items-center gap-2 rounded-lg border border-border-default bg-bg-surface/60 px-3 py-1.5 text-small text-text-secondary hover:bg-bg-elevated transition-colors"
           >
             <SearchIcon />
             <span>{t('search.placeholder')}</span>
-            <kbd className="ms-2 rounded bg-white/60 px-1.5 py-0.5 text-micro text-text-tertiary">{t('search.hint')}</kbd>
+            <kbd className="ms-2 rounded bg-bg-elevated px-1.5 py-0.5 text-micro text-text-tertiary">{t('search.hint')}</kbd>
           </button>
 
+          {/* 移动端搜索图标 */}
           <button
             type="button"
             onClick={openSearch}
             aria-label={t('nav.search')}
             data-testid="topbar-search-icon"
-            className="sm:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-text-secondary hover:bg-white/40"
+            className="sm:hidden inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary hover:bg-bg-elevated"
           >
             <SearchIcon />
           </button>
 
+          {/* 知语币 */}
           <Link
             to="/coin"
             aria-label={t('nav.coin')}
             data-testid="topbar-coin"
-            className="hidden sm:inline-flex items-center gap-1 rounded-full bg-amber-500/15 px-2.5 py-1 text-small font-medium text-amber-700"
+            className="hidden sm:inline-flex items-center gap-1 rounded-lg bg-amber-500/10 px-2.5 py-1 text-small font-medium text-amber-700 dark:text-amber-400"
           >
             <CoinIcon />
             <span>0</span>
           </Link>
 
+          {/* 通知铃铛 */}
           <button
             type="button"
             onClick={openNotif}
             aria-label={t('nav.notifications')}
             data-testid="topbar-bell"
-            className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-text-secondary hover:bg-white/40"
+            className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg text-text-secondary hover:bg-bg-elevated"
           >
             <BellIcon />
             {unread > 0 && (
               <span
                 data-testid="topbar-bell-badge"
-                className="absolute -right-0.5 -top-0.5 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-rose-600 px-1 text-[10px] font-semibold text-white"
+                className="absolute -right-0.5 -top-0.5 inline-flex h-4 min-w-[16px] items-center justify-center rounded-full bg-rose-600 px-1 text-caption font-semibold text-white"
               >
                 {unread > 99 ? '99+' : unread}
               </span>

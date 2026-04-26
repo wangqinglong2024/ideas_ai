@@ -72,10 +72,10 @@
 
   /* Typography */
   --font-sans:
-    'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    'Noto Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-zh: 'Noto Sans SC', 'PingFang SC', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
-  --font-display: 'Inter Display', 'Inter', system-ui, sans-serif;
+  --font-display: 'Inter', 'Noto Sans', system-ui, sans-serif;
 
   --text-caption: 11px;
   --text-caption--line-height: 14px;

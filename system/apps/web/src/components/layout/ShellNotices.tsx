@@ -49,7 +49,7 @@ export function UpdateToast(): JSX.Element | null {
         <button
           type="button"
           onClick={() => setNeedRefresh(false)}
-          className="rounded-md px-3 py-1.5 text-small text-text-secondary hover:bg-white/40"
+          className="rounded-md px-3 py-1.5 text-small text-text-secondary hover:bg-bg-elevated/60"
         >
           {t('actions.cancel')}
         </button>

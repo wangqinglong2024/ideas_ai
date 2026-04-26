@@ -1,12 +1,12 @@
 /**
- * E06 — Discover China home.
+ * E06 — 发现中国首页。
  *
- * Replaces the M1 mock with live data from /api/v1/discover/*:
- *  - Hero (kept from E05 design)
- *  - Continue learning rail (reading_progress)
- *  - Category strip (12 cultural buckets)
- *  - HSK filter chips
- *  - Featured articles grid with infinite-scroll keyset cursor
+ * 严格遵循 PRD 02-discover-china：
+ *  - DC-FR-001：12 类目卡片，显示文章总数
+ *  - DC-FR-002：HSK 难度 + 阅读时长筛选，无限滚动 keyset cursor
+ *  - DC-FR-014：HSK 难度标识
+ *  - DC-FR-013：母语切换
+ *  - 继续阅读轨道（reading_progress）
  */
 import { useEffect, useMemo, useState } from 'react';
 import type { JSX } from 'react';
@@ -30,12 +30,19 @@ import { useT } from '@zhiyu/i18n/client';
 import { discover, auth as authApi, type DiscoverArticleCard, type DiscoverCategory } from '../lib/api.js';
 
 const HSK_LEVELS = [1, 2, 3, 4, 5, 6] as const;
+const LENGTH_FILTERS = [
+  { key: 'all', label: '全部', min: undefined, max: undefined },
+  { key: 'short', label: '短文 ≤5min', min: undefined, max: 5 },
+  { key: 'medium', label: '中等 6-15min', min: 6, max: 15 },
+  { key: 'long', label: '长文 >15min', min: 16, max: undefined },
+] as const;
 
 function pickI18n(map: Record<string, string> | null | undefined, lng: string): string {
   if (!map) return '';
   return map[lng] || map['en'] || map['zh-CN'] || Object.values(map)[0] || '';
 }
 
+/* ── 文章卡片 ── */
 function ArticleCard({ a, lng }: { a: DiscoverArticleCard; lng: string }): JSX.Element {
   const title = pickI18n(a.i18n_title, lng);
   const summary = pickI18n(a.i18n_summary, lng);
@@ -49,15 +56,15 @@ function ArticleCard({ a, lng }: { a: DiscoverArticleCard; lng: string }): JSX.E
       <Card className="h-full transition-shadow group-hover:shadow-lg">
         {a.cover_url ? (
           <div
-            className="mb-3 h-32 w-full rounded-2xl bg-cover bg-center"
+            className="mb-3 h-36 w-full rounded-xl bg-cover bg-center"
             style={{ backgroundImage: `url(${a.cover_url})` }}
           />
         ) : (
-          <div className="mb-3 flex h-32 w-full items-center justify-center rounded-2xl bg-gradient-to-br from-rose-100 to-amber-100 text-4xl">
+          <div className="mb-3 flex h-36 w-full items-center justify-center rounded-xl bg-gradient-to-br from-rose-50 to-amber-50 dark:from-rose-950/30 dark:to-amber-950/30 text-3xl">
             🇨🇳
           </div>
         )}
-        <HStack gap={2} className="mb-2">
+        <HStack gap={2} className="mb-2 flex-wrap">
           <Badge tone="rose" variant="soft">{`HSK ${a.hsk_level}`}</Badge>
           <Badge tone="amber" variant="soft">{`${a.estimated_minutes} min`}</Badge>
           {Number(a.rating_avg) > 0 && (
@@ -65,19 +72,23 @@ function ArticleCard({ a, lng }: { a: DiscoverArticleCard; lng: string }): JSX.E
           )}
         </HStack>
         <CardHeader>
-          <CardTitle className="line-clamp-2">{title || a.slug}</CardTitle>
-          <CardDescription className="line-clamp-2">{summary}</CardDescription>
+          <CardTitle className="text-body-lg font-semibold line-clamp-2">{title || a.slug}</CardTitle>
+          <CardDescription className="text-small line-clamp-2">{summary}</CardDescription>
         </CardHeader>
       </Card>
     </Link>
   );
 }
 
+/* ── 主页面 ── */
 export function DiscoverPage(): JSX.Element {
   const { t, i18n } = useT('common');
   const lng = i18n.language || 'en';
   const [categorySlug, setCategorySlug] = useState<string | undefined>(undefined);
   const [hsk, setHsk] = useState<number | undefined>(undefined);
+  const [lengthFilter, setLengthFilter] = useState<string>('all');
+
+  const selectedLength = LENGTH_FILTERS.find((f) => f.key === lengthFilter) ?? LENGTH_FILTERS[0]!;
 
   const { data: catData, isLoading: catsLoading } = useQuery({
     queryKey: ['discover', 'categories'],
@@ -99,10 +110,17 @@ export function DiscoverPage(): JSX.Element {
   });
 
   const articlesQ = useInfiniteQuery({
-    queryKey: ['discover', 'articles', { categorySlug, hsk }],
+    queryKey: ['discover', 'articles', { categorySlug, hsk, lengthFilter }],
     initialPageParam: undefined as string | undefined,
     queryFn: ({ pageParam }) =>
-      discover.articles({ category: categorySlug, hsk, cursor: pageParam, limit: 12 }),
+      discover.articles({
+        category: categorySlug,
+        hsk,
+        cursor: pageParam,
+        limit: 12,
+        minMinutes: selectedLength.min,
+        maxMinutes: selectedLength.max,
+      }),
     getNextPageParam: (last) => last.next_cursor ?? undefined,
   });
 
@@ -130,12 +148,13 @@ export function DiscoverPage(): JSX.Element {
   const continueItems = (progressData?.items ?? []).slice(0, 3);
 
   return (
-    <div className="flex flex-col gap-10 pt-2" data-testid="discover-page">
+    <div className="flex flex-col gap-8 pt-2" data-testid="discover-page">
+      {/* ── Hero 区 ── */}
       <section data-testid="discover-hero">
-        <Card>
+        <Card className="overflow-hidden">
           <VStack gap={4}>
             <Badge tone="rose" variant="soft">{t('home.badge')}</Badge>
-            <h1 className="text-display max-w-2xl text-balance text-text-primary">
+            <h1 className="text-h1 max-w-2xl text-balance text-text-primary">
               {t('home.headline')}
             </h1>
             <p className="max-w-2xl text-body-lg text-text-secondary">{t('home.lead')}</p>
@@ -151,21 +170,20 @@ export function DiscoverPage(): JSX.Element {
         </Card>
       </section>
 
+      {/* ── 继续阅读 ── */}
       {continueItems.length > 0 && (
         <section data-testid="discover-continue">
-          <header className="mb-3 flex items-end justify-between">
-            <h2 className="text-h2">{t('home.card1_title')}</h2>
-          </header>
+          <h2 className="mb-3 text-title text-text-primary">{t('home.card1_title')}</h2>
           <Grid cols={3} gap={4}>
             {continueItems.map((p) => {
               const a = slugById.get(p.article_id);
               return (
                 <Card key={p.article_id} data-testid={`continue-${p.article_id}`}>
                   <CardHeader>
-                    <CardTitle className="line-clamp-1">
+                    <CardTitle className="text-body-lg font-semibold line-clamp-1">
                       {a ? pickI18n(a.i18n_title, lng) : p.article_id.slice(0, 8)}
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-small">
                       {Math.round(Number(p.scroll_pct))}% · {Math.round(p.accumulated_seconds / 60)} min
                     </CardDescription>
                   </CardHeader>
@@ -185,14 +203,13 @@ export function DiscoverPage(): JSX.Element {
         </section>
       )}
 
+      {/* ── 类目条 DC-FR-001 ── */}
       <section data-testid="discover-categories">
-        <header className="mb-3 flex items-end justify-between">
-          <h2 className="text-h2">Discover China</h2>
-        </header>
+        <h2 className="mb-3 text-title text-text-primary">Discover China</h2>
         {catsLoading ? (
           <div className="flex gap-3 overflow-x-auto pb-2">
             {Array.from({ length: 6 }).map((_, i) => (
-              <Skeleton key={i} className="h-24 w-40 rounded-2xl" />
+              <Skeleton key={i} className="h-20 w-32 rounded-xl" />
             ))}
           </div>
         ) : (
@@ -200,45 +217,52 @@ export function DiscoverPage(): JSX.Element {
             <button
               type="button"
               onClick={() => setCategorySlug(undefined)}
-              className={`min-w-[140px] snap-start rounded-2xl border-2 p-4 text-left transition ${
+              className={`min-w-[120px] snap-start rounded-xl border p-3 text-left transition ${
                 categorySlug === undefined
-                  ? 'border-rose-500 bg-rose-50'
-                  : 'border-transparent bg-surface-2 hover:border-rose-200'
+                  ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/30'
+                  : 'border-border-default bg-bg-surface hover:border-rose-300'
               }`}
               data-testid="cat-all"
             >
-              <div className="text-2xl">✨</div>
-              <div className="mt-2 text-sm font-semibold">All</div>
+              <div className="text-xl">✨</div>
+              <div className="mt-1.5 text-small font-medium">All</div>
             </button>
             {(catData?.categories ?? []).map((c: DiscoverCategory) => (
               <button
                 key={c.id}
                 type="button"
                 onClick={() => setCategorySlug(c.slug)}
-                className={`min-w-[140px] snap-start rounded-2xl border-2 p-4 text-left transition ${
+                className={`min-w-[120px] snap-start rounded-xl border p-3 text-left transition ${
                   categorySlug === c.slug
-                    ? 'border-rose-500 bg-rose-50'
-                    : 'border-transparent bg-surface-2 hover:border-rose-200'
+                    ? 'border-rose-500 bg-rose-50 dark:bg-rose-950/30'
+                    : 'border-border-default bg-bg-surface hover:border-rose-300'
                 }`}
                 data-testid={`cat-${c.slug}`}
               >
-                <div className="text-2xl">{c.emoji ?? '📚'}</div>
-                <div className="mt-2 text-sm font-semibold line-clamp-1">
+                <div className="text-xl">{c.emoji ?? '📚'}</div>
+                <div className="mt-1.5 text-small font-medium line-clamp-1">
                   {pickI18n(c.i18n_name, lng) || c.slug}
                 </div>
+                {c.article_count != null && (
+                  <div className="mt-0.5 text-micro text-text-tertiary">{c.article_count} 篇</div>
+                )}
               </button>
             ))}
           </div>
         )}
       </section>
 
-      <section>
+      {/* ── 筛选区 DC-FR-002 + DC-FR-014 ── */}
+      <section className="flex flex-col gap-3">
+        {/* HSK 筛选 */}
         <HStack gap={2} className="flex-wrap">
           <button
             type="button"
             onClick={() => setHsk(undefined)}
-            className={`rounded-full px-3 py-1 text-sm ${
-              hsk === undefined ? 'bg-rose-500 text-white' : 'bg-surface-2 text-text-secondary'
+            className={`rounded-lg px-3 py-1.5 text-small font-medium transition-colors ${
+              hsk === undefined
+                ? 'bg-rose-600 text-white'
+                : 'bg-bg-surface text-text-secondary border border-border-default hover:border-rose-300'
             }`}
             data-testid="hsk-all"
           >
@@ -249,24 +273,41 @@ export function DiscoverPage(): JSX.Element {
               key={lvl}
               type="button"
               onClick={() => setHsk(hsk === lvl ? undefined : lvl)}
-              className={`rounded-full px-3 py-1 text-sm ${
-                hsk === lvl ? 'bg-rose-500 text-white' : 'bg-surface-2 text-text-secondary'
+              className={`rounded-lg px-3 py-1.5 text-small font-medium transition-colors ${
+                hsk === lvl
+                  ? 'bg-rose-600 text-white'
+                  : 'bg-bg-surface text-text-secondary border border-border-default hover:border-rose-300'
               }`}
               data-testid={`hsk-${lvl}`}
             >{`HSK ${lvl}`}</button>
           ))}
         </HStack>
+        {/* 长度筛选 DC-FR-002 */}
+        <HStack gap={2} className="flex-wrap">
+          {LENGTH_FILTERS.map((f) => (
+            <button
+              key={f.key}
+              type="button"
+              onClick={() => setLengthFilter(f.key)}
+              className={`rounded-lg px-3 py-1.5 text-small font-medium transition-colors ${
+                lengthFilter === f.key
+                  ? 'bg-sky-600 text-white'
+                  : 'bg-bg-surface text-text-secondary border border-border-default hover:border-sky-300'
+              }`}
+              data-testid={`len-${f.key}`}
+            >{f.label}</button>
+          ))}
+        </HStack>
       </section>
 
+      {/* ── 文章网格 ── */}
       <section data-testid="discover-articles">
-        <header className="mb-3 flex items-end justify-between">
-          <h2 className="text-h2">Featured articles</h2>
-        </header>
+        <h2 className="mb-3 text-title text-text-primary">Featured articles</h2>
         {articlesQ.isLoading ? (
           <Grid cols={3} gap={4}>
             {Array.from({ length: 6 }).map((_, i) => (
               <Card key={i}>
-                <Skeleton className="h-32 w-full rounded-2xl" />
+                <Skeleton className="h-36 w-full rounded-xl" />
                 <Skeleton className="mt-3 h-5 w-3/4" />
                 <Skeleton className="mt-2 h-4 w-full" />
               </Card>
@@ -293,7 +334,7 @@ export function DiscoverPage(): JSX.Element {
                   disabled={articlesQ.isFetchingNextPage}
                   data-testid="load-more"
                 >
-                  {articlesQ.isFetchingNextPage ? '…' : (t('actions.more') ?? 'Load more')}
+                  {articlesQ.isFetchingNextPage ? '...' : (t('actions.more') ?? 'Load more')}
                 </Button>
               )}
             </div>

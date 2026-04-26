@@ -176,7 +176,7 @@ export function NotificationCenter(): JSX.Element | null {
             type="button"
             onClick={close}
             aria-label={t('actions.close')}
-            className="rounded-md px-2 py-1 text-text-secondary hover:bg-white/40"
+            className="rounded-md px-2 py-1 text-text-secondary hover:bg-bg-elevated/60"
           >
             ✕
           </button>
@@ -191,7 +191,7 @@ export function NotificationCenter(): JSX.Element | null {
               data-testid={`notif-filter-${f.key}`}
               className={[
                 'shrink-0 rounded-full px-3 py-1 text-small transition-colors',
-                f.key === filter ? 'bg-rose-500/15 text-rose-700 font-medium' : 'text-text-secondary hover:bg-white/40',
+                f.key === filter ? 'bg-rose-500/15 text-rose-700 font-medium' : 'text-text-secondary hover:bg-bg-elevated/60',
               ].join(' ')}
             >
               {t(f.labelKey)}
@@ -202,7 +202,7 @@ export function NotificationCenter(): JSX.Element | null {
             type="button"
             onClick={() => void handleMarkAll()}
             data-testid="notif-mark-all"
-            className="shrink-0 rounded-md px-2 py-1 text-small text-text-secondary hover:bg-white/40"
+            className="shrink-0 rounded-md px-2 py-1 text-small text-text-secondary hover:bg-bg-elevated/60"
           >
             {t('notifications.mark_all_read')}
           </button>
@@ -219,7 +219,7 @@ export function NotificationCenter(): JSX.Element | null {
                 onClick={() => void handleClick(n)}
                 data-testid={`notif-item-${n.id}`}
                 className={[
-                  'flex w-full items-start gap-3 border-b border-glass-border px-4 py-3 text-start transition-colors hover:bg-white/40',
+                  'flex w-full items-start gap-3 border-b border-glass-border px-4 py-3 text-start transition-colors hover:bg-bg-elevated/60',
                   n.read_at ? 'opacity-70' : '',
                 ].join(' ')}
               >

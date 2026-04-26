@@ -1,12 +1,16 @@
+/**
+ * E07 — SRS 间隔重复复习页。
+ * UI 风格遵循设计系统。
+ */
 import { useEffect, useState, type JSX } from 'react';
-import { Button, Card, EmptyState, Spinner } from '@zhiyu/ui';
+import { Button, Card, EmptyState, Spinner, Badge, HStack, VStack } from '@zhiyu/ui';
 import { srs, type SrsCard } from '../lib/api.js';
 
 const GRADES = [
-  { v: 1 as const, label: '不会 (Again)', cls: 'bg-red-600' },
-  { v: 2 as const, label: '困难 (Hard)', cls: 'bg-orange-500' },
-  { v: 3 as const, label: '一般 (Good)', cls: 'bg-emerald-600' },
-  { v: 4 as const, label: '简单 (Easy)', cls: 'bg-blue-600' },
+  { v: 1 as const, label: '不会', sublabel: 'Again', cls: 'bg-red-600 hover:bg-red-700' },
+  { v: 2 as const, label: '困难', sublabel: 'Hard', cls: 'bg-orange-500 hover:bg-orange-600' },
+  { v: 3 as const, label: '一般', sublabel: 'Good', cls: 'bg-emerald-600 hover:bg-emerald-700' },
+  { v: 4 as const, label: '简单', sublabel: 'Easy', cls: 'bg-sky-600 hover:bg-sky-700' },
 ];
 
 export function SrsPage(): JSX.Element {
@@ -34,9 +38,7 @@ export function SrsPage(): JSX.Element {
     }
   }
 
-  useEffect(() => {
-    void load();
-  }, []);
+  useEffect(() => { void load(); }, []);
 
   async function grade(g: 1 | 2 | 3 | 4): Promise<void> {
     const card = queue[idx];
@@ -67,53 +69,56 @@ export function SrsPage(): JSX.Element {
 
   return (
     <div className="pt-2 max-w-2xl" data-testid="srs-page">
-      <header className="mb-5">
-        <h1 className="text-h1">单词记忆 (SRS)</h1>
+      <header className="mb-6">
+        <h1 className="text-h1 text-text-primary">单词记忆 (SRS)</h1>
         {stats && (
-          <p className="text-body text-text-secondary mt-1" data-testid="srs-stats">
-            今日待复习 {stats.due} · 累计 {stats.total} · 失误 {stats.lapses}
-          </p>
+          <HStack gap={3} className="mt-2 flex-wrap">
+            <Badge tone="rose" variant="soft">待复习 {stats.due}</Badge>
+            <Badge tone="sky" variant="soft">累计 {stats.total}</Badge>
+            <Badge tone="amber" variant="soft">失误 {stats.lapses}</Badge>
+          </HStack>
         )}
       </header>
 
       {error && (
-        <div className="mb-4 rounded border border-red-300 bg-red-50 p-3 text-sm text-red-700">{error}</div>
+        <div className="mb-4 rounded-xl border border-red-300 dark:border-red-700 bg-red-50 dark:bg-red-950/30 p-3 text-small text-red-700 dark:text-red-300">{error}</div>
       )}
 
       {queue.length === 0 ? (
-        <EmptyState illustration="success" title="今日已无待复习" description="明天再来吧 🎉" />
+        <EmptyState illustration="success" title="今日已无待复习" description="明天再来吧" />
       ) : (
         <Card>
-          <div className="text-center py-6" data-testid="srs-card">
+          <div className="text-center py-8" data-testid="srs-card">
             <p className="text-micro text-text-tertiary">{idx + 1} / {queue.length}</p>
-            <p className="mt-2 text-5xl font-semibold" data-testid="srs-word">{queue[idx]?.word}</p>
+            <p className="mt-4 text-zh-hero font-semibold text-text-primary" data-testid="srs-word">{queue[idx]?.word}</p>
             {reveal ? (
-              <div className="mt-4 space-y-1" data-testid="srs-reveal">
-                {queue[idx]?.pinyin && <p className="text-h2">{queue[idx]?.pinyin}</p>}
+              <VStack gap={2} className="mt-6" data-testid="srs-reveal">
+                {queue[idx]?.pinyin && <p className="text-h2 text-text-primary">{queue[idx]?.pinyin}</p>}
                 {queue[idx]?.i18n_gloss && (
-                  <p className="text-body text-text-secondary">
+                  <p className="text-body-lg text-text-secondary">
                     {Object.values(queue[idx]?.i18n_gloss ?? {})[0]}
                   </p>
                 )}
-              </div>
+              </VStack>
             ) : (
-              <Button className="mt-6" onClick={() => setReveal(true)} data-testid="srs-show">
+              <Button className="mt-8" onClick={() => setReveal(true)} data-testid="srs-show">
                 显示答案
               </Button>
             )}
           </div>
 
           {reveal && (
-            <div className="mt-2 grid grid-cols-2 gap-2" data-testid="srs-grades">
+            <div className="mt-4 grid grid-cols-2 gap-2" data-testid="srs-grades">
               {GRADES.map((g) => (
                 <button
                   key={g.v}
-                  className={`${g.cls} text-white rounded px-3 py-2 disabled:opacity-50`}
+                  className={`${g.cls} text-white rounded-xl px-3 py-3 text-body font-medium disabled:opacity-50 transition-colors`}
                   disabled={busy}
                   onClick={() => void grade(g.v)}
                   data-testid={`srs-grade-${g.v}`}
                 >
-                  {g.label}
+                  <div>{g.label}</div>
+                  <div className="text-micro text-white/70">{g.sublabel}</div>
                 </button>
               ))}
             </div>

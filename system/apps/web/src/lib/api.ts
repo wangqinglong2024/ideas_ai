@@ -84,6 +84,7 @@ export interface DiscoverCategory {
   i18n_name: Record<string, string>;
   i18n_summary: Record<string, string>;
   sort_order: number;
+  article_count?: number;
 }
 
 export interface DiscoverArticleCard {
@@ -116,6 +117,8 @@ export interface DiscoverArticleFull extends DiscoverArticleCard {
   audio_voice: string;
   author: string | null;
   status: string;
+  category_name?: string;
+  key_points?: string[];
 }
 
 export interface DiscoverDictEntry {
@@ -130,13 +133,15 @@ export interface DiscoverDictEntry {
 export const discover = {
   categories: () =>
     api<{ categories: DiscoverCategory[] }>('/api/v1/discover/categories'),
-  articles: (params: { category?: string; hsk?: number; cursor?: string; limit?: number; q?: string } = {}) => {
+  articles: (params: { category?: string; hsk?: number; cursor?: string; limit?: number; q?: string; minMinutes?: number; maxMinutes?: number } = {}) => {
     const sp = new URLSearchParams();
     if (params.category) sp.set('category', params.category);
     if (params.hsk) sp.set('hsk', String(params.hsk));
     if (params.cursor) sp.set('cursor', params.cursor);
     if (params.limit) sp.set('limit', String(params.limit));
     if (params.q) sp.set('q', params.q);
+    if (params.minMinutes) sp.set('min_minutes', String(params.minMinutes));
+    if (params.maxMinutes) sp.set('max_minutes', String(params.maxMinutes));
     const qs = sp.toString();
     return api<{ items: DiscoverArticleCard[]; next_cursor: string | null }>(
       `/api/v1/discover/articles${qs ? `?${qs}` : ''}`,
@@ -149,6 +154,10 @@ export const discover = {
       progress: { last_sentence_idx?: number; scroll_pct?: number; accumulated_seconds?: number; completed?: boolean } | null;
       rating_mine: number | null;
     }>(`/api/v1/discover/articles/${encodeURIComponent(slug)}`),
+  related: (slug: string) =>
+    api<{ items: Array<{ slug: string; i18n_title?: Record<string, string>; hsk_level?: number; estimated_minutes?: number }> }>(
+      `/api/v1/discover/articles/${encodeURIComponent(slug)}/related`,
+    ),
   search: (q: string, limit = 10) =>
     api<{ q: string; total: number; items: Array<DiscoverArticleCard & { rank: number | null; highlight: string }> }>(
       `/api/v1/discover/search?q=${encodeURIComponent(q)}&limit=${limit}`,
@@ -309,6 +318,8 @@ export interface DashboardCards {
 }
 
 export const learning = {
+  lastActive: () =>
+    api<{ lesson_id: string; track: string; title?: string } | null>('/api/v1/me/learning/last-active').catch(() => null),
   courses: () => api<{ items: CourseCard[] }>('/api/v1/courses'),
   course: (id: string) => api<{ course: CourseCard; lessons: Array<{ id: string; slug: string; position: number; i18n_title: Record<string, string> }> }>(`/api/v1/courses/${id}`),
   enroll: (id: string) => api<{ enrollment: Enrollment }>(`/api/v1/courses/${id}/enroll`, { method: 'POST' }),
@@ -341,6 +352,7 @@ export interface TrackStage {
   sort_order: number;
   lesson_count: number;
   unlocked: boolean;
+  progress_pct?: number;
 }
 export interface StageLesson {
   id: string;

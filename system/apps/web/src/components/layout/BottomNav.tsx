@@ -1,7 +1,7 @@
 /**
- * ZY-05-03 — Bottom tab navigation. Mobile-only; hidden on `md` and up where
- * SideNav takes over. Uses TanStack Router `Link` so active state syncs with
- * URL and `aria-current="page"` is wired automatically.
+ * ZY-05-03 — 底部标签导航。仅移动端显示；md 及以上由 SideNav 接管。
+ * 使用 TanStack Router Link，活跃状态与 URL 同步。
+ * 遵循 03-glassmorphism-system.md 第四层 glass-floating。
  */
 import { Link, useRouterState } from '@tanstack/react-router';
 import { useT } from '@zhiyu/i18n/client';
@@ -74,11 +74,11 @@ export function BottomNav(): JSX.Element {
             className={[
               'group flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-full px-2 py-2 transition-all duration-200',
               active
-                ? 'bg-rose-500/15 text-rose-600 scale-[1.02]'
-                : 'text-text-secondary hover:bg-white/40',
+                ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400'
+                : 'text-text-secondary hover:bg-bg-elevated/60',
             ].join(' ')}
           >
-            <span className={active ? 'text-rose-600' : 'text-text-secondary'}>{tab.icon}</span>
+            <span className={active ? 'text-rose-600 dark:text-rose-400' : 'text-text-secondary'}>{tab.icon}</span>
             <span className="text-micro font-medium leading-none">{t(tab.labelKey)}</span>
           </Link>
         );

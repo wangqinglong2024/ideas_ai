@@ -1,5 +1,6 @@
 /**
- * Desktop side navigation (>= md). Mirrors the bottom-tab destinations.
+ * 桌面端侧边导航（>= md）。与底部标签镜像同一组目标。
+ * 遵循 03-glassmorphism-system.md 第二层 glass-card。
  */
 import { Link, useRouterState } from '@tanstack/react-router';
 import { useT } from '@zhiyu/i18n/client';
@@ -27,8 +28,10 @@ export function SideNav(): JSX.Element {
               to={item.to}
               aria-current={active ? 'page' : undefined}
               className={[
-                'rounded-md px-3 py-2 text-body transition-colors',
-                active ? 'bg-rose-500/15 text-rose-600 font-medium' : 'text-text-secondary hover:bg-white/40',
+                'rounded-lg px-3 py-2 text-body transition-colors',
+                active
+                  ? 'bg-rose-500/12 text-rose-600 dark:text-rose-400 font-medium'
+                  : 'text-text-secondary hover:bg-bg-elevated/60',
               ].join(' ')}
             >
               {t(item.labelKey)}
