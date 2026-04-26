@@ -8,13 +8,14 @@
 # top_constraint: planning/00-rules.md
 
 generated: 2026-04-25
-last_updated: 2026-04-27
+last_updated: 2026-04-26
 total_stories: 151
 notes: |
   - 全部 20 个 epic 的 story 已展开为 ready-for-dev（含 SQL DDL / API 契约 / Docker 验收命令）。
   - sprint 文件统一改写为编年格式，对齐 story 编号。
   - 2026-04-27 补齐：新增 5 个 story 以覆盖 PRD P0 缺口：ZY-06-07（评分/预览/推荐/统计）、ZY-08-07（拼音入门+阶段考）、ZY-11-06a（章末快测）、ZY-17-11（种子导入工具）、ZY-18-09（SSRF/不安全设计）。
-  - 下一阶段：E03 dev (bmad-dev-story) → code-review → MCP 浏览器测试 + retrospective。
+  - 2026-04-26 E03 全部 6 个 story 已 done：迁移 0002 + Drizzle schema + SDK OTP/密码工具 + Fastify auth/me/sessions/gdpr 路由 + worker GDPR 导出/物理删除 + Web auth/me 页面（含 OAuth 回调）。Docker 端到端冒烟通过 + MCP 浏览器逐页验证 + 代码审查（snake_case 标准化、useEffect 修正、checkOtpRate 按 purpose 分桶、admin.signOut 合约修正、CORS 凭据放行、cookie 导出）已应用。
+  - 下一阶段：E04 i18n & 本地化。
 
 epics:
 
@@ -47,16 +48,16 @@ epics:
 
   - id: E03
     name: 用户账户体系
-    status: ready-for-dev
+    status: done
     sprint: S03
     story_count: 6
     stories:
-      - { id: ZY-03-01, title: profiles + RLS + handle_new_user,          status: ready-for-dev }
-      - { id: ZY-03-02, title: OTP 注册 + 限频,                            status: ready-for-dev }
-      - { id: ZY-03-03, title: 密码 + OAuth + 重置 + 5 失败 15 分锁,      status: ready-for-dev }
-      - { id: ZY-03-04, title: 资料 / 头像 / 用户名,                       status: ready-for-dev }
-      - { id: ZY-03-05, title: user_settings + 会话列表撤销,               status: ready-for-dev }
-      - { id: ZY-03-06, title: GDPR 导出 + 30 日延迟删除,                 status: ready-for-dev }
+      - { id: ZY-03-01, title: profiles + RLS + handle_new_user,          status: done }
+      - { id: ZY-03-02, title: OTP 注册 + 限频,                            status: done }
+      - { id: ZY-03-03, title: 密码 + OAuth + 重置 + 5 失败 15 分锁,      status: done }
+      - { id: ZY-03-04, title: 资料 / 头像 / 用户名,                       status: done }
+      - { id: ZY-03-05, title: user_settings + 会话列表撤销,               status: done }
+      - { id: ZY-03-06, title: GDPR 导出 + 30 日延迟删除,                 status: done }
 
   - id: E04
     name: 国际化与本地化

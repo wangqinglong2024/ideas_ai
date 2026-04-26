@@ -19,6 +19,8 @@ import {
   VStack,
   toast,
 } from '@zhiyu/ui';
+import { SignInPage, SignUpPage, ResetPasswordPage } from './pages/auth.js';
+import { MeOverviewPage, MeEditPage, MeSettingsPage, MeSecurityPage, MeDataPage, AuthCallbackPage } from './pages/me.js';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL ?? '';
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY ?? '';
@@ -36,6 +38,15 @@ export default function App(): JSX.Element {
   if (path === '/_debug/supabase') return <DebugSupabase />;
   if (path === '/_debug/throw') return <DebugThrow />;
   if (path === '/__styleguide') return <StyleGuide />;
+  if (path === '/signin') return <SignInPage />;
+  if (path === '/signup') return <SignUpPage />;
+  if (path === '/reset-password') return <ResetPasswordPage />;
+  if (path === '/auth/callback') return <AuthCallbackPage />;
+  if (path === '/me') return <MeOverviewPage />;
+  if (path === '/me/edit') return <MeEditPage />;
+  if (path === '/me/settings') return <MeSettingsPage />;
+  if (path === '/me/security') return <MeSecurityPage />;
+  if (path === '/me/data') return <MeDataPage />;
   return <Home />;
 }
 
@@ -52,6 +63,12 @@ function Header(): JSX.Element {
             <ThemeMenu />
             <Button asChild size="sm" variant="ghost">
               <a href="/__styleguide">样式指南</a>
+            </Button>
+            <Button asChild size="sm" variant="ghost">
+              <a href="/signin">登录</a>
+            </Button>
+            <Button asChild size="sm">
+              <a href="/signup">注册</a>
             </Button>
           </HStack>
         </HStack>

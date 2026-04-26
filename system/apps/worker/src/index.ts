@@ -2,6 +2,7 @@ import { Queue, QueueEvents, Worker, type Job } from 'bullmq';
 import { Redis } from 'ioredis';
 import pino from 'pino';
 import { loadEnv } from '@zhiyu/config';
+import { startGdprWorkers } from './gdpr.js';
 
 const env = loadEnv();
 const logger = pino({
@@ -47,10 +48,12 @@ function startHeartbeat(): void {
 
 logger.info({ queue: NOOP_QUEUE, heartbeat_ms: HEARTBEAT_MS }, 'zhiyu-worker started');
 startHeartbeat();
+const gdpr = startGdprWorkers(connection.duplicate());
 
 const stop = async (sig: string) => {
   logger.info({ sig }, 'shutting_down');
   if (timer) clearInterval(timer);
+  await gdpr.stop();
   await worker.close();
   await events.close();
   await noopQueue.close();

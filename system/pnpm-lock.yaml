@@ -198,15 +198,27 @@ importers:
       '@zhiyu/config':
         specifier: workspace:*
         version: link:../../packages/config
+      '@zhiyu/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@zhiyu/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
       bullmq:
         specifier: ^5.7.0
         version: 5.76.2
+      drizzle-orm:
+        specifier: ^0.30.10
+        version: 0.30.10(@opentelemetry/api@1.9.1)(@types/react@18.3.28)(postgres@3.4.9)(react@18.3.1)
       ioredis:
         specifier: ^5.4.1
         version: 5.10.1
       pino:
         specifier: ^9.1.0
         version: 9.14.0
+      postgres:
+        specifier: ^3.4.4
+        version: 3.4.9
     devDependencies:
       tsx:
         specifier: ^4.7.2

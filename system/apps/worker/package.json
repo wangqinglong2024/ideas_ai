@@ -12,9 +12,13 @@
   },
   "dependencies": {
     "@zhiyu/config": "workspace:*",
+    "@zhiyu/db": "workspace:*",
+    "@zhiyu/sdk": "workspace:*",
     "bullmq": "^5.7.0",
+    "drizzle-orm": "^0.30.10",
     "ioredis": "^5.4.1",
-    "pino": "^9.1.0"
+    "pino": "^9.1.0",
+    "postgres": "^3.4.4"
   },
   "devDependencies": {
     "tsx": "^4.7.2",

@@ -9,6 +9,9 @@ import { noopQueue } from './queue.js';
 import { runReadiness } from './readiness.js';
 import { registry } from './metrics.js';
 import { isMetricsAllowed } from './metrics-acl.js';
+import { registerAuthRoutes } from './routes/auth.js';
+import { registerMeRoutes } from './routes/me.js';
+import { registerSessionRoutes, registerGdprRoutes } from './routes/me-sessions.js';
 
 const env = loadEnv();
 const startedAt = Date.now();
@@ -37,8 +40,9 @@ export async function registerRoutes(app: FastifyInstance): Promise<void> {
     const origin = req.headers.origin;
     if (origin) {
       reply.header('access-control-allow-origin', origin);
-      reply.header('access-control-allow-headers', 'content-type,x-request-id');
-      reply.header('access-control-allow-methods', 'GET,POST,OPTIONS');
+      reply.header('access-control-allow-credentials', 'true');
+      reply.header('access-control-allow-headers', 'content-type,x-request-id,authorization');
+      reply.header('access-control-allow-methods', 'GET,POST,PUT,PATCH,DELETE,OPTIONS');
       reply.header('vary', 'origin');
     }
     if (req.method === 'OPTIONS') {
@@ -130,4 +134,10 @@ export async function registerRoutes(app: FastifyInstance): Promise<void> {
     const r = await db.execute(sql`select 1 as ok`);
     return { result: r };
   });
+
+  // E03 user account
+  await registerAuthRoutes(app);
+  await registerMeRoutes(app);
+  await registerSessionRoutes(app);
+  await registerGdprRoutes(app);
 }
