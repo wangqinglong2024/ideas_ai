@@ -3,7 +3,7 @@
 > 生成日期：2026-04-25
 > 基于：planning/epics（20 Epics + 1 Post-MVP Backlog）
 > 工作流：bmad-sprint-planning
-> 总 stories：213（v1 = 201 · v1.5 = 12 为 E16 AI 内容工厂）
+> 总 stories：146（按需出，已剔除硬凑；E09 含 9-5-v1 拆分；E10 = 12 款游戏 + 共享）
 > 跟踪文件：[sprint-status.yaml](./sprint-status.yaml)
 
 ---
@@ -19,26 +19,26 @@
 
 | Sprint # | Epic 名称 | 阶段 | Story 数 | 优先级 | 文件 |
 |:---:|---|:---:|:---:|:---:|---|
-| S01 | 平台基础设施 | M0 | 12 | P0 | [01-platform-foundation.md](./01-platform-foundation.md) |
-| S02 | 设计系统与 UI 工具库 | M0 | 10 | P0 | [02-design-system.md](./02-design-system.md) |
-| S03 | 用户账户体系 | M1 | 10 | P0 | [03-user-account.md](./03-user-account.md) |
-| S04 | 国际化与本地化 | M1 | 10 | P0 | [04-i18n.md](./04-i18n.md) |
-| S05 | 应用骨架与导航 | M1 | 10 | P0 | [05-app-shell.md](./05-app-shell.md) |
-| S06 | 中国发现 | M2 | 10 | P0 | [06-discover-china.md](./06-discover-china.md) |
-| S07 | 学习引擎 | M2 | 12 | P0 | [07-learning-engine.md](./07-learning-engine.md) |
-| S08 | 课程模块 | M3 | 10 | P0 | [08-courses.md](./08-courses.md) |
+| S01 | 平台基础设施 | M0 | 6 | P0 | [01-platform-foundation.md](./01-platform-foundation.md) |
+| S02 | 设计系统与 UI 工具库 | M0 | 7 | P0 | [02-design-system.md](./02-design-system.md) |
+| S03 | 用户账户体系 | M1 | 6 | P0 | [03-user-account.md](./03-user-account.md) |
+| S04 | 国际化与本地化 | M1 | 5 | P0 | [04-i18n.md](./04-i18n.md) |
+| S05 | 应用骨架与导航 | M1 | 6 | P0 | [05-app-shell.md](./05-app-shell.md) |
+| S06 | 中国发现 | M2 | 6 | P0 | [06-discover-china.md](./06-discover-china.md) |
+| S07 | 学习引擎 | M2 | 7 | P0 | [07-learning-engine.md](./07-learning-engine.md) |
+| S08 | 课程模块 | M3 | 6 | P0 | [08-courses.md](./08-courses.md) |
 | S09 | 游戏引擎共享层 | M3 | 11 | P0 | [09-game-engine.md](./09-game-engine.md) |
 | S10 | 游戏专区（12 款 MVP 一次性首发）| M4 | 15 | P0 | [10-games.md](./10-games.md) |
-| S11 | 小说阅读 | M4 | 10 | P0 | [11-novels.md](./11-novels.md) |
-| S12 | 知语币与商城 | M5 | 10 | P0 | [12-economy.md](./12-economy.md) |
-| S13 | 支付与订阅 | M5 | 10 | P0 | [13-payment.md](./13-payment.md) |
-| S14 | 分销系统 | M5-M6 | 11 | P0 | [14-referral.md](./14-referral.md) |
-| S15 | 客服 IM 与工单 | M6 | 10 | P0 | [15-customer-service.md](./15-customer-service.md) |
-| S16 | AI 内容工厂 | v1.5 | 12 | P1 | [16-content-factory.md](./16-content-factory.md) |
-| S17 | 管理后台 | M3-M5 | 12 | P0 | [17-admin.md](./17-admin.md) |
-| S18 | 安全与合规 | M0-M6 | 10 | P0 | [18-security.md](./18-security.md) |
-| S19 | 可观测与运维 | M0-M6 | 10 | P0 | [19-observability.md](./19-observability.md) |
-| S20 | 上线与发布 | M6 | 10 | P0 | [20-launch.md](./20-launch.md) |
+| S11 | 小说阅读 | M4 | 6 | P0 | [11-novels.md](./11-novels.md) |
+| S12 | 知语币与商城 | M5 | 8 | P0 | [12-economy.md](./12-economy.md) |
+| S13 | 支付与订阅 | M5 | 6 | P0 | [13-payment.md](./13-payment.md) |
+| S14 | 分销系统 | M5-M6 | 9 | P0 | [14-referral.md](./14-referral.md) |
+| S15 | 客服 IM 与工单 | M6 | 7 | P0 | [15-customer-service.md](./15-customer-service.md) |
+| S16 | 内容工厂（占位 + Adapter） | v1 末 | 3 | P1 | [16-content-factory.md](./16-content-factory.md) |
+| S17 | 管理后台 | M3-M5 | 10 | P0 | [17-admin.md](./17-admin.md) |
+| S18 | 安全与合规 | M0-M6 | 8 | P0 | [18-security.md](./18-security.md) |
+| S19 | 可观测与运维 | M0-M6 | 8 | P0 | [19-observability.md](./19-observability.md) |
+| S20 | 上线与发布 | M6 | 6 | P0 | [20-launch.md](./20-launch.md) |
 
 ---
 

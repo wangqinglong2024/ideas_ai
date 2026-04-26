@@ -1,18 +1,32 @@
 # ZY-15-03 · 用户端 IM UI
 
-> Epic：E15 · 估算：L · 状态：ready-for-dev
+> Epic：E15 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 用户
+**I want** 在「我 → 客服」打开聊天窗，发文字 / 图片 / 截屏，并能查看历史
+**So that** 遇到问题随时找客服。
+
+## 上下文
+- 路由 `/support/chat`
+- 列表：日期 group + 我 / 客服气泡
+- 输入：文本 + 图片（拖拽 / 选择）+ 表情
+- 历史：分页加载 + 锚点到未读
+
 ## Acceptance Criteria
-- [ ] 浮动按钮 + drawer 抽屉
-- [ ] 文 / 图 / 表情；图片走 supabase-storage `chat/<conv>/<file>`
-- [ ] 历史消息分页滚动
-- [ ] 订阅 `conv:<id>` 频道 → 实时刷新
-- [ ] 草稿本地保存
+- [ ] 聊天窗组件（复用未来通用 IM）
+- [ ] 图片上传走 storage + 自动压缩 ≤ 1MB
+- [ ] 4 语 + RTL
+- [ ] 离线 banner（未连 realtime）
 
 ## 测试方法
-- MCP Puppeteer：发文 + 发图 + 收回复
-- Storybook：抽屉 / 气泡组件
+- MCP Puppeteer：发文字 / 发图 / 退出再进 看历史
 
 ## DoD
-- [ ] 实时 + 媒体 OK
+- [ ] UX 流畅
+- [ ] 图片预览正常
+
+## 依赖
+- 上游：ZY-15-01 / 02

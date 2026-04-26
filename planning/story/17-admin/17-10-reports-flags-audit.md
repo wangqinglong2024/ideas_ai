@@ -1,19 +1,30 @@
-# ZY-17-10 · 报表 + Feature Flags + 审计
+# ZY-17-10 · 报表 + 风控信号 + 审计
 
-> Epic：E17 · 估算：L · 状态：ready-for-dev
+> Epic：E17 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 运营 / 安全
+**I want** 看 DAU / WAU / 留存 / 收入 / 充值 / 风控信号 / 审计日志
+**So that** 全局把握业务与风险。
+
+## 上下文
+- 路由 `/admin/reports`、`/admin/security/flags`、`/admin/security/audit`
+- 数据：来自 ZY-19-05（business_dashboard）+ fraud_signals + audit_log
+- 图表：echarts （本地 npm 包）；不外链
+
 ## Acceptance Criteria
-- [ ] 实时仪表板：注册 / 付费 / DAU / WAU
-- [ ] 漏斗：注册 → 完成首节 → 首付费
-- [ ] 收入按月汇总；CSV 导出
-- [ ] Feature Flags：CRUD + 灰度规则（按用户 / 比例）
-- [ ] 系统参数：ZC 规则 / 汇率
-- [ ] 审计日志查询页（按用户 / 操作类型 / 时间范围）
+- [ ] 报表页：6 卡 + 4 图（DAU/WAU 折线、收入柱、留存 cohort 表、漏斗）
+- [ ] 风控信号列表 + 筛选
+- [ ] 审计日志 + 全文搜索
+- [ ] CSV 导出
 
 ## 测试方法
-- MCP Puppeteer：Flag toggle 后 FE 行为变化
-- CSV 下载 + 审计搜索
+- MCP Puppeteer 三页可见 + 导出
 
 ## DoD
-- [ ] 仪表板 + Flags + 审计齐
+- [ ] 数据对得上
+
+## 依赖
+- 上游：ZY-19 / ZY-12-08 / ZY-17-01

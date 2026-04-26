@@ -1,34 +1,33 @@
-# Sprint S19 · 可观测与运维（Observability & Ops）
+# Sprint S19 · 可观测与运维
 
-> Epic：[E19](../epics/19-observability.md) · 阶段：M0-M6 贯穿 · 优先级：P0 · 估算：4 周分散
-> Story 数：10 · 状态：[sprint-status.yaml](./sprint-status.yaml#epic-19)
+> 顶层约束：[planning/00-rules.md](../00-rules.md)
+> Epic：[../epics/19-observability.md](../epics/19-observability.md) · 阶段：M0-M6 横切 · 优先级：P0
+> Story 数：8 · 状态：[sprint-status.yaml](./sprint-status.yaml)
 
-## Sprint 目标
-日志 / 错误 / 行为 / 健康 / 业务指标 / 告警 / 状态页 / RUM / 备份 / 部署事件 全链路覆盖。
+## 目标
+横切 8 项：pino 日志；error_events；events SDK；healthz/metrics；business dashboard；alerts；web vitals RUM；备份恢复。
 
-## Story 列表与阶段绑定
+## 排期
+| 周 | Story | 验收 |
+|---|---|---|
+| W3 | ZY-19-01 pino | docker logs 可读 |
+| W4-5 | ZY-19-02 error events | dedupe + admin 列表 |
+| W5-6 | ZY-19-03 events SDK | batch 不丢 |
+| W6 | ZY-19-04 health+metrics | healthcheck 联通 |
+| W18-20 | ZY-19-05 business dashboard | 5 接口 ≤ 500ms |
+| W20-21 | ZY-19-06 alerts | 抑制不漏不爆 |
+| W22 | ZY-19-07 web vitals | 5 指标全采 |
+| W3 起 | ZY-19-08 backup | 备份 + 月度演练 |
 
-| 序 | Story Key | 估 | 阶段 |
-|:-:|---|:-:|:-:|
-| 1 | 19-4-health-ready-metrics | S | M0（W3）|
-| 2 | 19-1-pino-logging-betterstack | M | M0（W4）|
-| 3 | 19-2-sentry-fe-be-integration | M | M0（W4）|
-| 4 | 19-3-posthog-event-tracking | L | M1-M2 |
-| 5 | 19-8-web-vitals-rum | M | M2 |
-| 6 | 19-6-alerts-rules-channels | M | M3 |
-| 7 | 19-7-status-page | M | M3 |
-| 8 | 19-5-business-metrics-dashboard | M | M4-M5 |
-| 9 | 19-10-deployment-events-postmortem | S | M5 |
-| 10 | 19-9-backup-recovery-drill | M | M5-M6 |
+## 依赖与并行
+- 与所有 sprint 并行
+- 上线前 alerts + 备份 + 报表必须就绪
+
+## 退出标准
+- 全部 BE 结构化日志
+- 业务大盘可看核心指标
+- 备份+恢复演练通过
 
 ## 风险
-- 告警噪音 → 调阈值；首月 weekly review
-- 监控成本 → PostHog / Sentry / Better Stack 采样 + 配额
-
-## DoD
-- [ ] 三件套全集成（Sentry / PostHog / Better Stack）
-- [ ] SLO 监控启用（API uptime ≥ 99.9% / P95 延迟）
-- [ ] PagerDuty + Slack 告警有效
-- [ ] status.zhiyu.io 公开 + 订阅
-- [ ] 季度备份恢复演练 runbook
-- [ ] retrospective 完成
+- DB 物化视图刷新负载：低峰跑
+- 告警渠道 fake：上线前替换为可达通道

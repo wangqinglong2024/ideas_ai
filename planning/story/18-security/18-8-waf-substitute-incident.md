@@ -1,18 +1,35 @@
-# ZY-18-08 · WAF 替代 + 风控 + 事件响应
+# ZY-18-08 · WAF 替代 + 应急响应
 
 > Epic：E18 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 运维
+**I want** 在 nginx 层做 WAF 等价能力 + 一份应急响应剧本
+**So that** 不依赖 Cloudflare WAF 也能拦截常见攻击。
+
+## 上下文
+- nginx 层（`/opt/gateway`）：
+  - GeoIP 黑名单（可选）
+  - User-Agent 黑名单
+  - 高频 IP 临时封禁（fail2ban + log scan）
+  - 大请求体 / 慢请求拦截
+- 应用层 RateLimiter (ZY-18-02) 配合
+- 应急剧本（runbook）：DDoS / 数据泄露 / 失陷账号 / 支付欺诈 共 4 模板
+
 ## Acceptance Criteria
-- [ ] zhiyu-internal nginx 容器配置：UA 黑名单 / 已知坏路径 → 404 / 简单 IP 限速
-- [ ] 异常 IP 自动写 `zhiyu.blocked_ips` 表
-- [ ] BE 启动时加载并周期性 reload（5 分钟）
-- [ ] runbook md：事件响应步骤
-- [ ] 演练 1 次（命令手册输出）
+- [ ] nginx conf snippet 提供
+- [ ] fail2ban 集成
+- [ ] runbook md 4 份（在 `system/docs/runbooks/`）
+- [ ] 演练记录模板
 
 ## 测试方法
-- 集成：mock 坏路径 → 404
-- 黑名单 IP 请求 → 403
+- 手动 ab -n 10000 触发限流；检查 fail2ban 日志
 
 ## DoD
-- [ ] 替代 WAF 基线；不引用 Cloudflare / Turnstile / Recaptcha
+- [ ] nginx + fail2ban 联动
+- [ ] runbook 完整
+
+## 依赖
+- 上游：外部 nginx 已就位

@@ -1,34 +1,33 @@
-# Sprint S18 · 安全与合规（Security & Compliance）
+# Sprint S18 · 安全与合规
 
-> Epic：[E18](../epics/18-security.md) · 阶段：M0-M6 贯穿 · 优先级：P0 · 估算：5 周分散
-> Story 数：10 · 状态：[sprint-status.yaml](./sprint-status.yaml#epic-18)
+> 顶层约束：[planning/00-rules.md](../00-rules.md)
+> Epic：[../epics/18-security.md](../epics/18-security.md) · 阶段：M0-M6 横切 · 优先级：P0
+> Story 数：8 · 状态：[sprint-status.yaml](./sprint-status.yaml)
 
-## Sprint 目标
-OWASP Top 10、加密、合规（GDPR / PDPA）、风控、隐私政策、漏洞响应。
+## 目标
+横切 8 项：密码 / token 基线；输入校验 + 限流；helmet/CSP/CORS/cookie；加密 + 审计；隐私 / TOS；GDPR 导出 / 删除；漏洞扫描；WAF 替代 + 应急剧本。
 
-## Story 列表与阶段绑定
+## 排期（贯穿全阶段）
+| 周 | Story | 验收 |
+|---|---|---|
+| W3-4 | ZY-18-01 password+token | argon2id + refresh rotate |
+| W4-5 | ZY-18-02 zod+ratelimit | 4 默认策略 + ±5% 准确 |
+| W5 | ZY-18-03 helmet+CSP | observatory 评分达标 |
+| W6-7 | ZY-18-04 encryption+audit | 加密往返 + 审计入库 |
+| W7-8 | ZY-18-05 privacy+tos | 4 语同意条 + 版本 re-prompt |
+| W17-18 | ZY-18-06 export+delete | zip 完整 + 30d 真删 |
+| W22 | ZY-18-07 vuln scan | 报告 + 高危开 ticket |
+| W23 | ZY-18-08 WAF+runbook | nginx + fail2ban + 4 runbook |
 
-| 序 | Story Key | 估 | 阶段 |
-|:-:|---|:-:|:-:|
-| 1 | 18-1-password-token-baseline | M | M0（W3）|
-| 2 | 18-2-input-validation-rate-limit | M | M0（W4）|
-| 3 | 18-3-security-http-headers | M | M0（W4）|
-| 4 | 18-8-vuln-scanning-deps | M | M0（W4）|
-| 5 | 18-4-data-encryption | M | M1（W7）|
-| 6 | 18-9-waf-bot-protection | M | M1（W8）|
-| 7 | 18-6-privacy-tos | M | M2（W12）|
-| 8 | 18-7-data-export-delete-gdpr | L | M2（W13-W14，配合 S03）|
-| 9 | 18-5-audit-logs | M | M3（W15-W16，配合 S17）|
-| 10 | 18-10-incident-response | M | M6（W36-W37）|
+## 依赖与并行
+- 与所有 sprint 并行
+- 上线前必须全绿
+
+## 退出标准
+- securityheaders 期望分
+- GDPR 路径全测
+- 4 runbook 演练记录留档
 
 ## 风险
-- 跨国合规复杂 → 律师 + 分国处理
-- 单点故障泄露 → 多层防护（WAF + Rate Limit + Input Validation + Encryption + Audit）
-
-## DoD
-- [ ] OWASP Top 10 验证通过（手动 + 自动）
-- [ ] 渗透测试报告（M6 末，外部团队）
-- [ ] 合规文件 4+1 语完整
-- [ ] CodeQL + Renovate / Dependabot 启用
-- [ ] CSP 严格白名单 + 报告端点
-- [ ] retrospective 完成
+- 加密 key 管理：env + 备份策略
+- 限流误伤：白名单 + 监控

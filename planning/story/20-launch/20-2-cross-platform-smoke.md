@@ -1,16 +1,33 @@
-# ZY-20-02 · 跨平台冒烟测试（MCP Puppeteer 矩阵）
+# ZY-20-02 · 跨平台冒烟
 
-> Epic：E20 · 估算：L · 状态：ready-for-dev
+> Epic：E20 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** QA
+**I want** 一键脚本跑 5 浏览器 × 3 视口 × 4 语 关键路径冒烟
+**So that** 上线前快速回归。
+
+## 上下文
+- 工具：playwright + MCP Puppeteer 双轨；不接 BrowserStack / Sauce Labs
+- 关键路径：登录 / 注册 / 浏览课程 / 完成 1 lesson / 阅读 1 章 / 玩 1 游戏 / 下单 fake
+- 输出 HTML 报告 + 截图
+
 ## Acceptance Criteria
-- [ ] MCP Puppeteer 脚本矩阵：iPhone Safari / Android Chrome / iPad / Desktop Chrome
-- [ ] 主流程：注册 → 选课 → 完成首节 → 付费墙 → fake checkout → 完成
-- [ ] 4 语回归（en/es/zh/ar）
-- [ ] 报告输出至 `planning/qa-reports/dev-acceptance.md`
+- [ ] playwright 项目 + 配置 5 × 3 × 4 = 60 矩阵（合并复用）
+- [ ] script `pnpm smoke`
+- [ ] 报告产出
+- [ ] CI（dev 环境本地）一键跑
 
 ## 测试方法
-- 跑全矩阵脚本；失败 issue 记录到报告
+```bash
+cd /opt/projects/zhiyu/system
+pnpm smoke
+```
 
 ## DoD
-- [ ] 4×4 = 16 个 case 全绿
+- [ ] 关键路径 100% 通过
+
+## 依赖
+- 上游：所有 app + admin 已就绪

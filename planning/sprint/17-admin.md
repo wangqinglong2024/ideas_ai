@@ -1,51 +1,32 @@
-# Sprint S17 · 管理后台（Admin）
+# Sprint S17 · 管理后台
 
-> Epic：[E17](../epics/17-admin.md) · 阶段：M3-M5 贯穿（3 阶段交付） · 优先级：P0
-> Story 数：12 · 状态：[sprint-status.yaml](./sprint-status.yaml#epic-17)
+> 顶层约束：[planning/00-rules.md](../00-rules.md)
+> Epic：[../epics/17-admin.md](../epics/17-admin.md) · 阶段：M3-M5 · 周期：W14-W22 滚动 · 优先级：P0
+> Story 数：10 · 状态：[sprint-status.yaml](./sprint-status.yaml)
 
-## Sprint 目标
-admin.zhiyu.io 全功能后台：用户 / 内容 / CMS / 订单 / 客服 / 报表 / RBAC / 审计 / Flags。
+## 目标
+分阶段交付：admin schema + login TOTP + RBAC + 应用骨架 → 用户管理 → 内容（文章 / 课程 / 小说 / 游戏 / 词包）→ 发布控制台 → 财务 / 退款 / 推荐 → 报表 / 风控 / 审计。
 
-## 三阶段交付
+## 排期（滚动 9 周）
+| 周 | Story | 验收 |
+|---|---|---|
+| W14-15 | ZY-17-01..04 admin tables/login/rbac/shell | 5 角色登录 + 菜单正确 |
+| W16-17 | ZY-17-05 user mgmt | impersonate banner 不可关 |
+| W18-19 | ZY-17-06 content articles+courses | 4 语翻译抽屉 |
+| W19-20 | ZY-17-07 content novels/games/wordpacks | 三类 CRUD |
+| W20-21 | ZY-17-08 publish console | 计划发布到点 |
+| W21 | ZY-17-09 orders/refund/referral | 退款撤 entitlement |
+| W22 | ZY-17-10 reports/flags/audit | 5 报表 ≤ 500ms |
 
-### Phase A · M3 · v1（W15-W20）
-基础登录 + RBAC + Shell + 用户 / 文章 / 课程管理。
+## 依赖与并行
+- 依赖 S01 / S03 / S18
+- 配合 S06 / S07 / S08 / S11 / S12 / S13 / S14 / S15 同期上数据
 
-| 序 | Story Key | 估 |
-|:-:|---|:-:|
-| 1 | 17-1-admin-users-roles-permissions | M |
-| 2 | 17-2-admin-login-totp | L |
-| 3 | 17-3-rbac-middleware | M |
-| 4 | 17-4-admin-app-shell | L |
-| 5 | 17-5-user-management | L |
-| 6 | 17-6-content-mgmt-articles | L |
-| 7 | 17-7-content-mgmt-courses | L |
-
-### Phase B · M4 · v2（W21-W26）
-小说 / 游戏 / 词包 / CMS 控制台 + 工厂占位。
-
-| 序 | Story Key | 估 |
-|:-:|---|:-:|
-| 8 | 17-8-content-mgmt-novels-games-wordpacks | L |
-| 9 | 17-9-cms-publish-console-factory-placeholder | L |
-
-### Phase C · M5 · v3（W27-W32）
-订单 / 退款 / 分销 / 报表 / Flags / 设置。
-
-| 序 | Story Key | 估 |
-|:-:|---|:-:|
-| 10 | 17-10-orders-refunds-referral | L |
-| 11 | 17-11-reports-bi | L |
-| 12 | 17-12-feature-flags-system-settings | M |
+## 退出标准
+- 5 角色登录 + 菜单 + 操作 + 审计 全闭环
+- 内容→发布→app 端可见
+- 财务退款链路通
 
 ## 风险
-- 后台权限错配 → 灰盒测试 + RBAC 矩阵单元测试
-- 管理员误操作 → 二次确认 + 完整审计
-
-## DoD
-- [ ] 后台全功能可用
-- [ ] RBAC 100% 覆盖路由 + UI
-- [ ] 审计日志完整 append-only
-- [ ] 报表可信
-- [ ] 退款触发 commission_reversed（联通 S14）
-- [ ] retrospective 完成
+- TOTP 设备遗失：超级管理员可重置流程
+- 大富文本性能：分块加载

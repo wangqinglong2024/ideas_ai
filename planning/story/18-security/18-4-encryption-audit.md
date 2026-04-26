@@ -1,18 +1,33 @@
-# ZY-18-04 · 数据加密 + 审计日志
+# ZY-18-04 · 加密 + 审计
 
 > Epic：E18 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 安全负责人
+**I want** 敏感字段（OTP / TOTP secret / device fingerprint）静态加密 + 关键操作审计日志
+**So that** 即便 DB 泄露关键秘密仍受保护。
+
+## 上下文
+- 加密：libsodium (sealed box) 或 node:crypto AES-256-GCM；密钥从 env `APP_ENCRYPTION_KEY`（缺失则启动失败 only in prod；dev 自动生成临时）
+- 审计：admin 所有 mutate 操作 → audit_log（接 ZY-17-01）+ 业务关键操作（退款 / 封禁 / 大额充值）
+
 ## Acceptance Criteria
-- [ ] 敏感字段（手机 / 身份证 / 银行卡）AES-GCM 加密；密钥来自 env（dev 占位）
-- [ ] supabase-storage 启用 server-side encryption（默认）
-- [ ] schema `zhiyu.audit_logs(actor_id, action, target_type, target_id, before jsonb, after jsonb, ip, ts)`
-- [ ] 后台所有写操作自动写入（middleware）
-- [ ] append-only（无 UPDATE/DELETE 权限）；保留 7 年
+- [ ] EncryptionService（encrypt/decrypt）+ migration 加密 totp_secret 等
+- [ ] AuditLogger middleware
+- [ ] 单测 + 缺 key 报错路径
+- [ ] 不可篡改 (audit_log 不允许 update/delete)
 
 ## 测试方法
-- 单元：加解密往返
-- 集成：admin 改用户 → audit_logs 出现
+```bash
+cd /opt/projects/zhiyu/system/docker
+docker compose exec zhiyu-app-be pnpm vitest run security.crypto
+```
 
 ## DoD
-- [ ] 100% 后台写操作覆盖
+- [ ] 加密往返正确
+- [ ] 审计入库
+
+## 依赖
+- 上游：ZY-17-01

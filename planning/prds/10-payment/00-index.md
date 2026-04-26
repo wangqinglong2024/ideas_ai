@@ -1,3 +1,5 @@
+> ⚠️ 本文件含历史 SaaS / 厂商命名，**以 [planning/00-rules.md](../../00-rules.md) §1.1 + [planning/00-saas-overrides.md](../../00-saas-overrides.md) 为准**。开发时按映射表取等价自托管 / Adapter 实现。
+
 # 10 · 支付（Payment · PY）
 
 > **代号**：PY | **优先级**：P0 | **核心**：Paddle MoR + LemonSqueezy 备份；多档订阅

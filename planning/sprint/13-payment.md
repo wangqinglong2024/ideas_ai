@@ -1,33 +1,31 @@
-# Sprint S13 · 支付与订阅（Payment & Subscription）
+# Sprint S13 · 支付与订阅
 
-> Epic：[E13](../epics/13-payment.md) · 阶段：M5 · 周期：W27-W30 · 优先级：P0
-> Story 数：10 · 状态：[sprint-status.yaml](./sprint-status.yaml#epic-13)
+> 顶层约束：[planning/00-rules.md](../00-rules.md)
+> Epic：[../epics/13-payment.md](../epics/13-payment.md) · 阶段：M5 · 周期：W20-W22 · 优先级：P0
+> Story 数：6 · 状态：[sprint-status.yaml](./sprint-status.yaml)
 
-## Sprint 目标
-Paddle 主 + LemonSqueezy 备的 MoR 支付；月 / 年 / 终身订阅；知语币充值；退款 + 续费 + 取消。
+## 目标
+3 周：plans+orders+entitlements；PaymentAdapter 接口 + Fake；价格页 + Checkout；订阅管理 + 优惠券；续费 + 3 天宽限；财务对账 / 退款。
 
-## Story 列表
+## 排期
+| 周 | Day | Story | 验收 |
+|---|---|---|---|
+| W20 | D1-D3 | ZY-13-01 tables | 状态机单测 |
+| W20 | D3-D5 | ZY-13-02 adapter+fake | webhook 验签 + fake-checkout 通 |
+| W21 | D6-D8 | ZY-13-03 pricing+checkout | 4 plan + 优惠券 + 端到端 |
+| W21 | D8-D10 | ZY-13-04 sub mgmt+coupon | 取消/恢复/换 plan + coupon 校验 |
+| W22 | D11-D12 | ZY-13-05 renewal+grace | active→past_due→expired |
+| W22 | D12-D15 | ZY-13-06 reconciliation+refund | daily_revenue + 退款工单 |
 
-| 序 | Story Key | 标题 | 估 | 依赖 | 周次 |
-|:-:|---|---|:-:|---|:-:|
-| 1 | 13-1-plans-subscriptions-orders-tables | 表 + 索引 + RLS | M | S01 | W27 |
-| 2 | 13-2-paddle-checkout-integration | Paddle Checkout | L | 13-1 | W27-W28 |
-| 3 | 13-3-paddle-webhook | Paddle Webhook | L | 13-2 | W28 |
-| 4 | 13-5-plan-selection-ui | 套餐选择 UI | M | 13-2,S04 | W28 |
-| 5 | 13-4-lemonsqueezy-backup | LemonSqueezy 备份 | M | 13-2 | W29 |
-| 6 | 13-6-subscription-management | 订阅管理（个人页） | L | 13-3 | W29 |
-| 7 | 13-8-coupon-system | 优惠券系统 | M | 13-2 | W29 |
-| 8 | 13-7-refund-flow | 退款流程 | M | 13-3,S12,S14 | W30 |
-| 9 | 13-9-renewal-reminders | 续费提醒 | S | 13-6 | W30 |
-| 10 | 13-10-financial-reconciliation | 财务对账 | L | 13-3,S17 | W30 |
+## 依赖与并行
+- 依赖 S03 / S12
+- 与 S12 / S14 并行
+
+## 退出标准
+- 完整 fake 支付链路
+- 退款撤回 entitlement + 通知
+- 续费宽限 3 天逻辑准确
 
 ## 风险
-- Paddle 国家限制 → LemonSqueezy 兜底自动切换
-- Webhook 延迟 / 丢失 → 主动轮询补偿（每 6h）
-
-## DoD
-- [ ] 支付链路全跑通（Paddle + LemonSqueezy 双链）
-- [ ] 退款 + 续费 + 取消 + 升降级 OK
-- [ ] 财务对账每日自动 + 差异告警
-- [ ] 退款触发 commission_reversed（联通 S14）
-- [ ] retrospective 完成
+- 真实支付供应商 dev 不接：保 Adapter 接口稳定
+- 退款不可逆：双人复核可选

@@ -1,3 +1,5 @@
+> ⚠️ 本文件含历史 SaaS / 厂商命名，**以 [planning/00-rules.md](../../00-rules.md) §1.1 + [planning/00-saas-overrides.md](../../00-saas-overrides.md) 为准**。开发时按映射表取等价自托管 / Adapter 实现。
+
 # 14.1 · 内容工厂 · 功能需求
 
 ## CF-FR-001：工作流定义

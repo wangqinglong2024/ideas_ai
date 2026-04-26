@@ -1,343 +1,289 @@
-# generated: 2026-04-25
-# last_updated: 2026-04-25  # E10/E11/E12/E16/E17/E18/E19/E20 stories created
-# project: ideas_ai (知语 Zhiyu)
-# project_key: ZY
+# 知语 Zhiyu · sprint status
 # tracking_system: file-system
+# project: zhiyu
+# project_key: ZY
 # story_location: planning/story
-
-# STATUS DEFINITIONS:
-# ==================
-# Epic Status:
-#   - backlog: Epic not yet started
-#   - in-progress: Epic actively being worked on
-#   - done: All stories in epic completed
-#
-# Epic Status Transitions:
-#   - backlog → in-progress: Automatically when first story is created (via create-story)
-#   - in-progress → done: Manually when all stories reach 'done' status
-#
-# Story Status:
-#   - backlog: Story only exists in epic file
-#   - ready-for-dev: Story file created in stories folder
-#   - in-progress: Developer actively working on implementation
-#   - review: Ready for code review (via Dev's code-review workflow)
-#   - done: Story completed
-#
-# Retrospective Status:
-#   - optional: Can be completed but not required
-#   - done: Retrospective has been completed
-#
-# WORKFLOW NOTES:
-# ===============
-# - Epic transitions to 'in-progress' automatically when first story is created
-# - Stories can be worked in parallel if team capacity allows
-# - Developer typically creates next story after previous one is 'done' to incorporate learnings
-# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+# epic_location: planning/epics
+# sprint_location: planning/sprint
+# top_constraint: planning/00-rules.md
 
 generated: 2026-04-25
-last_updated: 2026-04-26  # WAVE 1 rewrite: E01 重写为 6 story (Docker-only)；E02-E20 为旧版，待 Wave 2-3 重写
-project: zhiyu
-project_key: ZY
-tracking_system: file-system
-story_location: planning/story
-top_constraint: planning/00-rules.md
+last_updated: 2026-04-26
+total_stories: 146
 notes: |
-  - Wave 1 (本次)：00-rules / spec/00-01-02-08-10 / E01 完成重写。
-  - Wave 2-3：E02-E20 epic + story + sprint 待按 00-rules 重写
-    （移除 Cloudflare/Render/Doppler/Sentry/PostHog/Better Stack/Dify 等关键词，
-     story 数量按需出而非硬凑 10）。
-  - 旧 E02-E20 条目保留作变更基准；正式开发前必须替换。
+  - 全部 20 个 epic 的 story 已展开为 ready-for-dev（含 SQL DDL / API 契约 / Docker 验收命令）。
+  - sprint 文件统一改写为编年格式，对齐 story 编号。
+  - 下一阶段：E03 dev (bmad-dev-story) → code-review → MCP 浏览器测试 + retrospective。
 
-development_status:
-  # ===== E01 Platform Foundation (M0) — WAVE 1 已重写 =====
-  epic-1: in-progress
-  1-1-init-monorepo: ready-for-dev
-  1-2-code-style-hooks: ready-for-dev
-  1-3-docker-compose-dev: ready-for-dev
-  1-4-secrets-zod: ready-for-dev
-  1-5-supabase-init: ready-for-dev
-  1-6-redis-bullmq-health-logs: ready-for-dev
-  epic-1-retrospective: optional
+epics:
 
-  # ===== E02 Design System (M0) =====
-  epic-2: in-progress
-  2-1-design-tokens: ready-for-dev
-  2-2-tailwind-v4-config: ready-for-dev
-  2-3-glassmorphism-css: ready-for-dev
-  2-4-theme-switching: ready-for-dev
-  2-5-fonts-typography: ready-for-dev
-  2-6-core-components: ready-for-dev
-  2-7-feedback-components: ready-for-dev
-  2-8-layout-components: ready-for-dev
-  2-9-microinteractions: ready-for-dev
-  2-10-storybook-visual-regression: ready-for-dev
-  epic-2-retrospective: optional
+  - id: E01
+    name: 平台基础与 DevOps
+    status: ready-for-dev
+    sprint: S01
+    story_count: 6
+    stories:
+      - { id: ZY-01-01, title: 初始化 monorepo 与 Turborepo,            status: ready-for-dev }
+      - { id: ZY-01-02, title: 代码规范与 git hooks,                     status: ready-for-dev }
+      - { id: ZY-01-03, title: docker-compose 一键开发环境,              status: ready-for-dev }
+      - { id: ZY-01-04, title: Secrets 与 zod env 校验,                  status: ready-for-dev }
+      - { id: ZY-01-05, title: Supabase self-hosted 初始化,              status: ready-for-dev }
+      - { id: ZY-01-06, title: Redis + BullMQ + healthz/metrics + 日志,  status: ready-for-dev }
 
-  # ===== E03 User Account (M1) =====
-  epic-3: in-progress
-  3-1-users-sessions-tables: ready-for-dev
-  3-2-register-email-verification: ready-for-dev
-  3-3-login-jwt: ready-for-dev
-  3-4-oauth-google-apple: ready-for-dev
-  3-5-forgot-password: ready-for-dev
-  3-6-profile-avatar: ready-for-dev
-  3-7-settings-center: ready-for-dev
-  3-8-device-session-management: ready-for-dev
-  3-9-account-deletion-gdpr: ready-for-dev
-  3-10-account-frontend-pages: ready-for-dev
-  epic-3-retrospective: optional
+  - id: E02
+    name: 设计系统与 UI 工具库
+    status: ready-for-dev
+    sprint: S02
+    story_count: 7
+    stories:
+      - { id: ZY-02-01, title: design-tokens 包,                          status: ready-for-dev }
+      - { id: ZY-02-02, title: Tailwind v4 玻璃化 preset,                 status: ready-for-dev }
+      - { id: ZY-02-03, title: 主题切换无 FOUC,                           status: ready-for-dev }
+      - { id: ZY-02-04, title: 自托管字体子集,                            status: ready-for-dev }
+      - { id: ZY-02-05, title: 核心组件,                                  status: ready-for-dev }
+      - { id: ZY-02-06, title: 反馈与布局组件,                            status: ready-for-dev }
+      - { id: ZY-02-07, title: Storybook 内部站,                          status: ready-for-dev }
 
-  # ===== E04 i18n (M1) =====
-  epic-4: in-progress
-  4-1-i18next-integration: ready-for-dev
-  4-2-four-language-resources: ready-for-dev
-  4-3-icu-message-format: ready-for-dev
-  4-4-fonts-by-language: ready-for-dev
-  4-5-number-date-currency: ready-for-dev
-  4-6-content-translations-api: ready-for-dev
-  4-7-translation-admin: ready-for-dev
-  4-8-translation-import-export: ready-for-dev
-  4-9-rtl-readiness: ready-for-dev
-  4-10-translation-quality-monitor: ready-for-dev
-  epic-4-retrospective: optional
+  - id: E03
+    name: 用户账户体系
+    status: ready-for-dev
+    sprint: S03
+    story_count: 6
+    stories:
+      - { id: ZY-03-01, title: profiles + RLS + handle_new_user,          status: ready-for-dev }
+      - { id: ZY-03-02, title: OTP 注册 + 限频,                            status: ready-for-dev }
+      - { id: ZY-03-03, title: 密码 + OAuth + 重置 + 5 失败 15 分锁,      status: ready-for-dev }
+      - { id: ZY-03-04, title: 资料 / 头像 / 用户名,                       status: ready-for-dev }
+      - { id: ZY-03-05, title: user_settings + 会话列表撤销,               status: ready-for-dev }
+      - { id: ZY-03-06, title: GDPR 导出 + 30 日延迟删除,                 status: ready-for-dev }
 
-  # ===== E05 App Shell (M1) =====
-  epic-5: in-progress
-  5-1-pwa-manifest-icons: ready-for-dev
-  5-2-service-worker: ready-for-dev
-  5-3-tanstack-router: ready-for-dev
-  5-4-tanstack-query: ready-for-dev
-  5-5-bottom-navigation: ready-for-dev
-  5-6-top-bar-search: ready-for-dev
-  5-7-global-search-modal: ready-for-dev
-  5-8-discover-skeleton: ready-for-dev
-  5-9-notification-center: ready-for-dev
-  5-10-app-responsive-container: ready-for-dev
-  epic-5-retrospective: optional
+  - id: E04
+    name: 国际化与本地化
+    status: ready-for-dev
+    sprint: S04
+    story_count: 5
+    stories:
+      - { id: ZY-04-01, title: i18next 4 语 namespaces,                   status: ready-for-dev }
+      - { id: ZY-04-02, title: ICU formatters,                            status: ready-for-dev }
+      - { id: ZY-04-03, title: 按语言加载字体,                            status: ready-for-dev }
+      - { id: ZY-04-04, title: content_translations EAV + LRU,            status: ready-for-dev }
+      - { id: ZY-04-05, title: 硬编码 / RTL lint,                         status: ready-for-dev }
 
-  # ===== E06 Discover China (M2) =====
-  epic-6: in-progress
-  6-1-categories-articles-tables: ready-for-dev
-  6-2-articles-list-page: ready-for-dev
-  6-3-article-detail-immersive: ready-for-dev
-  6-4-sentence-audio-player: ready-for-dev
-  6-5-character-popup: ready-for-dev
-  6-6-favorites-notes: ready-for-dev
-  6-7-reading-progress-time: ready-for-dev
-  6-8-multilingual-toggle: ready-for-dev
-  6-9-article-fulltext-search: ready-for-dev
-  6-10-mobile-desktop-optimization: ready-for-dev
-  epic-6-retrospective: optional
+  - id: E05
+    name: 应用骨架与导航
+    status: ready-for-dev
+    sprint: S05
+    story_count: 6
+    stories:
+      - { id: ZY-05-01, title: PWA 离线策略,                              status: ready-for-dev }
+      - { id: ZY-05-02, title: TanStack Router + Query persister,         status: ready-for-dev }
+      - { id: ZY-05-03, title: BottomNav + TopBar + SideNav,              status: ready-for-dev }
+      - { id: ZY-05-04, title: cmdk 命令面板,                             status: ready-for-dev }
+      - { id: ZY-05-05, title: SSR-lite 首屏,                             status: ready-for-dev }
+      - { id: ZY-05-06, title: 通知中心 supabase-realtime,                status: ready-for-dev }
 
-  # ===== E07 Learning Engine (M2) =====
-  epic-7: in-progress
-  7-1-enrollments-progress-mistakes-tables: ready-for-dev
-  7-2-course-enrollment-api: ready-for-dev
-  7-3-step-progression-api: ready-for-dev
-  7-4-lesson-completion-settlement: ready-for-dev
-  7-5-srs-review-engine: ready-for-dev
-  7-6-vocabulary-book: ready-for-dev
-  7-7-mistake-book: ready-for-dev
-  7-8-xp-and-levels: ready-for-dev
-  7-9-streak-system: ready-for-dev
-  7-10-hsk-self-assessment: ready-for-dev
-  7-11-hsk-auto-assessment-stub: ready-for-dev
-  7-12-personal-learning-dashboard: ready-for-dev
-  epic-7-retrospective: optional
+  - id: E06
+    name: 中国发现
+    status: ready-for-dev
+    sprint: S06
+    story_count: 6
+    stories:
+      - { id: ZY-06-01, title: 12 类目 + articles 表 + RLS,                status: ready-for-dev }
+      - { id: ZY-06-02, title: 列表 keyset 无限加载,                      status: ready-for-dev }
+      - { id: ZY-06-03, title: 沉浸阅读器 拼音 + TTS,                     status: ready-for-dev }
+      - { id: ZY-06-04, title: 点字弹窗 + 收藏,                           status: ready-for-dev }
+      - { id: ZY-06-05, title: 阅读进度 + i18n 字幕,                       status: ready-for-dev }
+      - { id: ZY-06-06, title: pg_jieba FTS + 拼音 tsvector,              status: ready-for-dev }
 
-  # ===== E08 Courses (M3) =====
-  epic-8: in-progress
-  8-1-course-tables-migration: ready-for-dev
-  8-2-step-type-spec: ready-for-dev
-  8-3-courses-list-detail-api: ready-for-dev
-  8-4-lesson-learning-api: ready-for-dev
-  8-5-courses-list-page: ready-for-dev
-  8-6-stage-detail-page: ready-for-dev
-  8-7-lesson-learning-page: ready-for-dev
-  8-8-ten-step-components: ready-for-dev
-  8-9-lesson-completion-screen: ready-for-dev
-  8-10-paywall-lesson-level: ready-for-dev
-  epic-8-retrospective: optional
+  - id: E07
+    name: 学习引擎
+    status: ready-for-dev
+    sprint: S07
+    story_count: 7
+    stories:
+      - { id: ZY-07-01, title: enrollments + lesson_progress 表,           status: ready-for-dev }
+      - { id: ZY-07-02, title: LessonEngine 10-step 状态机,                status: ready-for-dev }
+      - { id: ZY-07-03, title: SM-2 SRS,                                   status: ready-for-dev }
+      - { id: ZY-07-04, title: mistake_log + wordbook,                     status: ready-for-dev }
+      - { id: ZY-07-05, title: user_progression + xp_log + streak,         status: ready-for-dev }
+      - { id: ZY-07-06, title: HSK 30Q 自评,                               status: ready-for-dev }
+      - { id: ZY-07-07, title: 6 卡 dashboard 聚合,                        status: ready-for-dev }
 
-  # ===== E09 Game Engine (M3 · MVP 优先) =====
-  epic-9: in-progress
-  # MVP 子集 (W15-W16)
-  9-1-game-engine-package-skeleton: ready-for-dev
-  9-2-pixijs-application-wrapper: ready-for-dev
-  9-3-scene-manager-mvp: ready-for-dev
-  9-4-asset-loader-mvp: ready-for-dev
-  9-5-input-manager-mvp: ready-for-dev
-  9-9-landscape-fullscreen: ready-for-dev
-  # V1 增强 (W17-W18)
-  9-11-input-manager-v1: ready-for-dev
-  9-6-audio-manager: ready-for-dev
-  9-7-physics-world: ready-for-dev
-  9-8-wordpack-pinyin-renderer: ready-for-dev
-  9-10-analytics-leaderboard: ready-for-dev
-  epic-9-retrospective: optional
+  - id: E08
+    name: 课程模块
+    status: ready-for-dev
+    sprint: S08
+    story_count: 6
+    stories:
+      - { id: ZY-08-01, title: courses+lessons schema + steps zod,         status: ready-for-dev }
+      - { id: ZY-08-02, title: REST API + openapi,                         status: ready-for-dev }
+      - { id: ZY-08-03, title: 三层路由 list/stage/detail,                 status: ready-for-dev }
+      - { id: ZY-08-04, title: 课时学习页 离线 + 批量回传,                 status: ready-for-dev }
+      - { id: ZY-08-05, title: 10 step 组件 + hanzi-writer,                status: ready-for-dev }
+      - { id: ZY-08-06, title: 完成庆祝 + paywall 三路径,                  status: ready-for-dev }
 
-  # ===== E10 Games (12 款 · MVP 单阶段) =====
-  epic-10: in-progress
-  # 通用基础设施 A
-  10-a1-games-hub-entry: ready-for-dev
-  10-a2-wordpack-selector: ready-for-dev
-  10-a3-landscape-force: ready-for-dev
-  # 12 款游戏 MVP
-  10-g1-pinyin-shooter: ready-for-dev
-  10-g2-tone-bubbles: ready-for-dev
-  10-g3-whack-hanzi: ready-for-dev
-  10-g4-hanzi-match3: ready-for-dev
-  10-g5-memory-match: ready-for-dev
-  10-g6-hanzi-ninja: ready-for-dev
-  10-g7-hanzi-tetris: ready-for-dev
-  10-g8-pinyin-defense: ready-for-dev
-  10-g9-hanzi-snake: ready-for-dev
-  10-g10-hanzi-rhythm: ready-for-dev
-  10-g11-hanzi-runner: ready-for-dev
-  10-g12-hanzi-slingshot: ready-for-dev
-  epic-10-retrospective: optional
+  - id: E09
+    name: 游戏引擎共享层
+    status: ready-for-dev
+    sprint: S09
+    story_count: 11
+    stories:
+      - { id: ZY-09-01,    title: Engine skeleton + tick,                    status: ready-for-dev }
+      - { id: ZY-09-02,    title: PixiRenderer,                              status: ready-for-dev }
+      - { id: ZY-09-03,    title: SceneManager,                              status: ready-for-dev }
+      - { id: ZY-09-04,    title: AssetLoader,                               status: ready-for-dev }
+      - { id: ZY-09-05,    title: KeyboardInput,                             status: ready-for-dev }
+      - { id: ZY-09-05-v1, title: TouchInput 5 手势,                         status: ready-for-dev }
+      - { id: ZY-09-06,    title: AudioManager Howler,                       status: ready-for-dev }
+      - { id: ZY-09-07,    title: PhysicsWorld Matter.js,                    status: ready-for-dev }
+      - { id: ZY-09-08,    title: WordPack + pinyin index,                   status: ready-for-dev }
+      - { id: ZY-09-09,    title: 横屏全屏 + safe-area,                      status: ready-for-dev }
+      - { id: ZY-09-10,    title: leaderboard + game_runs + realtime,        status: ready-for-dev }
 
-  # ===== E11 Novels (M4) =====
-  epic-11: in-progress
-  11-1-novels-tables: ready-for-dev
-  11-2-novels-list-detail-api: ready-for-dev
-  11-3-chapter-content-paywall-api: ready-for-dev
-  11-4-novels-bookshelf-page: ready-for-dev
-  11-5-novel-detail-page: ready-for-dev
-  11-6-chapter-reader: ready-for-dev
-  11-7-chapter-unlock-payment: ready-for-dev
-  11-8-update-notifications: ready-for-dev
-  11-9-reading-preferences: ready-for-dev
-  11-10-five-launch-novels-content: ready-for-dev
-  epic-11-retrospective: optional
+  - id: E10
+    name: 12 款游戏
+    status: ready-for-dev
+    sprint: S10
+    story_count: 15
+    stories: [] # 详见 planning/story/10-games/
 
-  # ===== E12 Economy (M5) =====
-  epic-12: in-progress
-  12-1-coins-balances-ledger-tables: ready-for-dev
-  12-2-earning-rules-engine: ready-for-dev
-  12-3-spend-api-idempotency: ready-for-dev
-  12-4-recharge-flow: ready-for-dev
-  12-5-shop-items-api: ready-for-dev
-  12-6-shop-page: ready-for-dev
-  12-7-ledger-personal-page: ready-for-dev
-  12-8-seven-day-checkin: ready-for-dev
-  12-9-admin-rule-config: ready-for-dev
-  12-10-anti-cheat: ready-for-dev
-  epic-12-retrospective: optional
+  - id: E11
+    name: 小说阅读
+    status: ready-for-dev
+    sprint: S11
+    story_count: 6
+    stories:
+      - { id: ZY-11-01, title: novels+chapters schema + API,               status: ready-for-dev }
+      - { id: ZY-11-02, title: 列表 / 类型筛选,                            status: ready-for-dev }
+      - { id: ZY-11-03, title: 详情 + 目录,                                status: ready-for-dev }
+      - { id: ZY-11-04, title: 沉浸式 reader,                              status: ready-for-dev }
+      - { id: ZY-11-05, title: ZC/VIP/自动订阅 三路径解锁,                 status: ready-for-dev }
+      - { id: ZY-11-06, title: 书架 + TTS + 推荐,                          status: ready-for-dev }
 
-  # ===== E13 Payment (M5) =====
-  epic-13: in-progress
-  13-1-plans-subscriptions-orders-tables: ready-for-dev
-  13-2-paddle-checkout-integration: ready-for-dev
-  13-3-paddle-webhook: ready-for-dev
-  13-4-lemonsqueezy-backup: ready-for-dev
-  13-5-plan-selection-ui: ready-for-dev
-  13-6-subscription-management: ready-for-dev
-  13-7-refund-flow: ready-for-dev
-  13-8-coupon-system: ready-for-dev
-  13-9-renewal-reminders: ready-for-dev
-  13-10-financial-reconciliation: ready-for-dev
-  epic-13-retrospective: optional
+  - id: E12
+    name: 知语币与商城
+    status: ready-for-dev
+    sprint: S12
+    story_count: 8
+    stories:
+      - { id: ZY-12-01, title: wallets + coin_ledger,                       status: ready-for-dev }
+      - { id: ZY-12-02, title: 7 类获取规则,                                status: ready-for-dev }
+      - { id: ZY-12-03, title: spend API 幂等 + 5 hooks,                    status: ready-for-dev }
+      - { id: ZY-12-04, title: 充值 fake adapter,                           status: ready-for-dev }
+      - { id: ZY-12-05, title: shop_items + user_inventory,                 status: ready-for-dev }
+      - { id: ZY-12-06, title: 商城 + 钱包页 + 流水,                        status: ready-for-dev }
+      - { id: ZY-12-07, title: 7 日打卡,                                    status: ready-for-dev }
+      - { id: ZY-12-08, title: 反作弊 fraud_signals,                        status: ready-for-dev }
 
-  # ===== E14 Referral (M5-M6) =====
-  epic-14: in-progress
-  14-1-referral-tables-rls: ready-for-dev
-  14-2-invitation-code-generation: ready-for-dev
-  14-3-share-link-asset-center: ready-for-dev
-  14-4-referral-landing-page: ready-for-dev
-  14-5-parent-binding-anti-cheat: ready-for-dev
-  14-6-commission-calc-webhook: ready-for-dev
-  14-7-fourteen-day-confirmation-cron: ready-for-dev
-  14-8-refund-commission-reverse: ready-for-dev
-  14-9-referral-dashboard: ready-for-dev
-  14-10-anti-cheat-monitoring: ready-for-dev
-  14-11-notifications-leaderboard: ready-for-dev
-  epic-14-retrospective: optional
+  - id: E13
+    name: 支付与订阅
+    status: ready-for-dev
+    sprint: S13
+    story_count: 6
+    stories:
+      - { id: ZY-13-01, title: plans + orders + entitlements,               status: ready-for-dev }
+      - { id: ZY-13-02, title: PaymentAdapter + Fake + webhook,             status: ready-for-dev }
+      - { id: ZY-13-03, title: 价格页 + Checkout,                           status: ready-for-dev }
+      - { id: ZY-13-04, title: 订阅管理 + coupons,                          status: ready-for-dev }
+      - { id: ZY-13-05, title: 续费 cron + 3 天宽限,                        status: ready-for-dev }
+      - { id: ZY-13-06, title: 财务对账 + 退款工单,                         status: ready-for-dev }
 
-  # ===== E15 Customer Service (M6) =====
-  epic-15: in-progress
-  15-1-cs-tables-rls: ready-for-dev
-  15-2-websocket-gateway: ready-for-dev
-  15-3-agent-dispatch-service: ready-for-dev
-  15-4-user-im-ui: ready-for-dev
-  15-5-agent-im-workbench: ready-for-dev
-  15-6-ticket-flow: ready-for-dev
-  15-7-faq-self-service: ready-for-dev
-  15-8-ai-assist-v1: ready-for-dev
-  15-9-offline-fallback-email: ready-for-dev
-  15-10-cs-sla-dashboard: ready-for-dev
-  epic-15-retrospective: optional
+  - id: E14
+    name: 分销系统
+    status: ready-for-dev
+    sprint: S14
+    story_count: 9
+    stories:
+      - { id: ZY-14-01, title: referral 三表 + RLS,                         status: ready-for-dev }
+      - { id: ZY-14-02, title: 邀请码生成,                                  status: ready-for-dev }
+      - { id: ZY-14-03, title: 分享链接 + 海报,                             status: ready-for-dev }
+      - { id: ZY-14-04, title: 落地页 + cookie 30 日,                       status: ready-for-dev }
+      - { id: ZY-14-05, title: 绑定父子 + 反作弊,                           status: ready-for-dev }
+      - { id: ZY-14-06, title: 佣金计算 4 规则,                             status: ready-for-dev }
+      - { id: ZY-14-07, title: 7 日确认 cron + 退款冲销,                    status: ready-for-dev }
+      - { id: ZY-14-08, title: 用户分销 dashboard,                          status: ready-for-dev }
+      - { id: ZY-14-09, title: 反作弊后台,                                  status: ready-for-dev }
 
-  # ===== E16 Content Factory (v1.5 推迟，不在 v1 调度池) =====
-  epic-16: backlog
-  16-1-prompt-templates-admin: ready-for-dev
-  16-2-langgraph-checkpointer: ready-for-dev
-  16-3-anthropic-deepseek-clients: ready-for-dev
-  16-4-article-generation-flow: ready-for-dev
-  16-5-lesson-generation-flow: ready-for-dev
-  16-6-novel-chapter-generation-flow: ready-for-dev
-  16-7-wordpack-generation-flow: ready-for-dev
-  16-8-deepseek-tts: ready-for-dev
-  16-9-translation-node-five-langs: ready-for-dev
-  16-10-auto-evaluator: ready-for-dev
-  16-11-human-review-ui: ready-for-dev
-  16-12-cost-quality-dashboard: ready-for-dev
-  epic-16-retrospective: optional
+  - id: E15
+    name: 客服 IM 与工单
+    status: ready-for-dev
+    sprint: S15
+    story_count: 7
+    stories:
+      - { id: ZY-15-01, title: cs_conversations / messages / tickets,       status: ready-for-dev }
+      - { id: ZY-15-02, title: realtime 分发,                               status: ready-for-dev }
+      - { id: ZY-15-03, title: 用户 IM UI,                                  status: ready-for-dev }
+      - { id: ZY-15-04, title: 客服工作台,                                  status: ready-for-dev }
+      - { id: ZY-15-05, title: 工单 CRUD + 状态机,                          status: ready-for-dev }
+      - { id: ZY-15-06, title: FAQ + AI fake responder,                     status: ready-for-dev }
+      - { id: ZY-15-07, title: SLA 看板 + 5 min 转工单,                     status: ready-for-dev }
 
-  # ===== E17 Admin (M3-M5) =====
-  epic-17: in-progress
-  17-1-admin-users-roles-permissions: ready-for-dev
-  17-2-admin-login-totp: ready-for-dev
-  17-3-rbac-middleware: ready-for-dev
-  17-4-admin-app-shell: ready-for-dev
-  17-5-user-management: ready-for-dev
-  17-6-content-mgmt-articles: ready-for-dev
-  17-7-content-mgmt-courses: ready-for-dev
-  17-8-content-mgmt-novels-games-wordpacks: ready-for-dev
-  17-9-cms-publish-console-factory-placeholder: ready-for-dev
-  17-10-orders-refunds-referral: ready-for-dev
-  17-11-reports-bi: ready-for-dev
-  17-12-feature-flags-system-settings: ready-for-dev
-  epic-17-retrospective: optional
+  - id: E16
+    name: 内容工厂（占位 + Adapter）
+    status: ready-for-dev
+    sprint: S16
+    story_count: 3
+    stories:
+      - { id: ZY-16-01, title: gen_jobs + LLMAdapter Fake,                  status: ready-for-dev }
+      - { id: ZY-16-02, title: admin 占位页,                                status: ready-for-dev }
+      - { id: ZY-16-03, title: 批量导入 CLI / admin 工具,                   status: ready-for-dev }
 
-  # ===== E18 Security (M0-M6) =====
-  epic-18: in-progress
-  18-1-password-token-baseline: ready-for-dev
-  18-2-input-validation-rate-limit: ready-for-dev
-  18-3-security-http-headers: ready-for-dev
-  18-4-data-encryption: ready-for-dev
-  18-5-audit-logs: ready-for-dev
-  18-6-privacy-tos: ready-for-dev
-  18-7-data-export-delete-gdpr: ready-for-dev
-  18-8-vuln-scanning-deps: ready-for-dev
-  18-9-waf-bot-protection: ready-for-dev
-  18-10-incident-response: ready-for-dev
-  epic-18-retrospective: optional
+  - id: E17
+    name: 管理后台
+    status: ready-for-dev
+    sprint: S17
+    story_count: 10
+    stories:
+      - { id: ZY-17-01, title: admin schema + RBAC 表,                      status: ready-for-dev }
+      - { id: ZY-17-02, title: admin login + TOTP,                          status: ready-for-dev }
+      - { id: ZY-17-03, title: RBAC 中间件,                                 status: ready-for-dev }
+      - { id: ZY-17-04, title: admin 应用骨架,                              status: ready-for-dev }
+      - { id: ZY-17-05, title: 用户管理 + impersonate,                      status: ready-for-dev }
+      - { id: ZY-17-06, title: 内容 articles + courses,                     status: ready-for-dev }
+      - { id: ZY-17-07, title: 内容 novels / games / wordpacks,             status: ready-for-dev }
+      - { id: ZY-17-08, title: 发布控制台,                                  status: ready-for-dev }
+      - { id: ZY-17-09, title: 订单 / 退款 / 推荐,                          status: ready-for-dev }
+      - { id: ZY-17-10, title: 报表 / 风控 / 审计,                          status: ready-for-dev }
 
-  # ===== E19 Observability (M0-M6) =====
-  epic-19: in-progress
-  19-1-pino-logging-betterstack: ready-for-dev
-  19-2-sentry-fe-be-integration: ready-for-dev
-  19-3-posthog-event-tracking: ready-for-dev
-  19-4-health-ready-metrics: ready-for-dev
-  19-5-business-metrics-dashboard: ready-for-dev
-  19-6-alerts-rules-channels: ready-for-dev
-  19-7-status-page: ready-for-dev
-  19-8-web-vitals-rum: ready-for-dev
-  19-9-backup-recovery-drill: ready-for-dev
-  19-10-deployment-events-postmortem: ready-for-dev
-  epic-19-retrospective: optional
+  - id: E18
+    name: 安全与合规
+    status: ready-for-dev
+    sprint: S18
+    story_count: 8
+    stories:
+      - { id: ZY-18-01, title: argon2id + token rotate,                     status: ready-for-dev }
+      - { id: ZY-18-02, title: zod + redis-lua ratelimit,                   status: ready-for-dev }
+      - { id: ZY-18-03, title: helmet + CSP + cookie 安全位,                status: ready-for-dev }
+      - { id: ZY-18-04, title: encryption + audit_log,                      status: ready-for-dev }
+      - { id: ZY-18-05, title: 隐私 / TOS 4 语,                             status: ready-for-dev }
+      - { id: ZY-18-06, title: GDPR 导出 / 删除（执行实现归 E03 已做）,    status: ready-for-dev }
+      - { id: ZY-18-07, title: 漏洞扫描,                                    status: ready-for-dev }
+      - { id: ZY-18-08, title: WAF 替代 + 4 runbook,                        status: ready-for-dev }
 
-  # ===== E20 Launch (M6) =====
-  epic-20: in-progress
-  20-1-marketing-site: ready-for-dev
-  20-2-seo-optimization: ready-for-dev
-  20-3-app-store-pwa-twa: ready-for-dev
-  20-4-cross-platform-smoke-tests: ready-for-dev
-  20-5-canary-release: ready-for-dev
-  20-6-growth-pixels-integration: ready-for-dev
-  20-7-launch-campaign: ready-for-dev
-  20-8-cs-knowledge-base-training: ready-for-dev
-  20-9-legal-compliance-review: ready-for-dev
-  20-10-launch-day-postmortem: ready-for-dev
-  epic-20-retrospective: optional
+  - id: E19
+    name: 可观测与运维
+    status: ready-for-dev
+    sprint: S19
+    story_count: 8
+    stories:
+      - { id: ZY-19-01, title: pino 结构化日志,                             status: ready-for-dev }
+      - { id: ZY-19-02, title: error_events,                                status: ready-for-dev }
+      - { id: ZY-19-03, title: events SDK + 月分区,                         status: ready-for-dev }
+      - { id: ZY-19-04, title: healthz + prom-client metrics,               status: ready-for-dev }
+      - { id: ZY-19-05, title: business dashboard 5 接口,                   status: ready-for-dev }
+      - { id: ZY-19-06, title: alerts 表 + 抑制策略,                        status: ready-for-dev }
+      - { id: ZY-19-07, title: web vitals RUM,                              status: ready-for-dev }
+      - { id: ZY-19-08, title: 备份与月度演练,                              status: ready-for-dev }
+
+  - id: E20
+    name: 上线与发布
+    status: ready-for-dev
+    sprint: S20
+    story_count: 6
+    stories:
+      - { id: ZY-20-01, title: 营销站,                                      status: ready-for-dev }
+      - { id: ZY-20-02, title: 跨平台冒烟 5×3×4,                            status: ready-for-dev }
+      - { id: ZY-20-03, title: PixelAdapter 占位,                           status: ready-for-dev }
+      - { id: ZY-20-04, title: 启动活动 3 套,                               status: ready-for-dev }
+      - { id: ZY-20-05, title: 客服知识库 ≥ 20 篇,                          status: ready-for-dev }
+      - { id: ZY-20-06, title: 法务清单 + D-7/D-1/D-Day,                    status: ready-for-dev }

@@ -1,33 +1,31 @@
-# Sprint S15 · 客服 IM 与工单（Customer Service）
+# Sprint S15 · 客服 IM 与工单
 
-> Epic：[E15](../epics/15-customer-service.md) · 阶段：M6 · 周期：W33-W36 · 优先级：P0
-> Story 数：10 · 状态：[sprint-status.yaml](./sprint-status.yaml#epic-15)
+> 顶层约束：[planning/00-rules.md](../00-rules.md)
+> Epic：[../epics/15-customer-service.md](../epics/15-customer-service.md) · 阶段：M6 · 周期：W23-W26 · 优先级：P0
+> Story 数：7 · 状态：[sprint-status.yaml](./sprint-status.yaml)
 
-## Sprint 目标
-内嵌 IM 客服 + 工单系统 + FAQ；多客服派单；离线邮件兜底。
+## 目标
+4 周：cs_conversations / messages / tickets 表；realtime 分发；用户 IM UI；客服工作台；工单 CRUD；FAQ + AI fake；SLA 看板 + 离线兜底。
 
-## Story 列表
+## 排期
+| 周 | Day | Story | 验收 |
+|---|---|---|---|
+| W23 | D1-D3 | ZY-15-01 tables+RLS | sla_due_at 自动 |
+| W23 | D3-D5 | ZY-15-02 realtime | < 500ms 延迟 |
+| W24 | D6-D8 | ZY-15-03 user IM UI | 文本+图片+历史 |
+| W24 | D8-D10 | ZY-15-04 workbench | claim 唯一 + 模板 |
+| W25 | D11-D13 | ZY-15-05 ticket flow | 状态机 + 通知 |
+| W25 | D13-D15 | ZY-15-06 FAQ+AI fake | 三轮转人工 |
+| W26 | D16-D20 | ZY-15-07 SLA+offline | 5 min 转工单 + 看板 |
 
-| 序 | Story Key | 标题 | 估 | 依赖 | 周次 |
-|:-:|---|---|:-:|---|:-:|
-| 1 | 15-1-cs-tables-rls | 表 + RLS | M | S01 | W33 |
-| 2 | 15-2-websocket-gateway | WS 网关（Socket.io+Redis） | L | S01,15-1 | W33-W34 |
-| 3 | 15-3-agent-dispatch-service | 派单服务 + 转接 | L | 15-2 | W34 |
-| 4 | 15-4-user-im-ui | 用户端 IM UI | L | 15-2,S05 | W34-W35 |
-| 5 | 15-5-agent-im-workbench | 客服后台工作台 | L | 15-2,S17 | W35 |
-| 6 | 15-6-ticket-flow | 工单流（提交 / 分类 / 派单） | M | 15-1 | W35 |
-| 7 | 15-7-faq-self-service | FAQ 自助 | M | 15-1,S04 | W35 |
-| 8 | 15-9-offline-fallback-email | 离线邮件兜底 | S | 15-3 | W36 |
-| 9 | 15-8-ai-assist-v1 | AI 辅助（FAQ 匹配 + 建议） | M | 15-7 | W36 |
-| 10 | 15-10-cs-sla-dashboard | SLA 仪表板 | M | 15-3,S19 | W36 |
+## 依赖与并行
+- 依赖 S03 / S05 / S17
+- 下游：S20
+
+## 退出标准
+- 双窗口 IM 实时
+- SLA 看板数字准确
 
 ## 风险
-- 客服资源不足 → AI 辅助 + FAQ 引导优先
-- 多语客服培训 → 内部知识库 4+1 语
-
-## DoD
-- [ ] IM 实时通畅（P95 < 500ms）
-- [ ] 派单 + 转接 + 升级 OK
-- [ ] FAQ 命中率 ≥ 60%（首月数据）
-- [ ] SLA 监控（响应 / 时长 / 满意度）
-- [ ] retrospective 完成
+- LLM key 缺：fake responder
+- 实时连接：监控 supabase-realtime 容器

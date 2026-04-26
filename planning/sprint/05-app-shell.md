@@ -1,39 +1,31 @@
-# Sprint S05 · 应用骨架与导航（App Shell）
+# Sprint S05 · 应用骨架与导航
 
-> Epic：[E05](../epics/05-app-shell.md) · 阶段：M1 · 周期：W6-W8 · 优先级：P0
-> Story 数：10 · 状态：[sprint-status.yaml](./sprint-status.yaml#epic-5)
+> 顶层约束：[planning/00-rules.md](../00-rules.md)
+> Epic：[../epics/05-app-shell.md](../epics/05-app-shell.md) · 阶段：M1 · 周期：W6-W8 · 优先级：P0
+> Story 数：6 · 状态：[sprint-status.yaml](./sprint-status.yaml)
 
-## Sprint 目标
-PWA 骨架、TanStack Router 路由、底部导航、顶栏、首屏发现页框架与离线兜底。
+## 目标
+3 周：PWA 离线 / TanStack Router+Query persister / BottomNav+TopBar+SideNav / 命令面板 / SSR-lite 首屏 / supabase-realtime 通知中心。
 
-## Story 列表
+## 排期
+| 周 | Day | Story | 验收 |
+|---|---|---|---|
+| W6 | D1-D3 | ZY-05-01 PWA | HTML SWR / JS-CSS cache-first / API NF 5s |
+| W6 | D3-D5 | ZY-05-02 router+query | file routes + IndexedDB persister |
+| W7 | D6-D8 | ZY-05-03 nav | BottomNav 4 tab+fab / TopBar / SideNav |
+| W7 | D8-D10 | ZY-05-04 cmdk palette | 多类型搜索 + ⌘K |
+| W8 | D11-D12 | ZY-05-05 SSR-lite | 首屏静态 HTML LCP ≤ 2.5s |
+| W8 | D12-D15 | ZY-05-06 notifications | 表 + supabase-realtime broadcast |
 
-| 序 | Story Key | 标题 | 估 | 依赖 | 周次 |
-|:-:|---|---|:-:|---|:-:|
-| 1 | 5-3-tanstack-router | TanStack Router 配置 | M | S01,S02 | W6 |
-| 2 | 5-4-tanstack-query | TanStack Query 配置 | S | S01 | W6 |
-| 3 | 5-1-pwa-manifest-icons | PWA Manifest + 图标 | M | S02 | W6 |
-| 4 | 5-2-service-worker | Service Worker（Workbox） | L | 5-1 | W7 |
-| 5 | 5-5-bottom-navigation | 底部导航 5 项 | M | 5-3 | W7 |
-| 6 | 5-6-top-bar-search | 顶栏 + 搜索入口 | M | 5-3 | W7 |
-| 7 | 5-10-app-responsive-container | 响应式容器（手/平/桌） | M | S02 | W7 |
-| 8 | 5-9-notification-center | 通知中心 sheet | M | 5-6 | W8 |
-| 9 | 5-8-discover-skeleton | 首屏发现页骨架 | L | 5-3,5-5 | W8 |
-| 10 | 5-7-global-search-modal | 全站搜索 modal（cmdk） | L | 5-6 | W8 |
+## 依赖与并行
+- 依赖 S02 / S03 / S04
+- 下游：所有业务页
 
-## 周次计划
-- **W6**：5-3 + 5-4（路由 / 数据层）；5-1 PWA manifest + 图标
-- **W7**：5-2 SW；5-5 bottom nav；5-6 顶栏；5-10 响应式
-- **W8**：5-8 发现页骨架；5-7 cmdk 搜索；5-9 通知中心
+## 退出标准
+- 飞行模式可打开缓存页
+- 实时通知 ≤ 1s 到达
+- LCP / INP 达标
 
 ## 风险
-- iOS PWA 推送限制（仅 16.4+） → UX 引导降级
-- SW 缓存策略错误导致脏内容 → cache-version + 自动清理
-
-## DoD
-- [ ] Lighthouse PWA ≥ 95
-- [ ] 离线兜底页可用
-- [ ] 路由全部正常 + 滚动恢复
-- [ ] 三端响应式适配
-- [ ] cmdk 搜索能查到课程 / 文章 / 小说 / 词
-- [ ] retrospective 完成
+- realtime 端口：与 supabase-realtime 容器联通
+- IndexedDB 持久化大小：监控 ≤ 50MB

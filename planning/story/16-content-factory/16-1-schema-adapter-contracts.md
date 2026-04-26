@@ -1,22 +1,34 @@
-# ZY-16-01 · 表 schema + Adapter 契约
+# ZY-16-01 · 内容工厂 schema 与 Adapter 契约
 
 > Epic：E16 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 后端工程师
+**I want** "内容工厂"（批量生成课程 / 文章 / 词包）的最小 schema + LLMAdapter 契约
+**So that** 后续可接 OpenAI/Claude/本地模型，不锁定供应商。
+
+## 上下文
+- 表 `zhiyu.gen_jobs(id, type, payload jsonb, status, result jsonb, error, created_at, finished_at)`
+- type：article / lesson / wordpack
+- LLMAdapter `generate(prompt, schema?) → json | text`，fake 返回模板示例
+- 批量入口：admin 上传 CSV / JSON 触发 worker 队列
+
 ## Acceptance Criteria
-- [ ] schema `zhiyu`：`prompt_templates`、`factory_tasks`、`generations`
-- [ ] 索引 + RLS（admin only）
-- [ ] `packages/adapters` 增加：
-  - `LLMAdapter.generate({prompt, schema?}) / .stream(...)`
-  - `TTSAdapter.synthesize({text, locale}) → {url}`（fake 写 `/static/silent.wav`）
-  - `ASRAdapter.recognize({audio, locale}) → {text, confidence}`（fake 返回参考文本）
-  - `WebSearchAdapter.search({query, locale}) → {results[]}`（fake 返回固定占位）
-- [ ] 工厂选择 provider；缺 key 时 fake 自动启用
-- [ ] **PR 规则**：禁止 import openai/anthropic/dify/langchain/langgraph
+- [ ] migration
+- [ ] FakeLLMAdapter 实现
+- [ ] BullMQ 队列 `gen-jobs`
+- [ ] 接口 `POST /api/v1/admin/gen-jobs` 创建
 
 ## 测试方法
-- 单元：每 Adapter fake 输出稳定
-- migration 通过
+```bash
+cd /opt/projects/zhiyu/system/docker
+docker compose exec zhiyu-worker pnpm vitest run gen-jobs
+```
 
 ## DoD
-- [ ] 三表 + 4 Adapter；fake 全跑通
+- [ ] fake 走通
+
+## 依赖
+- 上游：ZY-17 / ZY-19

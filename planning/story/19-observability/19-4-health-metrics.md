@@ -1,17 +1,32 @@
-# ZY-19-04 · /healthz /readyz /metrics
+# ZY-19-04 · 健康检查 + Prometheus metrics
 
 > Epic：E19 · 估算：S · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 运维
+**I want** /healthz / /readyz + Prometheus /metrics
+**So that** docker / nginx / 监控统一查活。
+
+## 上下文
+- prom-client：默认 metrics + 自定义（http_request_duration / queue_size / business_events）
+- /healthz 浅检查（进程活）；/readyz 深检查（DB / redis / supabase）
+- 单独 metrics 端口 9091 (避免暴露主端口)
+
 ## Acceptance Criteria
-- [ ] `GET /healthz` 200 if process alive
-- [ ] `GET /readyz` 200 if supabase + redis + 关键 Adapter (fake → ok) 通
-- [ ] `GET /metrics` Prometheus 格式（prom-client）：http_requests_total / duration_histogram / inflight / event_loop_lag
-- [ ] zhiyu-worker 同步实现
+- [ ] 三服务都暴露 healthz/readyz/metrics
+- [ ] readyz 失败时容器 unhealthy
+- [ ] docker-compose healthcheck 接入
 
 ## 测试方法
-- curl 三端点
-- prometheus scrape 格式校验
+```bash
+curl localhost:8100/healthz; curl localhost:9091/metrics | head
+```
 
 ## DoD
-- [ ] 三端点全在 zhiyu-app-be / zhiyu-admin-be / zhiyu-worker
+- [ ] healthcheck 联通
+- [ ] metrics 有业务计数
+
+## 依赖
+- 上游：ZY-19-01

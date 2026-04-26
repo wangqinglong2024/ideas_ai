@@ -1,18 +1,35 @@
-# ZY-14-09 · 反作弊监控 + 后台审计
+# ZY-14-09 · 反作弊后台
 
-> Epic：E14 · 估算：L · 状态：ready-for-dev
+> Epic：E14 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 风控
+**I want** 看到所有可疑邀请关系，可一键置疑、撤销、加黑
+**So that** 主动清理刷量账号。
+
+## 上下文
+- admin 路由 `/admin/referral`
+- 列表：异常分数高的关系（同 IP / 同 device / 邀请爆发期）
+- 操作：reject 关系（撤回 pending commission）；flag 父账号
+- 全程审计 audit_log
+
 ## Acceptance Criteria
-- [ ] 同 IP / 同设备聚集检测；小时级 5×中位数突增告警（写站内 + EmailAdapter fake）
-- [ ] admin 后台 suspicious 关系列表 + 冻结操作
-- [ ] 冻结后不再 confirm / issue
-- [ ] 申诉链接（人工审核流程占位 markdown）
-- [ ] 旧 withdraw / regenerate / code 端点 → 404
+- [ ] BE `GET /api/v1/admin/referral/suspicious?cursor`
+- [ ] 操作 endpoints：reject / flag / restore
+- [ ] FE 列表 + 操作按钮 + 二次确认
+- [ ] 仅 RBAC role=fraud / admin 可用
 
 ## 测试方法
-- 集成：mock 异常聚集 → 列表显示
-- 旧端点 GET → 404
+```bash
+cd /opt/projects/zhiyu/system/docker
+docker compose exec zhiyu-app-be pnpm vitest run admin.referral
+```
 
 ## DoD
-- [ ] 风控 + 审计闭环
+- [ ] 操作链路通
+- [ ] 审计日志全
+
+## 依赖
+- 上游：ZY-14-01..08 / ZY-17 / ZY-18-04

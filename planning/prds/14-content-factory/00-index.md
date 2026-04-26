@@ -1,3 +1,5 @@
+> ⚠️ 本文件含历史 SaaS / 厂商命名，**以 [planning/00-rules.md](../../00-rules.md) §1.1 + [planning/00-saas-overrides.md](../../00-saas-overrides.md) 为准**。开发时按映射表取等价自托管 / Adapter 实现。
+
 # 14 · 内容工厂（Content Factory · CF）
 
 > **代号**：CF | **优先级**：**Post-MVP（v1.5）** | **核心**：LangGraph 工作流 + 双 LLM + TTS + 4 语翻译 + 母语审校

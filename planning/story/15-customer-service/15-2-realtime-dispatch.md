@@ -1,18 +1,31 @@
-# ZY-15-02 · Realtime 通道 + 派单服务
+# ZY-15-02 · 实时分发 / 消息推送
 
-> Epic：E15 · 估算：L · 状态：ready-for-dev
+> Epic：E15 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 用户 / 客服
+**I want** 消息毫秒级到达，多端在线时实时同步
+**So that** 沟通如同现代 IM。
+
+## 上下文
+- supabase-realtime broadcast `cs:conv:<id>`（new_msg / typing / read）
+- 服务端在 cs_messages insert 后通过 realtime 推 channel
+- 客户端无连接时 → push 通知（PushAdapter fake → 写 notifications）
+- typing 事件 throttle 1 / 2s
+
 ## Acceptance Criteria
-- [ ] 用户开会话 → BE 创建 conversation
-- [ ] 客服在线时 supabase realtime broadcast 到 `agent:<aid>` 频道
-- [ ] 全部客服离线 → 自动转工单 + EmailAdapter（fake）通知
-- [ ] 转接 / 升级 actions 写库 + emit broadcast 到 `conv:<id>`
-- [ ] **不引入** Socket.io / 自建 Redis adapter
+- [ ] BE realtime hook
+- [ ] FE 用户端 / 客服端订阅 channel
+- [ ] typing / read receipt
+- [ ] 离线 → push 通知
 
 ## 测试方法
-- 集成：在线 / 全离线 两路径
-- MCP Puppeteer：双客户端实时收消息
+- 双窗口：用户发 → 客服窗口 < 1s 收到
 
 ## DoD
-- [ ] supabase realtime only
+- [ ] 实时延迟 ≤ 500ms
+
+## 依赖
+- 上游：ZY-15-01 / ZY-05-06

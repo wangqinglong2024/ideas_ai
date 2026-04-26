@@ -1,17 +1,30 @@
-# ZY-19-07 · Web Vitals RUM + 部署事件
+# ZY-19-07 · Web Vitals / RUM
 
-> Epic：E19 · 估算：M · 状态：ready-for-dev
+> Epic：E19 · 估算：S · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** FE 工程师
+**I want** 真实用户性能数据（LCP / CLS / INP / FID / TTFB）入库可查
+**So that** 持续优化体验。
+
+## 上下文
+- 用 web-vitals 库；通过 ZY-19-03 events 上报
+- 大盘 p75 / p95 / p99 按页面 / 国家
+- 触发回归 → 自动告警
+
 ## Acceptance Criteria
-- [ ] FE 上报 LCP / INP / CLS / FCP / TTFB 到 `events`
-- [ ] admin 仪表板按页面 / 设备聚合
-- [ ] `pnpm release:mark` 命令写 `releases(version, ts, sha, notes)` + emit event
-- [ ] 部署线在仪表板时间轴可见
+- [ ] FE 集成 web-vitals 上报
+- [ ] BE 提供 RUM 报表接口
+- [ ] admin RUM 页（接 ZY-17-10）
+- [ ] 性能预算回归告警
 
 ## 测试方法
-- 集成：FE 触发 vitals → 表落行
-- release:mark 命令落行
+- MCP Puppeteer 加载首页 → events 表 web_vitals 出现
 
 ## DoD
-- [ ] vitals 准确；部署可视
+- [ ] 5 指标全采
+
+## 依赖
+- 上游：ZY-19-03

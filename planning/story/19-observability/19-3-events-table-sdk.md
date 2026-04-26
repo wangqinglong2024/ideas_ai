@@ -1,19 +1,34 @@
-# ZY-19-03 · 行为埋点 events + 数据 SDK
+# ZY-19-03 · 业务事件表 + SDK
 
-> Epic：E19 · 估算：L · 状态：ready-for-dev
+> Epic：E19 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 数据分析
+**I want** 自建 events 表 + 客户端 / 服务端 SDK
+**So that** 替代 PostHog / GTM。
+
+## 上下文
+- 表 `zhiyu.events(id, name, user_id, anon_id, props jsonb, ts, session_id)`，分区按月
+- SDK：`track(name, props)` + auto pageview + session 续期（30 min idle）
+- 上报 batch 5s 或 50 条
+- 不接 GTM / GA4 / Mixpanel
+
 ## Acceptance Criteria
-- [ ] FE `useEvent(name, props)` hook + auto pageview
-- [ ] BE `analytics.track(userId, name, props)` 服务端事件
-- [ ] POST `/api/v1/_telemetry/event` 批量（5s flush 或 20 条）
-- [ ] `zhiyu.events` 按月分区
-- [ ] **禁止** import posthog-js
-- [ ] 事件 schema yaml 在 `_bmad/`（可选）
+- [ ] migration + 月分区
+- [ ] FE SDK + admin SDK 复用
+- [ ] BE batch ingest endpoint + 限流
+- [ ] 文档：事件命名规范 (snake_case verb_noun)
 
 ## 测试方法
-- 集成：批量 POST → 表行数
-- 单元：批量 flush 时机
+```bash
+cd /opt/projects/zhiyu/system/docker
+docker compose exec zhiyu-app-be pnpm vitest run analytics
+```
 
 ## DoD
-- [ ] 全自建；月分区高效
+- [ ] batch 入库 + 不丢
+
+## 依赖
+- 上游：ZY-19-01

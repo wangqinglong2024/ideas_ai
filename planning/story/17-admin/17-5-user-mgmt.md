@@ -1,16 +1,31 @@
 # ZY-17-05 · 用户管理
 
-> Epic：E17 · 估算：L · 状态：ready-for-dev
+> Epic：E17 · 估算：M · 状态：ready-for-dev
+> 代码根：`/opt/projects/zhiyu/system/`
 > 顶层约束：[planning/00-rules.md](../../00-rules.md)
 
+## User Story
+**As a** 管理员 / 客服
+**I want** 搜索 / 筛选 app 用户、看详情、封禁 / 解封 / 重置密码 / 模拟登录
+**So that** 高效处理用户问题。
+
+## 上下文
+- 路由 `/admin/users`
+- 详情 tab：基本信息 / 订阅 / 钱包 / 推荐 / 工单 / 审计
+- 操作：suspend / unsuspend / reset-password / impersonate（仅 admin / cs，需二次确认 + 审计）
+
 ## Acceptance Criteria
-- [ ] 列表 / 搜索 / 多维筛选；详情（学习 / 订单 / 设备）
-- [ ] 操作：封禁 / 重置密码 / 调整 ZC / 强制登出
-- [ ] 全部写 audit_logs（接 E18-04）
-- [ ] 高危操作二次确认
+- [ ] 列表 + 多条件搜索
+- [ ] 详情 6 tab
+- [ ] 4 操作 + 审计
+- [ ] impersonate 进 app 显示 banner "客服模拟"
 
 ## 测试方法
-- MCP Puppeteer：搜索 → 详情 → 调整 ZC → ledger 出现
+- MCP Puppeteer：搜索 + 操作 + impersonate
 
 ## DoD
-- [ ] 全操作审计
+- [ ] 操作可审计
+- [ ] impersonate banner 不可隐藏
+
+## 依赖
+- 上游：ZY-17-04 / ZY-03 / ZY-15

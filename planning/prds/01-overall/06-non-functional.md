@@ -1,3 +1,5 @@
+> ⚠️ 本文件含历史 SaaS / 厂商命名，**以 [planning/00-rules.md](../../00-rules.md) §1.1 + [planning/00-saas-overrides.md](../../00-saas-overrides.md) 为准**。开发时按映射表取等价自托管 / Adapter 实现。
+
 # 1.6 · 非功能需求（Non-Functional Requirements）
 
 ## 一、性能（Performance）
