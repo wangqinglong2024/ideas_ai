@@ -19,9 +19,9 @@
 - 4 apps + 共享 packages（仅占位 + 类型 + 基础工具）
 - TypeScript strict 全链路
 - ESLint + Prettier + husky + lint-staged（不引入 commitlint）
-- `system/docker/docker-compose.dev.yml` 一键拉起
+- `system/docker/docker-compose.yml` 一键拉起
 - `.env.example` + Zod 启动校验（缺非关键 key 走 fake adapter）
-- Supabase schema `dev_zhiyu` 初始化 + 连通性验证
+- Supabase schema `zhiyu` 初始化 + 连通性验证
 - Redis 容器 + BullMQ 骨架（一个 demo job）
 - `/health` `/ready` `/metrics` 三端点 + pino JSON 日志
 - E2E 烟雾测试通过 MCP Puppeteer 检查 4 个端口可访问
@@ -32,7 +32,8 @@
 - UI 实现（仅占位首页）
 - 真实 AI 调用（仅 Adapter 接口 + fake）
 - 任何托管 SaaS（CI / 部署 / 监控 / Secrets）→ 永久禁用
-- nginx prod 域名 vhost（待生产域名敲定后单独 epic 处理）
+- nginx 生产域名 vhost（生产上线事项不在本规划范围）
+- staging/prod 环境与配置（项目只有 dev）
 
 ## Stories（按需 6 个，不再硬凑 10）
 
@@ -61,7 +62,7 @@
 ### ZY-01-03 · Docker Compose 一键拉起（dev）
 **As a** 开发者 **I want** 一条命令启动整套环境 **So that** 30 分钟内新人可本地跑通。
 **AC**
-- [ ] `system/docker/docker-compose.dev.yml`：服务 `zhiyu-app-fe`(3100)、`zhiyu-app-be`(8100)、`zhiyu-admin-fe`(4100)、`zhiyu-admin-be`(9100)、`zhiyu-worker`、`zhiyu-redis`
+- [ ] `system/docker/docker-compose.yml`：服务 `zhiyu-app-fe`(3100)、`zhiyu-app-be`(8100)、`zhiyu-admin-fe`(4100)、`zhiyu-admin-be`(9100)、`zhiyu-worker`、`zhiyu-redis`
 - [ ] 加入 `gateway_net`（external，与 supabase 互通）+ `zhiyu-internal`
 - [ ] 4 apps 各有多阶段 Dockerfile（deps / build / runtime / dev target）
 - [ ] `.dockerignore` 排除 `.github`、`.agents`、`.claude`、`_bmad`、`planning`、`docs`、`china`、`course`、`games`、`novels`、`research`
@@ -83,8 +84,8 @@
 ### ZY-01-05 · Supabase 接入与 schema 初始化
 **AC**
 - [ ] BE 通过 `SUPABASE_URL=http://supabase-kong:8000` + service role key 连通
-- [ ] Drizzle 配置指向 `DATABASE_URL`，`search_path=dev_zhiyu`
-- [ ] 启动时自动创建 schema `dev_zhiyu`（若不存在），并跑迁移
+- [ ] Drizzle 配置指向 `DATABASE_URL`，`search_path=zhiyu`
+- [ ] 启动时自动创建 schema `zhiyu`（若不存在），并跑迁移
 - [ ] 一张占位表 `_meta`（id / version / created_at）作为连通测试
 - [ ] FE 通过 `VITE_SUPABASE_URL=http://115.159.109.23:8000` + anon key 可调用 supabase JS（demo：取 `_meta` 行数）
 - [ ] Auth 连通验证：BE 调用 supabase admin API 列出 users（应为 0）
@@ -107,7 +108,7 @@
 
 ## DoD（Definition of Done，整个 Epic）
 
-- [ ] `git pull && cd system/docker && docker compose -f docker-compose.dev.yml up -d --build` 一条命令成功
+- [ ] `git pull && cd system/docker && docker compose up -d --build` 一条命令成功
 - [ ] 4 个端口（3100 / 8100 / 4100 / 9100）从外网 `115.159.109.23` 可访问
 - [ ] MCP Puppeteer 烟雾测试：访问 4 个 URL 各得到合理响应（首页/JSON）
 - [ ] 缺第三方 API key 启动不报错，仅 WARN

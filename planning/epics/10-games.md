@@ -3,6 +3,8 @@
 > 阶段：M3 · 优先级：P0
 > 估算：每款游戏 3-5 天 MVP；通用基础设施 1 周；总周期约 4 周。
 > 依据：`planning/prds/04-games/00-index.md`
+>
+> 顶层约束：[planning/00-rules.md](../00-rules.md)（Docker only · 单一 dev 环境 · 自建埋点 → `zhiyu.events`）
 
 ## 摘要
 12 款 H5 横屏游戏 **一次性首发上线**，全部按 **MVP 单阶段** 交付，**不再切 V1 / V1.5**，**不再分波次**，**不再使用 `coming_soon` 占位**。

@@ -17,10 +17,11 @@
 
 ### 1.1 强约束
 
-- 所有 app / api / admin / worker 必须以 docker-compose 启动；**禁止**「主机直接 `pnpm dev`」作为开发主流程。
+- 本项目**只有一个环境**：dev。不产出 staging / prod 配置与文档；生产由用户自行处理。
+- 所有 app / api / admin / worker 必须以 docker compose 启动；**禁止**「主机直接 `pnpm dev`」作为开发主流程。
 - 不得引入：GitHub Actions / GitLab CI / CircleCI 等任何托管 CI；不得引入 Cloudflare Pages / Render / Vercel / Fly.io / Netlify 等任何托管部署；不得引入 Doppler / Vault Cloud 等托管 secrets。
-- 唯一服务器：腾讯云 `115.159.109.23`，所有 dev 服务在此暴露；外网通过 IP+端口直连（防火墙已开）。
-- 项目根目录提供 `system/docker/docker-compose.dev.yml` 一键拉起整套环境；新人 30 分钟可跑通。
+- 唯一服务器：腾讯云 `115.159.109.23`；外网通过 IP+端口直连（防火墙已开）。
+- 项目根目录提供 `system/docker/docker-compose.yml` 一键拉起整套环境；新人 30 分钟可跑通。
 
 ### 1.2 镜像构建规则
 
@@ -40,9 +41,9 @@
 | 管理后台后端 | `zhiyu-admin-be` | 8080 | **9100** | `http://115.159.109.23:9100` |
 | Worker（队列消费）| `zhiyu-worker` | — | — | 内网 |
 
-- staging 端口：3200/8200/4200/9200。生产：仅走域名（待定）。
-- 所有 4 个对外端口主机已防火墙放行。
-- Compose 项目名：`zhiyu-dev`，网络：`gateway_net`（与 Supabase / nginx 互通）+ `zhiyu-internal`。
+- **本项目只有一个环境 = dev**。不设 staging / prod；不设 `docker-compose.stg.yml` / `docker-compose.prod.yml`。生产上线事项由用户自行处理，不在本规划范围。
+- 4 个对外端口主机已防火墙放行。
+- Compose 项目名：`zhiyu`，唯一 compose 文件：`system/docker/docker-compose.yml`；网络：`gateway_net`（与 Supabase / nginx 互通）+ `zhiyu-internal`。
 
 ---
 
@@ -52,7 +53,7 @@
 
 | 需求 | 必走 | 备注 |
 |---|---|---|
-| 关系型数据 | `supabase-db` (Postgres 16) | schema 隔离：`dev_zhiyu` / `stg_zhiyu` / `public`(prod) |
+| 关系型数据 | `supabase-db` (Postgres 16) | schema：`zhiyu`（唯一环境） |
 | 用户认证 | `supabase-auth` (GoTrue) | 邮箱 + OAuth + Phone；后台管理员复用同实例不同 role |
 | 文件存储 | `supabase-storage` | 4 桶（images/audio/uploads/backups）|
 | 向量检索 | Postgres `pgvector` | RAG / 推荐；不另搭 Pinecone/Weaviate |
@@ -121,7 +122,7 @@
 
 - 不接任何托管 CI。
 - 本地预提交：`husky` + `lint-staged`（lint / typecheck / unit test 范围内）。
-- 每次部署：人工 SSH 到 `115.159.109.23`，进入 `system/docker`，执行 `docker compose -f docker-compose.dev.yml up -d --build`（dev）；staging/prod 走 `docker-compose.stg.yml` / `docker-compose.prod.yml`。
+- 每次部署/重启：人工 SSH 到 `115.159.109.23`，进入 `system/docker`，执行 `docker compose up -d --build`。不存在 staging/prod 分支。
 - 数据库迁移：`drizzle-kit migrate`，在 `zhiyu-app-be` 容器启动时自检；破坏性迁移分两步（add → backfill → drop）。
 - 备份：`pg_dump -Fc` cron 写到 `/opt/backups/zhiyu/<ts>/`，30 天保留；外加 supabase 自带 PITR（若启）。
 

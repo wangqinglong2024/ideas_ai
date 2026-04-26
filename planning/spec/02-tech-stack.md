@@ -61,7 +61,7 @@
 
 | 用途 | 技术 | 备注 |
 |---|---|---|
-| 关系型主库 | Supabase Postgres 16 | schema：`dev_zhiyu` / `stg_zhiyu` / `public` |
+| 关系型主库 | Supabase Postgres 16 | schema：`zhiyu`（唯一环境） |
 | 用户认证 | Supabase Auth (GoTrue) | 邮箱/OAuth/Phone |
 | 后台认证 | 复用 Supabase Auth + RBAC 表 | `admin` role |
 | 文件存储 | Supabase Storage | 4 桶 |
@@ -126,7 +126,7 @@
 |---|---|---|
 | 容器编排 | docker compose | dev / stg / prod 三套 yml |
 | 反向代理 | nginx (`global-gateway` 容器) | 现有，配置在 `/opt/gateway/conf.d/` |
-| TLS | Let's Encrypt + nginx | 仅 prod 域名（域名待定）|
+| TLS | Let's Encrypt + nginx | 仅后期生产上线时由用户自行配置，本规划不覆盖 |
 | 数据库迁移 | drizzle-kit | 容器启动自检 |
 | 备份 | pg_dump cron → `/opt/backups/zhiyu/` | 30 天 |
 | 服务器 | 腾讯云 `115.159.109.23` 单台 | — |

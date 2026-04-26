@@ -324,7 +324,7 @@ await onesignal.createNotification({
 ## 十五、密钥管理
 
 - Doppler （集中管理）
-- 环境隔离 dev / staging / prod
+- 环境：仅 dev（本规划不覆盖 staging/prod）
 - 轮换计划：90 天
 - 最小权限
 

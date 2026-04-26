@@ -1,113 +1,49 @@
----
-stepsCompleted: ["init","module-survey","epic-design","story-decomposition"]
-inputDocuments:
-  - planning/prds/**
-  - planning/spec/**
-  - planning/ux/**
----
+# Epics 总览（v1 · 单一 dev 环境）
 
-# 知语 Zhiyu · Epics 与 Stories 总目录
+> 顶层约束（强制）：[planning/00-rules.md](../00-rules.md)
+> Docker only · 单一 dev 环境（115.159.109.23）· 端口 3100/8100/4100/9100 · schema `zhiyu` · supabase 自托管优先 · 缺 key 自动 fake adapter
+> 生产 / staging / 域名 / CDN / WAF / 应用商店 / 真实第三方 SaaS 接入 = **用户后续自行处理**，不在本 planning 范围。
 
-> **顶层约束**：[planning/00-rules.md](../00-rules.md)（Docker only / Supabase first / 端口约定 / AI mock 期）。
-> 基于 PRD 15 模块 + 架构 12 文件 + UX 16 文件
-> Story 数量按需出（取消硬凑 10），使用 INVEST 原则。
->
-> **重写状态**（v2.0，2026-04-26）：
-> - ✅ E01 已按新规则重写（6 stories）
-> - ⚠️ E02-E20 为旧版（含 Cloudflare/Render/Sentry 等已禁用关键词），等待 Wave 2-3 重写
+## Epic 清单
 
----
+| ID  | 名称              | 阶段 | 故事数 | 优先级 | 状态        |
+| --- | ----------------- | ---- | ------ | ------ | ----------- |
+| E01 | 平台基建          | M0   | 8      | P0     | ✅ 已重写   |
+| E02 | 设计系统          | M0   | 7      | P0     | ✅ 已重写   |
+| E03 | 用户账户          | M1   | 6      | P0     | ✅ 已重写   |
+| E04 | 国际化与本地化    | M1   | 5      | P0     | ✅ 已重写   |
+| E05 | 应用骨架与导航    | M1   | 6      | P0     | ✅ 已重写   |
+| E06 | 中国发现          | M2   | 6      | P0     | ✅ 已重写   |
+| E07 | 学习引擎          | M2   | 7      | P0     | ✅ 已重写   |
+| E08 | 课程模块          | M3   | 6      | P0     | ✅ 已重写   |
+| E09 | 游戏引擎          | M3   | 10     | P0     | ✅ 已重写   |
+| E10 | 12 款游戏专区     | M3   | 15     | P0     | ✅ 沿用     |
+| E11 | 小说模块          | M4   | 6      | P0     | ✅ 已重写   |
+| E12 | 经济与商城（ZC）  | M5   | 8      | P0     | ✅ 已重写   |
+| E13 | 支付（Adapter+fake） | M5 | 6      | P0     | ✅ 已重写   |
+| E14 | 分销系统          | M5-6 | 9      | P0     | ✅ 已重写   |
+| E15 | 客服 IM 与工单    | M6   | 7      | P0     | ✅ 已重写   |
+| E16 | AI 内容工厂占位   | -    | 3      | P2     | ✅ 已 defer |
+| E17 | 管理后台          | M3-5 | 10     | P0     | ✅ 已重写   |
+| E18 | 安全与合规        | 贯穿 | 8      | P0     | ✅ 已重写   |
+| E19 | 可观测与运维      | 贯穿 | 8      | P0     | ✅ 已重写   |
+| E20 | 上线与发布（dev 验收）| M6 | 6     | P0     | ✅ 已重写   |
+| E99 | Post-MVP Backlog  | -    | -      | -      | ✅ 标注     |
 
-## Epic 全景
+**总计**：20 个 epic，约 137 个 story（按需切分，未来 wave 中拆分到 `planning/story/` 目录）。
 
-| Epic # | 名称 | 模块 | 故事数 | 优先级 | 阶段 | 文件 |
-|:---:|---|---|:---:|:---:|:---:|---|
-| E01 | 平台基础设施 | spec | **6** ✅ | P0 | M0 | [01-platform-foundation.md](./01-platform-foundation.md) |
-| E02 | 设计系统与 UI 工具库 | ux | 10 | P0 | M0 | [02-design-system.md](./02-design-system.md) |
-| E03 | 用户账户体系 | 06 | 10 | P0 | M1 | [03-user-account.md](./03-user-account.md) |
-| E04 | 国际化与本地化 | 15 | 10 | P0 | M1 | [04-i18n.md](./04-i18n.md) |
-| E05 | 应用骨架与导航 | 01 + ux | 10 | P0 | M1 | [05-app-shell.md](./05-app-shell.md) |
-| E06 | 中国发现（探索）| 02 | 10 | P0 | M2 | [06-discover-china.md](./06-discover-china.md) |
-| E07 | 学习引擎 | 07 | 12 | P0 | M2 | [07-learning-engine.md](./07-learning-engine.md) |
-| E08 | 课程模块 | 03 | 10 | P0 | M3 | [08-courses.md](./08-courses.md) |
-| E09 | 游戏引擎共享层 | spec/11 | 11 | P0 | M3 | [09-game-engine.md](./09-game-engine.md) |
-| E10 | 游戏专区（12 款 · 一次性首发 MVP）| 04 | 15 | P0 | M4 | [10-games.md](./10-games.md) |
-| E11 | 小说阅读 | 05 | 10 | P0 | M4 | [11-novels.md](./11-novels.md) |
-| E12 | 知语币与商城 | 08 | 10 | P0 | M5 | [12-economy.md](./12-economy.md) |
-| E13 | 支付与订阅 | 10 | 10 | P0 | M5 | [13-payment.md](./13-payment.md) |
-| E14 | 分销系统（佣金=ZC，无提现） | 09 | 11 | P0 | M5-M6 | [14-referral.md](./14-referral.md) |
-| E15 | 客服 IM 与工单 | 11 | 10 | P0 | M6 | [15-customer-service.md](./15-customer-service.md) |
-| E16 | AI 内容工厂（**v1.5 Post-MVP**） | 14 | 12 | P1 | v1.5 | [16-content-factory.md](./16-content-factory.md) |
-| E17 | 管理后台 | 12 | 12 | P0 | M3-M5 | [17-admin.md](./17-admin.md) |
-| E18 | 安全与合规 | 13 | 10 | P0 | M0-M6 | [18-security.md](./18-security.md) |
-| E19 | 可观测与运维 | spec/10 | 10 | P0 | M0-M6 | [19-observability.md](./19-observability.md) |
-| E20 | 上线与发布 | spec/08 | 10 | P0 | M6 | [20-launch.md](./20-launch.md) |
+## 重写原则（本轮已应用）
 
-合计 **20 Epics × 213 Stories**（磁盘实际数）
+1. **单一 dev 环境**：所有文件不再出现 dev/staging/prod 切分；只有一个 `docker-compose.yml`、schema = `zhiyu`、单组端口 3100/8100/4100/9100。
+2. **Supabase 自托管优先**：Auth / Storage / Realtime / Edge Functions / pgvector 优先复用；不重复造轮子。
+3. **Adapter + fake 模式**：所有第三方依赖（Email / SMS / Push / Payment / Captcha / LLM / TTS / ASR / WebSearch / Workflow）以 Adapter 接口 + Fake 实现交付；缺 key 自动启用 fake，不阻塞 dev 验收。
+4. **禁用清单**（明确移除）：Cloudflare、Render、Doppler、Sentry、PostHog、Better Stack、Logtail、Upstash Redis、PagerDuty、Slack 直接集成、Resend、Paddle/LemonSqueezy 直接 SDK、Dify、Vercel/Netlify/Fly.io、Chromatic、GitHub Actions 自动化、Turnstile/Recaptcha 真实接入。
+5. **Story 数量按需**：不再统一 10 条；E13 / E15 / E16 已大幅收敛，E14 保持 9 条，E10 沿用既有 15 条 MVP 切分。
+6. **测试方法**：每 epic 在 DoD / Stories AC 中要求 `docker compose run/exec` 或 MCP Puppeteer 直连容器对外端口验证。
+7. **未来重写预告**：E16 占位指向「LangGraph(TS) + Vercel AI SDK + Anthropic Claude / DeepSeek」未来阶段；当前 dev 周期不消耗 LLM key。
 
-> **MVP（v1）实际交付**：E01-E15 + E17-E20 共 19 Epics（201 stories），其中 E10 一次性首发 12 款游戏全 MVP（无 `coming_soon`、无奖励、60s 单局 / 无限连玩）
-> **Post-MVP（v1.5）**：E16 内容工厂 12 stories（手工写库为 v1 路径，AI 工厂 v1.5 上线）
-> **v2 / 延后增量**：游戏内购 / 排行榜 / 三星 / 教学 / 关卡化 / IAP 等增强项见 [99-post-mvp-backlog.md](./99-post-mvp-backlog.md)
+## 下一波（待执行）
 
----
-
-## 阶段（Milestones）
-
-| 阶段 | 时长 | 目标 |
-|---|---|---|
-| M0 基础 | 4 周 | 平台 / 设计系统 / 安全骨架 / 可观测基线 |
-| M1 账户 | 4 周 | 用户 / i18n / App Shell |
-| M2 内容 | 6 周 | 探索 / 学习引擎（手工内容生产并行启动） |
-| M3 课程游戏 | 6 周 | 课程 / 游戏引擎 / 后台 v1 |
-| M4 游戏小说 | 6 周 | 12 款游戏一次性首发 / 小说 / 后台 v2 |
-| M5 商业化 | 6 周 | 经济 / 支付 / 分销（严格串行） |
-| M6 上线准备 | 6 周 | 客服 / 安全终审 / 灰度上线 |
-| **总计** | **38 周** | **v1 上线 4 国** |
-
-> 备注：AI 内容工厂（E16）已推迟到 **v1.5（M+3 起 8 周）**；E10 游戏增强（关卡 / 排行榜 / IAP 等）已迁入 [99-post-mvp-backlog.md](./99-post-mvp-backlog.md)。
-
----
-
-## 故事编号约定
-
-```
-ZY-{Epic}-{NN}     # 例: ZY-07-03 学习引擎-第三个故事
-```
-
-## 故事模板（精简版）
-
-```markdown
-### ZY-XX-NN · 故事标题
-
-**As a** <角色>
-**I want** <目标>
-**So that** <价值>
-
-**Acceptance Criteria**
-- [ ] 1. ...
-- [ ] 2. ...
-
-**Tech Notes**
-- ...
-
-**Dependencies**
-- 依赖 ZY-XX-MM
-
-**估算**: S / M / L
-```
-
-## 优先级
-
-- P0：v1 必交付
-- P1：v1 可选 / v1.5 必交
-- P2：v2
-
-## 输出物
-
-各 Epic 文件包含：
-1. Epic 摘要 + 价值
-2. 范围 / 非范围
-3. ~10 Stories（含 AC + 估算 + 依赖）
-4. 技术注解（关联 spec / ux 文件）
-5. 风险与权衡
-6. 完成定义（DoD）
+- Wave 2：按新 epics 重写 `planning/story/02-20/*` 故事文件
+- Wave 3：按新 epics 重写 `planning/sprint/02-20.md` 与 `sprint/sprint-status.yaml`
+- Wave 4：清理 `planning/prds/` 与 `planning/ux/` 中残留的 Cloudflare/Sentry/PostHog 引用

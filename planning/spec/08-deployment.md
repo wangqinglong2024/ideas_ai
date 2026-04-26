@@ -1,33 +1,31 @@
-# 08 · 部署（Docker Only）
+# 08 · 部署（Docker Only · 单一 dev 环境）
 
-> **本文档受 [planning/00-rules.md](../00-rules.md) 强约束**：唯一编排=docker compose；唯一服务器=`115.159.109.23`；禁用任何托管 CI/CD/部署 SaaS。
+> **本文档受 [planning/00-rules.md](../00-rules.md) 强约束**：唯一编排=docker compose；唯一服务器=`115.159.109.23`；**只有一个环境 = dev**；不产出 staging/prod；禁用任何托管 CI/CD/部署 SaaS。
 
 ---
 
-## 一、环境矩阵
+## 一、环境
 
-| 环境 | 触发方式 | Compose 文件 | 域名/访问 |
+| 环境 | 触发方式 | Compose 文件 | 访问 |
 |---|---|---|---|
-| local（开发机）| `docker compose up` | `system/docker/docker-compose.dev.yml` | `localhost:3100/8100/4100/9100` |
-| dev（服务器）| 手动 SSH | 同上 | `http://115.159.109.23:3100/8100/4100/9100` |
-| staging | 手动 SSH | `docker-compose.stg.yml` | `http://115.159.109.23:3200/8200/4200/9200` |
-| prod | 手动 SSH | `docker-compose.prod.yml` | `https://<待定域名>` |
+| **dev（唯一）** | 人工 SSH `docker compose up` | `system/docker/docker-compose.yml` | `http://115.159.109.23:{3100,8100,4100,9100}` |
 
-> 仅 prod 走域名 + TLS；dev/staging 始终 IP+端口。
+> 生产上线由用户自行处理，不在本规划范围；不存在 `docker-compose.stg.yml` / `docker-compose.prod.yml`。
 
 ---
 
-## 二、端口与容器（统一约束）
+## 二、端口与容器
 
-| 角色 | 容器名 | dev | staging | prod |
-|---|---|---|---|---|
-| 应用前端 | `zhiyu-app-fe` | 3100 | 3200 | 80/443（域名）|
-| 应用后端 | `zhiyu-app-be` | 8100 | 8200 | 80/443（域名）|
-| 管理前端 | `zhiyu-admin-fe` | 4100 | 4200 | 80/443（域名）|
-| 管理后端 | `zhiyu-admin-be` | 9100 | 9200 | 80/443（域名）|
-| Worker | `zhiyu-worker` | 仅内网 | 仅内网 | 仅内网 |
+| 角色 | 容器名 | 主机端口 |
+|---|---|---|
+| 应用前端 | `zhiyu-app-fe` | 3100 |
+| 应用后端 | `zhiyu-app-be` | 8100 |
+| 管理前端 | `zhiyu-admin-fe` | 4100 |
+| 管理后端 | `zhiyu-admin-be` | 9100 |
+| Worker | `zhiyu-worker` | — 内网 |
+| Redis | `zhiyu-redis` | — 内网 |
 
-防火墙：dev/staging 端口在腾讯云安全组与 ufw 已放行。
+防火墙：4 个对外端口在腾讯云安全组与 ufw 已放行。
 
 ---
 
@@ -37,22 +35,22 @@
 ┌────────────────────────────────────────────┐
 │ Docker host (115.159.109.23)               │
 │                                            │
-│  network: gateway_net                      │
-│   ├─ global-gateway (nginx) ── prod 域名   │
+│  network: gateway_net (external)           │
+│   ├─ global-gateway (nginx)                │
 │   ├─ supabase-kong (8000) ── 数据/Auth    │
-│   ├─ supabase-studio (3000)                │
+│   ├─ supabase-studio                       │
 │   └─ zhiyu-* 业务容器                      │
 │                                            │
 │  network: zhiyu-internal                   │
-│   ├─ zhiyu-app-be ── redis ── supabase-kong│
+│   ├─ zhiyu-app-be ── zhiyu-redis           │
 │   ├─ zhiyu-admin-be                        │
 │   └─ zhiyu-worker                          │
 └────────────────────────────────────────────┘
 ```
 
-- 所有 zhiyu 业务容器同时加入 `gateway_net`（对外 + 访问 supabase）与 `zhiyu-internal`（内部互通）。
-- Redis：复用既有 `redis-tcm` 容器或新建 `zhiyu-redis`（dev 阶段 docker-compose.dev.yml 内自带）。
-- DB：复用 `supabase-db`，schema 隔离 `dev_zhiyu` / `stg_zhiyu` / `public`。
+- 所有 zhiyu 业务容器同时加入 `gateway_net`（访问 supabase）与 `zhiyu-internal`（内部互通）。
+- Redis：自带 `zhiyu-redis`（不复用其他项目的 redis）。
+- DB：复用 `supabase-db`，schema `zhiyu`。
 
 ---
 
@@ -60,19 +58,15 @@
 
 ```
 system/docker/
-├── docker-compose.dev.yml        # 主用
-├── docker-compose.stg.yml
-├── docker-compose.prod.yml
+├── docker-compose.yml
 ├── .env.example
-├── .env                          # gitignored
-└── nginx/
-    └── prod/                     # 生产域名 vhost（待定域名）
+└── .env                          # gitignored
 ```
 
-`docker-compose.dev.yml`（草案）：
+`docker-compose.yml`：
 
 ```yaml
-name: zhiyu-dev
+name: zhiyu
 
 networks:
   gateway_net:
@@ -86,8 +80,9 @@ x-app-env: &app-env
   SUPABASE_URL: http://supabase-kong:8000
   SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY}
   SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
-  DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@supabase-db:5432/postgres?search_path=dev_zhiyu
+  DATABASE_URL: postgres://postgres:${POSTGRES_PASSWORD}@supabase-db:5432/postgres?search_path=zhiyu
   REDIS_URL: redis://zhiyu-redis:6379/0
+  JWT_SECRET: ${JWT_SECRET}
 
 services:
   zhiyu-app-be:
@@ -210,30 +205,19 @@ CMD ["pnpm", "--filter=api", "dev"]
 
 ---
 
-## 六、部署流程（人工 SSH，不接托管 CI）
+## 六、部署/重启流程（人工 SSH，不接托管 CI）
 
 ```bash
-# 1) 拉取最新代码
 ssh root@115.159.109.23
 cd /opt/projects/zhiyu
 git pull
-
-# 2) 构建并重启
 cd system/docker
-docker compose -f docker-compose.dev.yml up -d --build
-
-# 3) 等健康检查 OK
-docker compose -f docker-compose.dev.yml ps
-
-# 4) 跑迁移（已在 BE 容器启动时自动跑；如需手动）
-docker compose -f docker-compose.dev.yml run --rm zhiyu-app-be pnpm db:migrate
-
-# 5) 烟雾测试
+docker compose up -d --build
+docker compose ps
+docker compose run --rm zhiyu-app-be pnpm db:migrate
 curl -fsS http://115.159.109.23:8100/health
 curl -fsS http://115.159.109.23:9100/health
 ```
-
-> 任何 staging / prod 部署等同流程，仅 compose 文件和 .env 不同。
 
 ---
 
@@ -243,14 +227,13 @@ curl -fsS http://115.159.109.23:9100/health
 - 文件：`apps/api/drizzle/migrations/*.sql`（入 git）。
 - 时机：BE 容器启动时执行 `pnpm db:migrate`；失败则容器健康检查不通过。
 - 安全：破坏性改动分两步（add → backfill → drop column），单 PR 不混合。
-- Shadow DB：本地用 `pg_temp` schema 预演；CI 不强制。
 
 ---
 
 ## 八、Secrets
 
 - 文件：`system/docker/.env`，模板 `system/docker/.env.example`。
-- 启动时后端用 Zod 校验：必填项（DB URL / Supabase keys / JWT secret）缺失 → 启动失败；可选项（外部 API key）缺失 → fallback 到 fake adapter + WARN 日志。
+- 启动时后端用 Zod 校验：必填项缺失 → 启动失败；可选项缺失 → fallback fake adapter + WARN 日志。
 - 禁止：把 secrets 写入 dockerfile / compose 内联 / 入 git。
 
 ---
@@ -260,20 +243,18 @@ curl -fsS http://115.159.109.23:9100/health
 | 对象 | 工具 | 频率 | 保留 | 路径 |
 |---|---|---|---|---|
 | Supabase 主库 | `pg_dump -Fc` cron | 每日 02:00 | 30 天 | `/opt/backups/zhiyu/<ts>/full.dump` |
-| 关键 schema | `pg_dump --schema=dev_zhiyu` | 每日 | 30 天 | `/opt/backups/zhiyu/<ts>/schema-*.sql` |
+| schema `zhiyu` | `pg_dump --schema=zhiyu` | 每日 | 30 天 | `/opt/backups/zhiyu/<ts>/schema-zhiyu.sql` |
 | Supabase Storage | rsync 桶目录 | 每日 | 30 天 | `/opt/backups/zhiyu-storage/` |
 | Redis | RDB | 每小时 | 24 小时 | `zhiyu-redis-data` volume |
 
-恢复脚本：仓库 `system/scripts/restore.sh`（从 `/opt/backups/zhiyu/<ts>/` 还原）。
-
-> 灾难演练：每季度 1 次，文档化 RTO=4h / RPO=24h。
+恢复脚本：仓库 `system/scripts/restore.sh`。
 
 ---
 
 ## 十、回滚
 
 - 应用：保留上一稳定镜像 tag；`docker compose up -d --no-build` 切回。
-- 数据库：迁移脚本必带 `down`；对破坏性回滚走 PITR / 从最近 dump 还原。
+- 数据库：迁移脚本必带 `down`；对破坏性回滚从最近 dump 还原。
 
 ---
 
@@ -282,17 +263,17 @@ curl -fsS http://115.159.109.23:9100/health
 每个服务必须暴露：
 - `GET /health` → 200 + `{"status":"ok","version":"<git sha>","uptime":<sec>}`
 - `GET /ready` → 检查 DB / Redis / Supabase 连通；任一失败 → 503
-- `GET /metrics` → Prometheus 文本（仅内网访问，nginx 拦外部）
+- `GET /metrics` → Prometheus 文本（仅内网访问）
 
 ---
 
 ## 十二、检查清单
 
-- [ ] dev compose 一条命令拉起整套
+- [ ] `cd system/docker && docker compose up -d --build` 一条命令拉起整套
 - [ ] 4 个对外端口（3100/8100/4100/9100）从 `115.159.109.23` 可访问
-- [ ] supabase 连通 OK（schema `dev_zhiyu` 已创建）
+- [ ] supabase 连通 OK（schema `zhiyu` 已创建）
 - [ ] 所有镜像 < 300MB
 - [ ] `.dockerignore` 排除 agent 工具与 planning 资产
 - [ ] 缺第三方 key 时启动不阻塞
 - [ ] 备份 cron 在跑
-- [ ] 不引用任何禁用的托管 SaaS
+- [ ] 不引用 staging/prod / 任何禁用 SaaS

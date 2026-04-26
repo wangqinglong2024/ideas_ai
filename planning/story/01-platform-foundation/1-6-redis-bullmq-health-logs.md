@@ -28,7 +28,7 @@
 - [ ] `pino` 全局 logger；字段 `ts/level/service/env/version/req_id/user_id?/msg`
 - [ ] request_id 中间件：从 header `X-Request-Id` 取或生成 nanoid，回写响应头
 - [ ] 错误中间件：未处理异常 → pino error + 写入表 `error_events`
-- [ ] 表 `dev_zhiyu.error_events(id, ts, env, service, version, level, fingerprint, message, stack, context jsonb)` 在迁移中创建
+- [ ] 表 `zhiyu.error_events(id, ts, env, service, version, level, fingerprint, message, stack, context jsonb)` 在迁移中创建
 - [ ] FE 全局 `window.onerror` + `unhandledrejection` POST `/api/v1/_telemetry/error`
 - [ ] 敏感字段中间件：黑名单（password/token/secret/card/id_no）写入前替换 `***`
 
@@ -67,7 +67,7 @@ docker logs zhiyu-worker | grep noop_processed
 curl -fsSX POST http://115.159.109.23:8100/api/v1/_telemetry/error \
   -H 'Content-Type: application/json' \
   -d '{"message":"test","stack":"at fake.js:1"}'
-docker exec supabase-db psql -U postgres -d postgres -c "select count(*) from dev_zhiyu.error_events;"
+docker exec supabase-db psql -U postgres -d postgres -c "select count(*) from zhiyu.error_events;"
 ```
 
 MCP Puppeteer：在 `http://115.159.109.23:3100/_debug/throw` 触发未捕获错误，断言后端 `error_events` +1。

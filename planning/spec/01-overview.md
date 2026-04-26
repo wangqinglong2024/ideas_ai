@@ -16,12 +16,12 @@
         ┌──────────────────┐  ┌──────────────────┐
         │  Mobile PWA      │  │  Browser PWA     │
         │  zhiyu-app-fe    │  │  zhiyu-admin-fe  │
-        │  (3100 dev)      │  │  (4100 dev)      │
+        │  (3100)          │  │  (4100)          │
         └────────┬─────────┘  └────────┬─────────┘
                  │ /api/v1            │ /api/v1
                  ▼                     ▼
-        ┌──────────────────────────────────────┐
-        │  global-gateway (nginx, prod 域名)   │   ← 仅生产用
+        ┌─────────────────────────────────────┐
+        │  global-gateway (nginx)               │   ← 可选反代
         └──────────────────┬───────────────────┘
                            │ docker network: gateway_net
                            ▼
@@ -58,7 +58,7 @@
 
 ### 2.1 前端
 
-| 应用 | 目录 | 端口（dev）| 说明 |
+| 应用 | 目录 | 端口 | 说明 |
 |---|---|---|---|
 | App PWA (C 端) | `apps/web` | 3100 | React 19 SPA + PixiJS 画布 |
 | Admin Web (B 端) | `apps/admin` | 4100 | React 19 SPA |
@@ -67,7 +67,7 @@
 
 ### 2.2 后端
 
-| 服务 | 目录 | 端口（dev）| 说明 |
+| 服务 | 目录 | 端口 | 说明 |
 |---|---|---|---|
 | App API | `apps/api` | 8100 | Express，REST `/api/v1/*` |
 | Admin API | `apps/admin-api` | 9100 | Express，REST `/api/v1/admin/*`（可与 App API 复用 codebase，按入口拆容器）|
@@ -91,7 +91,7 @@
 
 ## 三、运行时拓扑
 
-| 服务 | 运行时 | 部署 | dev 副本 |
+| 服务 | 运行时 | 部署 | 副本 |
 |---|---|---|---|
 | zhiyu-app-fe | nginx serve dist | docker compose | 1 |
 | zhiyu-admin-fe | nginx serve dist | docker compose | 1 |
@@ -102,7 +102,7 @@
 | zhiyu-redis | redis:7-alpine | docker compose | 1 |
 | global-gateway | nginx | 既有 docker | — |
 
-prod 副本数：v1 阶段单副本；高可用走 v1.5 评估（多容器 + 健康检查滚动更新）。
+> 本项目只有一个环境：dev；生产由用户自行处理。
 
 ---
 

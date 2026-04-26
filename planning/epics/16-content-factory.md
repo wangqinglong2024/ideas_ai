@@ -1,129 +1,48 @@
-# Epic E16 · AI 内容工厂（Content Factory）
+# Epic E16 · AI 内容工厂占位（Content Factory · Deferred）
 
-> 阶段：**v1.5（Post-MVP）** · 优先级：**P1（v1 不交付）** · 估算：8 周
+> 阶段：**v1.5+（本 dev 周期不交付）** · 优先级：P2
+>
+> 顶层约束：[planning/00-rules.md](../00-rules.md)
+>
+> **本期只做 schema 占位 + Adapter 契约**。完整工作流推迟到未来「LangGraph(TS) + Vercel AI SDK + Anthropic Claude / DeepSeek」重写阶段；本 dev 周期内容由人工 / fixture 入库。
 
-## 摘要
-LangGraph + Claude + DeepSeek 编排，自动生成文章 / 课程节 / 小说章 / 词包，人审 + 评分 + 发布。
+## 范围（本期实际交付）
+- `prompt_templates` / `factory_tasks` / `generations` 表（schema `zhiyu`）
+- `LLMAdapter`、`TTSAdapter`、`ASRAdapter`、`WebSearchAdapter` 接口与 fake 实现
+- 后台 `/admin/factory` 占位页（"v1.5+ 即将上线"）
+- 批量内容导入工具（CSV / JSON → 课程 / 文章 / 小说章 / 词包）
 
-## ⚠️ 范围与排期说明
-- **MVP（v1.0）阶段不实现 LangGraph 自动化**，所有内容由人工/外部脚本写库
-- 本 Epic 整体推迟到 v1.5（M+3 评估，M+4-M+5 实施）
-- 数据库表（prompt_templates / factory_tasks / generations）在 E01 平台基建一并建好（保留 schema），但暂不接入工作流
-- admin 路由 `/admin/factory` 在 E17 仅作为占位（"v1.5 即将上线"），不接入实际功能
+## 非范围（明确推迟）
+- LangGraph 工作流（4 类内容）
+- 真实 LLM / TTS / ASR 接入（key 在 env.md 标记，但本期不消耗）
+- 自动评估 / LangSmith
+- 人审 UI 完整功能
+- 翻译节点
 
-## MVP 替代路径（不在本 Epic）
-- 见 E08（课程）/ E06（探索）/ E11（小说）：均提供后台 CRUD + 批量导入工具
-- TTS：手工调用云 API + R2 上传脚本
-- 翻译：人工 + DeepSeek API 离线脚本
+## Stories（按需 3）
 
-## 范围
-- prompt_templates / factory_tasks / generations 模型
-- 4 类内容工作流
-- 5 语翻译 + TTS
-- 人审 UI
-- 成本 / 质量监控
-
-## Stories
-
-### ZY-16-01 · prompt_templates 表 + 模板管理后台
+### ZY-16-01 · 表 schema + Adapter 契约
 **AC**
-- [ ] 表 + 版本号
-- [ ] 后台 CRUD
-- [ ] 变量预览
-**Tech**：spec/06 § 4
-**估**: M
+- [ ] 三表创建 + 索引；不接入工作流
+- [ ] `LLMAdapter`（generate / stream）、`TTSAdapter`（synthesize → supabase-storage url）、`ASRAdapter`（recognize）、`WebSearchAdapter`（search） 接口 + Fake 实现
+- [ ] 缺真实 key 时 Fake 实现自动启用
+**估**：M
 
-### ZY-16-02 · LangGraph 集成 + checkpointer
+### ZY-16-02 · 后台占位页
 **AC**
-- [ ] LangGraph 包安装
-- [ ] PG checkpointer
-- [ ] 演示 graph 可重放
-**Tech**：spec/06 § 3
-**估**: L
+- [ ] `/admin/factory` 显示「即将上线」+ 导入工具入口
+- [ ] 路由 + 简单文案（i18n）
+**估**：S
 
-### ZY-16-03 · Anthropic + DeepSeek 客户端封装
+### ZY-16-03 · 批量内容导入工具
 **AC**
-- [ ] 统一接口（generate / stream）
-- [ ] 成本上报
-- [ ] 限速 + 重试
-- [ ] 缓存（Redis）
-**Tech**：spec/07 § 4
-**估**: L
-
-### ZY-16-04 · 文章生成工作流
-**AC**
-- [ ] outline → draft → polish → split → pinyin → translate → audio → cover → eval
-- [ ] 自动重试 ≤ 2
-- [ ] 评分 ≥ 0.7 通过
-**估**: L
-
-### ZY-16-05 · 课程节生成工作流
-**AC**
-- [ ] 步骤设计 + payload + scoring
-- [ ] 10-15 步骤
-- [ ] 单节 < $0.50
-**估**: L
-
-### ZY-16-06 · 小说章生成工作流
-**AC**
-- [ ] 上下文记忆（前章）
-- [ ] 3000 字
-- [ ] 单章 < $1.50
-**估**: L
-
-### ZY-16-07 · 词包生成工作流
-**AC**
-- [ ] 主题词检索 / 生成
-- [ ] HSK 关联
-- [ ] 拼音 / 翻译 / 例句 / 音频
-**估**: M
-
-### ZY-16-08 · DeepSeek TTS 集成
-**AC**
-- [ ] 句级音频
-- [ ] R2 存储
-- [ ] CDN 分发
-- [ ] 失败重试
-**估**: M
-
-### ZY-16-09 · 翻译节点（5 语）
-**AC**
-- [ ] Claude（en）+ DeepSeek（vi/th/id）+ pass-through（zh）
-- [ ] 句级翻译缓存
-- [ ] 批量
-**估**: M
-
-### ZY-16-10 · 自动评估器
-**AC**
-- [ ] 4 维度评分
-- [ ] 综合阈值
-- [ ] 触发重试 / 转人审
-**Tech**：spec/06 § 8
-**估**: M
-
-### ZY-16-11 · 人审 UI（后台）
-**AC**
-- [ ] 任务队列 + 派发
-- [ ] 编辑器（多语对比）
-- [ ] 通过 / 修改 / 打回 / 废弃
-- [ ] SLA 计时
-**Tech**：ux/12 § 8
-**估**: L
-
-### ZY-16-12 · 成本 + 质量仪表板
-**AC**
-- [ ] 月度 / 任务级成本
-- [ ] 成功率 / 评分
-- [ ] LangSmith 集成
-- [ ] 预算告警
-**估**: M
-
-## 风险
-- AI 输出质量不稳 → 人审 + 反馈训练
-- 成本超支 → 严格配额 + 缓存
+- [ ] 命令行：`pnpm content:import <type> <file>`
+- [ ] 校验 + 入库 + supabase-storage 上传音频 / 图片
+- [ ] 在 zhiyu-worker 容器内可跑
+**估**：M
 
 ## DoD
-- [ ] 4 类工作流可一键
-- [ ] 单任务成本达标
-- [ ] 人审 UI 完整
-- [ ] LangSmith 可见
+- [ ] 三表 schema 落地；Adapter 接口稳定
+- [ ] 占位页可见
+- [ ] 导入工具 fixture 跑通
+- [ ] 不引用 Dify、不真实调用 Anthropic / OpenAI / DeepSeek

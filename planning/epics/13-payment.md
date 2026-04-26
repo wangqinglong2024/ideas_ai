@@ -1,102 +1,67 @@
 # Epic E13 · 支付与订阅（Payment & Subscription）
 
-> 阶段：M5 · 优先级：P0 · 估算：4 周
+> 阶段：M5 · 优先级：P0 · 估算：3 周（缩减后）
+>
+> 顶层约束：[planning/00-rules.md](../00-rules.md)
+>
+> **范围调整**：本期不引入 Paddle / LemonSqueezy 等真实 MoR，全部走 `PaymentAdapter` 抽象 + fake provider。真实集成由用户在后续阶段自行处理（不在 planning 范围）。
 
 ## 摘要
-Paddle 主 + LemonSqueezy 备的 MoR 支付；月 / 年 / 终身订阅；知语币充值。
+统一 PaymentAdapter 抽象 + sandbox/fake provider；月 / 年 / 终身订阅；ZC 充值；对账与退款流程。
 
 ## 范围
-- Paddle / LemonSqueezy 集成
-- 套餐定义（订阅 + 充值包）
-- Webhook 处理
-- 订单 / 订阅模型
-- 退款 / 续费 / 取消
+- `plans` / `subscriptions` / `payment_orders` / `entitlements` 表
+- `PaymentAdapter` 接口 + `FakePaymentProvider`
+- 套餐选择 UI、订阅管理、退款流程、续费提醒
+- 后台对账视图
 
-## 非范围
-- 本地支付（v1.5）
-- 发票（v1.5）
+## 非范围（明确移交用户后续）
+- Paddle / LemonSqueezy 真实 SDK 与 webhook
+- 银联 / 支付宝 / 微信
+- 发票
 
-## Stories
+## Stories（按需 6）
 
-### ZY-13-01 · plans / subscriptions / payment_orders 表
+### ZY-13-01 · plans / subscriptions / payment_orders / entitlements 表
 **AC**
-- [ ] 表 + 索引 + RLS
-**Tech**：spec/05 § 4.12
-**估**: M
+- [ ] schema `zhiyu` 四表 + 索引 + RLS
+- [ ] `entitlements` 用于课程 / 章节解锁判定
+**估**：M
 
-### ZY-13-02 · Paddle 集成 + Checkout
+### ZY-13-02 · PaymentAdapter 接口 + FakePaymentProvider
 **AC**
-- [ ] Vendor 账号 + Products
-- [ ] 前端 Paddle.js
-- [ ] checkout.open
-- [ ] 客户邮箱预填
-**Tech**：spec/07 § 3.1
-**估**: L
+- [ ] 接口：`createCheckout(planId, userId) → {checkoutUrl, orderId}`、`getOrder(orderId)`、`refund(orderId)`、`subscribe(orderId, callbacks)`、`notifyOrderSuccess(orderId)`
+- [ ] FakeProvider：内存 / DB sandbox；`/api/v1/dev/payment/sandbox?order=` 一键确认成功 / 退款（仅 dev）
+- [ ] 事件总线：`order.succeeded` / `order.refunded` 由 BE 内部 emit；订阅消费（E12 入账、E14 佣金）
+**估**：L
 
-### ZY-13-03 · Paddle Webhook
+### ZY-13-03 · 套餐选择 UI + Checkout
 **AC**
-- [ ] /webhooks/paddle 路由
-- [ ] 签名校验
-- [ ] checkout.completed / subscription.* 处理
-- [ ] 幂等
-**估**: L
+- [ ] 月 / 年 / 终身价目；推荐徽章；本地化货币（接 E04）
+- [ ] 调 `createCheckout`；fake 模式下跳沙盒确认页
+**估**：M
 
-### ZY-13-04 · LemonSqueezy 备份集成
+### ZY-13-04 · 订阅管理 + 退款 + 优惠券
 **AC**
-- [ ] 类似 Paddle
-- [ ] 用户切换入口（Paddle 不可用国家）
-**估**: M
+- [ ] 个人页：当前订阅 / 取消 / 升降级 / 过期提醒
+- [ ] 后台发起退款 → emit `order.refunded` → 反向佣金 + ZC 回收
+- [ ] 简单折扣码 `coupons` 表
+**估**：L
 
-### ZY-13-05 · 套餐选择 UI
+### ZY-13-05 · 续费提醒 + grace period
 **AC**
-- [ ] 月 / 年 / 终身
-- [ ] 价格本地化
-- [ ] 推荐徽章
-- [ ] 全球付款方式
-**估**: M
+- [ ] 到期前 7d / 1d 通过 EmailAdapter（fake 输出 console）+ supabase-realtime 站内通知
+- [ ] 失败续费 grace 3 天
+**估**：S
 
-### ZY-13-06 · 订阅管理（个人页）
+### ZY-13-06 · 财务对账视图（后台）
 **AC**
-- [ ] 当前订阅状态
-- [ ] 取消 / 续费切换
-- [ ] 过期提醒
-- [ ] 升级 / 降级
-**估**: L
-
-### ZY-13-07 · 退款流程
-**AC**
-- [ ] 后台发起 → Paddle Refund
-- [ ] Webhook 收到 → 调整状态
-- [ ] 知语币 / 解锁回收
-- [ ] 反佣回滚
-**估**: M
-
-### ZY-13-08 · 优惠券系统（v1 简单）
-**AC**
-- [ ] 折扣码
-- [ ] 后台生成 + 限额
-- [ ] 应用于 checkout
-**估**: M
-
-### ZY-13-09 · 续费提醒
-**AC**
-- [ ] 到期前 7d / 1d 邮件 + push
-- [ ] 失败续费提醒（grace period）
-**估**: S
-
-### ZY-13-10 · 财务对账
-**AC**
-- [ ] 每日 Paddle 流水拉取
-- [ ] 与本地订单对账
-- [ ] 差异告警
-- [ ] 后台报表
-**估**: L
-
-## 风险
-- Paddle 国家限制 → LemonSqueezy 兜底
-- Webhook 延迟 → 主动轮询补偿
+- [ ] 每日订单聚合：成交 / 退款 / 净额
+- [ ] CSV 导出
+- [ ] 真实供应商接入后此视图复用（接口预留）
+**估**：M
 
 ## DoD
-- [ ] 支付链路全跑通
-- [ ] 退款 + 续费 + 取消 OK
-- [ ] 对账准确
+- [ ] PaymentAdapter 抽象通；FakeProvider 全链路 OK
+- [ ] 订阅 / 退款 / 优惠券 / 提醒 跑通
+- [ ] 不直接 import paddle / lemonsqueezy / stripe SDK

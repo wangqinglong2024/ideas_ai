@@ -24,7 +24,7 @@
 - 不依赖外部 SaaS / 不需任何 API key
 
 ## 退出标准（同 Epic DoD）
-1. `cd system/docker && docker compose -f docker-compose.dev.yml up -d --build` 一键
+1. `cd system/docker && docker compose up -d --build` 一键
 2. `curl http://115.159.109.23:{3100,8100,4100,9100}/...` 全 200
 3. MCP Puppeteer 烟雾全过
 4. `grep -RE "Cloudflare|Render|Doppler|Sentry|PostHog|Better Stack|Dify"` 无业务代码命中
