@@ -30,6 +30,7 @@ import { requireUser, getOptionalUser } from '../../auth-mw.js';
 import { answerPayloadSchema, evaluateStep, resolveStepType, STEP_TYPES } from '../../learning/lesson-engine.js';
 import { awardXp } from '../../learning/progression-svc.js';
 import { XP_AMOUNTS } from '../../learning/xp-algo.js';
+import { userHasLessonEntitlement } from './tracks.js';
 
 const idParam = z.object({ id: z.string().uuid() });
 const stepParams = z.object({ id: z.string().uuid(), n: z.string().regex(/^[0-9]$/) });
@@ -47,6 +48,30 @@ export async function registerLessonRoutes(app: FastifyInstance): Promise<void> 
       return { error: 'lesson_not_found' };
     }
     const user = await maybeUser(req);
+    // Paywall: if lesson is paid AND not pinyin intro, check entitlements.
+    if (!lesson.isFree && !lesson.isPinyinIntro) {
+      if (!user) {
+        reply.code(402);
+        return {
+          error: 'payment_required',
+          reason: 'unauthenticated',
+          paywall: { lesson_id: lesson.id, course_id: lesson.courseId },
+        };
+      }
+      const ok = await userHasLessonEntitlement(user.id, lesson.id, lesson.courseId);
+      if (!ok) {
+        reply.code(402);
+        return {
+          error: 'payment_required',
+          reason: 'no_entitlement',
+          paywall: {
+            lesson_id: lesson.id,
+            course_id: lesson.courseId,
+            options: ['subscription', 'single_lesson', 'zc_unlock'],
+          },
+        };
+      }
+    }
     let progress: Array<{ step_index: number; status: string; score: string }> = [];
     if (user) {
       const rows = await db
@@ -83,7 +108,21 @@ export async function registerLessonRoutes(app: FastifyInstance): Promise<void> 
       reply.code(404);
       return { error: 'lesson_not_found' };
     }
-    // Enforce gating: step n requires step n-1 done (intro exempt).
+    if (!lesson.isFree && !lesson.isPinyinIntro) {
+      const ok = await userHasLessonEntitlement(user.id, lesson.id, lesson.courseId);
+      if (!ok) {
+        reply.code(402);
+        return {
+          error: 'payment_required',
+          reason: 'no_entitlement',
+          paywall: {
+            lesson_id: lesson.id,
+            course_id: lesson.courseId,
+            options: ['subscription', 'single_lesson', 'zc_unlock'],
+          },
+        };
+      }
+    }
     if (stepIndex > 0) {
       const [prev] = await db
         .select()

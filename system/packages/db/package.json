@@ -12,7 +12,8 @@
   "dependencies": {
     "@zhiyu/config": "workspace:*",
     "drizzle-orm": "^0.30.10",
-    "postgres": "^3.4.4"
+    "postgres": "^3.4.4",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "drizzle-kit": "^0.20.17",

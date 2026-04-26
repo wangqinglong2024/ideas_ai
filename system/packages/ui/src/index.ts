@@ -31,3 +31,6 @@ export * from './components/toast.js';
 export * from './components/alert.js';
 export * from './components/empty-state.js';
 export * from './components/layout.js';
+
+// E08 — learning step components
+export * from './learning/index.js';

@@ -1,9 +1,20 @@
 import { useEffect, useMemo, useState, type JSX } from 'react';
 import { useParams, useNavigate } from '@tanstack/react-router';
-import { Button, Card, Spinner } from '@zhiyu/ui';
+import {
+  Button,
+  Card,
+  Spinner,
+  ProgressSegments,
+  StepHost,
+  LessonComplete,
+  PaywallModal,
+  type PaywallOption,
+  type StepResult,
+} from '@zhiyu/ui';
 import { useT } from '@zhiyu/i18n/client';
 import {
   learning,
+  entitlements,
   type AdvanceResult,
   type LessonDetail,
   type LessonStep,
@@ -69,6 +80,9 @@ export function LessonPage(): JSX.Element {
   const [selections, setSelections] = useState<Record<string, number>>({});
   const [submitting, setSubmitting] = useState(false);
   const [lastResult, setLastResult] = useState<AdvanceResult | null>(null);
+  const [paywall, setPaywall] = useState<{ reason: string; options: PaywallOption[]; lesson_id?: string; course_id?: string } | null>(null);
+  const [showCelebration, setShowCelebration] = useState(false);
+  const [exitPrompt, setExitPrompt] = useState(false);
 
   async function load(): Promise<void> {
     setLoading(true);
@@ -76,6 +90,7 @@ export function LessonPage(): JSX.Element {
     try {
       const d = await learning.lesson(lessonId);
       setData(d);
+      setPaywall(null);
       // Resume at first not-yet-passed step.
       const passedSet = new Set(d.progress.filter((p) => p.passed).map((p) => p.step_index));
       let next = 0;
@@ -88,7 +103,21 @@ export function LessonPage(): JSX.Element {
       }
       setStepIdx(next);
     } catch (e) {
-      setError((e as Error).message);
+      const err = e as { status?: number; body?: { error?: string; reason?: string; paywall?: { lesson_id?: string; course_id?: string; options?: PaywallOption[] } } };
+      if (err.status === 402 && err.body?.paywall) {
+        setPaywall({
+          reason: err.body.reason ?? 'no_entitlement',
+          options: err.body.paywall.options ?? [
+            { kind: 'subscription', highlight: true },
+            { kind: 'single_lesson' },
+            { kind: 'zc_unlock', price_zc: 30 },
+          ],
+          lesson_id: err.body.paywall.lesson_id,
+          course_id: err.body.paywall.course_id,
+        });
+      } else {
+        setError((e as Error).message);
+      }
     } finally {
       setLoading(false);
     }
@@ -117,13 +146,68 @@ export function LessonPage(): JSX.Element {
         setSelections({});
       }
       if (res.lesson_complete) {
-        // refresh to reflect completion in progress list.
+        setShowCelebration(true);
+        await load();
+      }
+    } catch (e) {
+      const err = e as { status?: number; body?: { error?: string; reason?: string; paywall?: { lesson_id?: string; course_id?: string; options?: PaywallOption[] } } };
+      if (err.status === 402 && err.body?.paywall) {
+        setPaywall({
+          reason: err.body.reason ?? 'no_entitlement',
+          options: err.body.paywall.options ?? [
+            { kind: 'subscription', highlight: true },
+            { kind: 'single_lesson' },
+            { kind: 'zc_unlock', price_zc: 30 },
+          ],
+          lesson_id: err.body.paywall.lesson_id,
+          course_id: err.body.paywall.course_id,
+        });
+      } else {
+        setError((e as Error).message);
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleStepHostComplete(r: StepResult): Promise<void> {
+    if (!data) return;
+    setSubmitting(true);
+    try {
+      const payload: Record<string, unknown> = stepType === 'intro'
+        ? { seen: true }
+        : stepType === 'speak' || stepType === 'write'
+          ? { confidence: r.confidence ?? r.score }
+          : { answers: r.answers ?? [{ question_id: 'auto', correct: r.passed }] };
+      const res = await learning.answerStep(lessonId, stepIdx, payload);
+      setLastResult(res);
+      if (res.passed && !res.lesson_complete && res.next_step_index !== null) {
+        setStepIdx(res.next_step_index);
+        setSelections({});
+      }
+      if (res.lesson_complete) {
+        setShowCelebration(true);
         await load();
       }
     } catch (e) {
       setError((e as Error).message);
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function handlePaywall(opt: PaywallOption): Promise<void> {
+    if (!paywall) return;
+    try {
+      await entitlements.unlockFake({
+        kind: opt.kind,
+        course_id: paywall.course_id,
+        lesson_id: opt.kind === 'single_lesson' || opt.kind === 'zc_unlock' ? paywall.lesson_id : undefined,
+      });
+      setPaywall(null);
+      await load();
+    } catch (e) {
+      alert((e as Error).message);
     }
   }
 
@@ -139,6 +223,21 @@ export function LessonPage(): JSX.Element {
     return (
       <div className="pt-6 flex items-center justify-center min-h-[40vh]" data-testid="lesson-loading">
         <Spinner />
+      </div>
+    );
+  }
+  if (paywall) {
+    return (
+      <div className="pt-6 max-w-md mx-auto" data-testid="lesson-paywall-page">
+        <PaywallModal
+          open={true}
+          onClose={() => navigate({ to: '/learn' })}
+          reason={paywall.reason}
+          options={paywall.options}
+          lessonId={paywall.lesson_id}
+          courseId={paywall.course_id}
+          onSelect={handlePaywall}
+        />
       </div>
     );
   }
@@ -164,25 +263,57 @@ export function LessonPage(): JSX.Element {
 
   const total = data.lesson.steps.length;
   const passedCount = data.progress.filter((p) => p.passed).length;
+  const passedFlags = Array.from({ length: total }, (_, i) => data.progress.some((p) => p.step_index === i && p.passed));
   const lessonTitle = pickI18n(data.lesson.i18n_title, lang) || data.lesson.slug;
+  // If the seeded step has a payload object, prefer the new StepHost dispatcher.
+  const stepPayload = (currentStep.data as { payload?: Record<string, unknown> } | undefined)?.payload
+    ?? (currentStep.data as Record<string, unknown> | undefined);
+  const usingStepHost = Boolean(
+    stepPayload && (
+      'words' in stepPayload || 'items' in stepPayload || 'sentences' in stepPayload
+      || 'questions' in stepPayload || 'passage' in stepPayload || 'body' in stepPayload
+    ),
+  );
 
   return (
     <div className="pt-2 max-w-3xl" data-testid="lesson-page">
+      {showCelebration && lastResult?.lesson_complete && (
+        <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center p-4">
+          <div className="max-w-md w-full">
+            <LessonComplete
+              passed
+              scorePct={lastResult.score ?? 1}
+              xpAwarded={lastResult.xp?.awarded}
+              onContinue={() => {
+                setShowCelebration(false);
+                navigate({ to: '/learn' });
+              }}
+            />
+          </div>
+        </div>
+      )}
+      {exitPrompt && (
+        <div className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4">
+          <Card className="max-w-sm w-full p-4 space-y-3 text-center">
+            <h3 className="text-h3">退出本课？</h3>
+            <p className="text-sm text-text-secondary">未提交的进度会丢失。</p>
+            <div className="flex justify-center gap-2">
+              <Button variant="secondary" onClick={() => setExitPrompt(false)}>留下</Button>
+              <Button variant="danger" onClick={() => navigate({ to: '/learn' })}>退出</Button>
+            </div>
+          </Card>
+        </div>
+      )}
       <header className="mb-4">
         <button
-          onClick={() => navigate({ to: '/learn' })}
+          onClick={() => setExitPrompt(true)}
           className="text-sm text-text-secondary hover:underline"
           data-testid="lesson-back"
         >
           ← 返回课程
         </button>
         <h1 className="mt-1 text-h1">{lessonTitle}</h1>
-        <div className="mt-3 h-2 w-full rounded-full bg-surface-2">
-          <div
-            className="h-2 rounded-full bg-primary transition-all"
-            style={{ width: `${Math.round((passedCount / total) * 100)}%` }}
-          />
-        </div>
+        <ProgressSegments total={total} current={stepIdx} passed={passedFlags} className="mt-3" />
         <p className="mt-1 text-micro text-text-tertiary">
           {passedCount}/{total} 步骤完成 · 当前 step #{stepIdx + 1} ({stepType})
         </p>
@@ -196,7 +327,15 @@ export function LessonPage(): JSX.Element {
           <span className="rounded-full bg-surface-2 px-2 py-0.5 text-micro text-text-secondary">{stepType}</span>
         </div>
 
-        {stepType === 'intro' ? (
+        {usingStepHost ? (
+          <StepHost
+            type={stepType}
+            payload={stepPayload as Record<string, unknown>}
+            title={currentStep.title}
+            lang={lang}
+            onComplete={(r) => void handleStepHostComplete(r)}
+          />
+        ) : stepType === 'intro' ? (
           <p className="text-body" data-testid="lesson-intro">
             {(currentStep.data?.hint as string | undefined) ?? '准备好了吗？点击「完成此步」开始本课的学习。'}
           </p>

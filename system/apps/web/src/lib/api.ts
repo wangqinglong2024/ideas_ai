@@ -322,6 +322,104 @@ export const learning = {
     }),
 };
 
+// ---- E08 Tracks / Stages / Lessons ---------------------------------------
+export interface TrackSummary {
+  track: string;
+  stages: number;
+  lessons: number;
+  title_i18n: Record<string, string>;
+}
+export interface TrackStage {
+  id: string;
+  slug: string;
+  stage_no: number;
+  hsk_level: number;
+  is_premium: boolean;
+  i18n_title: Record<string, string>;
+  i18n_summary: Record<string, string>;
+  cover_url: string | null;
+  sort_order: number;
+  lesson_count: number;
+  unlocked: boolean;
+}
+export interface StageLesson {
+  id: string;
+  slug: string;
+  position: number;
+  chapter_no: number;
+  lesson_no: number;
+  i18n_title: Record<string, string>;
+  is_free: boolean;
+  is_pinyin_intro: boolean;
+  estimated_minutes: number;
+}
+export interface StageDetail {
+  track: string;
+  stage_no: number;
+  course: CourseCard;
+  lessons: StageLesson[];
+  progress: Record<string, { done_steps: number; total_steps: number; passed: boolean }>;
+}
+export interface Entitlement {
+  id: string;
+  user_id: string;
+  kind: 'subscription' | 'single_lesson' | 'single_course' | 'zc_unlock';
+  course_id: string | null;
+  lesson_id: string | null;
+  source: string;
+  expires_at: string | null;
+  created_at: string;
+}
+
+export const tracks = {
+  list: () => api<{ items: TrackSummary[] }>('/api/v1/tracks'),
+  detail: (track: string) =>
+    api<{ track: string; title_i18n: Record<string, string>; stages: TrackStage[] }>(`/api/v1/tracks/${track}`),
+  stage: (track: string, stageNo: number) =>
+    api<StageDetail>(`/api/v1/tracks/${track}/stages/${stageNo}`),
+};
+
+export const entitlements = {
+  list: () => api<{ items: Entitlement[] }>('/api/v1/me/entitlements'),
+  unlockFake: (payload: { kind: 'subscription' | 'single_lesson' | 'single_course' | 'zc_unlock'; course_id?: string; lesson_id?: string }) =>
+    api<{ entitlement: Entitlement }>('/api/v1/me/entitlements/fake', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+};
+
+export const pinyinIntro = {
+  status: () =>
+    api<{ items: Array<{ slug: string; lesson_id: string; done: boolean }>; all_done: boolean }>(
+      '/api/v1/me/pinyin-intro/status',
+    ),
+  complete: (slug: string) =>
+    api<{ ok: boolean; all_done: boolean }>(`/api/v1/pinyin-intro/${slug}/complete`, { method: 'POST' }),
+};
+
+export interface StageExamQuestion {
+  id: string;
+  type: string;
+  payload: Record<string, unknown>;
+}
+
+export const stageExam = {
+  cooldown: (track: string, stageNo: number) =>
+    api<{ in_cooldown: boolean; seconds_remaining: number; last_score_pct?: number }>(
+      `/api/v1/stage-exam/${track}/${stageNo}/cooldown`,
+    ),
+  start: (track: string, stageNo: number) =>
+    api<{ token: string; ttl_minutes: number; pass_pct: number; questions: StageExamQuestion[] }>(
+      `/api/v1/stage-exam/${track}/${stageNo}/start`,
+      { method: 'POST' },
+    ),
+  submit: (track: string, stageNo: number, payload: { token: string; answers: Record<string, string>; duration_s?: number }) =>
+    api<{ passed: boolean; score_pct: number; correct: number; total: number; pass_pct: number; cooldown_days: number; next_stage_unlocked: number | null }>(
+      `/api/v1/stage-exam/${track}/${stageNo}/submit`,
+      { method: 'POST', body: JSON.stringify(payload) },
+    ),
+};
+
 export const srs = {
   queue: (limit = 20) => api<{ items: SrsCard[] }>(`/api/v1/srs/queue?limit=${limit}`),
   add: (payload: { word: string; pinyin?: string; i18n_gloss?: Record<string, string>; source?: string }) =>

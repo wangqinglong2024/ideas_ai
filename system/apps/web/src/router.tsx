@@ -23,6 +23,9 @@ import { MeNotesPage } from './pages/me/notes.js';
 import { PlayPage } from './routes/play.js';
 import { GamePlaygroundRoute } from './routes/play-game.js';
 import { LearnPage } from './routes/learn.js';
+import { LearnTrackPage } from './routes/learn-track.js';
+import { LearnStagePage } from './routes/learn-stage.js';
+import { StageExamPage } from './routes/stage-exam.js';
 import { LessonPage } from './routes/lesson.js';
 import { SrsPage } from './routes/srs.js';
 import { WordbookPage } from './pages/wordbook.js';
@@ -76,6 +79,25 @@ const learnRoute = createRoute({
   getParentRoute: () => appShellLayout,
   path: '/learn',
   component: LearnPage,
+});
+
+const learnTrackRoute = createRoute({
+  getParentRoute: () => appShellLayout,
+  path: '/learn/$track',
+  component: LearnTrackPage,
+});
+
+const learnStageRoute = createRoute({
+  getParentRoute: () => appShellLayout,
+  path: '/learn/$track/$stageNo',
+  component: LearnStagePage,
+});
+
+const stageExamRoute = createRoute({
+  getParentRoute: () => appShellLayout,
+  path: '/learn/$track/$stageNo/exam',
+  beforeLoad: requireAuth,
+  component: StageExamPage,
 });
 
 const lessonRoute = createRoute({
@@ -164,6 +186,9 @@ const routeTree = rootRoute.addChildren([
     playRoute,
     playGameRoute,
     learnRoute,
+    learnTrackRoute,
+    learnStageRoute,
+    stageExamRoute,
     lessonRoute,
     srsRoute,
     coinRoute,

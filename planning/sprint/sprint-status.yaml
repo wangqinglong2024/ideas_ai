@@ -132,21 +132,25 @@ epics:
 
   - id: E09
     name: 游戏引擎共享层
-    status: ready-for-dev
+    status: done
     sprint: S09
     story_count: 11
+    last_updated: '2026-04-26'
+    artifacts:
+      code_review: planning/sprint/E09-code-review.md
+      retrospective: planning/sprint/E09-retrospective.md
     stories:
-      - { id: ZY-09-01,    title: Engine skeleton + tick,                    status: ready-for-dev }
-      - { id: ZY-09-02,    title: PixiRenderer,                              status: ready-for-dev }
-      - { id: ZY-09-03,    title: SceneManager,                              status: ready-for-dev }
-      - { id: ZY-09-04,    title: AssetLoader,                               status: ready-for-dev }
-      - { id: ZY-09-05,    title: KeyboardInput,                             status: ready-for-dev }
-      - { id: ZY-09-05-v1, title: TouchInput 5 手势,                         status: ready-for-dev }
-      - { id: ZY-09-06,    title: AudioManager Howler,                       status: ready-for-dev }
-      - { id: ZY-09-07,    title: PhysicsWorld Matter.js,                    status: ready-for-dev }
-      - { id: ZY-09-08,    title: WordPack + pinyin index,                   status: ready-for-dev }
-      - { id: ZY-09-09,    title: 横屏全屏 + safe-area,                      status: ready-for-dev }
-      - { id: ZY-09-10,    title: leaderboard + game_runs + realtime,        status: ready-for-dev }
+      - { id: ZY-09-01,    title: Engine skeleton + tick,                    status: done }
+      - { id: ZY-09-02,    title: PixiRenderer,                              status: done }
+      - { id: ZY-09-03,    title: SceneManager,                              status: done }
+      - { id: ZY-09-04,    title: AssetLoader,                               status: done }
+      - { id: ZY-09-05,    title: KeyboardInput,                             status: done }
+      - { id: ZY-09-05-v1, title: TouchInput 5 手势,                         status: done }
+      - { id: ZY-09-06,    title: AudioManager Howler,                       status: done }
+      - { id: ZY-09-07,    title: PhysicsWorld Matter.js,                    status: done }
+      - { id: ZY-09-08,    title: WordPack + pinyin index,                   status: done }
+      - { id: ZY-09-09,    title: 横屏全屏 + safe-area,                      status: done }
+      - { id: ZY-09-10,    title: leaderboard + game_runs + realtime,        status: done }
 
   - id: E10
     name: 12 款游戏

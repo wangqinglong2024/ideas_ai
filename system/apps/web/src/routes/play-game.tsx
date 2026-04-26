@@ -30,8 +30,15 @@ interface PlayGroundParams {
 
 export function GamePlaygroundPage({ slug = 'hanzi-ninja' }: { slug?: string } = {}): JSX.Element {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const analytics = useMemo(() => new GameAnalytics({ endpoint: '/api/v1/_telemetry/event' }), []);
-  const lbClient = useMemo(() => new LeaderboardClient({ baseUrl: '/api/v1/games' }), []);
+  const apiBase = (import.meta.env.VITE_API_BASE ?? '') as string;
+  const analytics = useMemo(
+    () => new GameAnalytics({ endpoint: `${apiBase}/api/v1/_telemetry/event` }),
+    [apiBase],
+  );
+  const lbClient = useMemo(
+    () => new LeaderboardClient({ baseUrl: `${apiBase}/api/v1/games` }),
+    [apiBase],
+  );
   const ctrl = useMemo(() => new PinyinKeyboardController(), []);
 
   const [pinyinInput, setPinyinInput] = useState('');

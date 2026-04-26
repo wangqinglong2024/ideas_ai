@@ -9,6 +9,9 @@ import { registerWordbookMistakeRoutes } from './wordbook-mistakes.js';
 import { registerProgressionRoutes } from './progression.js';
 import { registerHskRoutes } from './hsk.js';
 import { registerDashboardRoutes } from './dashboard.js';
+import { registerTrackRoutes } from './tracks.js';
+import { registerPinyinIntroRoutes } from './pinyin-intro.js';
+import { registerStageExamRoutes } from './stage-exam.js';
 
 export async function registerLearningRoutes(app: FastifyInstance): Promise<void> {
   await registerEnrollmentRoutes(app);
@@ -18,4 +21,7 @@ export async function registerLearningRoutes(app: FastifyInstance): Promise<void
   await registerProgressionRoutes(app);
   await registerHskRoutes(app);
   await registerDashboardRoutes(app);
+  await registerTrackRoutes(app);
+  await registerPinyinIntroRoutes(app);
+  await registerStageExamRoutes(app);
 }

@@ -27,8 +27,13 @@ export const courses = zhiyu.table(
     slug: text('slug').notNull().unique(),
     track: text('track').notNull().default('daily'),
     hskLevel: smallint('hsk_level').notNull().default(1),
+    stageNo: smallint('stage_no').notNull().default(1),
+    level: smallint('level').notNull().default(1),
+    isPremium: boolean('is_premium').notNull().default(false),
+    priceZc: integer('price_zc').notNull().default(0),
     i18nTitle: jsonb('i18n_title').notNull().default(sql`'{}'::jsonb`),
     i18nSummary: jsonb('i18n_summary').notNull().default(sql`'{}'::jsonb`),
+    i18nDescription: jsonb('i18n_description').notNull().default(sql`'{}'::jsonb`),
     coverUrl: text('cover_url'),
     isFree: boolean('is_free').notNull().default(true),
     status: text('status').notNull().default('published'),
@@ -37,7 +42,10 @@ export const courses = zhiyu.table(
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => ({ trackIdx: index('courses_track_idx').on(t.track, t.sortOrder) }),
+  (t) => ({
+    trackIdx: index('courses_track_idx').on(t.track, t.sortOrder),
+    trackStageIdx: index('courses_track_stage_idx').on(t.track, t.stageNo, t.sortOrder),
+  }),
 );
 
 export const lessons = zhiyu.table(
@@ -50,6 +58,11 @@ export const lessons = zhiyu.table(
     i18nSummary: jsonb('i18n_summary').notNull().default(sql`'{}'::jsonb`),
     steps: jsonb('steps').notNull().default(sql`'[]'::jsonb`),
     position: smallint('position').notNull().default(0),
+    chapterNo: smallint('chapter_no').notNull().default(1),
+    lessonNo: smallint('lesson_no').notNull().default(1),
+    isFree: boolean('is_free').notNull().default(true),
+    isPinyinIntro: boolean('is_pinyin_intro').notNull().default(false),
+    priceZc: integer('price_zc').notNull().default(0),
     estimatedMinutes: smallint('estimated_minutes').notNull().default(8),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),

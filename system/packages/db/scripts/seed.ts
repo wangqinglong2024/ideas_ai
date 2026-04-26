@@ -11,6 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SEEDS = [
   { name: 'discover-china', file: '../seed/discover-china/seed.ts' },
   { name: 'learning', file: '../seed/learning/seed.ts' },
+  { name: 'courses-e08', file: '../seed/courses/seed.ts' },
 ];
 
 let failed = 0;

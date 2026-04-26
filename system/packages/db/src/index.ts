@@ -6,3 +6,5 @@ export * from './discover.js';
 export * from './games.js';
 export * from './learning-core.js';
 export * from './learning-srs.js';
+export * from './courses-e08.js';
+export * from './step-payloads.js';
