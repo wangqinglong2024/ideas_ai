@@ -1,11 +1,11 @@
 .app-shell { min-height: 100vh; padding-bottom: calc(80px + env(safe-area-inset-bottom)); overflow-x: hidden; }
-.app-main { width: min(100%, 768px); min-width: 0; margin: 0 auto; padding: 84px 16px 24px; }
+.app-main { width: 100%; min-width: 0; margin: 0; padding: 84px max(20px, env(safe-area-inset-left)) 24px max(20px, env(safe-area-inset-right)); }
 .app-main.immersive { width: 100%; max-width: none; padding: 0; }
-.page { width: min(100%, 768px); min-width: 0; margin: 0 auto; }
+.page { width: 100%; min-width: 0; margin: 0 auto; max-width: 1280px; }
 .stack { display: grid; gap: 16px; }
 .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .between { justify-content: space-between; }
-.app-header { position: fixed; z-index: 20; top: 0; left: 50%; transform: translateX(-50%); width: min(100%, 768px); min-height: calc(56px + env(safe-area-inset-top)); padding: env(safe-area-inset-top) 12px 0; display: flex; justify-content: space-between; align-items: center; }
+.app-header { position: fixed; z-index: 20; top: 0; left: 0; transform: none; width: 100%; min-height: calc(56px + env(safe-area-inset-top)); padding: env(safe-area-inset-top) max(20px, env(safe-area-inset-left)) 0 max(20px, env(safe-area-inset-right)); display: flex; justify-content: space-between; align-items: center; }
 .app-header.transparent { background: transparent; box-shadow: none; }
 .brand { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
 .seal { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 7px; background: var(--brand-cinnabar); color: #fff8ec; font-family: var(--font-title-zh); }
@@ -13,7 +13,7 @@
 .header-actions { display: flex; align-items: center; gap: 2px; }
 .locale-pill { min-height: 44px; display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--line-hair); border-radius: 999px; padding: 0 8px; background: linear-gradient(135deg, var(--glass-highlight), var(--glass-porcelain)); backdrop-filter: blur(14px) saturate(118%); }
 .locale-pill select { border: 0; background: transparent; color: var(--text-ink); font-weight: 700; }
-.tabbar { position: fixed; left: 50%; bottom: 0; z-index: 20; transform: translateX(-50%); width: min(100%, 768px); height: calc(64px + env(safe-area-inset-bottom)); padding: 6px 8px env(safe-area-inset-bottom); display: grid; grid-template-columns: repeat(4, 1fr); }
+.tabbar { position: fixed; left: 0; bottom: 0; z-index: 20; transform: none; width: 100%; height: calc(64px + env(safe-area-inset-bottom)); padding: 6px max(8px, env(safe-area-inset-left)) env(safe-area-inset-bottom) max(8px, env(safe-area-inset-right)); display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1280px; left: 50%; transform: translateX(-50%); }
 .tabbar button { border: 0; background: transparent; color: var(--text-ink-muted); display: grid; place-items: center; gap: 2px; min-height: 52px; }
 .tabbar [aria-current='page'] { color: var(--brand-jade); }
 .hero-book, .reading-cover, .game-cover, .profile-hero { border-radius: 12px; padding: 24px; background: linear-gradient(135deg, var(--surface-paper), var(--brand-porcelain)); border: 1px solid var(--line-hair); }

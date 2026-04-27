@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, BookOpen, Globe2, Moon, Search, Share2, Sun } from 'lucide-react';
 import { Button, Card, IconButton, Toast } from '@zhiyu/ui';
-import { localeFromPath, locales, stripLocale, t, type Locale } from '@zhiyu/i18n';
+import { localeFromPath, localeLabels, locales, stripLocale, t, type Locale } from '@zhiyu/i18n';
 import { navItems } from './data';
 import { AuthPages, OnboardingPage, ProfilePage } from './pages/AuthPages';
 import { CoursePage, GamePage } from './pages/LearningPages';
@@ -61,7 +61,7 @@ function AppHeader({ route, navigate, changeLocale, theme, setTheme, immersive }
     <div className="header-actions">
       {route.route !== '/discover' ? <IconButton label="Back" onClick={() => history.back()}><ArrowLeft size={20} /></IconButton> : null}
       <IconButton label="Search" onClick={() => navigate('/discover/search')}><Search size={20} /></IconButton>
-      <label className="locale-pill" title={t(route.locale, 'language')}><Globe2 size={16} /><select value={route.locale} onChange={(event) => changeLocale(event.currentTarget.value as Locale)}>{locales.map((locale) => <option key={locale} value={locale}>{locale.toUpperCase()}</option>)}</select></label>
+      <label className="locale-pill" title={t(route.locale, 'language')}><Globe2 size={16} /><select value={route.locale} onChange={(event) => changeLocale(event.currentTarget.value as Locale)}>{locales.map((locale) => <option key={locale} value={locale}>{localeLabels[locale]}</option>)}</select></label>
       <IconButton label="Share" onClick={() => navigator.clipboard?.writeText(location.href)}><Share2 size={20} /></IconButton>
       <IconButton label="Toggle theme" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>{theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}</IconButton>
     </div>

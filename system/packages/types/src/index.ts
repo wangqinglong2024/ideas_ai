@@ -10,7 +10,7 @@ export type ApiResponse<T> = {
   error: ApiError | null;
 };
 
-export type Locale = 'en' | 'vi' | 'th' | 'id';
+export type Locale = 'en' | 'vi' | 'th' | 'id' | 'zh-CN';
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type AdminRole = 'admin' | 'editor' | 'reviewer' | 'cs' | 'viewer';
 

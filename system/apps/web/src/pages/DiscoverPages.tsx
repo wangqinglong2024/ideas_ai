@@ -43,7 +43,6 @@ export function CategoryPage({ route, locale, loggedIn, navigate }: { route: str
   const slug = route.split('/')[2] ?? 'history';
   const [categories, setCategories] = useState<Category[]>([]);
   const [articles, setArticles] = useState<Article[]>([]);
-  const [hsk, setHsk] = useState('all');
   const [length, setLength] = useState('all');
   const [sort, setSort] = useState('latest');
   const [locked, setLocked] = useState(false);
@@ -51,14 +50,14 @@ export function CategoryPage({ route, locale, loggedIn, navigate }: { route: str
   useEffect(() => { getJson<Category[]>(`/api/v1/discover/categories?locale=${locale}`).then((data) => setCategories(data ?? [])); }, [locale]);
   useEffect(() => {
     setLocked(false);
-    api.request<Article[]>(`/api/v1/discover/categories/${slug}/articles?hsk_level=${hsk}&length=${length}&sort=${sort}&locale=${locale}`).then((result) => { setArticles(result.data ?? []); setLocked(result.error?.code === 'discover_category_login_required'); });
-  }, [slug, hsk, length, sort, locale, loggedIn]);
+    api.request<Article[]>(`/api/v1/discover/categories/${slug}/articles?length=${length}&sort=${sort}&locale=${locale}`).then((result) => { setArticles(result.data ?? []); setLocked(result.error?.code === 'discover_category_login_required'); });
+  }, [slug, length, sort, locale, loggedIn]);
   return <section className="page stack">
     <div className="reading-cover category-cover"><Badge>{category?.motif ?? 'Discover China'}</Badge><h1>{category ? categoryTitle(category, locale) : slug}</h1><p>{category?.contentBoundary ?? localizedText(category?.description, locale, '')}</p></div>
     {locked ? <Paywall onLogin={() => navigate('/auth/login')} /> : null}
-    {!locked ? <div className="filterbar glass-porcelain"><Select label="HSK" value={hsk} onChange={(event) => setHsk(event.currentTarget.value)}><option value="all">All HSK</option><option value="1">HSK 1</option><option value="2-3">HSK 2-3</option><option value="4-5">HSK 4-5</option><option value="6+">HSK 6+</option></Select><Select label="Length" value={length} onChange={(event) => setLength(event.currentTarget.value)}><option value="all">All lengths</option><option value="short">Short</option><option value="medium">Medium</option><option value="long">Long</option></Select><Select label="Sort" value={sort} onChange={(event) => setSort(event.currentTarget.value)}><option value="latest">Latest</option><option value="popular">Popular</option></Select></div> : null}
+    {!locked ? <div className="filterbar glass-porcelain"><Select label="Length" value={length} onChange={(event) => setLength(event.currentTarget.value)}><option value="all">All lengths</option><option value="short">Short</option><option value="medium">Medium</option><option value="long">Long</option></Select><Select label="Sort" value={sort} onChange={(event) => setSort(event.currentTarget.value)}><option value="latest">Latest</option><option value="popular">Popular</option></Select></div> : null}
     {!locked && articles.length === 0 ? <EmptyState title="No articles match these filters" /> : null}
-    <div className="article-list">{articles.map((article) => <Card key={article.id} variant="interactive"><div className="row between"><div><h3>{titleFor(article, locale)}</h3><p>{localizedText(article.summary, locale)} · HSK {article.hskLevel} · {article.readingMinutes} min</p></div><Button onClick={() => navigate(`/discover/${slug}/${article.slug}`)}>Read</Button></div></Card>)}</div>
+    <div className="article-list">{articles.map((article) => <Card key={article.id} variant="interactive"><div className="row between"><div><h3>{titleFor(article, locale)}</h3><p>{localizedText(article.summary, locale)} · {article.readingMinutes} min</p></div><Button onClick={() => navigate(`/discover/${slug}/${article.slug}`)}>Read</Button></div></Card>)}</div>
   </section>;
 }
 
@@ -145,7 +144,7 @@ export function ArticlePage({ route, locale, loggedIn, navigate }: { route: stri
   if (!article) return <section className="page stack"><Card>Loading article...</Card></section>;
   return <article className={`page stack article-page ${fontClass[prefs.fontSize]}`}>
     <div className="reading-progress"><span style={{ width: `${progress}%` }} /></div>
-    <div className="reading-cover article-cover"><Badge>HSK {article.hskLevel}</Badge><h1>{titleFor(article, locale)}</h1><p>{localizedText(article.summary, locale)} · {article.wordCount} words · {article.readingMinutes} min · {article.favoriteCount} saves</p><div className="row"><Button variant="secondary" onClick={() => sentences[0] ? handleSentencePlay(sentences[0], 0) : undefined}><Volume2 size={18} />Audio</Button><Button variant={favorite ? 'secondary' : 'ghost'} onClick={toggleFavorite}><Bookmark size={18} />{favorite ? 'Saved' : 'Save'}</Button><Button variant="ghost" onClick={shareArticle}><Share2 size={18} />Share</Button></div></div>
+    <div className="reading-cover article-cover"><Badge>Discover China</Badge><h1>{titleFor(article, locale)}</h1><p>{localizedText(article.summary, locale)} · {article.wordCount} words · {article.readingMinutes} min · {article.favoriteCount} saves</p><div className="row"><Button variant="secondary" onClick={() => sentences[0] ? handleSentencePlay(sentences[0], 0) : undefined}><Volume2 size={18} />Audio</Button><Button variant={favorite ? 'secondary' : 'ghost'} onClick={toggleFavorite}><Bookmark size={18} />{favorite ? 'Saved' : 'Save'}</Button><Button variant="ghost" onClick={shareArticle}><Share2 size={18} />Share</Button></div></div>
     <div className="sentence-list">{sentences.map((sentence, index) => <SentenceCard key={sentence.id} zh={sentence.zh} pinyin={sentence.pinyin} pinyinTones={sentence.pinyinTones} translation={localizedText(sentence.translations, locale)} keyPoint={localizedText(sentence.keyPoint, locale)} pinyinMode={prefs.pinyinMode} translationMode={prefs.translationMode} active={activeSentence === sentence.id} saved={favorite} noteOpen={noteSentence === sentence.id} noteValue={note} noteError={note.length > 500 ? '500 characters max' : undefined} onPlay={() => handleSentencePlay(sentence, index)} onSave={toggleFavorite} onCopy={() => navigator.clipboard?.writeText(sentence.zh)} onNoteOpen={() => setNoteSentence(noteSentence === sentence.id ? null : sentence.id)} onNoteChange={setNote} onNoteSubmit={() => saveNote(sentence.id)} />)}</div>
     <Card><h2>重点提示</h2>{keyPoints.map((point) => <p key={point}>{point}</p>)}</Card>
     <Card><h2>这篇文章对你有帮助吗？</h2><div className="rating-row">{[1, 2, 3, 4, 5].map((value) => <button key={value} aria-label={`${value} stars`} aria-pressed={rating === value} onClick={() => rate(value)}><Star size={22} fill={rating && value <= rating ? 'currentColor' : 'none'} /></button>)}</div></Card>

@@ -10,7 +10,7 @@ export type SessionRecord = { id: string; userId: string; deviceName: string; ip
 export type OtpRecord = { userId: string; email: string; code: string; purpose: string; expiresAt: number; attempts: number; consumedAt?: string };
 export type OrderRecord = { id: string; userId: string; status: string; amountUsd: number; plan: string; createdAt: string; webhookHistory: string[] };
 export type AdminRecord = { id: string; email: string; passwordHash: string; displayName: string; role: AdminRole; languages: string[]; isOnline: boolean; status: string; failedAttempts: number; lockedUntil: string | null; lastLoginAt: string | null };
-type LocaleKey = 'en' | 'vi' | 'th' | 'id';
+type LocaleKey = 'en' | 'vi' | 'th' | 'id' | 'zh-CN';
 type LocalizedText = Record<LocaleKey, string>;
 type DiscoverRuntimeSnapshot = { categories: DiscoverCategoryRecord[]; articles: DiscoverArticleRecord[]; contentVersions: Record<string, unknown>[]; contentImports: Record<string, unknown>[]; reviewQueue: ReviewQueueRecord[]; updatedAt: string };
 export type DiscoverCategoryRecord = { id: string; slug: string; code: string; nameZh: string; nameTranslations: LocalizedText; description: LocalizedText; coverImageUrl: string; themeColor: string; displayOrder: number; status: 'active' | 'draft'; public: boolean; motif: string; sourceDoc: string; contentBoundary: string; articleCount: number; recentTitles: string[] };
@@ -66,7 +66,7 @@ const adminUsers: AdminRecord[] = [
   { id: randomUUID(), email: 'admin@example.com', passwordHash, displayName: 'Admin', role: 'admin' as AdminRole, languages: ['en', 'vi'], isOnline: false, status: 'active', failedAttempts: 0, lockedUntil: null, lastLoginAt: null },
   { id: randomUUID(), email: 'editor@example.com', passwordHash, displayName: 'Editor', role: 'editor' as AdminRole, languages: ['en'], isOnline: false, status: 'active', failedAttempts: 0, lockedUntil: null, lastLoginAt: null },
   { id: randomUUID(), email: 'reviewer@example.com', passwordHash, displayName: 'Reviewer', role: 'reviewer' as AdminRole, languages: ['en', 'vi', 'th'], isOnline: false, status: 'active', failedAttempts: 0, lockedUntil: null, lastLoginAt: null },
-  { id: randomUUID(), email: 'cs@example.com', passwordHash, displayName: 'Customer Support', role: 'cs' as AdminRole, languages: ['en', 'vi', 'th', 'id'], isOnline: false, status: 'active', failedAttempts: 0, lockedUntil: null, lastLoginAt: null },
+  { id: randomUUID(), email: 'cs@example.com', passwordHash, displayName: 'Customer Support', role: 'cs' as AdminRole, languages: ['en', 'vi', 'th', 'id', 'zh-CN'], isOnline: false, status: 'active', failedAttempts: 0, lockedUntil: null, lastLoginAt: null },
   { id: randomUUID(), email: 'viewer@example.com', passwordHash, displayName: 'Viewer', role: 'viewer' as AdminRole, languages: ['en'], isOnline: false, status: 'active', failedAttempts: 0, lockedUntil: null, lastLoginAt: null }
 ];
 

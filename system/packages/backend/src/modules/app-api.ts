@@ -57,7 +57,7 @@ function hasValidUserToken(req: express.Request, env: ReturnType<typeof createBa
 
 function localeParam(req: express.Request) {
   const value = String(req.query.locale ?? req.headers['x-zhiyu-locale'] ?? 'en');
-  return ['en', 'vi', 'th', 'id'].includes(value) ? value as 'en' | 'vi' | 'th' | 'id' : 'en';
+  return ['en', 'vi', 'th', 'id', 'zh-CN'].includes(value) ? value as 'en' | 'vi' | 'th' | 'id' | 'zh-CN' : 'en';
 }
 
 function requestParam(req: express.Request, key: string) {
@@ -317,7 +317,7 @@ function registerMeRoutes(router: express.Router, env: ReturnType<typeof createB
       pushEnabled: req.body?.push_enabled ?? req.body?.pushEnabled ?? current.pushEnabled,
       theme: req.body?.theme ?? current.theme
     };
-    if (['en', 'vi', 'th', 'id'].includes(next.uiLang)) user.uiLang = next.uiLang;
+    if (['en', 'vi', 'th', 'id', 'zh-CN'].includes(next.uiLang)) user.uiLang = next.uiLang;
     state.preferences.set(user.id, next);
     return ok(res, { preferences: next });
   });
