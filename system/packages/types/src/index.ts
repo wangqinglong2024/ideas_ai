@@ -32,6 +32,7 @@ export type UserProfile = {
 };
 
 export type UserPreferences = {
+  uiLang: Locale;
   pinyinMode: 'letters' | 'tones' | 'hidden';
   translationMode: 'inline' | 'collapse' | 'hidden';
   fontSize: 'S' | 'M' | 'L' | 'XL';

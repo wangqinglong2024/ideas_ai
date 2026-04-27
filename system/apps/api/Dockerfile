@@ -5,6 +5,7 @@ COPY apps/api/package.json apps/api/package.json
 COPY packages/types/package.json packages/types/package.json
 COPY packages/adapters/package.json packages/adapters/package.json
 COPY packages/backend/package.json packages/backend/package.json
+COPY packages/db/package.json packages/db/package.json
 RUN corepack enable && pnpm install --frozen-lockfile
 
 FROM deps AS build
@@ -26,8 +27,9 @@ HEALTHCHECK --interval=30s CMD wget -qO- http://localhost:8080/health || exit 1
 CMD ["node", "apps/api/dist/server.js"]
 
 FROM deps AS dev
-COPY apps/api apps/api
-COPY packages packages
+COPY --chown=node:node apps/api apps/api
+COPY --chown=node:node packages packages
+RUN chown -R node:node /app/apps/api /app/packages
 USER node
 ENV NODE_ENV=development
 EXPOSE 8080

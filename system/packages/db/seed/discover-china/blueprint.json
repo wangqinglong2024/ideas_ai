@@ -1,0 +1,32 @@
+{
+  "$schema_version": "1.0",
+  "module": "discover-china",
+  "minimumArticlesPerCategory": 3,
+  "locales": ["en", "vi", "th", "id"],
+  "categories": [
+    { "slug": "history", "name_zh": "中国历史", "source": "content/china/01-chinese-history.md", "public": true, "titles": ["中国朝代速览：五分钟了解五千年", "秦始皇：统一文字、货币和度量衡的故事", "丝绸之路：连接中国与世界的古老商路"] },
+    { "slug": "cuisine", "name_zh": "中国美食", "source": "content/china/02-chinese-cuisine.md", "public": true, "titles": ["四川火锅：为什么中国人这么爱吃辣？", "北京烤鸭：300 年历史的国宝级美食", "广东早茶：一盅两件的悠闲时光"] },
+    { "slug": "scenic", "name_zh": "名胜风光", "source": "content/china/03-scenic-wonders.md", "public": true, "titles": ["万里长城：世界最长的城墙有多长？", "张家界：阿凡达的灵感来源", "西安兵马俑：沉睡两千年的地下军队"] },
+    { "slug": "festivals", "name_zh": "传统节日", "source": "content/china/04-festivals-customs.md", "public": false, "titles": ["春节：为什么中国人要过两个新年？", "十二生肖：你是哪个动物？", "中秋节：嫦娥、月亮和月饼的故事"] },
+    { "slug": "arts", "name_zh": "艺术非遗", "source": "content/china/05-arts-heritage.md", "public": false, "titles": ["中国书法入门：为什么汉字可以是艺术？", "景德镇青花瓷：惊艳世界的中国蓝", "剪纸艺术：一张纸能变出什么花样？"] },
+    { "slug": "music-opera", "name_zh": "音乐戏曲", "source": "content/china/06-music-opera.md", "public": false, "titles": ["古筝：最让外国人着迷的中国乐器", "京剧脸谱：颜色背后的秘密", "茉莉花：全世界都在唱的中国民歌"] },
+    { "slug": "literature", "name_zh": "文学经典", "source": "content/china/07-classic-literature.md", "public": false, "titles": ["孙悟空：中国最有名的超级英雄", "李白：一个爱喝酒的天才诗人", "静夜思：中国人人会背的第一首诗"] },
+    { "slug": "idioms", "name_zh": "成语典故", "source": "content/china/08-idioms-allusions.md", "public": false, "titles": ["画龙点睛：为什么龙不能画眼睛？", "守株待兔 vs 刻舟求剑：两个关于等的成语", "中国人最爱说的 10 个成语"] },
+    { "slug": "philosophy", "name_zh": "哲学思想", "source": "content/china/09-philosophy-wisdom.md", "public": false, "titles": ["孔子：影响中国两千年的老师", "道是什么？老子用五千字改变世界", "孙子兵法：全世界商人都在读的中国古书"] },
+    { "slug": "modern", "name_zh": "当代中国", "source": "content/china/10-modern-china.md", "public": false, "titles": ["移动支付：中国人出门为什么不带钱包？", "微信：10 亿人离不开的 App", "中国高铁：坐一次就会爱上的交通工具"] },
+    { "slug": "fun-hanzi", "name_zh": "趣味汉字", "source": "content/china/11-fun-with-chinese.md", "public": false, "titles": ["520 = 我爱你：中文数字密码大揭秘", "汉字是画出来的：10 个象形字的前世今生", "不好意思和对不起到底有什么区别？"] },
+    { "slug": "myths", "name_zh": "中国神话传说", "source": "content/china/12-myths-legends.md", "public": false, "titles": ["盘古开天辟地：中国人的宇宙起源故事", "十二生肖的来历：动物们的一场大赛跑", "牛郎织女：银河两岸的爱情传说"] }
+  ],
+  "articleTemplate": {
+    "i18n": {
+      "zh-CN": { "summary": "面向中文学习者的发现中国文章，包含中文、拼音、四语翻译、关键点、音频占位和跨模块入口。" },
+      "en": { "summary": "A Discover China article with Chinese, pinyin, translations, key points, audio placeholders, and cross-module CTAs." },
+      "vi": { "summary": "Bài đọc Discover China có tiếng Trung, pinyin, bản dịch, điểm chính, âm thanh mẫu và lối sang mô-đun khác." },
+      "th": { "summary": "บทอ่าน Discover China พร้อมภาษาจีน พินอิน คำแปล จุดสำคัญ เสียงตัวอย่าง และทางไปโมดูลอื่น" },
+      "id": { "summary": "Artikel Discover China dengan bahasa Mandarin, pinyin, terjemahan, poin kunci, audio contoh, dan CTA lintas modul." }
+    },
+    "bodyMinimumZhChars": 300,
+    "sentencesPerArticle": 4,
+    "media": { "cover": "seed://images/discover-china/{slug}.webp", "audio": "seed://audio/discover-china/{slug}.mp3" }
+  }
+}

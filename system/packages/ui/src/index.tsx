@@ -1,5 +1,5 @@
-import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode } from 'react';
-import { AlertCircle, Check, Info, Loader, Search, TriangleAlert, XCircle } from 'lucide-react';
+import type { ButtonHTMLAttributes, InputHTMLAttributes, ReactNode, SelectHTMLAttributes, TextareaHTMLAttributes } from 'react';
+import { AlertCircle, Bookmark, Check, Clipboard, Info, Loader, NotebookPen, Search, TriangleAlert, Volume2, XCircle } from 'lucide-react';
 
 export function cx(...items: Array<string | false | null | undefined>) {
   return items.filter(Boolean).join(' ');
@@ -13,9 +13,19 @@ export function IconButton({ label, children, ...props }: ButtonHTMLAttributes<H
   return <button className="zy-icon-button" aria-label={label} title={label} {...props}>{children}</button>;
 }
 
-export function Input({ label, error, id, ...props }: InputHTMLAttributes<HTMLInputElement> & { label: string; error?: string }) {
+export function Input({ label, error, id, ...props }: InputHTMLAttributes<HTMLInputElement> & { label: string; error?: string | undefined }) {
   const inputId = id ?? `input-${label.replace(/\s+/g, '-').toLowerCase()}`;
   return <label className="zy-field" htmlFor={inputId}><span>{label}</span><input id={inputId} aria-invalid={Boolean(error)} aria-describedby={error ? `${inputId}-error` : undefined} {...props} />{error ? <small id={`${inputId}-error`}><AlertCircle size={14} />{error}</small> : null}</label>;
+}
+
+export function TextArea({ label, error, id, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement> & { label: string; error?: string | undefined }) {
+  const inputId = id ?? `textarea-${label.replace(/\s+/g, '-').toLowerCase()}`;
+  return <label className="zy-field" htmlFor={inputId}><span>{label}</span><textarea id={inputId} aria-invalid={Boolean(error)} aria-describedby={error ? `${inputId}-error` : undefined} {...props} />{error ? <small id={`${inputId}-error`}><AlertCircle size={14} />{error}</small> : null}</label>;
+}
+
+export function Select({ label, error, id, children, ...props }: SelectHTMLAttributes<HTMLSelectElement> & { label: string; error?: string | undefined; children: ReactNode }) {
+  const inputId = id ?? `select-${label.replace(/\s+/g, '-').toLowerCase()}`;
+  return <label className="zy-field" htmlFor={inputId}><span>{label}</span><select id={inputId} aria-invalid={Boolean(error)} aria-describedby={error ? `${inputId}-error` : undefined} {...props}>{children}</select>{error ? <small id={`${inputId}-error`}><AlertCircle size={14} />{error}</small> : null}</label>;
 }
 
 export function SearchInput(props: Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & { label?: string }) {
@@ -57,6 +67,19 @@ export function PinyinText({ zh, pinyin, mode = 'tones' }: { zh: string; pinyin:
   return <span className="zy-pinyin-text"><strong>{zh}</strong>{mode === 'hidden' ? null : <small>{mode === 'letters' ? pinyin.replace(/[1-5]/g, '') : pinyin}</small>}</span>;
 }
 
-export function SentenceCard({ zh, pinyin, translation }: { zh: string; pinyin: string; translation: string }) {
-  return <Card variant="paper" className="zy-sentence"><PinyinText zh={zh} pinyin={pinyin} /><p>{translation}</p><div><Button variant="ghost" size="sm">Play</Button><Button variant="ghost" size="sm">Note</Button><Button variant="ghost" size="sm">Save</Button></div></Card>;
+export function SentenceCard({ zh, pinyin, pinyinTones, translation, keyPoint, pinyinMode = 'tones', translationMode = 'inline', active = false, saved = false, noteOpen = false, noteValue = '', noteError, onPlay, onSave, onCopy, onNoteOpen, onNoteChange, onNoteSubmit }: { zh: string; pinyin: string; pinyinTones?: string | undefined; translation: string; keyPoint?: string | null | undefined; pinyinMode?: 'letters' | 'tones' | 'hidden'; translationMode?: 'inline' | 'collapse' | 'hidden'; active?: boolean; saved?: boolean; noteOpen?: boolean; noteValue?: string; noteError?: string | undefined; onPlay?: () => void; onSave?: () => void; onCopy?: () => void; onNoteOpen?: () => void; onNoteChange?: (value: string) => void; onNoteSubmit?: () => void }) {
+  const spokenPinyin = pinyinMode === 'tones' ? (pinyinTones ?? pinyin) : pinyin;
+  const translationVisible = translationMode !== 'hidden';
+  return <Card variant="paper" className={cx('zy-sentence', active && 'is-playing')}>
+    <PinyinText zh={zh} pinyin={spokenPinyin} mode={pinyinMode} />
+    {translationVisible ? <p className={cx(translationMode === 'collapse' && 'is-muted')}>{translation}</p> : null}
+    {keyPoint ? <small className="zy-key-point">{keyPoint}</small> : null}
+    <div className="zy-sentence-actions" role="toolbar" aria-label="Sentence actions">
+      <Button variant="ghost" size="sm" onClick={onPlay}><Volume2 size={16} />Play</Button>
+      <Button variant={saved ? 'secondary' : 'ghost'} size="sm" onClick={onSave}><Bookmark size={16} />{saved ? 'Saved' : 'Save'}</Button>
+      <Button variant="ghost" size="sm" onClick={onNoteOpen}><NotebookPen size={16} />Note</Button>
+      <Button variant="ghost" size="sm" onClick={onCopy}><Clipboard size={16} />Copy</Button>
+    </div>
+    {noteOpen ? <div className="zy-sentence-note"><TextArea label="Sentence note" maxLength={500} value={noteValue} onChange={(event) => onNoteChange?.(event.currentTarget.value)} error={noteError} /><Button size="sm" onClick={onNoteSubmit}>Save note</Button></div> : null}
+  </Card>;
 }

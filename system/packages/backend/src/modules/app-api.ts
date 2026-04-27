@@ -6,8 +6,9 @@ import { randomUUID } from 'node:crypto';
 import { captchaAdapter, emailAdapter } from '@zhiyu/adapters';
 import { readToken, requireAuth, signToken } from '../runtime/auth.js';
 import { createBaseApp, installErrorHandler } from '../runtime/base-app.js';
-import { audit, defaultPreferences, now, publicUser, state } from '../runtime/state.js';
+import { audit, defaultPreferences, now, publicUser, refreshDiscoverContent, state } from '../runtime/state.js';
 import { created, failure, ok, pageMeta } from '../runtime/response.js';
+import type { DiscoverArticleRecord } from '../runtime/state.js';
 
 const rateLimitHandler = (_req: express.Request, res: express.Response) => failure(res, 429, 'RATE_LIMITED', 'Too many requests');
 const authLimiter = rateLimit({ windowMs: 60_000, limit: 10, standardHeaders: true, legacyHeaders: false, handler: rateLimitHandler });
@@ -51,6 +52,80 @@ function hasValidUserToken(req: express.Request, env: ReturnType<typeof createBa
     return decoded.kind === 'user' && decoded.tokenUse !== 'refresh' && state.users.some((user) => user.id === decoded.userId && user.status === 'active');
   } catch {
     return false;
+  }
+}
+
+function localeParam(req: express.Request) {
+  const value = String(req.query.locale ?? req.headers['x-zhiyu-locale'] ?? 'en');
+  return ['en', 'vi', 'th', 'id'].includes(value) ? value as 'en' | 'vi' | 'th' | 'id' : 'en';
+}
+
+function requestParam(req: express.Request, key: string) {
+  const value = req.params[key];
+  return Array.isArray(value) ? value[0] ?? '' : value ?? '';
+}
+
+function positiveInt(value: unknown, fallback: number, max = 50) {
+  const parsed = Number(value);
+  if (!Number.isSafeInteger(parsed) || parsed < 1) return fallback;
+  return Math.min(parsed, max);
+}
+
+function canReadCategory(req: express.Request, env: ReturnType<typeof createBaseApp>['env'], categorySlug: string) {
+  const category = state.categories.find((item) => item.slug === categorySlug);
+  return Boolean(category && category.status === 'active' && (category.public || hasValidUserToken(req, env)));
+}
+
+function gateDiscover(req: express.Request, res: express.Response, env: ReturnType<typeof createBaseApp>['env'], categorySlug: string) {
+  const category = state.categories.find((item) => item.slug === categorySlug);
+  if (!category || category.status !== 'active') {
+    failure(res, 404, 'CATEGORY_NOT_FOUND', 'Discover China category not found');
+    return true;
+  }
+  if (canReadCategory(req, env, categorySlug)) return false;
+  state.events.push({ id: randomUUID(), ts: now(), type: 'discover_gate', anonId: req.headers['x-anon-id'] ?? 'anon-browser', deviceId: req.headers['x-device-id'] ?? 'browser', ipHash: `dev-${req.ip ?? 'local'}`, props: { categorySlug } });
+  failure(res, 401, 'discover_category_login_required', 'Register free to unlock all Discover China categories');
+  return true;
+}
+
+function publishedArticle(slugOrId: string) {
+  return state.articles.find((item) => (item.slug === slugOrId || item.id === slugOrId) && item.status === 'published') ?? null;
+}
+
+function assertReadableArticle(req: express.Request, res: express.Response, env: ReturnType<typeof createBaseApp>['env'], slugOrId: string) {
+  const article = publishedArticle(slugOrId);
+  if (!article) {
+    failure(res, 404, 'ARTICLE_NOT_FOUND', 'Article not found');
+    return null;
+  }
+  if (gateDiscover(req, res, env, article.categorySlug)) return null;
+  return article;
+}
+
+function articleListItem(article: DiscoverArticleRecord) {
+  return { ...article, sentences: undefined, category: article.categorySlug, title: article.titleZh, estimatedMinutes: article.readingMinutes };
+}
+
+function articlePayload(article: DiscoverArticleRecord, userId?: string) {
+  return {
+    ...article,
+    category: article.categorySlug,
+    title: article.titleZh,
+    estimatedMinutes: article.readingMinutes,
+    progress: userId ? state.readingProgress.find((item) => item.userId === userId && item.targetId === article.id) ?? null : null,
+    favorite: userId ? state.favorites.some((item) => item.userId === userId && item.targetType === 'article' && item.targetId === article.id) : false,
+    userRating: userId ? state.ratings.find((item) => item.userId === userId && item.targetId === article.id)?.rating ?? null : null
+  };
+}
+
+function activeUserId(req: express.Request, env: ReturnType<typeof createBaseApp>['env']) {
+  const token = readToken(req, 'user');
+  if (!token) return null;
+  try {
+    const decoded = jwt.verify(token, env.JWT_SECRET) as { kind?: string; tokenUse?: string; userId?: string };
+    return decoded.kind === 'user' && decoded.tokenUse !== 'refresh' ? decoded.userId ?? null : null;
+  } catch {
+    return null;
   }
 }
 
@@ -229,7 +304,20 @@ function registerMeRoutes(router: express.Router, env: ReturnType<typeof createB
     const user = activeUser(req, res);
     if (!user) return;
     const current = state.preferences.get(user.id) ?? { ...defaultPreferences };
-    const next = { ...current, ...req.body };
+    const next = {
+      ...current,
+      uiLang: req.body?.ui_lang ?? req.body?.uiLang ?? current.uiLang,
+      pinyinMode: req.body?.pinyin_mode ?? req.body?.pinyinMode ?? current.pinyinMode,
+      translationMode: req.body?.translation_mode ?? req.body?.translationMode ?? current.translationMode,
+      fontSize: req.body?.font_size ?? req.body?.fontSize ?? current.fontSize,
+      ttsSpeed: req.body?.tts_speed ?? req.body?.ttsSpeed ?? current.ttsSpeed,
+      ttsVoice: req.body?.tts_voice ?? req.body?.ttsVoice ?? current.ttsVoice,
+      emailMarketing: req.body?.email_marketing ?? req.body?.emailMarketing ?? current.emailMarketing,
+      emailLearningReminder: req.body?.email_learning_reminder ?? req.body?.emailLearningReminder ?? current.emailLearningReminder,
+      pushEnabled: req.body?.push_enabled ?? req.body?.pushEnabled ?? current.pushEnabled,
+      theme: req.body?.theme ?? current.theme
+    };
+    if (['en', 'vi', 'th', 'id'].includes(next.uiLang)) user.uiLang = next.uiLang;
     state.preferences.set(user.id, next);
     return ok(res, { preferences: next });
   });
@@ -301,18 +389,128 @@ export function createAppApi() {
     return created(res, event);
   });
 
-  app.get('/api/v1/discover/categories', (_req, res) => ok(res, state.categories));
+  app.use('/api/v1/discover', asyncRoute(async (_req, _res, next) => {
+    await refreshDiscoverContent();
+    next();
+  }));
+
+  app.get('/api/v1/discover/categories', (req, res) => {
+    const userId = activeUserId(req, env);
+    const readCounts = new Map(state.readingProgress.filter((item) => item.userId === userId && item.isCompleted).map((item) => [item.targetId, item]));
+    return ok(res, state.categories.filter((category) => category.status === 'active').map((category) => ({ ...category, readCount: state.articles.filter((article) => article.categorySlug === category.slug && article.status === 'published' && readCounts.has(article.id)).length, locked: !category.public && !userId })));
+  });
+
   app.get('/api/v1/discover/categories/:slug/articles', (req, res) => {
-    const rows = state.articles.filter((item) => item.category === req.params.slug);
-    return ok(res, rows.map((item) => ({ ...item, sentences: undefined })), pageMeta(1, rows.length, rows.length));
+    if (gateDiscover(req, res, env, req.params.slug)) return;
+    const page = positiveInt(req.query.page, 1);
+    const limit = positiveInt(req.query.limit, 20);
+    const hskFilter = String(req.query.hsk_level ?? 'all');
+    const lengthFilter = String(req.query.length ?? 'all');
+    const sort = String(req.query.sort ?? 'latest');
+    let rows = state.articles.filter((item) => item.categorySlug === req.params.slug && item.status === 'published');
+    if (hskFilter === '1') rows = rows.filter((item) => item.hskLevel <= 1);
+    if (hskFilter === '2-3') rows = rows.filter((item) => item.hskLevel >= 2 && item.hskLevel <= 3);
+    if (hskFilter === '4-5') rows = rows.filter((item) => item.hskLevel >= 4 && item.hskLevel <= 5);
+    if (hskFilter === '6+') rows = rows.filter((item) => item.hskLevel >= 6);
+    if (['short', 'medium', 'long'].includes(lengthFilter)) rows = rows.filter((item) => item.length === lengthFilter);
+    rows = [...rows].sort((left, right) => sort === 'popular' ? right.viewCount - left.viewCount : Date.parse(right.publishedAt) - Date.parse(left.publishedAt));
+    const start = (page - 1) * limit;
+    return ok(res, rows.slice(start, start + limit).map(articleListItem), pageMeta(page, limit, rows.length));
   });
+
   app.get('/api/v1/discover/articles/:slug', (req, res) => {
-    const article = state.articles.find((item) => item.slug === req.params.slug);
-    if (!article) return failure(res, 404, 'ARTICLE_NOT_FOUND', 'Article not found');
-    const isPublic = article.public || hasValidUserToken(req, env);
-    if (!isPublic) return ok(res, { ...article, sentences: [], locked: true, audioUrl: null });
-    return ok(res, article);
+    const article = assertReadableArticle(req, res, env, req.params.slug);
+    if (!article) return;
+    article.viewCount += 1;
+    const userId = activeUserId(req, env) ?? undefined;
+    return ok(res, articlePayload(article, userId));
   });
+
+  app.get('/api/v1/discover/search', (req, res) => {
+    const keyword = String(req.query.q ?? '').trim().toLowerCase();
+    const locale = localeParam(req);
+    const page = positiveInt(req.query.page, 1);
+    const limit = positiveInt(req.query.limit, 20);
+    let rows = state.articles.filter((article) => article.status === 'published' && canReadCategory(req, env, article.categorySlug));
+    if (keyword) {
+      rows = rows.filter((article) => [article.titleZh, article.titleTranslations[locale], article.summary[locale], ...article.sentences.map((sentence) => `${sentence.zh} ${sentence.translations[locale]}`)].join(' ').toLowerCase().includes(keyword));
+    }
+    const start = (page - 1) * limit;
+    return ok(res, rows.slice(start, start + limit).map((article) => ({ ...articleListItem(article), highlight: keyword || null })), pageMeta(page, limit, rows.length));
+  });
+
+  app.post('/api/v1/discover/articles/:id/progress', requireAuth(env, 'user'), (req, res) => {
+    const article = assertReadableArticle(req, res, env, requestParam(req, 'id'));
+    if (!article) return;
+    const progressPct = Number(req.body?.progress_pct ?? req.body?.progressPct ?? 0);
+    const readingTimeDelta = Number(req.body?.reading_time_delta ?? req.body?.readingTimeDelta ?? 0);
+    const lastSentenceId = req.body?.last_sentence_id ?? req.body?.lastSentenceId ?? null;
+    if (!Number.isFinite(progressPct) || progressPct < 0 || progressPct > 100) return failure(res, 400, 'PROGRESS_INVALID', 'progressPct must be between 0 and 100');
+    if (!Number.isFinite(readingTimeDelta) || readingTimeDelta < 0) return failure(res, 400, 'READING_TIME_INVALID', 'readingTimeDelta must be a non-negative number');
+    if (lastSentenceId && !article.sentences.some((sentence) => sentence.id === lastSentenceId)) return failure(res, 400, 'SENTENCE_INVALID', 'lastSentenceId is not part of this article');
+    const current = state.readingProgress.find((item) => item.userId === req.auth?.userId && item.targetId === article.id);
+    const next = { userId: req.auth?.userId ?? '', targetType: 'article' as const, targetId: article.id, lastSentenceId, progressPct, isCompleted: progressPct >= 100 || Boolean(req.body?.is_completed ?? req.body?.isCompleted), readingTimeSeconds: readingTimeDelta, lastReadAt: now() };
+    if (current) Object.assign(current, { ...next, readingTimeSeconds: current.readingTimeSeconds + next.readingTimeSeconds });
+    else state.readingProgress.push(next);
+    state.events.push({ id: randomUUID(), ts: now(), userId: req.auth?.userId, type: next.isCompleted ? 'discover_completed' : 'discover_progress', props: { articleId: article.id, progressPct: next.progressPct } });
+    return ok(res, current ?? next);
+  });
+
+  app.post('/api/v1/discover/articles/:id/favorite', requireAuth(env, 'user'), (req, res) => {
+    const article = assertReadableArticle(req, res, env, requestParam(req, 'id'));
+    if (!article) return;
+    const index = state.favorites.findIndex((item) => item.userId === req.auth?.userId && item.targetType === 'article' && item.targetId === article.id);
+    const favorite = index === -1;
+    if (favorite) state.favorites.push({ userId: req.auth?.userId ?? '', targetType: 'article', targetId: article.id, createdAt: now() });
+    else state.favorites.splice(index, 1);
+    article.favoriteCount = Math.max(0, article.favoriteCount + (favorite ? 1 : -1));
+    state.events.push({ id: randomUUID(), ts: now(), userId: req.auth?.userId, type: 'discover_favorite', props: { articleId: article.id, favorite } });
+    return ok(res, { favorite, favoriteCount: article.favoriteCount });
+  });
+
+  app.post('/api/v1/discover/sentences/:id/note', requireAuth(env, 'user'), (req, res) => {
+    const article = state.articles.find((item) => item.status === 'published' && item.sentences.some((sentence) => sentence.id === req.params.id));
+    if (!article) return failure(res, 404, 'SENTENCE_NOT_FOUND', 'Sentence not found');
+    if (gateDiscover(req, res, env, article.categorySlug)) return;
+    const sentence = article.sentences.find((item) => item.id === req.params.id);
+    if (!sentence) return failure(res, 404, 'SENTENCE_NOT_FOUND', 'Sentence not found');
+    const content = String(req.body?.content ?? '').trim();
+    if (!content || content.length > 500) return failure(res, 400, 'NOTE_INVALID', 'Note must be 1-500 characters');
+    const existing = state.notes.find((item) => item.userId === req.auth?.userId && item.targetId === sentence.id);
+    if (existing) Object.assign(existing, { content, updatedAt: now() });
+    else state.notes.push({ id: randomUUID(), userId: req.auth?.userId ?? '', targetType: 'sentence', targetId: sentence.id, content, createdAt: now(), updatedAt: now() });
+    return ok(res, state.notes.find((item) => item.userId === req.auth?.userId && item.targetId === sentence.id) ?? null);
+  });
+
+  app.post('/api/v1/discover/articles/:id/rating', requireAuth(env, 'user'), (req, res) => {
+    const article = assertReadableArticle(req, res, env, requestParam(req, 'id'));
+    if (!article) return;
+    const rating = Number(req.body?.rating);
+    if (!Number.isSafeInteger(rating) || rating < 1 || rating > 5) return failure(res, 400, 'RATING_INVALID', 'Rating must be 1-5');
+    const existing = state.ratings.find((item) => item.userId === req.auth?.userId && item.targetId === article.id);
+    if (existing) existing.rating = rating;
+    else state.ratings.push({ userId: req.auth?.userId ?? '', targetType: 'article', targetId: article.id, rating, comment: req.body?.comment, createdAt: now() });
+    const ratings = state.ratings.filter((item) => item.targetId === article.id);
+    article.ratingCount = ratings.length;
+    article.ratingAvg = Number((ratings.reduce((sum, item) => sum + item.rating, 0) / Math.max(1, ratings.length)).toFixed(2));
+    return ok(res, { rating, ratingAvg: article.ratingAvg, ratingCount: article.ratingCount });
+  });
+
+  app.post('/api/v1/discover/articles/:id/share-card', requireAuth(env, 'user'), (req, res) => {
+    const article = assertReadableArticle(req, res, env, requestParam(req, 'id'));
+    if (!article) return;
+    const card = { id: randomUUID(), userId: req.auth?.userId, articleId: article.id, width: 1080, height: 1920, url: `seed://share/discover/${article.slug}.png`, qr: `/discover/${article.categorySlug}/${article.slug}?ref=${req.auth?.userId?.slice(0, 6) ?? 'DEV'}`, expiresAt: new Date(Date.now() + 90 * 24 * 60 * 60_000).toISOString(), createdAt: now() };
+    state.shareCards.push(card);
+    state.events.push({ id: randomUUID(), ts: now(), userId: req.auth?.userId, type: 'discover_share', props: { articleId: article.id } });
+    return created(res, card);
+  });
+
+  app.get('/api/v1/me/discover-summary', requireAuth(env, 'user'), asyncRoute(async (req, res) => {
+    await refreshDiscoverContent();
+    const completed = state.readingProgress.filter((item) => item.userId === req.auth?.userId && item.isCompleted);
+    const favoriteRows = state.favorites.filter((item) => item.userId === req.auth?.userId && item.targetType === 'article');
+    return ok(res, { readArticles: completed.length, readWords: completed.reduce((sum, item) => sum + (state.articles.find((article) => article.id === item.targetId)?.wordCount ?? 0), 0), favorites: favoriteRows.length, notes: state.notes.filter((item) => item.userId === req.auth?.userId).length, favoriteArticles: favoriteRows.map((favorite) => state.articles.find((article) => article.id === favorite.targetId)).filter(Boolean).map((article) => article ? articleListItem(article) : null).filter(Boolean), notesList: state.notes.filter((item) => item.userId === req.auth?.userId) });
+  }));
   app.get('/api/v1/courses/map', (_req, res) => ok(res, ['daily', 'ecommerce', 'factory', 'hsk'].map((track) => ({ track, stages: 12, chaptersPerStage: 12, free: 'stage-1 chapters 1-3' }))));
   app.get('/api/v1/games', (_req, res) => ok(res, ['hanzi-ninja', 'pinyin-shooter', 'tone-bubbles', 'hanzi-tetris', 'whack-hanzi', 'hanzi-match3', 'hanzi-snake', 'hanzi-rhythm', 'hanzi-runner', 'pinyin-defense', 'memory-match', 'hanzi-slingshot'].map((slug, index) => ({ slug, title: slug.replaceAll('-', ' '), active: true, seconds: 60, recommendedHsk: [(index % 3) + 1] }))));
   app.get('/api/v1/games/:slug/wordpacks', (_req, res) => ok(res, [{ track: 'hsk', stage: 1, available: true }, { track: 'ecommerce', stage: 9, available: Boolean(_req.headers.authorization) }]));

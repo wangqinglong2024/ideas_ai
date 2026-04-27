@@ -12,6 +12,7 @@
     "test": "turbo run test",
     "db:migrate": "pnpm --filter @zhiyu/db migrate",
     "seed:all": "pnpm --filter @zhiyu/db seed:all",
+    "seed:discover-china": "pnpm --filter @zhiyu/db seed:discover-china",
     "seed:user": "pnpm --filter @zhiyu/db seed:user",
     "preflight": "node scripts/preflight.mjs"
   },

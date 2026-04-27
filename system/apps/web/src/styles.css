@@ -11,14 +11,38 @@
 .seal { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 7px; background: var(--brand-cinnabar); color: #fff8ec; font-family: var(--font-title-zh); }
 .seal.small { width: 28px; height: 28px; font-size: 14px; }
 .header-actions { display: flex; align-items: center; gap: 2px; }
+.locale-pill { min-height: 44px; display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--line-hair); border-radius: 999px; padding: 0 8px; background: linear-gradient(135deg, var(--glass-highlight), var(--glass-porcelain)); backdrop-filter: blur(14px) saturate(118%); }
+.locale-pill select { border: 0; background: transparent; color: var(--text-ink); font-weight: 700; }
 .tabbar { position: fixed; left: 50%; bottom: 0; z-index: 20; transform: translateX(-50%); width: min(100%, 768px); height: calc(64px + env(safe-area-inset-bottom)); padding: 6px 8px env(safe-area-inset-bottom); display: grid; grid-template-columns: repeat(4, 1fr); }
 .tabbar button { border: 0; background: transparent; color: var(--text-ink-muted); display: grid; place-items: center; gap: 2px; min-height: 52px; }
 .tabbar [aria-current='page'] { color: var(--brand-jade); }
 .hero-book, .reading-cover, .game-cover, .profile-hero { border-radius: 12px; padding: 24px; background: linear-gradient(135deg, var(--surface-paper), var(--brand-porcelain)); border: 1px solid var(--line-hair); }
+.hero-ink-flow { position: relative; overflow: hidden; min-height: 220px; display: grid; align-content: center; }
+.hero-ink-flow::after { content: ''; position: absolute; inset: auto -18% -34% -18%; height: 58%; background: linear-gradient(105deg, transparent, rgba(111,159,141,.26), rgba(255,248,236,.3), transparent); filter: blur(18px); animation: zy-ink-flow 16s var(--ease-brush, ease) infinite alternate; }
+.hero-ink-flow > * { position: relative; z-index: 1; }
 .hero-book h1, .reading-cover h1, .game-cover h1 { font-family: var(--font-title-zh); font-size: 32px; margin: 12px 0 8px; }
+.hero-actions, .cross-module-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+.today-strip { border-radius: 12px; padding: 10px; display: flex; align-items: center; gap: 8px; overflow-x: auto; }
+.today-strip button, .article-list.compact button { border: 0; border-radius: 999px; padding: 8px 12px; background: var(--surface-paper); color: var(--brand-jade); }
 .category-grid, .track-grid, .game-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .category-tile, .track-card, .game-card { min-width: 0; min-height: 132px; border: 1px solid var(--line-hair); border-radius: 8px; padding: 12px; text-align: left; color: var(--text-ink); display: grid; gap: 8px; align-content: start; overflow-wrap: anywhere; }
+.category-tile { position: relative; overflow: hidden; transition: transform 180ms, box-shadow 180ms, border-color 180ms; }
+.category-tile::after { content: ''; position: absolute; inset: auto -12% -22% -12%; height: 48%; background: linear-gradient(100deg, transparent, color-mix(in srgb, var(--tile-accent, var(--brand-jade)) 26%, transparent), transparent); filter: blur(14px); opacity: .86; }
+.category-tile:hover { transform: translateY(-1px); box-shadow: var(--shadow-glass-strong); border-color: color-mix(in srgb, var(--tile-accent, var(--brand-jade)) 38%, var(--line-hair)); }
+.category-tile > * { position: relative; z-index: 1; }
 .article-list, .sentence-list { display: grid; gap: 12px; }
+.filterbar, .search-panel { border-radius: 12px; padding: 12px; display: flex; align-items: end; gap: 10px; flex-wrap: wrap; }
+.filterbar .zy-field, .search-panel .zy-field { min-width: 160px; }
+.search-panel .zy-search { flex: 1 1 260px; }
+.reading-progress { position: sticky; top: calc(56px + env(safe-area-inset-top)); z-index: 12; height: 4px; overflow: hidden; border-radius: 999px; background: var(--surface-paper-muted); }
+.reading-progress span { display: block; height: 100%; background: linear-gradient(90deg, var(--brand-jade), var(--brand-celadon)); transition: width 180ms; }
+.article-cover { background: linear-gradient(140deg, var(--surface-paper), color-mix(in srgb, var(--brand-porcelain) 78%, var(--brand-celadon))); }
+.reader-small .zy-pinyin-text strong { font-size: 16px; }
+.reader-medium .zy-pinyin-text strong { font-size: 18px; }
+.reader-large .zy-pinyin-text strong { font-size: 22px; }
+.reader-xl .zy-pinyin-text strong { font-size: 26px; }
+.rating-row { display: flex; gap: 6px; }
+.rating-row button { width: 44px; height: 44px; border: 1px solid var(--line-hair); border-radius: 999px; background: var(--surface-paper); color: var(--brand-aged-gold); }
 .stage-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
 .stage-grid button { border: 1px solid var(--line-hair); border-radius: 8px; background: var(--surface-paper); min-height: 64px; display: grid; place-items: center; }
 .learning-sentence { font-size: 28px; font-family: var(--font-zh); }
@@ -34,6 +58,9 @@
 .avatar { width: 64px; height: 64px; border-radius: 16px; display: grid; place-items: center; background: var(--brand-cinnabar); color: #fff8ec; font-size: 28px; font-family: var(--font-title-zh); }
 .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
 .metric-grid span, .setting-line { border: 1px solid var(--line-hair); border-radius: 8px; padding: 10px; }
+.settings-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
 .setting-line { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+.setting-line input { accent-color: var(--brand-jade); }
 .offline { position: fixed; z-index: 30; top: 72px; left: 50%; transform: translateX(-50%); }
-@media (max-width: 520px) { .category-grid, .track-grid, .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stage-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .app-main { padding-left: 12px; padding-right: 12px; } }
+@media (max-width: 520px) { .category-grid, .track-grid, .game-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stage-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .metric-grid, .settings-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .app-main { padding-left: 12px; padding-right: 12px; } .hero-book h1, .reading-cover h1 { font-size: 28px; } }
+@media (prefers-reduced-motion: reduce) { .hero-ink-flow::after { animation: none !important; transform: none; } }

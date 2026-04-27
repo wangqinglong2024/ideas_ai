@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, BookOpen, Moon, Search, Share2, Sun } from 'lucide-react';
-import { Badge, Button, Card, IconButton, SearchInput, Toast } from '@zhiyu/ui';
-import { localeFromPath, stripLocale, t, type Locale } from '@zhiyu/i18n';
+import { ArrowLeft, BookOpen, Globe2, Moon, Search, Share2, Sun } from 'lucide-react';
+import { Button, Card, IconButton, Toast } from '@zhiyu/ui';
+import { localeFromPath, locales, stripLocale, t, type Locale } from '@zhiyu/i18n';
 import { navItems } from './data';
 import { AuthPages, OnboardingPage, ProfilePage } from './pages/AuthPages';
 import { CoursePage, GamePage } from './pages/LearningPages';
-import { DiscoverPage, ArticlePage, CategoryPage } from './pages/DiscoverPages';
+import { DiscoverPage, ArticlePage, CategoryPage, DiscoverSearchPage } from './pages/DiscoverPages';
 
 type RouteState = { locale: Locale; route: string };
 
@@ -36,40 +36,48 @@ export function App() {
     window.history.pushState(null, '', `/${route.locale}${path}`);
     setRoute(readRoute());
   };
+  const changeLocale = (locale: Locale) => {
+    const nextPath = stripLocale(window.location.pathname) || '/discover';
+    window.history.pushState(null, '', `/${locale}${nextPath}`);
+    localStorage.setItem('zhiyu.locale', locale);
+    document.documentElement.lang = locale;
+    setRoute(readRoute());
+  };
 
-  const page = useMemo(() => renderPage(route.route, navigate, loggedIn), [route.route, loggedIn]);
+  const page = useMemo(() => renderPage(route.route, route.locale, navigate, changeLocale, loggedIn), [route.route, route.locale, loggedIn]);
   const immersive = route.route.includes('/play') || route.route.includes('/auth') || route.route.includes('/onboarding');
 
   return <div className="app-shell surface-wash">
-    <AppHeader route={route} navigate={navigate} theme={theme} setTheme={setTheme} immersive={immersive} />
+    <AppHeader route={route} navigate={navigate} changeLocale={changeLocale} theme={theme} setTheme={setTheme} immersive={immersive} />
     <main id="main" className={immersive ? 'app-main immersive' : 'app-main'}>{page}</main>
     {!immersive ? <nav className="tabbar glass-porcelain" aria-label="Primary navigation">{navItems.map((item) => { const Icon = item.icon; const active = route.route.startsWith(item.path); return <button key={item.path} aria-current={active ? 'page' : undefined} onClick={() => navigate(item.path)}><Icon size={20} /><span>{t(route.locale, item.key)}</span></button>; })}</nav> : null}
     <OfflineBanner />
   </div>;
 }
 
-function AppHeader({ route, navigate, theme, setTheme, immersive }: { route: RouteState; navigate: (path: string) => void; theme: string; setTheme: (theme: string) => void; immersive: boolean }) {
+function AppHeader({ route, navigate, changeLocale, theme, setTheme, immersive }: { route: RouteState; navigate: (path: string) => void; changeLocale: (locale: Locale) => void; theme: string; setTheme: (theme: string) => void; immersive: boolean }) {
   return <header className={immersive ? 'app-header transparent' : 'app-header glass-porcelain'}>
     <div className="brand" onClick={() => navigate('/discover')} role="button" tabIndex={0}><span className="seal">知</span><strong>知语 Zhiyu</strong></div>
     <div className="header-actions">
       {route.route !== '/discover' ? <IconButton label="Back" onClick={() => history.back()}><ArrowLeft size={20} /></IconButton> : null}
       <IconButton label="Search" onClick={() => navigate('/discover/search')}><Search size={20} /></IconButton>
+      <label className="locale-pill" title={t(route.locale, 'language')}><Globe2 size={16} /><select value={route.locale} onChange={(event) => changeLocale(event.currentTarget.value as Locale)}>{locales.map((locale) => <option key={locale} value={locale}>{locale.toUpperCase()}</option>)}</select></label>
       <IconButton label="Share" onClick={() => navigator.clipboard?.writeText(location.href)}><Share2 size={20} /></IconButton>
       <IconButton label="Toggle theme" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>{theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}</IconButton>
     </div>
   </header>;
 }
 
-function renderPage(route: string, navigate: (path: string) => void, loggedIn: boolean) {
+function renderPage(route: string, locale: Locale, navigate: (path: string) => void, changeLocale: (locale: Locale) => void, loggedIn: boolean) {
   if (route.startsWith('/auth')) return <AuthPages route={route} navigate={navigate} />;
   if (route.startsWith('/onboarding')) return <OnboardingPage navigate={navigate} />;
-  if (route.startsWith('/profile')) return <ProfilePage navigate={navigate} />;
+  if (route.startsWith('/profile')) return <ProfilePage navigate={navigate} locale={locale} changeLocale={changeLocale} />;
   if (route.startsWith('/courses')) return <CoursePage route={route} navigate={navigate} loggedIn={loggedIn} />;
   if (route.startsWith('/games')) return <GamePage route={route} navigate={navigate} loggedIn={loggedIn} />;
-  if (route.startsWith('/discover/') && route.split('/').length >= 4) return <ArticlePage route={route} loggedIn={loggedIn} navigate={navigate} />;
-  if (route.startsWith('/discover/') && route !== '/discover/search') return <CategoryPage route={route} loggedIn={loggedIn} navigate={navigate} />;
-  if (route === '/discover/search') return <section className="page stack"><h1>Search</h1><SearchInput label="Search Zhiyu" placeholder="history, food, pinyin" /><Card><Badge>Local search</Badge><p>Search UI is ready for Postgres FTS integration.</p></Card></section>;
-  return <DiscoverPage navigate={navigate} loggedIn={loggedIn} />;
+  if (route.startsWith('/discover/') && route.split('/').length >= 4) return <ArticlePage route={route} locale={locale} loggedIn={loggedIn} navigate={navigate} />;
+  if (route.startsWith('/discover/') && route !== '/discover/search') return <CategoryPage route={route} locale={locale} loggedIn={loggedIn} navigate={navigate} />;
+  if (route === '/discover/search') return <DiscoverSearchPage locale={locale} navigate={navigate} />;
+  return <DiscoverPage locale={locale} navigate={navigate} loggedIn={loggedIn} />;
 }
 
 function OfflineBanner() {

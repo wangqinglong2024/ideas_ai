@@ -5,6 +5,7 @@ COPY apps/worker/package.json apps/worker/package.json
 COPY packages/types/package.json packages/types/package.json
 COPY packages/adapters/package.json packages/adapters/package.json
 COPY packages/backend/package.json packages/backend/package.json
+COPY packages/db/package.json packages/db/package.json
 RUN corepack enable && pnpm install --frozen-lockfile
 
 FROM deps AS build
@@ -24,8 +25,9 @@ ENV NODE_ENV=production
 CMD ["node", "apps/worker/dist/worker.js"]
 
 FROM deps AS dev
-COPY apps/worker apps/worker
-COPY packages packages
+COPY --chown=node:node apps/worker apps/worker
+COPY --chown=node:node packages packages
+RUN chown -R node:node /app/apps/worker /app/packages
 USER node
 ENV NODE_ENV=development
 CMD ["pnpm", "--filter", "@zhiyu/worker", "dev"]
