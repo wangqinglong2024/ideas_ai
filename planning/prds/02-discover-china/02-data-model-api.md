@@ -193,7 +193,7 @@ CREATE TABLE content_ratings (
 
 #### GET `/api/discover/articles/:slug`
 - 返回单篇 + 句子列表
-- **未登录限流**：cookie/IP 累计第 4 篇返回 401 + `code=preview_limit_reached`
+- **未登录限制**：仅允许读取前 3 个开放类目下的文章；第 4-12 类目返回 401 + `code=discover_category_login_required`
 - 缓存：CDN 1h（已发布）
 
 ```json
@@ -258,10 +258,10 @@ CREATE TABLE content_ratings (
 
 | 数据 | 层级 | TTL |
 |---|---|:---:|
-| 类目列表 | CDN | 1h |
-| 文章列表（按类目） | CDN | 5min |
-| 单篇内容（已发布） | CDN | 1h |
-| 句子音频 | CDN | 30 天（不变） |
+| 类目列表 | nginx/cache header/SW | 1h |
+| 文章列表（按类目） | nginx/cache header/SW | 5min |
+| 单篇内容（已发布） | nginx/cache header/SW | 1h |
+| 句子音频 | nginx/cache header/SW | 30 天（不变） |
 | 用户进度 / 收藏 | 不缓存 | - |
 | 分享图卡 | Storage | 90 天 |
 
@@ -274,7 +274,7 @@ CREATE TABLE content_ratings (
 4. TTS 批量生成
 5. 入审校工作台
 6. 母语审校通过 → status='published' + published_at
-7. CDN 主动 purge（避免延迟）
+7. 更新本地缓存版本号 / SW 预取清单（避免延迟）
 8. SEO sitemap 增量更新
 ```
 
@@ -291,6 +291,6 @@ CREATE TABLE content_ratings (
 ### W-5 → W-2
 - 全部入库 + 上架
 - SEO sitemap
-- CDN 预热
+- 本地缓存预热
 
 进入 [`03-acceptance-criteria.md`](./03-acceptance-criteria.md)。

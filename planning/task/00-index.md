@@ -19,10 +19,14 @@
 | 10 | `10-referral/` | 二级分销、分享链接、绑定、佣金、反作弊、看板 | `planning/prds/09-referral/**` |
 | 11 | `11-payment/` | 订单、订阅、退款、解锁、PaymentAdapter mock、fake webhook | `planning/prds/10-payment/**`、`planning/rules.md` |
 | 12 | `12-customer-service/` | 客服入口、IM、路由、Supabase Realtime、后台工作台、评分 | `planning/prds/11-customer-service/**`、`planning/spec/12-realtime-and-im.md` |
-| 13 | `13-admin/` | 后台登录、KPI、用户/订单/内容/审校/客服/分销/flags/审计/导出 | `planning/prds/12-admin/**`、`planning/ux/11-screens-admin.md` |
-| 14 | `14-security-compliance/` | 认证安全、HMAC、匿名 JWT、签名音频、水印、红线、合规、日志审计 | `planning/prds/13-security/**`、`planning/spec/09-security.md` |
-| 15 | `15-content-factory/` | v1 手动导入与 mock 工厂、v1.5 工作流占位、版本、审校、成本 | `planning/prds/14-content-factory/**`、`planning/spec/06-ai-factory.md` |
-| 16 | `16-i18n-localization/` | i18next、4 语路由、内容翻译、字体、邮件/错误、SEO、检查 | `planning/prds/15-i18n/**`、`planning/ux/14-i18n-fonts.md` |
+| 13 | `13-admin/` | 后台登录、KPI、用户/订单/通用内容壳/审校/客服/分销/flags/审计/导出 | `planning/prds/12-admin/**`、`planning/ux/11-screens-admin.md` |
+| 14 | `14-admin-discover-china/` | 发现中国后台：类目、文章、句子、审校、发布、seed、访问模型 | `planning/prds/12-admin/**`、`planning/prds/02-discover-china/**`、`content/china/**` |
+| 15 | `15-admin-courses/` | 系统课程后台：4 轨树形、题库、免费前 3 章、跨级购买、游戏词包权限 | `planning/prds/12-admin/**`、`planning/prds/03-courses/**`、`content/course/**` |
+| 16 | `16-admin-games/` | 游戏后台：12 游戏配置、统一设置、课程权限词包、SRS、MVP 禁用项 | `planning/prds/12-admin/**`、`planning/prds/04-games/**`、`content/games/**` |
+| 17 | `17-admin-novels/` | 小说后台：类目、小说、章节、句子、首章预览、登录全读、合规 | `planning/prds/12-admin/**`、`planning/prds/05-novels/**`、`content/novels/**` |
+| 18 | `18-security-compliance/` | 认证安全、HMAC、匿名 JWT、签名音频、水印、红线、合规、日志审计 | `planning/prds/13-security/**`、`planning/spec/09-security.md` |
+| 19 | `19-content-factory/` | v1 手动导入与 mock 工厂、v1.5 工作流占位、版本、审校、成本 | `planning/prds/14-content-factory/**`、`planning/spec/06-ai-factory.md` |
+| 20 | `20-i18n-localization/` | i18next、4 语路由、内容翻译、字体、邮件/错误、SEO、检查 | `planning/prds/15-i18n/**`、`planning/ux/14-i18n-fonts.md` |
 
 ## 全局裁决
 
@@ -34,6 +38,7 @@
 - 支付裁决：保留订单、权限、退款、分销反向逻辑，外部支付以 `PaymentAdapter` dummy/fake 落地。来源句：`planning/spec/02-tech-stack.md` 写明“支付 | PaymentAdapter | dummy（直接成功）| Paddle / 微信支付。”
 - 实时裁决：客服 IM / 通知优先走 Supabase Realtime。来源句：`planning/rules.md` 写明“实时通道 | supabase-realtime | 客服 IM / 通知推送，不再独立 Socket.io。”
 - 内容种子裁决：DC/CR/GM/NV/EC/UA 均必须有可端到端验证的 seed。来源句：`planning/rules.md` 写明“这些模块的正式内容由用户后续让 AI 按规定格式批量灌库，开发期不依赖真实大规模内容也必须可端到端跑通。”
+- 内容访问裁决：未登录 DC 只能浏览前 3 个类目（中国历史、中国美食、名胜风光），登录后可看全部 DC、全部 NV、玩全部 GM；CR 登录后每轨 Stage 1 前 3 章免费试学，课程允许跨级购买任意阶段；GM 词包可选范围由 CR 权限决定。来源句：`UA-FR-013` 与 `content/china/00-index.md`、`content/games/shared/01-unified-settings.md`。
 
 ## 覆盖校验方式
 

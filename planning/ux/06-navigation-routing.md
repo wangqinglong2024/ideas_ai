@@ -13,9 +13,9 @@
 
 **未登录可见**：所有 4 个 Tab 始终显示。
 **未登录限制**：
-- /discover：可看前 3 篇 / 类目，第 4 篇要求登录
-- /courses：可浏览课程结构，开始学习要求登录
-- /games：可看游戏列表，开始游戏要求登录
+- /discover：可看前 3 个类目（中国历史、中国美食、名胜风光）及其文章，第 4-12 类目要求登录
+- /courses：可浏览课程结构，开始学习要求登录；登录后每轨 Stage 1 前 3 章免费试学
+- /games：可看游戏列表；登录后 12 款游戏全部可玩，词包主题/阶段由课程权限决定
 - /profile：未登录显示登录/注册引导
 
 ### 1.2 一级 Tab 子路由
@@ -223,7 +223,7 @@ TabBar 在以下页面隐藏：
 | 守卫 | 用途 |
 |---|---|
 | AuthGuard | 需登录才能访问 |
-| PaidGuard | 需付费才能访问（CR 第 4 阶段+） |
+| PaidGuard | 需付费才能访问课程免费试学范围外内容；允许跨级购买任意阶段 |
 | RoleGuard | 后台 RBAC |
 | LocaleGuard | 校验语言前缀有效 |
 
@@ -234,7 +234,7 @@ const courseStageRoute = createRoute({
   path: '/courses/$track/$stage',
   beforeLoad: async ({ params, context }) => {
     if (!context.user) throw redirect({ to: '/auth/login' });
-    if (parseInt(params.stage) > 3 && !context.user.isPaid) {
+    if (!(await context.access.canAccessCourseNode(params))) {
       throw redirect({ to: '/profile/payments' });
     }
   },
@@ -277,7 +277,7 @@ const courseStageRoute = createRoute({
 ### 11.3 入屏后跳转
 - 已登录 + 有最近学习 → `/courses/<last_track>/<last_stage>`
 - 已登录无学习记录 → `/discover`
-- 未登录 → `/discover`（可看前 3 篇）
+- 未登录 → `/discover`（可看前 3 个类目）
 
 ## 十二、检查清单
 

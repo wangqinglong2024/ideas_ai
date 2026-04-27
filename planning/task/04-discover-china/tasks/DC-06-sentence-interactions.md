@@ -1,0 +1,31 @@
+# DC-06 · 实现句子交互与阅读偏好
+
+## PRD 原文引用
+
+- `DC-FR-004`：“句子点击 → 播放 TTS。”
+- `DC-FR-004`：“长按句子 → 显示菜单（收藏 / 笔记 / 复制）。”
+- `DC-FR-004`：“拼音显示模式：拼音字母 / 数字声调 / 隐藏（用户偏好）。”
+
+## 需求落实
+
+- 页面：DC 文章页。
+- 组件：SentenceReader、SentenceActionMenu、AudioButton、ReadingPreferenceProvider。
+- API：TTS 音频 URL 随 `GET /api/discover/articles/:slug` 返回。
+- 数据表：`content_sentences`、`user_preferences`。
+- 状态逻辑：偏好登录后云端同步，未登录 localStorage；音频失败回退文字模式。
+
+## 不明确 / 风险
+
+- 风险：移动端长按与浏览器文本选择冲突。
+- 处理：长按菜单仅作用于句子容器，复制动作由菜单提供。
+
+## 技术假设
+
+- TTS 本期使用 mock/占位音频 URL，不接真实供应商。
+
+## 最终验收清单
+
+- [ ] 点击句子播放对应音频。
+- [ ] 长按菜单含收藏、笔记、复制。
+- [ ] 拼音三种模式立即生效并持久化。
+- [ ] 字号/行高遵循用户阅读偏好。

@@ -60,6 +60,7 @@ CREATE INDEX idx_chapters_novel ON content_novel_chapters(novel_id, chapter_no);
 - `GET /api/novels/:novel_slug` — 小说详情 + 章节列表
 - `GET /api/novels/:novel_slug/chapters/:chapter_no` — 章节内容（含句子）
   - 未登录：仅可读小说前 1 章
+  - 已登录：可读全站全部小说章节
   - 限流：30/min/IP
 
 ### 已登录

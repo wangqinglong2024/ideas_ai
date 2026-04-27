@@ -1,4 +1,4 @@
-# 14 · 安全与合规任务清单
+# 18 · 安全与合规任务清单
 
 ## 来源覆盖
 
@@ -18,7 +18,7 @@
 - [ ] SC-04 实现 HMAC 签名：X-Sig-V/Ts/Nonce/Sig，ts≤5min，nonce 60min 未用，写 Redis。来源句：`SC-FR-002`。
 - [ ] SC-05 HMAC 应用于所有写 API + 关键读 API；dev 提供 sdk 自动签名。来源句：`SC-FR-002` 写明“应用范围：所有写 API + 关键读 API（题目内容）”。
 - [ ] SC-06 实现 JWT：access 15min、refresh 7d、anonymous 1h、HttpOnly Cookie。来源句：`SC-FR-003`。
-- [ ] SC-07 实现匿名 token：anon_id、exp、ip_hash，用于 DC/NV 限流计数。来源句：`SC-FR-006`。
+- [ ] SC-07 实现匿名 token：anon_id、exp、ip_hash，用于 DC/NV 匿名访问风控与注册转化关联；DC 不再按文章篇数计数。来源句：`SC-FR-006` 与 `UA-FR-013`。
 - [ ] SC-08 实现设备 ID：dev 使用 OSS/自研 visitor_id，注册/登录/关键操作携带，反作弊识别多账号/自推。来源句：`SC-FR-004`。
 - [ ] SC-09 实现音频签名 URL：HMAC + ts + path + 5min 过期，Express 生成。来源句：`SC-FR-005`。
 - [ ] SC-10 实现内容水印：零宽字符编码 user/session 哈希，支持检测工具。来源句：`SC-FR-007`。
@@ -35,5 +35,5 @@
 ## 验收与测试
 
 - [ ] SC-T01 重放同 nonce 被拒，过期 ts 被拒，错误签名写 security_events。来源句：`SC-FR-002`。
-- [ ] SC-T02 未登录 anon JWT 达到 DC/NV 限制后被引导注册。来源句：`SC-FR-006` 与 `UA-FR-013`。
+- [ ] SC-T02 未登录 anon JWT 访问 DC 第 4-12 类目或 NV 第 2 章时被引导注册。来源句：`SC-FR-006` 与 `UA-FR-013`。
 - [ ] SC-T03 红线词命中 block 直接拒绝，不入库。来源句：`SC-FR-008`。

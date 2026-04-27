@@ -26,7 +26,7 @@ CREATE TABLE game_sessions (
   user_id UUID NOT NULL REFERENCES users(id),
   game_id UUID NOT NULL REFERENCES games(id),
   pack_type TEXT NOT NULL,             -- 'current_track','all_learned','wrong_set','hsk_X'
-  pack_meta JSONB,                     -- {hsk_level, track, ...}
+  pack_meta JSONB,                     -- {track, stage, permission_reason, trial_mode}
   score INT NOT NULL,
   stars INT CHECK (stars BETWEEN 0 AND 3),
   duration_seconds INT NOT NULL,
@@ -78,14 +78,20 @@ CREATE INDEX idx_lb_rank ON game_leaderboards(game_id, scope, scope_date, best_s
 ## 二、API
 
 ### GET `/api/games`
-- 12 游戏列表（含 v1 active + 占位 coming_soon）
+- 12 游戏列表（全部 active，无 coming_soon 占位）
 
 ### GET `/api/games/:code`
-- 游戏元信息 + 用户最高分 + 排行榜前 10
+- 游戏元信息 + 用户最近一次得分 + 可选词包权限摘要
+
+### GET `/api/games/pack-options`
+- 返回当前用户可选择的课程题库范围：`[{ track_code, stage_no, has_access, reason, disabled_reason }]`
+- 权限来源复用 CR `GET /api/learn/permissions`
+- 未登录返回游客基础范围，`srsOn=false`
 
 ### POST `/api/games/:id/sessions/start`
-- Body: `{ pack_type, pack_meta }`
+- Body: `{ track_code, stage_no, difficulty }`
 - 返回：`{ session_token, questions: [...] }`（题目用一次 token 加密返回）
+- 服务端必须校验课程权限并记录 `pack_meta.permission_reason`
 - 限流：30/min/user
 
 ### POST `/api/games/:id/sessions/submit`
@@ -93,8 +99,8 @@ CREATE INDEX idx_lb_rank ON game_leaderboards(game_id, scope, scope_date, best_s
 - 服务端校验：签名、token、score 上限、时长合理性
 - 写 game_sessions + 更新 game_user_stats
 - 推错题到 SRS
-- 发币（不超日上限）
-- 返回：`{ stars, coins_earned, rank, wrong_questions: [...] }`
+- 不发币、不返回 stars/rank
+- 返回：`{ score, duration_seconds: 60, wrong_questions: [...] }`
 
 ### GET `/api/games/:id/leaderboard?scope=day|week|all_time`
 - 返回前 50 + 自己上下文

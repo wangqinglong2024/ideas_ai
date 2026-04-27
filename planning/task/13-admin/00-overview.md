@@ -1,9 +1,21 @@
 # 13 · 管理后台任务清单
 
+## 单任务文件
+
+- 具体任务已拆分到 `tasks/`，每个任务单独一个文件。
+- 索引：`tasks/00-task-index.md`。
+- 内容管理 4 模块另拆为独立后台闭环目录：`14-admin-discover-china/`、`15-admin-courses/`、`16-admin-games/`、`17-admin-novels/`。
+
 ## 来源覆盖
 
 - PRD：`planning/prds/12-admin/01-functional-requirements.md`、`02-data-model-api.md`。
 - UX：`planning/ux/11-screens-admin.md`。
+- 技术规范：`planning/spec/04-backend.md`、`planning/spec/09-security.md`、`planning/spec/10-observability.md`。
+
+## 产品裁决
+
+- `AD-FR-006` 的“内容管理（4 模块）”不得只放在 13-admin 总任务中，必须分别形成发现中国、课程、游戏、小说四个后台闭环目录。
+- 13-admin 只覆盖后台基础能力、RBAC、导航、审计、通用工作台；具体内容 CRUD 细节以 14-17 为准。
 
 ## 任务清单
 
@@ -26,6 +38,13 @@
 - [ ] AD-17 实现通知/公告：多语 banner、邮件群发给订阅用户、推送 v1.5 占位。来源句：`AD-FR-014`。
 - [ ] AD-18 后台 UX 按 Linear/Stripe 风格、桌面优先、亮/暗主题、移动响应。来源句：`planning/prds/12-admin/01-functional-requirements.md` “UX”章节。
 - [ ] AD-19 API 前缀统一 `/admin/api`，中间件按 role claim 拦截。来源句：`planning/prds/12-admin/02-data-model-api.md` “API（管理后台专属，路径前缀 /admin/api）”与“鉴权”。
+
+## 内容后台拆分映射
+
+- 发现中国后台：`planning/task/14-admin-discover-china/`，覆盖 DC 类目/文章/句子 CRUD。
+- 课程后台：`planning/task/15-admin-courses/`，覆盖 tracks/stages/chapters/lessons/knowledge_points 树形管理与课程权限配置。
+- 游戏后台：`planning/task/16-admin-games/`，覆盖游戏配置、词包绑定、课程权限词包范围。
+- 小说后台：`planning/task/17-admin-novels/`，覆盖小说类目/小说/章节/句子管理与合规。
 
 ## 验收与测试
 

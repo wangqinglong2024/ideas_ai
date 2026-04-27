@@ -32,7 +32,7 @@ CREATE TABLE content_stages (
   description JSONB,
   hsk_level_range INT[],               -- e.g. [4,5]
   prerequisite_stage INT,
-  is_free BOOLEAN DEFAULT FALSE,       -- TRUE for stages 1-3
+  is_free BOOLEAN DEFAULT FALSE,       -- 仅用于整阶段促销/人工免费；W0 免费试学按 chapter.is_free 控制
   status TEXT DEFAULT 'draft',
   published_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -50,6 +50,8 @@ CREATE TABLE content_chapters (
   name_zh TEXT NOT NULL,
   name_translations JSONB NOT NULL,
   description JSONB,
+  is_free BOOLEAN DEFAULT FALSE,       -- TRUE for Stage 1 chapters 1-3 in each track
+  free_reason TEXT,                    -- login_trial/manual/promo
   status TEXT DEFAULT 'draft',
   published_at TIMESTAMPTZ,
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -233,7 +235,7 @@ CREATE INDEX idx_purchases_user ON user_stage_purchases(user_id, status);
 
 #### GET `/api/learn/stages/:stage_id`
 - 返回阶段详情 + 12 章 + 每章进度
-- 检查权限：免费 or 已购 or 会员
+- 检查权限：返回每章 `has_access`，免费章 or 已购阶段 or 会员 or 人工授权
 
 #### GET `/api/learn/chapters/:chapter_id`
 - 返回章详情 + 12 节
@@ -262,9 +264,11 @@ CREATE INDEX idx_purchases_user ON user_stage_purchases(user_id, status);
 #### GET `/api/learn/wrong-set?source=...`
 - 返回错题集（分页）
 
-#### GET `/api/learn/permissions/:stage_id`
-- 检查用户对某段的访问权限
-- 返回：`{ has_access, reason: 'free'|'purchased'|'membership'|'paywall', expires_at }`
+#### GET `/api/learn/permissions`
+- 查询参数：`track_code`, `stage_no`, `chapter_no?`, `lesson_id?`
+- 检查用户对课程节点的访问权限
+- 返回：`{ has_access, reason: 'free_chapter'|'purchased_stage'|'membership'|'manual_grant'|'paywall', expires_at }`
+- 游戏模块复用该权限汇总生成可选词包范围
 
 ### 2.3 学习报告 API
 
@@ -286,11 +290,12 @@ CREATE INDEX idx_purchases_user ON user_stage_purchases(user_id, status);
 ## 三、权限检查算法
 
 ```typescript
-async function canAccessStage(userId: string, stageId: string): Promise<AccessResult> {
-  const stage = await getStage(stageId);
+async function canAccessCourseNode(userId: string, input: CourseNode): Promise<AccessResult> {
+  const stage = await getStage(input.stageId);
+  const chapter = input.chapterId ? await getChapter(input.chapterId) : null;
 
-  // 免费阶段
-  if (stage.is_free) return { allowed: true, reason: 'free' };
+  // 免费试学章：每轨 Stage 1 chapters 1-3
+  if (chapter?.is_free) return { allowed: true, reason: 'free_chapter' };
 
   // 检查活跃订阅会员
   const sub = await getActiveSubscription(userId);
@@ -301,7 +306,7 @@ async function canAccessStage(userId: string, stageId: string): Promise<AccessRe
     'SELECT * FROM user_stage_purchases WHERE user_id=$1 AND stage_id=$2 AND status=active',
     [userId, stageId]
   );
-  if (purchase) return { allowed: true, reason: 'purchased' };
+  if (purchase) return { allowed: true, reason: 'purchased_stage' };
 
   // 检查 9 段全包（按 track）
   const ninePack = await db.query(
@@ -313,6 +318,8 @@ async function canAccessStage(userId: string, stageId: string): Promise<AccessRe
   return { allowed: false, reason: 'paywall' };
 }
 ```
+
+> 购买不检查 `prerequisite_stage`，仅用于学习建议与 UI 提示；用户可跨级购买任意阶段。
 
 ## 四、错题 SRS 集成
 

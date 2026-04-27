@@ -1,5 +1,11 @@
 # 03 · 用户账号任务清单
 
+## 单任务文件
+
+- 具体任务已拆分到 `tasks/`，每个任务单独一个文件。
+- 索引：`tasks/00-task-index.md`。
+- 本总览只保留模块级覆盖视图；实施时以 `tasks/*.md` 的逐任务文件为准。
+
 ## 来源覆盖
 
 - PRD：`planning/prds/06-user-account/01-functional-requirements.md`、`02-data-model-api.md`。
@@ -27,7 +33,7 @@
 - [ ] UA-13 实现数据导出：JSON/CSV，包含 profile/progress/wrong_set/favorites/notes/orders/coin_ledger，邮件链接 24h，每月 1 次。来源句：`UA-FR-010`。
 - [ ] UA-14 实现销户：二次确认+密码、90 天可恢复软删、90 天后硬删、订阅不退款、知语币清零。来源句：`UA-FR-011`。
 - [ ] UA-15 实现欢迎流程：母语、UI 语言、学习目标、当前水平、推荐轨道、拼音入门提示，任意步骤可跳过。来源句：`UA-FR-012`。
-- [ ] UA-16 实现匿名访问计数：DC 前 3 篇、NV 首章、设备指纹累计、注册转化埋点。来源句：`UA-FR-013`。
+- [ ] UA-16 实现匿名与登录访问规则：匿名 DC 前 3 类目、NV 首章；登录后全部 DC、全部 NV、全部 GM、CR 每轨 Stage 1 前 3 章免费试学；设备指纹仅用于风控与注册转化埋点。来源句：`UA-FR-013`。
 - [ ] UA-17 实现 API：register/login/oauth/refresh/logout/otp/password/me/preferences/sessions/avatar/data-export/delete-account/restore-account。来源句：`planning/prds/06-user-account/02-data-model-api.md` “API”章节列出这些端点。
 - [ ] UA-18 实现限流：register/login 10/min/IP，send-otp 1/60s/email 与 5/h/email，数据导出 1/月/user。来源句：同文件“限流”章节。
 - [ ] UA-19 实现安全基线：bcrypt rounds=12、access 15min、refresh 7d、HttpOnly/Secure/SameSite。来源句：`planning/prds/06-user-account/01-functional-requirements.md` “性能 / 安全”章节。

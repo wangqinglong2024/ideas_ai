@@ -1,5 +1,11 @@
 # 01 · 基础平台与工程骨架任务清单
 
+## 单任务文件
+
+- 具体任务已拆分到 `tasks/`，每个任务单独一个文件。
+- 索引：`tasks/00-task-index.md`。
+- 本总览只保留模块级覆盖视图；实施时以 `tasks/*.md` 的逐任务文件为准。
+
 ## 来源覆盖
 
 - `planning/rules.md`：Docker-only、唯一代码根、Supabase first、Adapter/fake、测试与种子数据铁律。
