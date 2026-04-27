@@ -1,0 +1,64 @@
+.zy-button, .zy-icon-button {
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 180ms, color 180ms, border-color 180ms, box-shadow 180ms;
+}
+.zy-button-xs { min-height: 28px; padding: 4px 10px; font-size: 12px; }
+.zy-button-sm { min-height: 36px; padding: 6px 12px; font-size: 14px; }
+.zy-button-md { min-height: 44px; padding: 9px 16px; }
+.zy-button-lg { min-height: 52px; padding: 12px 20px; font-size: 18px; }
+.zy-button-primary { background: var(--brand-cinnabar); color: #fff8ec; box-shadow: var(--shadow-seal); }
+.zy-button-secondary { background: var(--glass-porcelain); color: var(--brand-jade); border-color: var(--line-hair); }
+.zy-button-tertiary, .zy-button-ghost { background: transparent; color: var(--text-ink); }
+.zy-button-danger { background: var(--brand-cinnabar); color: #fff8ec; }
+.zy-button-ink { background: var(--glass-ink); color: #f4efe4; }
+.zy-icon-button { width: 44px; padding: 0; background: transparent; color: var(--text-ink); }
+.zy-field { display: grid; gap: 6px; color: var(--text-ink-muted); }
+.zy-field input, .zy-field select, .zy-field textarea {
+  min-height: 44px;
+  border: 1px solid var(--line-hair);
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: var(--surface-paper);
+  color: var(--text-ink);
+}
+.zy-field small { display: inline-flex; align-items: center; gap: 4px; color: var(--brand-cinnabar); }
+.zy-search { position: relative; }
+.zy-search svg { position: absolute; left: 12px; bottom: 13px; color: var(--text-ink-muted); }
+.zy-search input { padding-left: 38px; }
+.zy-card { min-width: 0; border-radius: 8px; padding: 16px; border: 1px solid var(--line-hair); overflow-wrap: anywhere; }
+.zy-card-paper { background: var(--surface-paper); }
+.zy-card-porcelain, .zy-card-interactive { background: var(--glass-porcelain); box-shadow: var(--shadow-glass); }
+.zy-card-outlined { background: transparent; }
+.zy-card-ink { background: var(--glass-ink); color: #f4efe4; }
+.zy-badge { display: inline-flex; align-items: center; justify-self: start; width: fit-content; max-width: 100%; min-height: 24px; border-radius: 999px; padding: 2px 8px; font-size: 12px; border: 1px solid var(--line-hair); }
+.zy-badge-success { color: var(--brand-jade); }
+.zy-badge-warning { color: var(--brand-aged-gold); }
+.zy-badge-danger { color: var(--brand-cinnabar); }
+.zy-badge-info { color: var(--brand-mist-blue); }
+.zy-tabs, .zy-segmented { display: flex; gap: 4px; align-items: center; overflow-x: auto; }
+.zy-tabs button, .zy-segmented button { min-height: 36px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: var(--text-ink-muted); padding: 6px 10px; }
+.zy-tabs [aria-selected='true'], .zy-segmented [aria-pressed='true'] { color: var(--brand-jade); border-color: var(--brand-jade); }
+.zy-toast { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--line-hair); background: var(--surface-paper); box-shadow: var(--shadow-glass); }
+.zy-toast-error { color: var(--brand-cinnabar); }
+.zy-toast-warning { color: var(--brand-aged-gold); }
+.zy-toast-success { color: var(--brand-jade); }
+.zy-empty { text-align: center; padding: 32px; color: var(--text-ink-muted); }
+.zy-empty-mark { width: 48px; height: 48px; margin: 0 auto 12px; border: 1px solid var(--line-hair); border-radius: 8px; display: grid; place-items: center; }
+.zy-table-wrap { overflow: auto; border: 1px solid var(--line-hair); border-radius: 8px; background: var(--surface-paper); }
+.zy-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+.zy-table[data-columns='1'], .zy-table[data-columns='2'], .zy-table[data-columns='3'] { min-width: 100%; }
+.zy-table th, .zy-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line-hair); font-size: 14px; overflow-wrap: anywhere; }
+.zy-table tbody tr:hover { background: var(--surface-paper-muted); }
+.zy-pinyin-text { display: grid; gap: 3px; line-height: 1.5; }
+.zy-pinyin-text strong { font-family: var(--font-zh); font-size: 18px; }
+.zy-pinyin-text small { font-size: 12px; color: var(--text-ink-muted); }
+.zy-sentence { display: grid; gap: 8px; }
+.zy-sentence div { display: flex; gap: 8px; flex-wrap: wrap; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

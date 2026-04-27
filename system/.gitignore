@@ -1,0 +1,10 @@
+node_modules
+.pnpm-store
+dist
+.turbo
+coverage
+docker/.env
+*.log
+artifacts
+apps/*/dist
+packages/*/dist

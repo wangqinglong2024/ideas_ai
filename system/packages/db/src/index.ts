@@ -1,0 +1,23 @@
+export const schemaName = 'zhiyu';
+
+export const migrationTables = [
+  'users',
+  'user_preferences',
+  'user_devices',
+  'user_sessions',
+  'user_email_otp',
+  'user_data_exports',
+  'admin_users',
+  'admin_audit_logs',
+  'feature_flags',
+  'admin_announcements',
+  'content_review_workflow',
+  'error_events',
+  'events',
+  'security_events',
+  'blocked_entities',
+  'red_line_dictionary',
+  'coin_wallets',
+  'coin_ledger',
+  'export_jobs'
+] as const;

@@ -1,0 +1,155 @@
+name: zhiyu
+
+networks:
+  gateway_net:
+    external: true
+  zhiyu-internal:
+    driver: bridge
+
+x-api-env: &api-env
+  APP_ENV: dev
+  PROJECT_NAME: zhiyu
+  PUBLIC_HOST: ${PUBLIC_HOST:-115.159.109.23}
+  SUPABASE_URL: ${SUPABASE_URL:-http://supabase-kong:8000}
+  SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-dev-anon-key}
+  SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY:-dev-service-role-key}
+  DATABASE_URL: ${DATABASE_URL:-postgres://postgres:postgres@supabase-db:5432/postgres?search_path=zhiyu}
+  REDIS_URL: ${REDIS_URL:-redis://zhiyu-redis:6379/0}
+  JWT_SECRET: ${JWT_SECRET:-dev-only-change-me-please-32-characters}
+  CORS_ORIGINS: ${CORS_ORIGINS:-http://115.159.109.23:3100,http://115.159.109.23:4100,http://127.0.0.1:3100,http://127.0.0.1:4100,http://localhost:3100,http://localhost:4100}
+  ALLOW_FAKE_DATABASE: ${ALLOW_FAKE_DATABASE:-true}
+  ALLOW_FAKE_REDIS: ${ALLOW_FAKE_REDIS:-true}
+  LOG_LEVEL: ${LOG_LEVEL:-info}
+  EMAIL_PROVIDER: ${EMAIL_PROVIDER:-fake}
+  SMS_PROVIDER: ${SMS_PROVIDER:-fake}
+  PUSH_PROVIDER: ${PUSH_PROVIDER:-fake}
+  PAYMENT_PROVIDER: ${PAYMENT_PROVIDER:-dummy}
+  CAPTCHA_PROVIDER: ${CAPTCHA_PROVIDER:-always-pass}
+  LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+  TTS_PROVIDER: ${TTS_PROVIDER:-mock}
+  ASR_PROVIDER: ${ASR_PROVIDER:-mock}
+  WORKFLOW_PROVIDER: ${WORKFLOW_PROVIDER:-mock}
+
+services:
+  zhiyu-app-be:
+    build:
+      context: ..
+      dockerfile: apps/api/Dockerfile
+      target: dev
+    container_name: zhiyu-app-be
+    environment:
+      <<: *api-env
+      ROLE: app-api
+      PORT: 8080
+    ports:
+      - "${APP_BE_PORT:-8100}:8080"
+    networks: [gateway_net, zhiyu-internal]
+    depends_on: [zhiyu-redis]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/ready"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+
+  zhiyu-admin-be:
+    build:
+      context: ..
+      dockerfile: apps/admin-api/Dockerfile
+      target: dev
+    container_name: zhiyu-admin-be
+    environment:
+      <<: *api-env
+      ROLE: admin-api
+      PORT: 8080
+    ports:
+      - "${ADMIN_BE_PORT:-9100}:8080"
+    networks: [gateway_net, zhiyu-internal]
+    depends_on: [zhiyu-redis]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8080/ready"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+
+  zhiyu-app-fe:
+    build:
+      context: ..
+      dockerfile: apps/web/Dockerfile
+      target: dev
+    container_name: zhiyu-app-fe
+    environment:
+      ROLE: app-fe
+      PORT: 80
+      VITE_API_BASE: http://${PUBLIC_HOST:-115.159.109.23}:${APP_BE_PORT:-8100}
+      VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-http://115.159.109.23:8000}
+      VITE_SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-dev-anon-key}
+    ports:
+      - "${APP_FE_PORT:-3100}:80"
+    cap_add: [NET_BIND_SERVICE]
+    networks: [gateway_net, zhiyu-internal]
+    depends_on: [zhiyu-app-be]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+
+  zhiyu-admin-fe:
+    build:
+      context: ..
+      dockerfile: apps/admin/Dockerfile
+      target: dev
+    container_name: zhiyu-admin-fe
+    environment:
+      ROLE: admin-fe
+      PORT: 80
+      VITE_API_BASE: http://${PUBLIC_HOST:-115.159.109.23}:${ADMIN_BE_PORT:-9100}
+      VITE_SUPABASE_URL: ${VITE_SUPABASE_URL:-http://115.159.109.23:8000}
+      VITE_SUPABASE_ANON_KEY: ${SUPABASE_ANON_KEY:-dev-anon-key}
+    ports:
+      - "${ADMIN_FE_PORT:-4100}:80"
+    cap_add: [NET_BIND_SERVICE]
+    networks: [gateway_net, zhiyu-internal]
+    depends_on: [zhiyu-admin-be]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 45s
+
+  zhiyu-worker:
+    build:
+      context: ..
+      dockerfile: apps/worker/Dockerfile
+      target: dev
+    container_name: zhiyu-worker
+    environment:
+      <<: *api-env
+      ROLE: worker
+    networks: [gateway_net, zhiyu-internal]
+    depends_on: [zhiyu-redis]
+    healthcheck:
+      test: ["CMD", "node", "-e", "process.exit(0)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  zhiyu-redis:
+    image: redis:7-alpine
+    container_name: zhiyu-redis
+    command: ["redis-server", "--appendonly", "yes"]
+    networks: [zhiyu-internal]
+    volumes:
+      - zhiyu-redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  zhiyu-redis-data:
