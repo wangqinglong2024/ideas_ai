@@ -1,17 +1,29 @@
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button, GlassCard } from '@zhiyu/ui-kit';
+import { Button, GlassCard, useToast } from '@zhiyu/ui-kit';
 import { adminApi } from '../lib/http.ts';
+import { ConfirmDialog } from './china/dialogs/ConfirmDialog.tsx';
 
 type UserRow = { id: string; email: string; role: string; display_name: string | null; is_active: boolean };
 
 export function UsersPage() {
+  const toast = useToast();
+  const [target, setTarget] = useState<UserRow | null>(null);
   const q = useQuery({
     queryKey: ['admin-users'],
     queryFn: () => adminApi<{ items: UserRow[]; total: number }>('/users?page=1&size=50'),
   });
-  async function toggle(u: UserRow) {
-    await adminApi(`/users/${u.id}/active`, { method: 'POST', body: JSON.stringify({ is_active: !u.is_active }) });
-    await q.refetch();
+  async function doToggle() {
+    if (!target) return;
+    try {
+      await adminApi(`/users/${target.id}/active`, { method: 'POST', body: JSON.stringify({ is_active: !target.is_active }) });
+      toast.success(target.is_active ? '已禁用' : '已启用');
+      setTarget(null);
+      await q.refetch();
+    } catch (e) {
+      toast.error((e as Error).message || '操作失败');
+      throw e;
+    }
   }
   return (
     <div style={{ padding: 24 }}>
@@ -30,13 +42,30 @@ export function UsersPage() {
                 <div style={{ fontWeight: 600 }}>{u.display_name ?? u.email}</div>
                 <div style={{ color: 'var(--zy-fg-soft)', fontSize: 13 }}>{u.email} · {u.role} · {u.is_active ? '启用' : '禁用'}</div>
               </div>
-              <Button variant={u.is_active ? 'ghost' : 'primary'} data-testid={`toggle-${u.email}`} onClick={() => toggle(u)}>
+              <Button variant={u.is_active ? 'ghost' : 'primary'} data-testid={`toggle-${u.email}`} onClick={() => setTarget(u)}>
                 {u.is_active ? '禁用' : '启用'}
               </Button>
             </div>
           </GlassCard>
         ))}
       </div>
+
+      {target && (
+        <ConfirmDialog
+          open
+          testId="confirm-toggle-active"
+          title={target.is_active ? '禁用用户' : '启用用户'}
+          danger={target.is_active}
+          okText={target.is_active ? '确认禁用' : '确认启用'}
+          body={
+            target.is_active
+              ? <>确定要禁用 <b>{target.display_name ?? target.email}</b>？禁用后用户将无法登录。</>
+              : <>确定要启用 <b>{target.display_name ?? target.email}</b>？启用后用户可正常登录。</>
+          }
+          onCancel={() => setTarget(null)}
+          onConfirm={doToggle}
+        />
+      )}
     </div>
   );
 }

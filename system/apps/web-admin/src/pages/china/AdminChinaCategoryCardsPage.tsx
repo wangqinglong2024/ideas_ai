@@ -29,15 +29,15 @@ export function AdminChinaCategoryCardsPage() {
     <div style={{ padding: 24 }} data-testid="admin-china-cards">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, marginBottom: 16, flexWrap: 'wrap' }}>
         <h2 style={{ margin: 0 }}>发现中国 · 类目</h2>
-        <form onSubmit={onSearch} style={{ display: 'flex', gap: 8, minWidth: 280 }}>
+        <form onSubmit={onSearch} style={{ display: 'flex', gap: 8, minWidth: 280, alignItems: 'center' }}>
           <Input
             data-testid="global-search"
             placeholder="🔍 搜索文章标题或句子内容"
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            style={{ minWidth: 240 }}
+            style={{ flex: 1, minWidth: 240 }}
           />
-          <Button type="submit" data-testid="global-search-submit">搜索</Button>
+          <Button type="submit" data-testid="global-search-submit" style={{ whiteSpace: 'nowrap', minWidth: 80, flexShrink: 0 }}>搜索</Button>
         </form>
       </div>
 

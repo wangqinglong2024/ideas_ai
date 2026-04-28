@@ -116,19 +116,41 @@ export function AdminChinaArticleEditPage() {
 
   async function articleAction() {
     if (!article.data || !confirmArticle) return;
-    if (confirmArticle === 'publish') {
-      await adminApi(`/china/articles/${article.data.id}/publish`, { method: 'POST' });
-      toast.success('已发布');
-      setConfirmArticle(null); await article.refetch();
-    } else if (confirmArticle === 'unpublish') {
-      await adminApi(`/china/articles/${article.data.id}/unpublish`, { method: 'POST' });
-      toast.success('已下架');
-      setConfirmArticle(null); await article.refetch();
-    } else {
-      await adminApi(`/china/articles/${article.data.id}`, { method: 'DELETE' });
-      toast.success('已删除');
-      setConfirmArticle(null);
-      nav({ to: '/china/categories/$code', params: { code: article.data!.category.code } });
+    const aid = article.data.id;
+    const isAlreadyMessage = (msg: string, kind: 'publish' | 'unpublish') => {
+      if (kind === 'publish') return /CHINA_ARTICLE_ALREADY_PUBLISHED/i.test(msg);
+      return /CHINA_ARTICLE_ALREADY_DRAFT/i.test(msg);
+    };
+    try {
+      if (confirmArticle === 'publish') {
+        try {
+          await adminApi(`/china/articles/${aid}/publish`, { method: 'POST' });
+        } catch (e) {
+          // 幂等：若已发布，视为成功，仅静默刷新
+          if (!isAlreadyMessage((e as Error).message, 'publish')) throw e;
+        }
+        toast.success('已发布');
+        setConfirmArticle(null);
+        await article.refetch();
+      } else if (confirmArticle === 'unpublish') {
+        try {
+          await adminApi(`/china/articles/${aid}/unpublish`, { method: 'POST' });
+        } catch (e) {
+          if (!isAlreadyMessage((e as Error).message, 'unpublish')) throw e;
+        }
+        toast.success('已下架');
+        setConfirmArticle(null);
+        await article.refetch();
+      } else {
+        await adminApi(`/china/articles/${aid}`, { method: 'DELETE' });
+        toast.success('已删除');
+        setConfirmArticle(null);
+        nav({ to: '/china/categories/$code', params: { code: article.data.category.code } });
+      }
+    } catch (e) {
+      toast.error((e as Error).message || '操作失败');
+      // keep dialog open so user sees inline error too
+      throw e;
     }
   }
 

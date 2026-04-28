@@ -94,6 +94,8 @@
   border: 1px solid transparent;
   cursor: pointer;
   transition: transform 0.05s ease, background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+  line-height: 1;
 }
 .zy-btn:active { transform: translateY(1px); }
 .zy-btn-primary { background: var(--zy-brand); color: #fff; }
@@ -232,6 +234,7 @@ a { color: inherit; text-decoration: none; }
   display: grid; gap: 16px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
+@media (min-width: 640px) { .zy-grid-12 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 768px) { .zy-grid-12 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 1100px) { .zy-grid-12 { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .zy-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
@@ -296,3 +299,28 @@ a { color: inherit; text-decoration: none; }
 .zy-switch-track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: #fff; border-radius: 50%; transition: transform 0.15s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
 .zy-switch input:checked + .zy-switch-track { background: var(--zy-brand); }
 .zy-switch input:checked + .zy-switch-track::after { transform: translateX(16px); }
+
+/* Login page */
+.zy-fg-soft { color: var(--zy-fg-soft); }
+.zy-fg-mute { color: var(--zy-fg-mute); }
+.zy-link-strong { color: var(--zy-brand); font-weight: 600; }
+.zy-link-strong:hover { text-decoration: underline; }
+
+.zy-login-shell { position: relative; min-height: calc(100vh - 64px); display: flex; align-items: center; justify-content: center; padding: 24px 16px; overflow: hidden; }
+.zy-login-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.zy-blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.55; }
+.zy-blob-1 { width: 360px; height: 360px; background: radial-gradient(circle at 30% 30%, var(--zy-brand), transparent 70%); top: -80px; left: -60px; }
+.zy-blob-2 { width: 320px; height: 320px; background: radial-gradient(circle at 60% 60%, #f8b4c0, transparent 70%); bottom: -100px; right: -40px; }
+.zy-blob-3 { width: 240px; height: 240px; background: radial-gradient(circle at 50% 50%, #ffd6a8, transparent 70%); top: 30%; right: 20%; opacity: 0.4; }
+[data-theme='dark'] .zy-blob { opacity: 0.35; }
+
+.zy-login-card { position: relative; z-index: 1; width: 100%; max-width: 440px; padding: 32px; border-radius: 18px; background: var(--zy-bg-elev); border: 1px solid var(--zy-border); box-shadow: 0 24px 48px rgba(0,0,0,0.10); backdrop-filter: blur(12px); }
+.zy-login-brand { display: flex; align-items: center; gap: 14px; margin-bottom: 24px; }
+.zy-login-logo { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg, var(--zy-brand), #f08aa3); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; box-shadow: 0 6px 16px rgba(220, 60, 90, 0.25); }
+.zy-login-title { font-size: 20px; font-weight: 700; color: var(--zy-fg); }
+.zy-login-subtitle { font-size: 13px; color: var(--zy-fg-soft); margin-top: 2px; }
+.zy-login-form { display: grid; gap: 14px; margin-bottom: 16px; }
+.zy-login-divider { display: flex; align-items: center; gap: 12px; color: var(--zy-fg-mute); font-size: 12px; margin: 16px 0; }
+.zy-login-divider::before, .zy-login-divider::after { content: ''; flex: 1; height: 1px; background: var(--zy-border); }
+.zy-login-footer { display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; }
+.zy-login-extra { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; font-size: 12px; }

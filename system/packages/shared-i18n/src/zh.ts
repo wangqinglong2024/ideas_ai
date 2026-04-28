@@ -91,4 +91,24 @@ export default {
     login_later: '再看看',
     login_go: '去登录',
   },
+  me: {
+    title: '我的',
+    role: '角色',
+    profile: '个人资料',
+    settings: '设置',
+  },
+  header: {
+    menu: '菜单',
+    open_menu: '打开菜单',
+    profile: '个人中心',
+    logout: '退出登录',
+    login: '登录',
+  },
+  login_page: {
+    welcome: '欢迎回来',
+    subtitle: '登录后开启你的中文学习之旅',
+    or: '或',
+    sign_up_now: '立即注册',
+    no_account_q: '还没有账号？',
+  },
 } as const;

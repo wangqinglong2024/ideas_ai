@@ -87,4 +87,24 @@ export default {
     login_later: 'Maybe later',
     login_go: 'Sign In',
   },
+  me: {
+    title: 'Me',
+    role: 'Role',
+    profile: 'Profile',
+    settings: 'Settings',
+  },
+  header: {
+    menu: 'Menu',
+    open_menu: 'Open menu',
+    profile: 'My profile',
+    logout: 'Sign out',
+    login: 'Sign in',
+  },
+  login_page: {
+    welcome: 'Welcome back',
+    subtitle: 'Sign in to continue your Chinese learning journey',
+    or: 'or',
+    sign_up_now: 'Create an account',
+    no_account_q: "Don't have an account?",
+  },
 } as const;

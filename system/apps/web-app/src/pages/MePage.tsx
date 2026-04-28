@@ -32,7 +32,7 @@ export function MePage() {
       <GlassCard>
         <h3 style={{ marginTop: 0 }} data-testid="me-name">{u.display_name ?? u.email}</h3>
         <p style={{ color: 'var(--zy-fg-soft)' }}>{u.email}</p>
-        <p>角色：<b>{u.role}</b></p>
+        <p>{t('me.role')}<b>{u.role}</b></p>
         <Button variant="ghost" onClick={logout} data-testid="me-logout">{t('common.logout')}</Button>
       </GlassCard>
     </div>
