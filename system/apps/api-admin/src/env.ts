@@ -8,6 +8,7 @@ const Schema = z.object({
   SUPABASE_SERVICE_ROLE_KEY: z.string().min(10),
   SUPABASE_JWT_SECRET: z.string().min(16),
   SUPER_ADMIN_EMAIL: z.string().email(),
+  CORS_ORIGINS: z.string().optional(),
 });
 export type Env = z.infer<typeof Schema>;
 export function loadEnv(): Env {

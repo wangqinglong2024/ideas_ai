@@ -11,6 +11,7 @@ const Schema = z.object({
   LOG_LEVEL: z.string().default('info'),
   LOGIN_LOCK_THRESHOLD: z.coerce.number().int().default(5),
   LOGIN_LOCK_WINDOW_MIN: z.coerce.number().int().default(15),
+  CORS_ORIGINS: z.string().optional(),
 });
 
 export type Env = z.infer<typeof Schema>;

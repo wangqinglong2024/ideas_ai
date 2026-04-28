@@ -15,10 +15,14 @@ const sb = getServerSupabase(env.SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
 
 const app = new Hono();
 app.use('*', logger());
+const corsOrigins = (env.CORS_ORIGINS ?? 'http://localhost:4100')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
 app.use(
   '*',
   cors({
-    origin: ['http://localhost:4100'],
+    origin: corsOrigins,
     credentials: true,
     allowHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'],
   }),

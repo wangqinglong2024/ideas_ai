@@ -89,6 +89,7 @@ services:
       REDIS_URL: ${REDIS_URL}
       LOGIN_LOCK_THRESHOLD: ${LOGIN_LOCK_THRESHOLD}
       LOGIN_LOCK_WINDOW_MIN: ${LOGIN_LOCK_WINDOW_MIN}
+      CORS_ORIGINS: ${CORS_ORIGINS}
     volumes:
       - ../packages/shared-config/src:/repo/packages/shared-config/src
       - ../packages/shared-schemas/src:/repo/packages/shared-schemas/src
@@ -120,6 +121,7 @@ services:
       SUPABASE_SERVICE_ROLE_KEY: ${SUPABASE_SERVICE_ROLE_KEY}
       SUPABASE_JWT_SECRET: ${SUPABASE_JWT_SECRET}
       SUPER_ADMIN_EMAIL: ${SUPER_ADMIN_EMAIL}
+      CORS_ORIGINS: ${CORS_ORIGINS}
     volumes:
       - ../packages/shared-config/src:/repo/packages/shared-config/src
       - ../packages/shared-schemas/src:/repo/packages/shared-schemas/src
