@@ -67,22 +67,26 @@
 .zy-button-md { min-height: 44px; padding: 10px 18px; }
 .zy-button-lg { min-height: 54px; padding: 14px 24px; font-size: 16px; border-radius: var(--radius); }
 
-/* Primary：朱砂渐变 + 深阴影 */
+/* Primary：粉→浅黄→蓝 三色渐变 + 深阴影（Sweet Macaron） */
 .zy-button-primary {
   color: var(--primary-foreground);
   background:
-    linear-gradient(180deg, color-mix(in srgb, white 18%, var(--brand-cinnabar)), var(--brand-cinnabar) 60%, color-mix(in srgb, black 8%, var(--brand-cinnabar)));
-  border-color: color-mix(in srgb, var(--brand-cinnabar) 78%, transparent);
+    linear-gradient(135deg, var(--brand-bubblegum) 0%, var(--brand-cinnabar) 50%, var(--brand-mist-blue) 100%);
+  border-color: color-mix(in srgb, var(--brand-cinnabar) 70%, transparent);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.34),
+    inset 0 1px 0 rgba(255,255,255,.40),
     inset 0 -1px 0 rgba(0,0,0,.18),
     var(--shadow-seal);
 }
-.zy-button-primary:hover { box-shadow: inset 0 1px 0 rgba(255,255,255,.40), var(--shadow-seal); border-color: color-mix(in srgb, var(--brand-cinnabar) 88%, transparent); }
+.zy-button-primary:hover {
+  filter: brightness(1.05) saturate(1.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.46), var(--shadow-seal);
+  border-color: color-mix(in srgb, var(--brand-cinnabar) 88%, transparent);
+}
 
-/* Secondary：玉色文字 + 玻璃 */
-.zy-button-secondary { color: var(--brand-jade); }
-.zy-button-secondary:hover { color: color-mix(in srgb, var(--brand-jade) 80%, var(--text-ink)); }
+/* Secondary：蓝色文字 + 玻璃 */
+.zy-button-secondary { color: var(--brand-mist-blue); }
+.zy-button-secondary:hover { color: color-mix(in srgb, var(--brand-mist-blue) 80%, var(--text-ink)); }
 
 /* Tertiary / Ghost：透明玻璃 */
 .zy-button-tertiary, .zy-button-ghost {

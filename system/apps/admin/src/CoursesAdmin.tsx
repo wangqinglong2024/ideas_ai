@@ -88,29 +88,38 @@ export function CoursesAdmin() {
 
   if (!selected.theme) {
     return <section className="admin-page stack courses-admin-page">
-      <AdminHeading badge="AD-FR-006 · ACR-01" title="课程内容管理" description="默认先选择主题；进入后再管理阶段、章、节和知识点。产品文案统一叫主题，内部仍兼容 track_code。" actions={<><Button onClick={() => dryRunImport(false)}><FileJson size={16} />Dry-run seed</Button><Button variant="secondary" onClick={() => dryRunImport(true)}><Upload size={16} />Commit seed</Button></>} />
+      <AdminHeading badge="AD-FR-006 · ACR-01" title="课程内容管理 · 选择主题" description="本页面只展示 4 个学习领域，请点击进入对应领域后管理阶段 / 章 / 节 / 知识点。" />
       <div className="theme-picker-grid">{themeOrder.map((code) => {
         const theme = tree.find((item) => item.code === code);
         return <button key={code} className="theme-choice zy-glass-panel" onClick={() => selectTheme(code)}>
-          <Badge>{code}</Badge><strong>{theme?.nameZh ?? `${themeLabels[code]}主题`}</strong><span>{localized(theme?.description)}</span><small>12 阶段 · Stage 1-3 全部章免费 · 章内 12 节</small>
+          <Badge>{code}</Badge><strong>{theme?.nameZh ?? `${themeLabels[code]}主题`}</strong><span>{localized(theme?.description)}</span><small>12 阶段 · 12 章 · 12 节 · 12 知识点</small>
         </button>;
       })}</div>
-      <SystemPanels coverage={coverage} permissions={permissions} importResult={importResult} grant={grant} selected={selected} />
       {message ? <Toast type="info">{message}</Toast> : null}
     </section>;
   }
 
   if (selected.chapter && activeChapter) {
     return <section className="admin-page stack courses-admin-page">
-      <AdminHeading badge="ACR-04" title={`${themeLabels[selected.theme]} · Stage ${selected.stage} · Chapter ${selected.chapter}`} description="章编辑子页面：左侧 12 节，右侧显示当前节的 12 个知识点。章、节、知识点均可编辑并写审计。" actions={<Button variant="ghost" onClick={() => setSelected({ theme: selected.theme, stage: selected.stage, chapter: null, lesson: 1, kp: null })}><ArrowLeft size={16} />返回阶段/章</Button>} />
+      <AdminHeading badge="ACR-04" title={`${themeLabels[selected.theme]} · Stage ${selected.stage} · Chapter ${selected.chapter} · ${activeChapter.nameZh}`} description="左侧 12 节，点击切换；右侧展示当前节对应的 12 个知识点，每个知识点卡片可直接编辑并保存。" actions={<Button variant="ghost" onClick={() => setSelected({ theme: selected.theme, stage: selected.stage, chapter: null, lesson: 1, kp: null })}><ArrowLeft size={16} />返回阶段/章</Button>} />
       <div className="chapter-admin-layout">
-        <Card className="lesson-sidebar" variant="porcelain"><PanelTitle icon={<BookOpen />} title="12 节" source="Lesson sidebar" /><div className="lesson-nav">{Array.from({ length: 12 }, (_, index) => index + 1).map((lessonNo) => <button key={lessonNo} aria-current={selected.lesson === lessonNo ? 'true' : undefined} onClick={() => setSelected({ ...selected, lesson: lessonNo, kp: null })}><strong>Lesson {lessonNo}</strong><small>{lessonNo === selected.lesson ? lesson?.nameZh ?? lessonId : '点击切换知识点'}</small></button>)}</div></Card>
+        <Card className="lesson-sidebar" variant="porcelain">
+          <PanelTitle icon={<BookOpen />} title="12 节" source="Lesson sidebar" />
+          <div className="lesson-nav">{Array.from({ length: 12 }, (_, index) => index + 1).map((lessonNo) => <button key={lessonNo} aria-current={selected.lesson === lessonNo ? 'true' : undefined} onClick={() => setSelected({ ...selected, lesson: lessonNo, kp: null })}>
+            <strong>Lesson {lessonNo}</strong><small>{lessonNo === selected.lesson ? lesson?.nameZh ?? lessonId : '点击查看知识点'}</small>
+          </button>)}</div>
+        </Card>
         <div className="chapter-detail-stack">
-          <ChapterEditor chapter={activeChapter} theme={selected.theme} stageNo={selected.stage} setMessage={setMessage} refreshTree={refreshTree} />
-          <LessonEditor lesson={lesson} lessonId={lessonId} setMessage={setMessage} />
-          <Card variant="porcelain"><PanelTitle icon={<Database />} title="当前节 12 知识点" source="ACR-04 knowledge points" /><div className="kp-admin-grid">{knowledgePoints.slice(0, 12).map((kp) => <button key={kp.id} aria-current={selected.kp === kp.id ? 'true' : undefined} onClick={() => setSelected({ ...selected, kp: kp.id })}><Badge>{kp.kpointNo}</Badge><strong>{kp.zh}</strong><small>{kp.pinyinTones ?? kp.pinyin}</small></button>)}</div></Card>
-          <KnowledgePointEditor kp={activeKp} setMessage={setMessage} />
-          <Card variant="porcelain"><PanelTitle icon={<Search />} title="题库与测验预览" source="ACR-05 / CR-FR-007~009" /><DataTable rows={questions.map((question) => ({ id: question.id, type: question.type, stem: question.stemZh, hsk: question.hskLevel, reports: question.reportCount }))} columns={['type', 'stem', 'hsk', 'reports']} /><div className="admin-action-grid"><Button variant="secondary" onClick={() => adminRequest(`/admin/api/content/courses/quizzes/quiz-lesson_quiz-${lessonId}/preview`)}><Search size={16} />预览小测</Button><Button variant="secondary">36 题章测</Button><Button variant="secondary">80-150 题阶段考</Button></div></Card>
+          <LessonHeaderCard lesson={lesson} lessonId={lessonId} setMessage={setMessage} />
+          <Card variant="porcelain">
+            <PanelTitle icon={<Database />} title={`Lesson ${selected.lesson} · 12 个知识点`} source="ACR-04 knowledge points" />
+            <div className="kp-edit-grid">
+              {Array.from({ length: 12 }, (_, index) => index + 1).map((kpNo) => {
+                const kpItem = knowledgePoints.find((item) => item.kpointNo === kpNo) ?? null;
+                return <KnowledgePointInlineCard key={kpNo} kp={kpItem} kpNo={kpNo} lessonId={lessonId} theme={selected.theme!} stageNo={selected.stage} chapterNo={selected.chapter!} lessonNo={selected.lesson} setMessage={setMessage} />;
+              })}
+            </div>
+          </Card>
         </div>
       </div>
       {message ? <Toast type="success">{message}</Toast> : null}
@@ -152,6 +161,66 @@ function StageEditor({ stage, theme, setMessage, refreshTree }: { stage: Stage; 
     refreshTree();
   }
   return <Card variant="porcelain"><PanelTitle icon={<CheckCircle2 />} title={`Stage ${stage.stageNo} 编辑`} source="ACR-02 stage metadata" /><div className="editor-grid"><Input label="阶段标题" value={nameZh} onChange={(event) => setNameZh(event.currentTarget.value)} /><Input label="免费规则" value={stage.stageNo <= 3 ? 'Stage 1-3 全部章免费' : 'Stage 4+ 权限判断'} readOnly /></div><TextArea label="阶段描述" value={description} onChange={(event) => setDescription(event.currentTarget.value)} /><Button onClick={save}><CheckCircle2 size={16} />保存阶段</Button></Card>;
+}
+
+function LessonHeaderCard({ lesson, lessonId, setMessage }: { lesson: Lesson | null; lessonId: string; setMessage: (message: string) => void }) {
+  const [nameZh, setNameZh] = useState(lesson?.nameZh ?? '');
+  const [intro, setIntro] = useState(localized(lesson?.intro));
+  useEffect(() => { setNameZh(lesson?.nameZh ?? ''); setIntro(localized(lesson?.intro)); }, [lesson?.id, lesson?.nameZh, lesson?.intro]);
+  async function save() {
+    const response = await adminRequest<Row>(`/admin/api/content/courses/lessons/${lessonId}`, { method: 'PATCH', body: JSON.stringify({ nameZh, intro: { 'zh-CN': intro }, status: 'published' }) });
+    setMessage(response.error?.message ?? 'Lesson saved and audited');
+  }
+  return <Card variant="porcelain">
+    <PanelTitle icon={<CheckCircle2 />} title="当前节标题" source="ACR-04 lesson header" />
+    <div className="editor-grid">
+      <Input label="节标题" value={nameZh} onChange={(event) => setNameZh(event.currentTarget.value)} />
+      <Input label="Lesson ID" value={lessonId} readOnly />
+    </div>
+    <TextArea label="学习目标 / 母语介绍" value={intro} onChange={(event) => setIntro(event.currentTarget.value)} />
+    <Button onClick={save}><CheckCircle2 size={16} />保存节标题</Button>
+  </Card>;
+}
+
+function KnowledgePointInlineCard({ kp, kpNo, lessonId, theme, stageNo, chapterNo, lessonNo, setMessage }: { kp: KnowledgePoint | null; kpNo: number; lessonId: string; theme: ThemeCode; stageNo: number; chapterNo: number; lessonNo: number; setMessage: (message: string) => void }) {
+  const targetId = kp?.id ?? courseId(theme, stageNo, chapterNo, lessonNo, kpNo);
+  const [zh, setZh] = useState(kp?.zh ?? '');
+  const [pinyinTones, setPinyinTones] = useState(kp?.pinyinTones ?? kp?.pinyin ?? '');
+  const [keyPoint, setKeyPoint] = useState(localized(kp?.keyPoint));
+  const [translation, setTranslation] = useState(localized(kp?.translations));
+  useEffect(() => {
+    setZh(kp?.zh ?? '');
+    setPinyinTones(kp?.pinyinTones ?? kp?.pinyin ?? '');
+    setKeyPoint(localized(kp?.keyPoint));
+    setTranslation(localized(kp?.translations));
+  }, [kp?.id, kp?.zh, kp?.pinyinTones, kp?.pinyin, kp?.keyPoint, kp?.translations, lessonId]);
+  async function save() {
+    const response = await adminRequest<Row>(`/admin/api/content/courses/knowledge-points/${targetId}`, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        lessonId,
+        kpointNo: kpNo,
+        zh,
+        pinyinTones,
+        keyPoint: { 'zh-CN': keyPoint },
+        translations: { en: translation }
+      })
+    });
+    setMessage(response.error?.message ?? `KP ${kpNo} saved`);
+  }
+  return <div className="kp-edit-card zy-glass-panel">
+    <div className="row between">
+      <Badge>{`KP ${kpNo}`}</Badge>
+      <small>{kp ? 'loaded' : 'new'}</small>
+    </div>
+    <div className="editor-grid">
+      <Input label="中文" value={zh} onChange={(event) => setZh(event.currentTarget.value)} />
+      <Input label="拼音/声调" value={pinyinTones} onChange={(event) => setPinyinTones(event.currentTarget.value)} />
+    </div>
+    <TextArea label="Key point" value={keyPoint} onChange={(event) => setKeyPoint(event.currentTarget.value)} />
+    <Input label="Translation (en)" value={translation} onChange={(event) => setTranslation(event.currentTarget.value)} />
+    <Button onClick={save}><CheckCircle2 size={16} />保存知识点</Button>
+  </div>;
 }
 
 function ChapterEditor({ chapter, theme, stageNo, setMessage, refreshTree }: { chapter: Chapter; theme: ThemeCode; stageNo: number; setMessage: (message: string) => void; refreshTree: () => void }) {

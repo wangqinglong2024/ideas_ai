@@ -1,72 +1,81 @@
-/* Zhiyu design tokens — modern oriental glassmorphism.
-   重写要点：
-   - 背景从纯暖宣纸 → 冷瓷釉 + 玉色极光雾带，整体更现代大气
-   - 玻璃材质：更高透明度 + 更深 blur (24-40px) + 多层 inset highlight + 双重阴影
-   - 圆角默认 14px，浮层 22px；按钮/输入 12px
-   - 阴影 ambient + key 双层，色相向品牌色微偏移，避免黑灰浊感
-   类名保持兼容：所有 .zy-glass-*、.surface-*、shadcn token 名称不变。
+/* Zhiyu design tokens — Sweet Macaron · 粉/浅黄/浅蓝三联（无紫无绿）。
+   2026-Q2 重写：
+   - 主调：奶油底 + 棉花糖粉 / 柠檬奶油黄 / 雾蓝 三色，绝对不出现紫色和绿色
+   - 灵感：曼谷 / 雅加达 / 胡志明 IG 时尚博主、小红书千禧 macaron、Pantone Pink Carnation × Buttercream × Sky
+   - 玻璃材质：高 blur (16-36px) + 多层 inset highlight + 多重阴影
+   - 圆角默认 16px，浮层 22-28px；按钮/输入 12px；标签胶囊 999
+   类名保持兼容（cinnabar/jade/mist-violet/aged-gold 等保留作为 alias），值改为 粉/黄/蓝。
+   - cinnabar / cinnabar-soft / bubblegum / sunset → 粉色阶
+   - aged-gold / sunset 副档 → 浅黄
+   - mist-blue / jade(改蓝) / celadon(改蓝) / mist-violet(改蓝) → 蓝色阶
 */
 :root,
 :root[data-theme='light'] {
   color-scheme: light;
 
-  /* —— 表面与文字 —— */
-  --surface-paper: #f4f6f7;
-  --surface-paper-muted: #e9ecef;
-  --surface-deep: #dbe2e6;
-  --text-ink: #14181b;
-  --text-ink-muted: #5b6770;
-  --text-ink-soft: #8a96a0;
+  /* —— 表面：奶油底 —— */
+  --surface-paper:        #FFF8F4;   /* 主底：奶油桃 */
+  --surface-paper-muted:  #FBE9EE;   /* 次底：粉雾 */
+  --surface-deep:         #F4D5DD;   /* 深粉雾 */
+  --text-ink:             #1F2235;   /* 深蓝灰（不带紫） */
+  --text-ink-muted:       #5C6280;   /* 蓝灰中阶 */
+  --text-ink-soft:        #99A0BE;   /* 浅蓝灰 */
 
-  /* —— 品牌色（保留东方意象，但调高纯度/对比，去掉土黄） —— */
-  --brand-cinnabar: #d24a3c;
-  --brand-cinnabar-soft: #ec7565;
-  --brand-jade: #1f7a66;
-  --brand-jade-soft: #4ea58d;
-  --brand-celadon: #74b8a1;
-  --brand-porcelain: #d9e7e2;
-  --brand-mist-blue: #7a96ad;
-  --brand-mist-violet: #8d8ec0;
-  --brand-obsidian: #14181b;
-  --brand-aged-gold: #b3873a;
+  /* —— 品牌色（变量名沿用作 alias，色值仅 粉/黄/蓝） —— */
+  --brand-cinnabar:       #FF7AB3;   /* 主 CTA · 棉花糖粉 */
+  --brand-cinnabar-soft:  #FFB3D2;   /* 浅粉 */
+  --brand-bubblegum:      #FFC9DC;   /* 婴儿粉 */
+  --brand-sunset:         #FFE082;   /* 浅黄 · 副 CTA / 高亮 */
+  --brand-aged-gold:      #FFD54F;   /* 柠檬奶油黄 · 金币 / 成就 */
+  --brand-mist-blue:      #8FC8FF;   /* 雾蓝 · 链接 / 信息 / focus */
+  --brand-jade:           #5FB3FF;   /* 鲜亮蓝（取代绿，保持 alias 兼容） */
+  --brand-jade-soft:      #B8D9FF;   /* 浅蓝 */
+  --brand-celadon:        #C7E3FF;   /* 浅天蓝 */
+  --brand-mist-violet:    #A8D2FF;   /* 不再紫，改为浅蓝灰 */
+  --brand-porcelain:      #FFE6EC;   /* 粉瓷釉 */
+  --brand-obsidian:       #1F2235;
 
-  /* —— 声调色 —— */
-  --tone-1: #1f7a66;
-  --tone-2: #ad8027;
-  --tone-3: #5e7791;
-  --tone-4: #d24a3c;
-  --tone-neutral: #6b7681;
+  /* —— 声调色（学习内容；仅 粉/黄/蓝 谱） —— */
+  --tone-1: #5FB3FF;   /* 一声 — 蓝（平） */
+  --tone-2: #FFB347;   /* 二声 — 暖橙黄（升） */
+  --tone-3: #FF7AB3;   /* 三声 — 粉（折） */
+  --tone-4: #FF4F8B;   /* 四声 — 桃红（降） */
+  --tone-neutral: #99A0BE;
 
-  /* —— 玻璃层级（透明度递进，浅色配高白高亮） —— */
-  --glass-subtle:    rgba(255, 255, 255, 0.42);
-  --glass-panel:     rgba(255, 255, 255, 0.58);
-  --glass-elevated:  rgba(255, 255, 255, 0.72);
-  --glass-strong:    rgba(255, 255, 255, 0.86);
-  --glass-ink:       rgba(20, 24, 27, 0.46);
-  --glass-tint-jade: rgba(31, 122, 102, 0.10);
-  --glass-tint-cina: rgba(210, 74, 60, 0.10);
+  /* —— 玻璃层级 —— */
+  --glass-subtle:    rgba(255, 255, 255, 0.45);
+  --glass-panel:     rgba(255, 255, 255, 0.62);
+  --glass-elevated:  rgba(255, 255, 255, 0.78);
+  --glass-strong:    rgba(255, 255, 255, 0.92);
+  --glass-ink:       rgba(31, 34, 53, 0.50);
+  --glass-tint-jade: rgba(143, 200, 255, 0.16);
+  --glass-tint-cina: rgba(255, 122, 179, 0.14);
+  --glass-tint-violet: rgba(168, 210, 255, 0.16);
+  --glass-tint-gold: rgba(255, 213, 79, 0.16);
 
-  --glass-highlight: rgba(255, 255, 255, 0.78);
-  --glass-edge:      rgba(255, 255, 255, 0.92);
-  --glass-rim:       rgba(255, 255, 255, 0.55);
+  --glass-highlight: rgba(255, 255, 255, 0.85);
+  --glass-edge:      rgba(255, 255, 255, 0.95);
+  --glass-rim:       rgba(255, 255, 255, 0.60);
   --glass-paper:     var(--glass-panel);
-  --glass-porcelain: rgba(217, 231, 226, 0.44);
+  --glass-porcelain: rgba(255, 230, 236, 0.55);
 
-  --line-glass: rgba(20, 24, 27, 0.10);
-  --line-hair:  rgba(20, 24, 27, 0.08);
-  --line-strong: rgba(20, 24, 27, 0.18);
+  --line-glass:  rgba(31, 34, 53, 0.08);
+  --line-hair:   rgba(31, 34, 53, 0.06);
+  --line-strong: rgba(31, 34, 53, 0.16);
 
-  /* —— 阴影：双层 ambient+key + 微色相 —— */
-  --shadow-glass-sm: 0 1px 2px rgba(20,24,27,.06), 0 8px 22px -10px rgba(20,24,27,.14);
-  --shadow-glass-md: 0 2px 4px rgba(20,24,27,.06), 0 22px 48px -18px rgba(20,24,27,.22);
-  --shadow-glass-lg: 0 4px 8px rgba(20,24,27,.08), 0 40px 80px -28px rgba(20,24,27,.34);
+  /* —— 阴影：粉 / 蓝 / 黄 三色相 —— */
+  --shadow-glass-sm: 0 1px 2px rgba(31,34,53,.05), 0 8px 22px -10px rgba(255,122,179,.16);
+  --shadow-glass-md: 0 2px 4px rgba(31,34,53,.06), 0 22px 48px -18px rgba(143,200,255,.32);
+  --shadow-glass-lg: 0 4px 8px rgba(31,34,53,.08), 0 40px 80px -28px rgba(255,122,179,.32);
   --shadow-glass:        var(--shadow-glass-md);
   --shadow-glass-strong: var(--shadow-glass-lg);
-  --shadow-seal: 0 4px 10px rgba(210,74,60,.18), 0 22px 44px -16px rgba(210,74,60,.42);
-  --shadow-jade: 0 4px 10px rgba(31,122,102,.18), 0 22px 44px -16px rgba(31,122,102,.42);
+  --shadow-seal:    0 4px 10px rgba(255,122,179,.24), 0 22px 44px -16px rgba(255,122,179,.46);
+  --shadow-jade:    0 4px 10px rgba(143,200,255,.24), 0 22px 44px -16px rgba(143,200,255,.46);
+  --shadow-violet:  0 4px 10px rgba(168,210,255,.22), 0 22px 44px -16px rgba(168,210,255,.42);
+  --shadow-sunset:  0 4px 10px rgba(255,213,79,.22),  0 22px 44px -16px rgba(255,213,79,.40);
 
-  /* —— 焦点光晕 —— */
-  --focus-ring: 0 0 0 3px rgba(31,122,102,.28);
+  /* —— 焦点光晕（蓝） —— */
+  --focus-ring: 0 0 0 3px rgba(143,200,255,.40);
 
   /* —— shadcn 映射 —— */
   --background: var(--surface-paper);
@@ -78,18 +87,18 @@
   --primary: var(--brand-cinnabar);
   --primary-foreground: #fffaf6;
   --secondary: var(--glass-subtle);
-  --secondary-foreground: var(--brand-jade);
+  --secondary-foreground: var(--brand-mist-blue);
   --muted: var(--surface-paper-muted);
   --muted-foreground: var(--text-ink-muted);
-  --accent: var(--brand-jade);
-  --accent-foreground: #f4f6f7;
-  --destructive: var(--brand-cinnabar);
+  --accent: var(--brand-sunset);
+  --accent-foreground: #1F2235;
+  --destructive: #FF4F8B;
   --destructive-foreground: #fffaf6;
   --border: var(--line-glass);
   --input: var(--glass-strong);
-  --ring: var(--brand-jade);
+  --ring: var(--brand-mist-blue);
 
-  /* —— 圆角阶梯（变大、更现代） —— */
+  /* —— 圆角阶梯 —— */
   --radius-xs: 6px;
   --radius-sm: 10px;
   --radius:    14px;
@@ -111,55 +120,62 @@
 :root[data-theme='dark'] {
   color-scheme: dark;
 
-  --surface-paper: #0c1014;
-  --surface-paper-muted: #131820;
-  --surface-deep: #0a0d11;
-  --text-ink: #eef2f5;
-  --text-ink-muted: #aab4be;
-  --text-ink-soft: #6f7a85;
+  /* 暗色：午夜玫瑰天空，仍只用 粉/黄/蓝 —— 无紫无绿 */
+  --surface-paper:        #141826;   /* 深蓝黑 */
+  --surface-paper-muted:  #1B2032;
+  --surface-deep:         #0E1220;
+  --text-ink:             #F4EFF6;
+  --text-ink-muted:       #B7BBD3;
+  --text-ink-soft:        #7A809A;
 
-  --brand-cinnabar: #ff7a6b;
-  --brand-cinnabar-soft: #ff9a8e;
-  --brand-jade: #6dd3b1;
-  --brand-jade-soft: #97e1c5;
-  --brand-celadon: #a8e0c9;
-  --brand-porcelain: #1c2e2a;
-  --brand-mist-blue: #6e8aa3;
-  --brand-mist-violet: #9d9fd6;
-  --brand-obsidian: #eef2f5;
-  --brand-aged-gold: #e0bb6b;
+  --brand-cinnabar:       #FF92BD;
+  --brand-cinnabar-soft:  #FFC2D9;
+  --brand-bubblegum:      #FFD4E3;
+  --brand-sunset:         #FFE69A;
+  --brand-aged-gold:      #FFD969;
+  --brand-mist-blue:      #9DCEFF;
+  --brand-jade:           #74BAFF;
+  --brand-jade-soft:      #B8D9FF;
+  --brand-celadon:        #C9E2FF;
+  --brand-mist-violet:    #B0D4FF;
+  --brand-porcelain:      #2A2438;
+  --brand-obsidian:       #F4EFF6;
 
-  --tone-1: #6dd3b1;
-  --tone-2: #e0bb6b;
-  --tone-3: #a8b8c9;
-  --tone-4: #ff7a6b;
-  --tone-neutral: #aeb6bd;
+  --tone-1: #74BAFF;
+  --tone-2: #FFC971;
+  --tone-3: #FF92BD;
+  --tone-4: #FF6FA3;
+  --tone-neutral: #B7BBD3;
 
-  --glass-subtle:    rgba(255, 255, 255, 0.04);
-  --glass-panel:     rgba(255, 255, 255, 0.07);
-  --glass-elevated:  rgba(255, 255, 255, 0.10);
-  --glass-strong:    rgba(20, 26, 32, 0.78);
+  --glass-subtle:    rgba(255, 255, 255, 0.05);
+  --glass-panel:     rgba(255, 255, 255, 0.08);
+  --glass-elevated:  rgba(255, 255, 255, 0.12);
+  --glass-strong:    rgba(20, 24, 38, 0.86);
   --glass-ink:       rgba(0, 0, 0, 0.55);
-  --glass-tint-jade: rgba(109, 211, 177, 0.10);
-  --glass-tint-cina: rgba(255, 122, 107, 0.10);
+  --glass-tint-jade: rgba(116, 186, 255, 0.16);
+  --glass-tint-cina: rgba(255, 146, 189, 0.16);
+  --glass-tint-violet: rgba(176, 212, 255, 0.16);
+  --glass-tint-gold: rgba(255, 217, 105, 0.16);
 
-  --glass-highlight: rgba(255, 255, 255, 0.10);
-  --glass-edge:      rgba(255, 255, 255, 0.16);
-  --glass-rim:       rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.12);
+  --glass-edge:      rgba(255, 255, 255, 0.20);
+  --glass-rim:       rgba(255, 255, 255, 0.10);
   --glass-paper:     var(--glass-panel);
-  --glass-porcelain: rgba(109, 211, 177, 0.10);
+  --glass-porcelain: rgba(176, 212, 255, 0.12);
 
-  --line-glass: rgba(255, 255, 255, 0.10);
-  --line-hair:  rgba(255, 255, 255, 0.06);
-  --line-strong: rgba(255, 255, 255, 0.20);
+  --line-glass:  rgba(255, 255, 255, 0.10);
+  --line-hair:   rgba(255, 255, 255, 0.06);
+  --line-strong: rgba(255, 255, 255, 0.22);
 
-  --shadow-glass-sm: 0 1px 2px rgba(0,0,0,.40), 0 10px 26px -10px rgba(0,0,0,.55);
-  --shadow-glass-md: 0 2px 4px rgba(0,0,0,.45), 0 26px 60px -22px rgba(0,0,0,.7);
-  --shadow-glass-lg: 0 4px 10px rgba(0,0,0,.5),  0 50px 100px -32px rgba(0,0,0,.8);
-  --shadow-seal: 0 4px 10px rgba(255,122,107,.22), 0 26px 60px -20px rgba(255,122,107,.46);
-  --shadow-jade: 0 4px 10px rgba(109,211,177,.22), 0 26px 60px -20px rgba(109,211,177,.46);
+  --shadow-glass-sm: 0 1px 2px rgba(0,0,0,.40), 0 10px 26px -10px rgba(255,146,189,.22);
+  --shadow-glass-md: 0 2px 4px rgba(0,0,0,.45), 0 26px 60px -22px rgba(116,186,255,.32);
+  --shadow-glass-lg: 0 4px 10px rgba(0,0,0,.5),  0 50px 100px -32px rgba(255,146,189,.42);
+  --shadow-seal:   0 4px 10px rgba(255,146,189,.32), 0 26px 60px -20px rgba(255,146,189,.50);
+  --shadow-jade:   0 4px 10px rgba(116,186,255,.30), 0 26px 60px -20px rgba(116,186,255,.46);
+  --shadow-violet: 0 4px 10px rgba(176,212,255,.28), 0 26px 60px -20px rgba(176,212,255,.46);
+  --shadow-sunset: 0 4px 10px rgba(255,217,105,.26), 0 26px 60px -20px rgba(255,217,105,.42);
 
-  --focus-ring: 0 0 0 3px rgba(109,211,177,.34);
+  --focus-ring: 0 0 0 3px rgba(116,186,255,.45);
 }
 
 /* —— 全局基础 —— */
@@ -175,7 +191,10 @@ html {
 body { margin: 0; min-width: 320px; }
 button, input, select, textarea { font: inherit; color: inherit; }
 button, a, input, select, textarea { outline-color: var(--ring); }
-::selection { background: color-mix(in srgb, var(--brand-jade) 38%, transparent); color: var(--text-ink); }
+::selection { background: color-mix(in srgb, var(--brand-cinnabar) 38%, transparent); color: var(--text-ink); }
+
+/* 全局 emoji + 数字字符 */
+.tabular { font-feature-settings: 'tnum'; }
 
 /* —— 表面：纯净 paper 与极光毛玻璃背景 —— */
 .surface-paper { background: var(--surface-paper); color: var(--text-ink); }
@@ -186,14 +205,15 @@ button, a, input, select, textarea { outline-color: var(--ring); }
   isolation: isolate;
   min-height: 100vh;
   background:
-    radial-gradient(ellipse 80% 50% at 12% -8%,  color-mix(in srgb, var(--brand-jade) 22%, transparent), transparent 60%),
-    radial-gradient(ellipse 70% 50% at 92% 4%,   color-mix(in srgb, var(--brand-mist-violet) 20%, transparent), transparent 60%),
-    radial-gradient(ellipse 90% 60% at 50% 110%, color-mix(in srgb, var(--brand-cinnabar) 14%, transparent), transparent 65%),
+    radial-gradient(ellipse 70% 50% at 8% -6%,   color-mix(in srgb, var(--brand-cinnabar) 32%, transparent), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 96% 6%,   color-mix(in srgb, var(--brand-mist-violet) 36%, transparent), transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 102%, color-mix(in srgb, var(--brand-jade) 22%, transparent), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 88% 70%,  color-mix(in srgb, var(--brand-aged-gold) 22%, transparent), transparent 60%),
     linear-gradient(180deg, var(--surface-paper) 0%, var(--surface-paper-muted) 100%);
   color: var(--text-ink);
 }
 
-/* 大面积流光：极光雾带 — 仅装饰，pointer-events:none */
+/* 大面积流光：粉/紫/薄荷三色梦幻雾带 */
 .surface-wash::before,
 .surface-atmosphere::before {
   content: '';
@@ -202,11 +222,12 @@ button, a, input, select, textarea { outline-color: var(--ring); }
   z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 50% 40% at 20% 30%, color-mix(in srgb, var(--brand-jade) 26%, transparent), transparent 70%),
-    radial-gradient(ellipse 45% 35% at 78% 22%, color-mix(in srgb, var(--brand-mist-violet) 22%, transparent), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 60% 90%, color-mix(in srgb, var(--brand-cinnabar) 16%, transparent), transparent 70%);
-  filter: blur(80px) saturate(120%);
-  opacity: .9;
+    radial-gradient(ellipse 50% 40% at 18% 26%, color-mix(in srgb, var(--brand-cinnabar) 34%, transparent), transparent 70%),
+    radial-gradient(ellipse 45% 35% at 80% 20%, color-mix(in srgb, var(--brand-mist-violet) 38%, transparent), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 60% 92%, color-mix(in srgb, var(--brand-jade) 22%, transparent), transparent 70%),
+    radial-gradient(ellipse 35% 30% at 92% 60%, color-mix(in srgb, var(--brand-aged-gold) 22%, transparent), transparent 70%);
+  filter: blur(90px) saturate(135%);
+  opacity: .92;
   animation: zy-aurora 26s var(--ease-brush) infinite alternate;
 }
 
@@ -218,7 +239,7 @@ button, a, input, select, textarea { outline-color: var(--ring); }
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
   background-size: 3px 3px;
   mix-blend-mode: overlay;
   opacity: .55;
@@ -295,7 +316,14 @@ button, a, input, select, textarea { outline-color: var(--ring); }
 }
 
 /* —— 印章 / 强调 —— */
-.seal-accent { background: linear-gradient(135deg, var(--brand-cinnabar-soft), var(--brand-cinnabar)); color: #fffaf6; box-shadow: var(--shadow-seal); }
+.seal-accent {
+  background: linear-gradient(135deg, var(--brand-bubblegum), var(--brand-cinnabar) 55%, var(--brand-mist-violet));
+  color: #fffaf6;
+  box-shadow: var(--shadow-seal);
+}
+.glow-coral { box-shadow: var(--shadow-seal); }
+.glow-violet { box-shadow: var(--shadow-violet); }
+.glow-mint { box-shadow: var(--shadow-jade); }
 .porcelain-grid {
   background-image:
     linear-gradient(var(--line-hair) 1px, transparent 1px),
