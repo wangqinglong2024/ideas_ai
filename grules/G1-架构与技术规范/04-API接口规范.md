@@ -198,5 +198,6 @@
 
 ## 十、OpenAPI 文档
 
-- 每个 controller 必须挂 `zod-to-openapi` 注释，`api-app` 启动时输出 `openapi.json` 到 `docs/openapi/`。
+- 全栈 Hono：每个 handler 通过 `@hono/zod-openapi` 声明请求/响应 schema，`api-app` 启动时输出 `openapi.json` 到 `docs/openapi/`。
 - 后台路径独立输出 `openapi.admin.json`。
+- Edge Functions 与 Hono 同构 schema（均来自 `packages/shared-schemas`），同步生成 `openapi.edge.json`。

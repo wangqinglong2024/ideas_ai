@@ -3,7 +3,7 @@
 > **产品**：知语（Zhiyu）
 > **定位**：面向东南亚（越南、泰国、印尼等）用户的中文学习软件
 > **来源**：根据 `prompt/G1-用户-技术与架构偏好.md` 与模板 `template/G1-AI-架构与技术规范.md` 生成
-> **生成时间**：2026-04-28
+> **生成时间**：2026-04-28（已并入 PM 对 99 清单的全部回复）
 >
 > **谁来写**：AI 根据《G1-用户：技术与架构偏好》生成
 > **谁来审**：产品经理（PM）
@@ -26,17 +26,23 @@
 | 04 | [04-API接口规范.md](./04-API接口规范.md) | URL/响应/错误码/分页/筛选 | 设计/调用接口时 |
 | 05 | [05-编码规范.md](./05-编码规范.md) | 前后端代码风格、分层、错误处理、日志 | 写任何代码前 |
 | 06 | [06-部署与环境.md](./06-部署与环境.md) | Docker、端口、环境变量、API Key 管理 | 配置环境/部署时 |
-| 07 | [07-国际化与响应式.md](./07-国际化与响应式.md) | i18n、断点、移动端适配 | 写 UI 前 |
-| 99 | [99-待确认问题清单.md](./99-待确认问题清单.md) | AI 不确定、需 PM 拍板的问题 | 评审时 |
+| 07 | [07-国际化与响应式.md](./07-国际化与响应式.md) | i18n、断点、移动端适配、字体 | 写 UI 前 |
+| 99 | [99-待确认问题清单.md](./99-待确认问题清单.md) | AI 不确定、需 PM 拍板的问题（**当前已全部敲定**） | 评审时 |
 
 ---
 
-## 核心原则（速记）
+## 核心原则（速记，已落实 PM 全部决策）
 
-1. **TypeScript 前端 + JavaScript 后端**：按用户偏好执行；JS 后端使用 JSDoc + Zod 做类型守护（详见 05）。
-2. **Docker-only**：唯一 dev 环境跑在 Docker 内自动化测试，禁止多环境，禁止裸机/SaaS 托管业务。
-3. **Supabase first**：DB / Auth / Storage / Realtime / Vector 全走 Supabase Postgres。
-4. **Adapter + Mock**：缺 API Key（参考 `env.md`）一律走 mock 适配器，不阻塞流程。
-5. **端口固定**：应用端 fe=3100 / be=8100；管理端 fe=4100 / be=9100；占用即强制释放。
-6. **响应式 + i18n**：5 语言（zh/en/vi/th/id）×（PC + 移动）全场景。
-7. **单文件 ≤ 1200 行**：超出立刻拆分。
+1. **全栈 TypeScript（strict）**：前端 + 后端 + 共享包 + 脚本，统一 TS。**禁止使用 JS / `.mjs` / JSDoc 替代**。
+2. **后端 = Hono + Supabase Edge Functions**：业务 API 走 Hono（容器内）；鉴权、第三方回调、轻量编排走 Supabase Edge Functions。
+3. **数据访问 = supabase-js + Supabase MCP**：不引入 Drizzle / Prisma / Kysely；schema 与迁移由 Supabase CLI（SQL）管理；复杂查询通过 Postgres RPC 暴露。
+4. **前端 = React 19 + Vite + 纯 CSR/SPA**：HTML 仅空壳，所有业务数据通过 API 异步获取；**禁止 SSR/SSG/数据预注入**（反爬虫硬性要求）。
+5. **Docker-only**：唯一 dev 环境跑在 Docker 内自动化测试，禁止多环境，禁止裸机/SaaS 托管业务。
+6. **Supabase 本地自托管**：**不使用 supabase.com 云服务**。
+7. **Adapter + Mock**：缺 API Key（参考 `env.md`）一律走 mock 适配器；支付（Paddle）、邮件、Google 登录本期全部 mock。
+8. **端口固定**：应用端 fe=3100 / be=8100；管理后台 fe=4100 / be=9100；占用即强制释放。**dev 直接 `IP:端口` 访问，无反向代理**；HTTPS / Nginx 由用户在生产自行处理。
+9. **AI 工作流**：复杂场景 LangGraph（TS，接受 beta）；简单 prompt/流式 Vercel AI SDK；向量走 Supabase pgvector。
+10. **响应式 + i18n**：5 语言（zh/en/vi/th/id）×（PC + 移动）全场景；i18n 文案 AI 自动翻译占位 + 后续人工校对。
+11. **第三方登录**：仅 Google + 邮箱，本期均 mock。
+12. **字体**：自托管（Supabase 也是本地化），优先选好看的字体；**禁止走 Google Fonts CDN**。
+13. **单文件 ≤ 1200 行**：超出立刻拆分。
