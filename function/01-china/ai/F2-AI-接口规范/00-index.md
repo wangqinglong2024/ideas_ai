@@ -33,12 +33,14 @@
 | # | 名称 | 方法 | 路径 | 权限 | 对应需求 |
 |---|------|------|------|------|---------|
 | C1 | 列出 12 类目 | GET | `/api/v1/china/categories` | 公开 | F2 §一·应用端「12 个类目卡片」 |
-| C2 | 列出某类目下已发布文章 | GET | `/api/v1/china/categories/:code/articles` | 公开 | F2 §一·应用端「类目下文章列表」 |
-| C3 | 文章详情（含全部已发布句子） | GET | `/api/v1/china/articles/:code` | 公开 | F2 §一·应用端「逐句查看文章」 |
+| C2 | 列出某类目下已发布文章 | GET | `/api/v1/china/categories/:code/articles` | 分级公开¹ | F2 §一·应用端「类目下文章列表」 |
+| C3 | 文章详情（含全部已发布句子） | GET | `/api/v1/china/articles/:code` | 分级公开¹ | F2 §一·应用端「逐句查看文章」 |
 | C4 | 触发/获取句子 TTS（首次生成或命中缓存） | POST | `/api/v1/china/sentences/:id/audio` | 公开 | F2 §一·应用端「朗读」 |
-| C5 | 全文朗读清单 | GET | `/api/v1/china/articles/:code/audio-playlist` | 公开 | F2 §一·应用端「全文朗读」 |
+| C5 | 全文朗读清单 | GET | `/api/v1/china/articles/:code/audio-playlist` | 分级公开¹ | F2 §一·应用端「全文朗读」 |
 | C6 | 上报阅读进度 | PUT | `/api/v1/china/articles/:code/progress` | 登录用户 | F2 §一·应用端「逐句查看 + 进度」 |
 | C7 | 读取阅读进度 | GET | `/api/v1/china/articles/:code/progress` | 登录用户 | 同上 |
+
+> ¹ 分级公开（PM 答 F2-Q11）：类目 `01..03` 完全公开；`04..12` 必须登录，未登录返回 401 并带 `redirect_to=/login`。
 
 ### 管理端（`/admin/v1`）
 
