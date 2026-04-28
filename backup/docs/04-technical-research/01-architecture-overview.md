@@ -30,7 +30,7 @@
        ┌──────────────────┼─────────────────┐
        │                  │                 │
 [zhiyu.app]       [admin.zhiyu.app]    [API: api.zhiyu.app]
-  应用端 PWA          管理后台          后端 + Edge
+  应用端 PWA          管理端          后端 + Edge
        │                  │                 │
        └──────────────────┴────────┬────────┘
                                    │
@@ -57,7 +57,7 @@
                 ├── [TTS 生成 + 上传 Supabase Storage]
                 └── [入库 Postgres → 触发 RT 通知]
                             │
-                  [管理后台审校 Web UI]
+                  [管理端审校 Web UI]
                             │
                   [发布到 prod schema]
                             │
@@ -100,7 +100,7 @@
 
 ### 3.4 内容工厂生产一篇发现中国短文（典型）
 
-1. 运营在管理后台点"AI 生成 - 美食类目 - 北京烤鸭"
+1. 运营在管理端点"AI 生成 - 美食类目 - 北京烤鸭"
 2. 后端启动 LangGraph 工作流
 3. Step 1: 选题深化（生成 outline）
 4. Step 2: 中文文章生成（Claude）
@@ -135,7 +135,7 @@
 ### 5.1 代码仓库
 - Monorepo（pnpm workspace）：
   - `apps/web`（应用端）
-  - `apps/admin`（管理后台）
+  - `apps/admin`（管理端）
   - `apps/api`（后端 Express）
   - `packages/shared`（类型 / 工具 / i18n）
   - `packages/content-pipeline`（LangGraph 工作流）

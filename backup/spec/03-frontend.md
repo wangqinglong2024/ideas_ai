@@ -8,7 +8,7 @@
 zhiyu/
 ├── apps/
 │   ├── app/              # 应用端 PWA (用户)
-│   ├── admin/            # 管理后台
+│   ├── admin/            # 管理端
 │   ├── web/              # 营销站点 (v1.5 SSG)
 │   ├── api/              # 后端 API
 │   └── worker/           # 后台 Worker / 工厂

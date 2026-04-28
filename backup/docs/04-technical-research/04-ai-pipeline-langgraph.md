@@ -14,7 +14,7 @@
 
 ```
 ┌──────────────────────────────────────────────┐
-│  内容工厂（离线，管理后台触发）              │
+│  内容工厂（离线，管理端触发）              │
 │  ├── LangGraph 工作流                         │
 │  ├── 多 LLM 路由（Claude / DeepSeek）        │
 │  ├── TTS 生成                                 │
@@ -159,7 +159,7 @@ graph
 ### 3.5 状态持久化
 - LangGraph state 持久化到 Postgres `langgraph_runs` 表
 - 失败可重试（idempotency key）
-- 管理后台可看流水
+- 管理端可看流水
 
 ## 四、提示词工程（Prompt Engineering）
 
@@ -221,7 +221,7 @@ for await (const chunk of result.textStream) {
 
 ## 六、内容审校工作台
 
-### 6.1 工作台 UI（管理后台）
+### 6.1 工作台 UI（管理端）
 - 左侧：待审清单（按语种 / 模块 / 时间）
 - 中间：原文 + AI 译文双栏
 - 右侧：评分 + 修改 + 注释

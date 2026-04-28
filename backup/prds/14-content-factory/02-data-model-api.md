@@ -94,7 +94,7 @@ const graph = new StateGraph(lessonState)
   .setEntryPoint('outline');
 ```
 
-## API（管理后台调用）
+## API（管理端调用）
 
 - `POST /admin/api/factory/workflows`
   Body: `{workflow_type, input}` → `{workflow_id}`

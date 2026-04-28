@@ -1,6 +1,6 @@
 # 4.5 · 数据模型 · 统一内容数据格式
 
-> **目标**：让"AI 生成 → 入库 → 管理后台 → 应用端"的格式完全统一，杜绝数据漂移
+> **目标**：让"AI 生成 → 入库 → 管理端 → 应用端"的格式完全统一，杜绝数据漂移
 
 ## 一、数据模型分层
 
@@ -63,7 +63,7 @@ IM 表：
 
 ### 2.1 设计目标
 - 发现中国 / 课程 / 小说 三个模块的"句子"用同一 schema
-- 一处生成、四处展示（Web 应用端、管理后台、未来 App、SEO 静态页）
+- 一处生成、四处展示（Web 应用端、管理端、未来 App、SEO 静态页）
 - 用户偏好（拼音/母语显示、朗读模式）零修改 schema 即可生效
 
 ### 2.2 sentence 通用格式（JSON）
@@ -354,7 +354,7 @@ CREATE TABLE im_messages (
 CREATE INDEX idx_im_msg_conv ON im_messages(conversation_id, created_at);
 ```
 
-## 十一、管理后台数据呈现
+## 十一、管理端数据呈现
 
 ### 11.1 内容管理界面（关键）
 - 列表页：按"轨道 / 阶段 / 章 / 节" 树形展开
@@ -362,7 +362,7 @@ CREATE INDEX idx_im_msg_conv ON im_messages(conversation_id, created_at);
 - 操作：编辑 / 重生成 / 标记审过 / 退回 AI / 发布
 
 ### 11.2 后台 → 应用端一致性保证
-- 同一 schema、同一 API（管理后台 GET 时不带鉴权头取 admin 视图）
+- 同一 schema、同一 API（管理端 GET 时不带鉴权头取 admin 视图）
 - 修改后实时刷新 CDN（Cloudflare Purge API）
 - 前端通过 SWR 自动检测内容版本号
 
@@ -387,7 +387,7 @@ CREATE INDEX idx_im_msg_conv ON im_messages(conversation_id, created_at);
 
 ### 13.2 物化视图
 - `mv_user_dashboard` - 用户首页数据（每 5 分钟刷新）
-- `mv_admin_metrics` - 管理后台核心指标（每分钟刷新）
+- `mv_admin_metrics` - 管理端核心指标（每分钟刷新）
 
 ## 十四、数据治理
 

@@ -1,4 +1,4 @@
-# 12.2 · 管理后台 · 数据模型与 API
+# 12.2 · 管理端 · 数据模型与 API
 
 ## 数据模型
 
@@ -72,7 +72,7 @@ CREATE INDEX idx_review_assigned ON content_review_workflow(assigned_to, status)
 CREATE INDEX idx_review_pending ON content_review_workflow(language, status, created_at) WHERE status='to_review';
 ```
 
-## API（管理后台专属，路径前缀 /admin/api）
+## API（管理端专属，路径前缀 /admin/api）
 
 ### 用户
 - `GET /admin/api/users?q=&role=&page=`

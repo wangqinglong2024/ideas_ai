@@ -17,8 +17,8 @@
 | 图标 | lucide-react | 一致 + 树摇 |
 | 国际化 | i18next + react-i18next | 4 语种 v1 |
 | 动画 | Framer Motion | 留存友好的微动画 |
-| 图表 | Recharts（管理后台） | React 原生 |
-| 富文本 | TipTap（管理后台编辑器） | shadcn 友好 |
+| 图表 | Recharts（管理端） | React 原生 |
+| 富文本 | TipTap（管理端编辑器） | shadcn 友好 |
 | 音频 | Howler.js | 跨浏览器一致 |
 | 游戏 | PixiJS（Canvas / WebGL） | 性能 + 体积 |
 | 测试 | Vitest + Playwright | 单元 + e2e |
@@ -60,7 +60,7 @@
 /legal/tos              用户协议
 ```
 
-### 2.2 管理后台（Admin）路由
+### 2.2 管理端（Admin）路由
 
 ```
 /admin                  仪表盘
@@ -94,7 +94,7 @@
 
 ### 3.2 主要布局
 - 应用端：Mobile-first，桌面适配
-- 管理后台：Desktop-first，平板可用
+- 管理端：Desktop-first，平板可用
 - 游戏：强制横屏（lock orientation API + UI 兜底）
 
 ### 3.3 设计系统对接
@@ -117,7 +117,7 @@
 ### 4.2 翻译流水线
 - 静态文案：i18next JSON（开发时人工 + AI 校对）
 - 动态内容（课程/文章）：数据库字段中包含多语字段
-- 用户反馈翻译：管理后台一键修复
+- 用户反馈翻译：管理端一键修复
 
 ### 4.3 设置同步
 - 用户设置 UI 语言后：所有 UI + 内容讲解切换
