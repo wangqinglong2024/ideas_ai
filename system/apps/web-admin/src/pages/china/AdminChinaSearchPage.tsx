@@ -19,14 +19,14 @@ function sanitizeEm(html: string): string {
   });
 }
 
-type Search = { q?: string; type?: 'all' | 'articles' | 'sentences'; page?: number };
+type Search = { q?: string; scope?: 'all' | 'articles' | 'sentences'; page?: number };
 
 export function AdminChinaSearchPage() {
   const sp = useSearch({ strict: false }) as Search;
   const nav = useNavigate();
   const [q, setQ] = useState(sp.q ?? '');
   const [debouncedQ, setDebouncedQ] = useState(sp.q ?? '');
-  const [type, setType] = useState<NonNullable<Search['type']>>(sp.type ?? 'all');
+  const [scope, setScope] = useState<NonNullable<Search['scope']>>(sp.scope ?? 'all');
   const page = sp.page ?? 1;
   const pageSize = 20;
 
@@ -35,15 +35,15 @@ export function AdminChinaSearchPage() {
     return () => clearTimeout(id);
   }, [q]);
   useEffect(() => {
-    nav({ to: '/china/search', search: { q: debouncedQ || undefined, type, page: 1 } as never, replace: true });
-  }, [debouncedQ, type]);
+    nav({ to: '/china/search', search: { q: debouncedQ || undefined, scope, page: 1 } as never, replace: true });
+  }, [debouncedQ, scope]);
 
   const res = useQuery({
-    queryKey: ['admin-china-search', debouncedQ, type, page],
+    queryKey: ['admin-china-search', debouncedQ, scope, page],
     queryFn: () => {
       const p = new URLSearchParams();
       p.set('q', debouncedQ);
-      p.set('type', type);
+      p.set('scope', scope);
       p.set('page', String(page));
       p.set('page_size', String(pageSize));
       return adminApi<AdminSearchResp>(`/china/search?${p.toString()}`);
@@ -66,7 +66,7 @@ export function AdminChinaSearchPage() {
           autoFocus
           style={{ flex: 1, minWidth: 280 }}
         />
-        <Select data-testid="search-type" value={type} onChange={(e) => setType(e.target.value as Search['type'] as never)}>
+        <Select data-testid="search-type" value={scope} onChange={(e) => setScope(e.target.value as Search['scope'] as never)}>
           <option value="all">全部</option>
           <option value="articles">仅文章</option>
           <option value="sentences">仅句子</option>
@@ -121,7 +121,7 @@ export function AdminChinaSearchPage() {
                           {a.status === 'published' ? <Tag variant="success">已发布</Tag> : <Tag>草稿</Tag>}
                         </div>
                         <div className="zy-em" style={{ fontWeight: 600, fontSize: 15 }}
-                             dangerouslySetInnerHTML={{ __html: sanitizeEm((a.highlights?.find((h) => h.field === 'title_zh')?.snippet) || a.title_i18n?.zh || a.title_i18n_html?.zh || '') }} />
+                             dangerouslySetInnerHTML={{ __html: sanitizeEm((a.highlights?.find((h) => h.field === 'title_i18n.zh')?.snippet) || a.title_i18n?.zh || a.title_i18n_html?.zh || '') }} />
                         <div style={{ color: 'var(--zy-fg-soft)', fontSize: 12 }}>{a.title_pinyin}</div>
                       </div>
                       <span style={{ fontSize: 11, color: 'var(--zy-fg-mute)' }}>命中：{a.highlights?.[0]?.field || a.matched_field || ''}</span>
@@ -172,14 +172,14 @@ export function AdminChinaSearchPage() {
               <Button
                 variant="ghost"
                 disabled={page <= 1}
-                onClick={() => nav({ to: '/china/search', search: { q: debouncedQ, type, page: page - 1 } as never, replace: true })}
+                onClick={() => nav({ to: '/china/search', search: { q: debouncedQ, scope, page: page - 1 } as never, replace: true })}
                 data-testid="search-prev"
               >上一页</Button>
               <span style={{ alignSelf: 'center', fontSize: 12, color: 'var(--zy-fg-soft)' }}>第 {page} 页</span>
               <Button
                 variant="ghost"
                 disabled={!res.data.pagination?.has_next}
-                onClick={() => nav({ to: '/china/search', search: { q: debouncedQ, type, page: page + 1 } as never, replace: true })}
+                onClick={() => nav({ to: '/china/search', search: { q: debouncedQ, scope, page: page + 1 } as never, replace: true })}
                 data-testid="search-next"
               >下一页</Button>
             </div>

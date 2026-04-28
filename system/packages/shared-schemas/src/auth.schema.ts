@@ -30,6 +30,37 @@ export const ResetPasswordReq = z.object({
   new_password: PasswordSchema,
 });
 
+// ---- 邮箱 OTP（验证码）----
+export const OtpPurpose = z.enum(['register', 'reset_password']);
+export type OtpPurpose = z.infer<typeof OtpPurpose>;
+
+export const SendEmailOtpReq = z.object({
+  email: EmailSchema,
+  purpose: OtpPurpose,
+});
+
+export const VerifyRegisterOtpReq = z.object({
+  email: EmailSchema,
+  code: z.string().regex(/^\d{6}$/, 'auth.otp.invalid'),
+  password: PasswordSchema,
+  display_name: z.string().min(1).max(40).optional(),
+  locale: z.enum(['zh', 'en', 'vi', 'th', 'id']).optional(),
+});
+
+export const ResetPasswordOtpReq = z.object({
+  email: EmailSchema,
+  code: z.string().regex(/^\d{6}$/, 'auth.otp.invalid'),
+  new_password: PasswordSchema,
+});
+
+// ---- Google 登录（mock）----
+export const GoogleLoginReq = z.object({
+  id_token: z.string().min(1).max(4096).optional(),
+  // dev mock：允许直接传 email
+  mock_email: EmailSchema.optional(),
+  mock_name: z.string().min(1).max(40).optional(),
+});
+
 export const SessionInfo = z.object({
   id: z.string().uuid(),
   device_id: z.string(),
