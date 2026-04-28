@@ -36,7 +36,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <Link to="/" style={{ fontWeight: 700, fontSize: 18, color: 'var(--zy-brand)' }} data-testid="brand-link">
               {t('common.app_name')}
             </Link>
-            <Link to="/discover" data-testid="nav-discover">{t('nav.discover')}</Link>
+            <Link to="/china" data-testid="nav-china">{t('nav.discover')}</Link>
             {authed && <Link to="/me" data-testid="nav-me">{t('nav.me')}</Link>}
           </>
         }
