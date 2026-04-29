@@ -33,13 +33,13 @@ export function AdminLayout({ children }: { children: ReactNode }) {
       <TopNav
         left={
           <>
-            <Link to="/" style={{ fontWeight: 700, fontSize: 18, color: 'var(--zy-brand)' }} data-testid="brand-link">
+            <Link to="/" style={{ fontWeight: 700, fontSize: 18, color: 'var(--zy-brand)', whiteSpace: 'nowrap' }} data-testid="brand-link">
               知语 · Admin
             </Link>
             {authed && (
               <>
-                <Link to="/china" data-testid="nav-china">发现中国</Link>
-                <Link to="/users" data-testid="nav-users">用户管理</Link>
+                <Link to="/china" className="zy-topnav-link" activeClass="zy-nav-active" data-testid="nav-china">发现中国</Link>
+                <Link to="/users" className="zy-topnav-link" activeClass="zy-nav-active" data-testid="nav-users">用户管理</Link>
               </>
             )}
           </>
@@ -68,7 +68,7 @@ export function AdminLayout({ children }: { children: ReactNode }) {
           </>
         }
       />
-      <main className="zy-page" style={{ padding: 0 }}>{children}</main>
+      <main className="zy-page zy-admin-page" style={{ padding: 0 }}>{children}</main>
     </>
   );
 }

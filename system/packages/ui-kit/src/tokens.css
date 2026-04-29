@@ -232,7 +232,7 @@ a { color: inherit; text-decoration: none; }
 @media (min-width: 768px) { .zy-container { padding: 24px; } }
 .zy-grid-12 {
   display: grid; gap: 16px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 @media (min-width: 640px) { .zy-grid-12 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 768px) { .zy-grid-12 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -275,6 +275,28 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 600px) {
   .zy-drawer { width: 100% !important; }
   .zy-modal { width: 100% !important; }
+}
+
+/* TopNav nav links */
+.zy-topnav-link {
+  color: var(--zy-fg-soft); font-size: 14px; font-weight: 500;
+  padding: 4px 10px; border-radius: var(--zy-radius-sm);
+  transition: color 0.15s, background 0.15s; white-space: nowrap;
+}
+.zy-topnav-link:hover { color: var(--zy-fg); background: var(--zy-brand-soft); }
+.zy-nav-active {
+  color: var(--zy-brand) !important; font-weight: 700 !important;
+  background: var(--zy-brand-soft) !important; border-radius: var(--zy-radius-sm);
+}
+
+/* Admin mobile responsive */
+@media (max-width: 600px) {
+  .zy-topnav {
+    height: auto; min-height: 52px; padding: 8px 12px;
+    flex-wrap: wrap; gap: 6px 12px;
+  }
+  .zy-admin-page { padding: 12px !important; }
+  .zy-admin-page .zy-input { min-width: 0 !important; }
 }
 
 /* Offline bar */

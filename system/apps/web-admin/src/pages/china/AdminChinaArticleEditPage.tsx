@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
-import { Button, GlassCard, Input, Pagination, Select, SkeletonCard, Spinner, Tabs, Tag, useToast } from '@zhiyu/ui-kit';
+import { Button, GlassCard, Input, Pagination, Select, SkeletonCard, Tabs, Tag, useToast } from '@zhiyu/ui-kit';
 import { adminApi } from '../../lib/http.ts';
 import type { AdminArticle, AdminCategory, AdminSentence, AudioStatus, I18nMap, Locale } from '../../lib/types.ts';
 import { LOCALES, LOCALE_LABELS, fourDigit } from '../../lib/types.ts';
@@ -163,16 +163,6 @@ export function AdminChinaArticleEditPage() {
     await article.refetch();
   }
 
-  async function regenAudio(s: AdminSentence) {
-    try {
-      await adminApi(`/china/sentences/${s.id}/regenerate-audio`, { method: 'POST' });
-      toast.info('已加入语音生成队列');
-      await sentences.refetch();
-    } catch (e) {
-      toast.error((e as Error).message || '语音生成不可用');
-    }
-  }
-
   if (article.isLoading) return <div style={{ padding: 24 }}><SkeletonCard height={180} /></div>;
   if (article.error || !article.data) return (
     <div className="zy-state" data-testid="article-load-error">
@@ -298,7 +288,6 @@ export function AdminChinaArticleEditPage() {
                   <Button variant="ghost" data-testid={`sentence-insert-${s.seq_no}`} disabled={readonly} onClick={() => setCreatePos({ mode: 'after', afterSeqNo: s.seq_no })}>↓ 插入</Button>
                 </div>
                 <div style={{ display: 'flex', gap: 4 }}>
-                  <Button variant="ghost" data-testid={`sentence-regen-${s.seq_no}`} disabled={readonly || s.audio_status === 'processing' || s.audio_status === 'pending'} onClick={() => regenAudio(s)}>重生成语音</Button>
                   <Button variant="ghost" data-testid={`sentence-delete-${s.seq_no}`} disabled={readonly} onClick={() => setDelTarget(s)}>删除</Button>
                 </div>
               </div>
