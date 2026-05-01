@@ -32,17 +32,17 @@
 
   <!-- 进度 -->
   <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-    <div><strong>1.3.4 早上好</strong> · 节末小测</div>
-    <div style="color: var(--zy-fg-mute); font-size: 13px;">第 3 / 6 题</div>
+    <div><strong data-zh="1.3.4 早上好" data-trans-en="1.3.4 Good morning" data-trans-vi="1.3.4 Chào buổi sáng" data-trans-th="1.3.4 สวัสดีตอนเช้า" data-trans-id="1.3.4 Selamat pagi">1.3.4 早上好</strong> · <span data-i18n="exam.lesson">节末小测</span></div>
+    <div style="color: var(--zy-fg-mute); font-size: 13px;"><span data-zh="第 3 / 6 题" data-trans-en="Q 3 / 6" data-trans-vi="Câu 3 / 6" data-trans-th="ข้อ 3 / 6" data-trans-id="Soal 3 / 6">第 3 / 6 题</span></div>
   </div>
   <div class="zy-progress" style="margin-bottom: 24px;"><i style="width: 50%;"></i></div>
 
   <!-- 题目卡 -->
   <div class="zy-card" style="background: var(--zy-bg);">
-    <div style="display: flex; gap: 8px; margin-bottom: 8px;"><span class="zy-tag zy-tag-info" data-i18n="qt.listen_pick">听音选词</span><span class="zy-tag">难度 1</span></div>
+    <div style="display: flex; gap: 8px; margin-bottom: 8px;"><span class="zy-tag zy-tag-info" data-i18n="qt.listen_pick">听音选词</span><span class="zy-tag"><span data-zh="难度 1" data-trans-en="Difficulty 1" data-trans-vi="Độ khó 1" data-trans-th="ระดับ 1" data-trans-id="Tingkat 1">难度 1</span></span></div>
     <div class="qz-stem">
-      <button class="zy-btn zy-btn-ghost zy-btn-sm" data-toast="🔊 播放音频" data-toast-type="info">🔊 播放音频</button>
-      <span style="margin-left: 12px;">请选择你听到的词语：</span>
+      <button class="zy-btn zy-btn-ghost zy-btn-sm" data-toast="🔊 播放音频" data-toast-type="info"><span data-zh="🔊 播放音频" data-trans-en="🔊 Play audio" data-trans-vi="🔊 Phát âm thanh" data-trans-th="🔊 เล่นเสียง" data-trans-id="🔊 Putar audio">🔊 播放音频</span></button>
+      <span style="margin-left: 12px;" data-zh="请选择你听到的词语：" data-trans-en="Pick the word you heard:" data-trans-vi="Chọn từ bạn nghe được:" data-trans-th="เลือกคำที่คุณได้ยิน：" data-trans-id="Pilih kata yang Anda dengar:">请选择你听到的词语：</span>
     </div>
     <div class="qz-options" id="qzOpts">
       <div class="qz-opt" onclick="pickAns(this,0,false)"><span class="key">A</span>晚上 wǎn shang</div>
@@ -51,18 +51,18 @@
       <div class="qz-opt" onclick="pickAns(this,3,false)"><span class="key">D</span>下午 xià wǔ</div>
     </div>
     <div class="qz-feedback ok" id="qzFb">
-      <strong>✓ 答对了</strong>「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。
+      <strong data-zh="✓ 答对了" data-trans-en="✓ Correct" data-trans-vi="✓ Đúng" data-trans-th="✓ ถูกต้อง" data-trans-id="✓ Benar">✓ 答对了</strong><span data-zh="「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。" data-trans-en=" ‘早上’ zǎo shang means morning, often paired with ‘好’ as a greeting." data-trans-vi=" ‘早上’ zǎo shang nghĩa là buổi sáng, thường đi với ‘好’ để chào." data-trans-th=" ‘早上’ zǎo shang แปลว่าตอนเช้า มักคู่กับ ‘好’ เป็นคำทักทาย." data-trans-id=" ‘早上’ zǎo shang berarti pagi, sering dipasangkan dengan ‘好’ sebagai sapaan.">「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。</span>
     </div>
   </div>
 
   <div style="display:flex; gap: 12px; justify-content: space-between; margin-top: 24px;">
-    <button class="zy-btn zy-btn-ghost" data-toast="C9 overwrite=true：上一题答案可改写" data-toast-type="info">← 上一题（可改答）</button>
-    <button class="zy-btn zy-btn-primary zy-btn-lg" data-toast="提交答题事件 → 进入下一题（4/6）" data-toast-type="success">下一题 →</button>
+    <button class="zy-btn zy-btn-ghost" data-toast="C9 overwrite=true：上一题答案可改写" data-toast-type="info"><span data-zh="← 上一题（可改答）" data-trans-en="← Previous (editable)" data-trans-vi="← Câu trước (sửa được)" data-trans-th="← ข้อก่อนหน้า (แก้ไขได้)" data-trans-id="← Sebelumnya (bisa diubah)">← 上一题（可改答）</span></button>
+    <button class="zy-btn zy-btn-primary zy-btn-lg" data-toast="提交答题事件 → 进入下一题（4/6）" data-toast-type="success"><span data-zh="下一题 →" data-trans-en="Next →" data-trans-vi="Câu sau →" data-trans-th="ข้อถัดไป →" data-trans-id="Soal berikut →">下一题 →</span></button>
   </div>
 
   <div style="text-align:center; margin-top: 16px;">
-    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mSubmit">📋 模拟「最后一题提交」</button>
-    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mResult">📊 查看结果页（mock）</button>
+    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mSubmit"><span data-zh="📋 模拟「最后一题提交」" data-trans-en="📋 Simulate ‘final submit’" data-trans-vi="📋 Mô phỏng ‘nộp câu cuối’" data-trans-th="📋 จำลอง ‘ส่งข้อสุดท้าย’" data-trans-id="📋 Simulasi ‘kirim soal terakhir’">📋 模拟「最后一题提交」</span></button>
+    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mResult"><span data-zh="📊 查看结果页（mock）" data-trans-en="📊 View result page (mock)" data-trans-vi="📊 Xem trang kết quả (mock)" data-trans-th="📊 ดูหน้าผล (mock)" data-trans-id="📊 Lihat halaman hasil (mock)">📊 查看结果页（mock）</span></button>
   </div>
 </div>
 
@@ -76,9 +76,9 @@
 <!-- D-12 提交确认 -->
 <div class="zy-modal-mask" id="mSubmit">
   <div class="zy-modal size-md">
-    <div class="zy-modal-head"><div class="zy-modal-title">提交本次小测？</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="提交本次小测？" data-trans-en="Submit this quiz?" data-trans-vi="Nộp bài này?" data-trans-th="ส่งแบบทดสอบนี้？" data-trans-id="Kirim kuis ini?">提交本次小测？</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      <div>已答 6 / 6 题。提交后进入结果页，无法再修改答案。</div>
+      <div data-zh="已答 6 / 6 题。提交后进入结果页，无法再修改答案。" data-trans-en="Answered 6 / 6. After submission you cannot change answers." data-trans-vi="Đã trả lời 6 / 6. Sau khi nộp không sửa được." data-trans-th="ตอบแล้ว 6 / 6 ส่งแล้วแก้ไขไม่ได้" data-trans-id="Terjawab 6 / 6. Setelah dikirim tidak bisa diubah.">已答 6 / 6 题。提交后进入结果页，无法再修改答案。</div>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-open-modal="mResult" data-i18n="btn.confirmSubmit">确认提交</button></div>
   </div>
@@ -87,8 +87,8 @@
 <!-- 退出确认 -->
 <div class="zy-modal-mask" id="mExit">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">退出本次小测？</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">已作答记录将保留为草稿，下次进入可继续。</div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="退出本次小测？" data-trans-en="Exit this quiz?" data-trans-vi="Thoát bài này?" data-trans-th="ออกจากแบบทดสอบ？" data-trans-id="Keluar dari kuis ini?">退出本次小测？</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body" data-zh="已作答记录将保留为草稿，下次进入可继续。" data-trans-en="Your answers will be saved as draft and you can resume later." data-trans-vi="Câu trả lời sẽ lưu nháp, có thể tiếp tục sau." data-trans-th="คำตอบจะบันทึกเป็นฉบับร่าง" data-trans-id="Jawaban tersimpan sebagai draf, dapat dilanjut nanti.">已作答记录将保留为草稿，下次进入可继续。</div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.continueExam">继续答题</button><button class="zy-btn zy-btn-danger" data-close-modal data-nav="/learn" data-i18n="btn.exit">退出</button></div>
   </div>
 </div>
@@ -96,24 +96,24 @@
 <!-- 结果页 mock -->
 <div class="zy-modal-mask" id="mResult">
   <div class="zy-modal size-lg">
-    <div class="zy-modal-head"><div class="zy-modal-title">🎉 小测完成 · 1.3.4 早上好</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="🎉 小测完成 · 1.3.4 早上好" data-trans-en="🎉 Quiz done · 1.3.4 Good morning" data-trans-vi="🎉 Hoàn thành · 1.3.4 Chào buổi sáng" data-trans-th="🎉 เสร็จแบบทดสอบ · 1.3.4 สวัสดีตอนเช้า" data-trans-id="🎉 Selesai · 1.3.4 Selamat pagi">🎉 小测完成 · 1.3.4 早上好</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <div style="text-align: center; padding: 16px 0 24px;">
         <div style="font-size: 56px; font-weight: 700; color: var(--zy-brand);">5/6</div>
-        <div style="color: var(--zy-fg-mute);">得分 83 · 通过线 80</div>
-        <div class="zy-tag zy-tag-success" style="margin-top: 8px;">✓ 已通过</div>
+        <div style="color: var(--zy-fg-mute);"><span data-i18n="common.score">得分</span> 83 · <span data-i18n="common.passLine">通过线</span> 80</div>
+        <div class="zy-tag zy-tag-success" style="margin-top: 8px;" data-i18n="common.passed">✓ 已通过</div>
       </div>
-      <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">错题（1）</div>
+      <div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;"><span data-zh="错题（1）" data-trans-en="Mistakes (1)" data-trans-vi="Lỗi (1)" data-trans-th="ข้อผิด (1)" data-trans-id="Salah (1)">错题（1）</span></div>
       <div class="zy-card" style="background: var(--zy-bg-elev);">
-        <div style="display:flex; gap: 8px; margin-bottom: 6px;"><span class="zy-tag zy-tag-danger">第 4 题</span><span class="zy-tag" data-i18n="qt.tone_pick">选声调</span></div>
-        <div style="font-size: 14px;">「晚」的声调？</div>
-        <div style="font-size: 12px; color: var(--zy-fg-mute); margin-top: 6px;">你的答案：第 2 声 ❌ &nbsp; 正确答案：第 3 声 ✓</div>
+        <div style="display:flex; gap: 8px; margin-bottom: 6px;"><span class="zy-tag zy-tag-danger" data-zh="第 4 题" data-trans-en="Q 4" data-trans-vi="Câu 4" data-trans-th="ข้อ 4" data-trans-id="Soal 4">第 4 题</span><span class="zy-tag" data-i18n="qt.tone_pick">选声调</span></div>
+        <div style="font-size: 14px;" data-zh="「晚」的声调？" data-trans-en="Tone of ‘晚’?" data-trans-vi="Thanh điệu của ‘晚’?" data-trans-th="วรรณยุกต์ของ ‘晚’？" data-trans-id="Nada ‘晚’?">「晚」的声调？</div>
+        <div style="font-size: 12px; color: var(--zy-fg-mute); margin-top: 6px;" data-zh="你的答案：第 2 声 ❌   正确答案：第 3 声 ✓" data-trans-en="Your answer: tone 2 ❌   Correct: tone 3 ✓" data-trans-vi="Câu trả lời: thanh 2 ❌   Đúng: thanh 3 ✓" data-trans-th="คำตอบของคุณ：วรรณยุกต์ 2 ❌   ถูกต้อง：วรรณยุกต์ 3 ✓" data-trans-id="Jawaban Anda: nada 2 ❌   Benar: nada 3 ✓">你的答案：第 2 声 ❌   正确答案：第 3 声 ✓</div>
       </div>
     </div>
     <div class="zy-modal-foot">
-      <button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn">返回学习地图</button>
+      <button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn"><span data-zh="返回学习地图" data-trans-en="Back to map" data-trans-vi="Về bản đồ" data-trans-th="กลับสู่แผนที่" data-trans-id="Kembali ke peta">返回学习地图</span></button>
       <button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn/wrong" data-i18n="btn.viewWrong">查看错题本</button>
-      <button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/lessons/ec-1-3-5">下一节 1.3.5 →</button>
+      <button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/lessons/ec-1-3-5"><span data-zh="下一节 1.3.5 →" data-trans-en="Next 1.3.5 →" data-trans-vi="Bài sau 1.3.5 →" data-trans-th="บทถัดไป 1.3.5 →" data-trans-id="Pelajaran berikut 1.3.5 →">下一节 1.3.5 →</span></button>
     </div>
   </div>
 </div>
@@ -135,7 +135,7 @@ function pickAns(el, idx, ok){
 <!-- 语言切换 -->
 <div class="zy-modal-mask" id="mLang">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">界面语言</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-i18n="modal.langTitle">界面语言</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <div class="zy-stack">
         <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="zh" checked /> 简体中文</label>

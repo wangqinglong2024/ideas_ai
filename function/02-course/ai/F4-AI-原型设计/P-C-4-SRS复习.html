@@ -30,16 +30,16 @@
 
   <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 20px;">
     <div>
-      <h1 class="zy-page-title">📚 SRS · 今日复习</h1>
-      <p class="zy-page-sub">队列共 <strong>32</strong> 题（最多 50）· 当前第 <strong>5</strong> 题</p>
+      <h1 class="zy-page-title" data-i18n="srs.title">📚 SRS · 今日复习</h1>
+      <p class="zy-page-sub" data-zh="队列共 32 题（最多 50）· 当前第 5 题" data-trans-en="Queue: 32 (max 50) · currently #5" data-trans-vi="Hàng đợi: 32 (tối đa 50) · hiện tại #5" data-trans-th="คิว: 32 (สูงสุด 50) · ขณะนี้ #5" data-trans-id="Antrean: 32 (maks 50) · saat ini #5">队列共 <strong>32</strong> 题（最多 50）· 当前第 <strong>5</strong> 题</p>
     </div>
-    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mPause">⏸ 暂停</button>
+    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mPause" data-i18n="btn.pause">⏸ 暂停</button>
   </div>
   <div class="zy-progress" style="margin-bottom: 24px;"><i style="width: 15%;"></i></div>
 
   <div class="zy-card" style="background: var(--zy-bg);">
-    <div class="zy-tag-row" style="margin-bottom: 8px;"><span class="zy-tag zy-tag-info" data-i18n="qt.cloze">完形填空</span><span class="zy-tag">第&nbsp;5&nbsp;/&nbsp;32</span><span class="zy-tag">盒&nbsp;2&nbsp;→&nbsp;3</span></div>
-    <div class="qz-stem">请补全句子：____ 好，老板！</div>
+    <div class="zy-tag-row" style="margin-bottom: 8px;"><span class="zy-tag zy-tag-info" data-i18n="qt.cloze">完形填空</span><span class="zy-tag" data-zh="第 5 / 32" data-trans-en="#5 / 32" data-trans-vi="#5 / 32" data-trans-th="#5 / 32" data-trans-id="#5 / 32">第&nbsp;5&nbsp;/&nbsp;32</span><span class="zy-tag" data-zh="盒 2 → 3" data-trans-en="Box 2 → 3" data-trans-vi="Hộp 2 → 3" data-trans-th="กล่อง 2 → 3" data-trans-id="Kotak 2 → 3">盒&nbsp;2&nbsp;→&nbsp;3</span></div>
+    <div class="qz-stem" data-zh="请补全句子：____ 好，老板！" data-trans-en="Complete the sentence: ____ 好，老板！" data-trans-vi="Hoàn thành câu: ____ 好，老板！" data-trans-th="เติมประโยค： ____ 好，老板！" data-trans-id="Lengkapi kalimat: ____ 好，老板！">请补全句子：____ 好，老板！</div>
     <div class="qz-options">
       <div class="qz-opt" onclick="srsPick(this,false)"><span class="key">A</span>晚上</div>
       <div class="qz-opt" onclick="srsPick(this,true)"><span class="key">B</span>早上</div>
@@ -47,17 +47,17 @@
       <div class="qz-opt" onclick="srsPick(this,false)"><span class="key">D</span>再见</div>
     </div>
     <div class="qz-feedback ok" id="srsFb" style="display:none;">
-      <strong>✓ 答对了 → 升至盒 3</strong>下次复习：<strong>3 天后</strong>。
+      <strong data-zh="✓ 答对了 → 升至盒 3" data-trans-en="✓ Correct → promoted to box 3" data-trans-vi="✓ Đúng → lên hộp 3" data-trans-th="✓ ถูก → ขึ้นกล่อง 3" data-trans-id="✓ Benar → naik kotak 3">✓ 答对了 → 升至盒 3</strong><span data-zh="下次复习：3 天后。" data-trans-en=" Next review: in 3 days." data-trans-vi=" Lần ôn sau: 3 ngày nữa." data-trans-th=" ทบทวนถัดไป: อีก 3 วัน" data-trans-id=" Tinjauan berikut: 3 hari lagi.">下次复习：<strong>3 天后</strong>。</span>
     </div>
   </div>
 
   <div style="display:flex; gap: 12px; justify-content: space-between; margin-top: 24px;">
-    <button class="zy-btn zy-btn-ghost" data-toast="跳过：本题不计入升降盒，重新入队" data-toast-type="info">⏭ 跳过</button>
-    <button class="zy-btn zy-btn-primary zy-btn-lg" id="nextBtn" data-toast="POST /srs/answer → 第 6/32 题" data-toast-type="success">下一题 →</button>
+    <button class="zy-btn zy-btn-ghost" data-toast="跳过：本题不计入升降盒，重新入队" data-toast-type="info"><span data-zh="⏭ 跳过" data-trans-en="⏭ Skip" data-trans-vi="⏭ Bỏ qua" data-trans-th="⏭ ข้าม" data-trans-id="⏭ Lewati">⏭ 跳过</span></button>
+    <button class="zy-btn zy-btn-primary zy-btn-lg" id="nextBtn" data-toast="POST /srs/answer → 第 6/32 题" data-toast-type="success"><span data-zh="下一题 →" data-trans-en="Next →" data-trans-vi="Câu sau →" data-trans-th="ข้อถัดไป →" data-trans-id="Soal berikut →">下一题 →</span></button>
   </div>
 
   <div style="text-align: center; margin-top: 16px;">
-    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mDone">📋 模拟「队列完成」</button>
+    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mDone"><span data-zh="📋 模拟「队列完成」" data-trans-en="📋 Simulate ‘queue done’" data-trans-vi="📋 Mô phỏng ‘hàng đợi xong’" data-trans-th="📋 จำลอง ‘คิวจบ’" data-trans-id="📋 Simulasi ‘antrean selesai’">📋 模拟「队列完成」</span></button>
   </div>
 </div>
 
@@ -69,23 +69,23 @@
 
 <div class="zy-modal-mask" id="mPause">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">暂停 SRS？</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">已答记录将保存，下次进入继续未完成的 27 题。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.continue">继续</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/me">返回我的</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="暂停 SRS？" data-trans-en="Pause SRS?" data-trans-vi="Tạm dừng SRS?" data-trans-th="หยุด SRS？" data-trans-id="Jeda SRS?">暂停 SRS？</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body" data-zh="已答记录将保存，下次进入继续未完成的 27 题。" data-trans-en="Answers saved; resume the remaining 27 next time." data-trans-vi="Lưu câu trả lời; tiếp tục 27 câu còn lại sau." data-trans-th="บันทึกคำตอบแล้ว ต่อ 27 ข้อที่เหลือได้" data-trans-id="Jawaban tersimpan; lanjut 27 sisanya nanti.">已答记录将保存，下次进入继续未完成的 27 题。</div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.continue">继续</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/me"><span data-zh="返回我的" data-trans-en="Back to Me" data-trans-vi="Về trang Tôi" data-trans-th="กลับไปหน้าฉัน" data-trans-id="Kembali ke Saya">返回我的</span></button></div>
   </div>
 </div>
 
 <div class="zy-modal-mask" id="mDone">
   <div class="zy-modal size-md">
-    <div class="zy-modal-head"><div class="zy-modal-title">🎉 今日 SRS 完成！</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="🎉 今日 SRS 完成！" data-trans-en="🎉 Today’s SRS done!" data-trans-vi="🎉 SRS hôm nay xong!" data-trans-th="🎉 SRS วันนี้เสร็จ！" data-trans-id="🎉 SRS hari ini selesai!">🎉 今日 SRS 完成！</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: center;">
-        <div><div style="font-size: 28px; font-weight:700; color: var(--success);">28</div><div style="font-size: 12px; color: var(--zy-fg-mute);">答对</div></div>
-        <div><div style="font-size: 28px; font-weight:700; color: var(--zy-brand);">4</div><div style="font-size: 12px; color: var(--zy-fg-mute);">答错</div></div>
-        <div><div style="font-size: 28px; font-weight:700;">87.5%</div><div style="font-size: 12px; color: var(--zy-fg-mute);">正确率</div></div>
+        <div><div style="font-size: 28px; font-weight:700; color: var(--success);">28</div><div style="font-size: 12px; color: var(--zy-fg-mute);" data-zh="答对" data-trans-en="Correct" data-trans-vi="Đúng" data-trans-th="ถูก" data-trans-id="Benar">答对</div></div>
+        <div><div style="font-size: 28px; font-weight:700; color: var(--zy-brand);">4</div><div style="font-size: 12px; color: var(--zy-fg-mute);" data-zh="答错" data-trans-en="Wrong" data-trans-vi="Sai" data-trans-th="ผิด" data-trans-id="Salah">答错</div></div>
+        <div><div style="font-size: 28px; font-weight:700;">87.5%</div><div style="font-size: 12px; color: var(--zy-fg-mute);" data-zh="正确率" data-trans-en="Accuracy" data-trans-vi="Độ chính xác" data-trans-th="ความถูกต้อง" data-trans-id="Akurasi">正确率</div></div>
       </div>
       <div class="zy-divider"></div>
-      <div style="font-size: 13px; color: var(--zy-fg-mute);">明日预计 <strong>18</strong> 题待复习；4 题答错已加入错题本。</div>
+      <div style="font-size: 13px; color: var(--zy-fg-mute);" data-zh="明日预计 18 题待复习；4 题答错已加入错题本。" data-trans-en="Tomorrow: ~18 due; 4 wrong added to mistake book." data-trans-vi="Ngày mai: ~18 câu; 4 câu sai đã vào sổ lỗi." data-trans-th="พรุ่งนี้: ~18 ข้อ; 4 ข้อผิดเข้าสมุดผิด" data-trans-id="Besok: ~18 soal; 4 salah masuk buku salah.">明日预计 <strong>18</strong> 题待复习；4 题答错已加入错题本。</div>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn" data-i18n="btn.backLearn">返回学习</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/wrong" data-i18n="btn.viewWrong">查看错题本</button></div>
   </div>

@@ -30,15 +30,15 @@
 </header>
 
 <div class="zy-container">
-  <div class="zy-bread"><span data-nav="/learn" data-i18n="nav.learn">学习</span><span class="sep">›</span><span>电商 EC</span><span class="sep">›</span><span>1.3 见面与问候</span><span class="sep">›</span><span class="cur">1.3.4 早上好</span></div>
+  <div class="zy-bread"><span data-nav="/learn" data-i18n="nav.learn">学习</span><span class="sep">›</span><span data-i18n="theme.ec">🛒 电商 EC</span><span class="sep">›</span><span data-zh="1.3 见面与问候" data-trans-en="1.3 Meeting & greeting" data-trans-vi="1.3 Gặp gỡ & chào hỏi" data-trans-th="1.3 พบเจอและทักทาย" data-trans-id="1.3 Bertemu & menyapa">1.3 见面与问候</span><span class="sep">›</span><span class="cur" data-zh="1.3.4 早上好" data-trans-en="1.3.4 Good morning" data-trans-vi="1.3.4 Chào buổi sáng" data-trans-th="1.3.4 สวัสดีตอนเช้า" data-trans-id="1.3.4 Selamat pagi">1.3.4 早上好</span></div>
 
   <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-start; justify-content:space-between; margin: 8px 0 20px;">
     <div style="flex:1 1 240px; min-width:0;">
-      <h1 class="zy-page-title">1.3.4 早上好</h1>
-      <p class="zy-page-sub">本节包含 12 个知识点 · 学完即可解锁节末小测</p>
+      <h1 class="zy-page-title" data-zh="1.3.4 早上好" data-trans-en="1.3.4 Good morning" data-trans-vi="1.3.4 Chào buổi sáng" data-trans-th="1.3.4 สวัสดีตอนเช้า" data-trans-id="1.3.4 Selamat pagi">1.3.4 早上好</h1>
+      <p class="zy-page-sub" data-zh="本节包含 12 个知识点 · 学完即可解锁节末小测" data-trans-en="This lesson has 12 KP · finish them to unlock the lesson quiz" data-trans-vi="Bài này có 12 KP · hoàn thành để mở bài kiểm tra" data-trans-th="บทนี้มี 12 KP · เรียนจบเพื่อปลดล็อคแบบทดสอบ" data-trans-id="Pelajaran ini berisi 12 KP · selesaikan untuk membuka kuis">本节包含 12 个知识点 · 学完即可解锁节末小测</p>
     </div>
     <div style="flex:1 1 220px; min-width:200px; max-width:320px;">
-      <div style="display:flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;"><span>当前 8 / 12</span><span style="color: var(--zy-fg-mute);">66%</span></div>
+      <div style="display:flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px;"><span data-zh="当前 8 / 12" data-trans-en="Current 8 / 12" data-trans-vi="Hiện tại 8 / 12" data-trans-th="ปัจจุบัน 8 / 12" data-trans-id="Saat ini 8 / 12">当前 8 / 12</span><span style="color: var(--zy-fg-mute);">66%</span></div>
       <div class="zy-progress"><i style="width: 66%;"></i></div>
     </div>
   </div>
@@ -49,9 +49,9 @@
     <h1>早上</h1>
     <div class="trans zy-trans-only" data-zh="早上" data-trans-en="morning" data-trans-vi="buổi sáng" data-trans-th="ตอนเช้า" data-trans-id="pagi">morning</div>
     <div class="actions">
-      <button class="zy-play-btn" data-toast="播放 TTS（cdn://media/zaoshang.mp3）" data-toast-type="info"><span data-icon="speaker"></span>听音</button>
-      <button class="zy-btn zy-btn-ghost zy-btn-sm" data-toast="⭐ 已加入收藏（POST /me/favorites）" data-toast-type="success">⭐ 收藏</button>
-      <button class="zy-report-link" data-open-modal="mReportKP" title="举报内容问题"><span data-icon="flag"></span>举报</button>
+      <button class="zy-play-btn" data-toast="播放 TTS（cdn://media/zaoshang.mp3）" data-toast-type="info"><span data-icon="speaker"></span><span data-i18n="btn.listen">听音</span></button>
+      <button class="zy-btn zy-btn-ghost zy-btn-sm" data-toast="⭐ 已加入收藏（POST /me/favorites）" data-toast-type="success" data-i18n="btn.fav">⭐ 收藏</button>
+      <button class="zy-report-link" data-open-modal="mReportKP" title="举报内容问题"><span data-icon="flag"></span><span data-i18n="btn.report">举报</span></button>
     </div>
     <div class="examples">
       <div style="font-size: 12px; color: var(--zy-fg-mute); margin-bottom: 8px;" data-i18n="common.examples">例句 EXAMPLES</div>
@@ -62,13 +62,13 @@
 
   <!-- 上下题 -->
   <div style="max-width: 640px; margin: 24px auto 0; display: flex; gap: 12px; justify-content: space-between;">
-    <button class="zy-btn zy-btn-ghost" data-toast="← 上一个 KP">← 上一个</button>
-    <button class="zy-btn zy-btn-primary zy-btn-lg" data-toast="POST /lessons/:id/kp/:id/done → 进入第 9 个 KP" data-toast-type="success">下一个 →</button>
+    <button class="zy-btn zy-btn-ghost" data-toast="← 上一个 KP"><span data-zh="← 上一个" data-trans-en="← Previous" data-trans-vi="← Trước" data-trans-th="← ก่อนหน้า" data-trans-id="← Sebelumnya">← 上一个</span></button>
+    <button class="zy-btn zy-btn-primary zy-btn-lg" data-toast="POST /lessons/:id/kp/:id/done → 进入第 9 个 KP" data-toast-type="success"><span data-zh="下一个 →" data-trans-en="Next →" data-trans-vi="Tiếp →" data-trans-th="ถัดไป →" data-trans-id="Lanjut →">下一个 →</span></button>
   </div>
 
   <!-- 学完弹窗 提示 D-13（在最后一个 KP 后弹出） -->
   <div style="text-align: center; margin-top: 16px;">
-    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mLessonDone">📋 模拟「学完最后 1 个 KP」</button>
+    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mLessonDone"><span data-zh="📋 模拟「学完最后 1 个 KP」" data-trans-en="📋 Simulate ‘last KP done’" data-trans-vi="📋 Mô phỏng ‘học xong KP cuối’" data-trans-th="📋 จำลอง ‘เรียน KP สุดท้ายจบ’" data-trans-id="📋 Simulasi ‘KP terakhir selesai’">📋 模拟「学完最后 1 个 KP」</span></button>
   </div>
 </div>
 
@@ -82,9 +82,9 @@
 <!-- 设置 -->
 <div class="zy-modal-mask" id="mSettings">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">学习设置</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-i18n="settings.title">学习设置</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      <div class="zy-field"><label class="zy-label">界面语言</label>
+      <div class="zy-field"><label class="zy-label" data-i18n="modal.langTitle">界面语言</label>
         <div class="zy-stack">
           <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="zh" checked /> 简体中文</label>
           <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="en" /> English</label>
@@ -93,8 +93,8 @@
           <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="id" /> Bahasa Indonesia</label>
         </div>
       </div>
-      <div class="zy-field"><label class="zy-label">音频自动播放</label><select class="zy-select"><option>开启</option><option data-i18n="btn.close">关闭</option></select></div>
-      <div class="zy-field"><label class="zy-label">显示拼音</label><select class="zy-select"><option>始终显示</option><option>悬停显示</option></select></div>
+      <div class="zy-field"><label class="zy-label"><span data-zh="音频自动播放" data-trans-en="Auto-play audio" data-trans-vi="Tự phát âm thanh" data-trans-th="เล่นเสียงอัตโนมัติ" data-trans-id="Auto putar audio">音频自动播放</span></label><select class="zy-select"><option data-zh="开启" data-trans-en="On" data-trans-vi="Bật" data-trans-th="เปิด" data-trans-id="Aktif">开启</option><option data-zh="关闭" data-trans-en="Off" data-trans-vi="Tắt" data-trans-th="ปิด" data-trans-id="Mati">关闭</option></select></div>
+      <div class="zy-field"><label class="zy-label"><span data-zh="显示拼音" data-trans-en="Show pinyin" data-trans-vi="Hiện pinyin" data-trans-th="แสดงพินอิน" data-trans-id="Tampilkan pinyin">显示拼音</span></label><select class="zy-select"><option data-zh="始终显示" data-trans-en="Always" data-trans-vi="Luôn hiện" data-trans-th="แสดงเสมอ" data-trans-id="Selalu">始终显示</option><option data-zh="悬停显示" data-trans-en="On hover" data-trans-vi="Khi di chuột" data-trans-th="เมื่อชี้" data-trans-id="Saat hover">悬停显示</option></select></div>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="设置已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
   </div>
@@ -103,26 +103,26 @@
 <!-- D-14 举报 -->
 <div class="zy-modal-mask" id="mReportKP">
   <div class="zy-modal size-md">
-    <div class="zy-modal-head"><div class="zy-modal-title">举报内容问题（KP: zǎo shang）</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="举报内容问题（KP: zǎo shang）" data-trans-en="Report content issue (KP: zǎo shang)" data-trans-vi="Báo cáo lỗi nội dung (KP: zǎo shang)" data-trans-th="รายงานปัญหาเนื้อหา (KP: zǎo shang)" data-trans-id="Laporkan masalah konten (KP: zǎo shang)">举报内容问题（KP: zǎo shang）</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      <div class="zy-field"><label class="zy-label zy-required">问题类型</label>
-        <select class="zy-select"><option>翻译错误</option><option>例句不当</option><option>音频问题</option><option>其他</option></select>
+      <div class="zy-field"><label class="zy-label zy-required"><span data-zh="问题类型" data-trans-en="Issue type" data-trans-vi="Loại vấn đề" data-trans-th="ประเภทปัญหา" data-trans-id="Jenis masalah">问题类型</span></label>
+        <select class="zy-select"><option data-zh="翻译错误" data-trans-en="Translation error" data-trans-vi="Lỗi dịch" data-trans-th="แปลผิด" data-trans-id="Salah terjemahan">翻译错误</option><option data-zh="例句不当" data-trans-en="Inappropriate example" data-trans-vi="Ví dụ không phù hợp" data-trans-th="ตัวอย่างไม่เหมาะ" data-trans-id="Contoh tidak tepat">例句不当</option><option data-zh="音频问题" data-trans-en="Audio issue" data-trans-vi="Lỗi âm thanh" data-trans-th="ปัญหาเสียง" data-trans-id="Masalah audio">音频问题</option><option data-zh="其他" data-trans-en="Other" data-trans-vi="Khác" data-trans-th="อื่นๆ" data-trans-id="Lainnya">其他</option></select>
       </div>
-      <div class="zy-field"><label class="zy-label">详细描述（可选）</label><textarea class="zy-textarea" placeholder="如：英文翻译应为 morning 而非 mornings…"></textarea></div>
+      <div class="zy-field"><label class="zy-label"><span data-zh="详细描述（可选）" data-trans-en="Details (optional)" data-trans-vi="Mô tả chi tiết (tùy chọn)" data-trans-th="รายละเอียด (ไม่บังคับ)" data-trans-id="Detail (opsional)">详细描述（可选）</span></label><textarea class="zy-textarea" placeholder="如：英文翻译应为 morning 而非 mornings…"></textarea></div>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="举报已提交，将由内容运营审核" data-toast-type="success">提交举报</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="举报已提交，将由内容运营审核" data-toast-type="success"><span data-zh="提交举报" data-trans-en="Submit report" data-trans-vi="Gửi báo cáo" data-trans-th="ส่งรายงาน" data-trans-id="Kirim laporan">提交举报</span></button></div>
   </div>
 </div>
 
 <!-- D-13 学完节 -->
 <div class="zy-modal-mask" id="mLessonDone">
   <div class="zy-modal size-md">
-    <div class="zy-modal-head"><div class="zy-modal-title">🎉 完成 12 个知识点！</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="🎉 完成 12 个知识点！" data-trans-en="🎉 12 KP completed!" data-trans-vi="🎉 Hoàn thành 12 KP!" data-trans-th="🎉 เรียนจบ 12 KP แล้ว！" data-trans-id="🎉 12 KP selesai!">🎉 完成 12 个知识点！</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body" data-zh="接下来进入 1.3.4 节末小测（6 题）。测试通过后自动解锁 1.3.5 晚安。" data-trans-en="Next, take the 1.3.4 lesson quiz (6 questions). Pass to auto-unlock 1.3.5 Good night." data-trans-vi="Tiếp theo là bài kiểm tra 1.3.4 (6 câu). Đỗ sẽ mở 1.3.5 Chúc ngủ ngon." data-trans-th="ถัดไปทำแบบทดสอบ 1.3.4 (6 ข้อ) ผ่านจะปลดล็อค 1.3.5 ราตรีสวัสดิ์" data-trans-id="Selanjutnya kuis 1.3.4 (6 soal). Lulus untuk membuka 1.3.5 Selamat malam.">
       接下来进入 <strong>1.3.4 节末小测</strong>（6 题）。<br>测试通过后自动解锁 <strong>1.3.5 晚安</strong>。
     </div>
     <div class="zy-modal-foot">
-      <button class="zy-btn zy-btn-ghost" data-close-modal>稍后</button>
+      <button class="zy-btn zy-btn-ghost" data-close-modal><span data-zh="稍后" data-trans-en="Later" data-trans-vi="Để sau" data-trans-th="ไว้ทีหลัง" data-trans-id="Nanti">稍后</span></button>
       <button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/lessons/ec-1-3-4/quiz" data-i18n="btn.startExam">开始小测</button>
     </div>
   </div>

@@ -117,24 +117,24 @@
     <div class="zy-modal-head"><div class="zy-modal-title" data-i18n="btn.startExam">开始考试</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <ul style="margin:0; padding-left: 20px; line-height: 1.8;">
-        <li>本次考试 <strong>10 题 / 15 分钟</strong>，倒计时一旦开始不可暂停。</li>
-        <li>每题作答后可改答；提交后无法修改。</li>
-        <li>断网会自动保存草稿，恢复后可继续。</li>
+        <li data-i18n="exam.startTip1">本次考试 10 题 / 15 分钟，倒计时一旦开始不可暂停。</li>
+        <li data-i18n="exam.startTip2">每题作答后可改答；提交后无法修改。</li>
+        <li data-i18n="exam.startTip3">断网会自动保存草稿，恢复后可继续。</li>
       </ul>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/exams/atmp_xxx">开始（POST /exams/start）</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/exams/atmp_xxx"><span data-zh="开始（POST /exams/start）" data-trans-en="Start (POST /exams/start)" data-trans-vi="Bắt đầu" data-trans-th="เริ่ม" data-trans-id="Mulai">开始（POST /exams/start）</span></button></div>
   </div>
 </div>
 
 <div class="zy-modal-mask" id="mHistory">
   <div class="zy-modal size-md">
-    <div class="zy-modal-head"><div class="zy-modal-title">考试历史</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="考试历史" data-trans-en="Exam history" data-trans-vi="Lịch sử thi" data-trans-th="ประวัติสอบ" data-trans-id="Riwayat ujian">考试历史</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <table class="zy-table">
-        <thead><tr><th>开始时间</th><th data-i18n="common.score">得分</th><th>耗时</th><th data-i18n="common.status">状态</th></tr></thead>
+        <thead><tr><th data-zh="开始时间" data-trans-en="Start time" data-trans-vi="Bắt đầu" data-trans-th="เริ่ม" data-trans-id="Mulai">开始时间</th><th data-i18n="common.score">得分</th><th data-i18n="common.duration">耗时</th><th data-i18n="common.status">状态</th></tr></thead>
         <tbody>
-          <tr><td>2025-11-20 10:31</td><td><strong>92</strong></td><td>11:24</td><td><span class="zy-tag zy-tag-success">通过</span></td></tr>
-          <tr><td>2025-11-15 09:02</td><td>74</td><td>14:08</td><td><span class="zy-tag zy-tag-warn">未过</span></td></tr>
+          <tr><td>2025-11-20 10:31</td><td><strong>92</strong></td><td>11:24</td><td><span class="zy-tag zy-tag-success" data-zh="通过" data-trans-en="Pass" data-trans-vi="Đỗ" data-trans-th="ผ่าน" data-trans-id="Lulus">通过</span></td></tr>
+          <tr><td>2025-11-15 09:02</td><td>74</td><td>14:08</td><td><span class="zy-tag zy-tag-warn" data-zh="未过" data-trans-en="Fail" data-trans-vi="Rớt" data-trans-th="ไม่ผ่าน" data-trans-id="Gagal">未过</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -144,9 +144,9 @@
 
 <div class="zy-modal-mask" id="mLockHsk">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">HSK 2 模考</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">需先通过 HSK 1 模考，方可参加。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal>知道了</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="HSK 2 模考" data-trans-en="HSK 2 mock" data-trans-vi="HSK 2 thử" data-trans-th="HSK 2 ทดลอง" data-trans-id="HSK 2 simulasi">HSK 2 模考</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body" data-zh="需先通过 HSK 1 模考，方可参加。" data-trans-en="You must pass HSK 1 mock first." data-trans-vi="Phải đỗ HSK 1 thử trước." data-trans-th="ต้องผ่าน HSK 1 ก่อน" data-trans-id="Harus lulus simulasi HSK 1 dulu.">需先通过 HSK 1 模考，方可参加。</div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal><span data-zh="知道了" data-trans-en="Got it" data-trans-vi="Đã hiểu" data-trans-th="รับทราบ" data-trans-id="Mengerti">知道了</span></button></div>
   </div>
 </div>
 

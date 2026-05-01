@@ -28,46 +28,46 @@
 <div class="zy-container">
   <div class="zy-bread"><span data-nav="/learn/me" data-i18n="nav.me">我的</span><span class="sep">›</span><span class="cur" data-i18n="nav.wrong">错题本</span></div>
 
-  <h1 class="zy-page-title">❌ 错题本</h1>
-  <p class="zy-page-sub">最近 90 天答错的题目 · 共 <strong>27</strong> 道</p>
-  <p class="zy-helper" style="margin-top:-4px;">⚠ 筛选项为动态生成：当某主题 / 题型下存在错题才会出现（例：本示例为示例用户仅错过 EC/share/HSK 三个主题的题）。</p>
+  <h1 class="zy-page-title" data-zh="❌ 错题本" data-trans-en="❌ Mistake Book" data-trans-vi="❌ Sổ lỗi" data-trans-th="❌ สมุดผิด" data-trans-id="❌ Buku Salah">❌ 错题本</h1>
+  <p class="zy-page-sub" data-zh="最近 90 天答错的题目 · 共 27 道" data-trans-en="Wrong answers in last 90 days · 27 total" data-trans-vi="Câu sai trong 90 ngày qua · tổng 27" data-trans-th="ข้อผิด 90 วันล่าสุด · รวม 27 ข้อ" data-trans-id="Salah 90 hari terakhir · total 27">最近 90 天答错的题目 · 共 <strong>27</strong> 道</p>
+  <p class="zy-helper" style="margin-top:-4px;" data-zh="⚠ 筛选项为动态生成：当某主题 / 题型下存在错题才会出现。" data-trans-en="⚠ Filters generated dynamically: only themes/types with mistakes appear." data-trans-vi="⚠ Bộ lọc tạo động: chỉ hiện chủ đề/loại có lỗi." data-trans-th="⚠ ตัวกรองสร้างแบบไดนามิก: แสดงเฉพาะธีม/ประเภทที่มีข้อผิด" data-trans-id="⚠ Filter dibuat dinamis: hanya tema/tipe yang ada kesalahan yang muncul.">⚠ 筛选项为动态生成：当某主题 / 题型下存在错题才会出现（例：本示例为示例用户仅错过 EC/share/HSK 三个主题的题）。</p>
 
   <!-- 筛选 -->
   <div class="zy-row" style="margin: 16px 0; flex-wrap:wrap;">
-    <select class="zy-select" style="width: 160px;"><option>全部主题</option><option>EC 电商</option><option>SH 共享</option><option>HSK</option></select>
-    <select class="zy-select" style="width: 160px;"><option>全部题型</option><option data-i18n="qt.listen_pick">听音选词</option><option data-i18n="qt.tone_pick">选声调</option><option data-i18n="qt.cloze">完形填空</option></select>
-    <select class="zy-select" style="width: 140px;"><option>近 7 天</option><option selected>近 30 天</option><option>近 90 天</option><option data-i18n="common.all">全部</option></select>
-    <input class="zy-input" placeholder="🔍 搜索题面 / KP" style="flex: 1; min-width: 200px;" />
-    <button class="zy-btn zy-btn-ghost" data-toast="筛选已应用">筛选</button>
-    <button class="zy-btn zy-btn-primary" data-open-modal="mPractice">▶ 集中练习（27）</button>
+    <select class="zy-select" style="width: 160px;"><option data-zh="全部主题" data-trans-en="All themes" data-trans-vi="Tất cả chủ đề" data-trans-th="ทุกธีม" data-trans-id="Semua tema">全部主题</option><option data-i18n="theme.ec">EC 电商</option><option data-i18n="theme.share">SH 共享</option><option data-i18n="theme.hsk">HSK</option></select>
+    <select class="zy-select" style="width: 160px;"><option data-zh="全部题型" data-trans-en="All types" data-trans-vi="Tất cả loại" data-trans-th="ทุกประเภท" data-trans-id="Semua tipe">全部题型</option><option data-i18n="qt.listen_pick">听音选词</option><option data-i18n="qt.tone_pick">选声调</option><option data-i18n="qt.cloze">完形填空</option></select>
+    <select class="zy-select" style="width: 140px;"><option data-zh="近 7 天" data-trans-en="Last 7 days" data-trans-vi="7 ngày qua" data-trans-th="7 วันล่าสุด" data-trans-id="7 hari terakhir">近 7 天</option><option selected data-zh="近 30 天" data-trans-en="Last 30 days" data-trans-vi="30 ngày qua" data-trans-th="30 วันล่าสุด" data-trans-id="30 hari terakhir">近 30 天</option><option data-zh="近 90 天" data-trans-en="Last 90 days" data-trans-vi="90 ngày qua" data-trans-th="90 วันล่าสุด" data-trans-id="90 hari terakhir">近 90 天</option><option data-i18n="common.all">全部</option></select>
+    <input class="zy-input" data-i18n-attr="placeholder:wrong.searchPh" placeholder="🔍 搜索题面 / KP" style="flex: 1; min-width: 200px;" />
+    <button class="zy-btn zy-btn-ghost" data-toast="筛选已应用" data-i18n="btn.filter">筛选</button>
+    <button class="zy-btn zy-btn-primary" data-open-modal="mPractice"><span data-zh="▶ 集中练习（27）" data-trans-en="▶ Drill all (27)" data-trans-vi="▶ Ôn tập tập trung (27)" data-trans-th="▶ ฝึกรวม (27)" data-trans-id="▶ Latihan terfokus (27)">▶ 集中练习（27）</span></button>
   </div>
 
   <!-- 列表 -->
   <div class="zy-stack">
     <div class="zy-card">
-      <div style="display:flex; gap: 8px; margin-bottom: 8px;"><span class="zy-tag zy-tag-danger" data-i18n="qt.tone_pick">选声调</span><span class="zy-tag">EC 1.3.4</span><span class="zy-tag">2 天前</span><span class="zy-tag">错 2 次</span></div>
-      <div style="font-size: 15px;">「晚」的声调？</div>
-      <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 6px;">你的答案：第 2 声 ❌ &nbsp; 正确：<span style="color:var(--success);">第 3 声</span></div>
+      <div style="display:flex; gap: 8px; margin-bottom: 8px;"><span class="zy-tag zy-tag-danger" data-i18n="qt.tone_pick">选声调</span><span class="zy-tag">EC 1.3.4</span><span class="zy-tag" data-zh="2 天前" data-trans-en="2 days ago" data-trans-vi="2 ngày trước" data-trans-th="2 วันก่อน" data-trans-id="2 hari lalu">2 天前</span><span class="zy-tag" data-zh="错 2 次" data-trans-en="Wrong ×2" data-trans-vi="Sai 2 lần" data-trans-th="ผิด 2 ครั้ง" data-trans-id="Salah 2×">错 2 次</span></div>
+      <div style="font-size: 15px;" data-zh="「晚」的声调？" data-trans-en="Tone of ‘晚’?" data-trans-vi="Thanh điệu của ‘晚’?" data-trans-th="วรรณยุกต์ของ ‘晚’？" data-trans-id="Nada ‘晚’?">「晚」的声调？</div>
+      <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 6px;" data-zh="你的答案：第 2 声 ❌   正确：第 3 声" data-trans-en="Your answer: tone 2 ❌   Correct: tone 3" data-trans-vi="Câu trả lời: thanh 2 ❌   Đúng: thanh 3" data-trans-th="คำตอบของคุณ: วรรณยุกต์ 2 ❌   ถูกต้อง: วรรณยุกต์ 3" data-trans-id="Jawaban: nada 2 ❌   Benar: nada 3">你的答案：第 2 声 ❌   正确：<span style="color:var(--success);">第 3 声</span></div>
       <div class="zy-row" style="margin-top: 10px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="🔁 重新作答" data-i18n="btn.retry">重新作答</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/learn/lessons/ec-1-3-4" data-i18n="btn.viewKp">查看 KP</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mRemove" data-i18n="btn.remove">移除</button></div>
     </div>
 
     <div class="zy-card">
-      <div style="display:flex; gap: 8px; margin-bottom: 8px;"><span class="zy-tag zy-tag-danger" data-i18n="qt.listen_pick">听音选词</span><span class="zy-tag">EC 1.2.3</span><span class="zy-tag">5 天前</span></div>
-      <div style="font-size: 15px;">🔊 请选择听到的词语：____</div>
-      <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 6px;">你的答案：再见 ❌ &nbsp; 正确：<span style="color:var(--success);">谢谢</span></div>
+      <div style="display:flex; gap: 8px; margin-bottom: 8px;"><span class="zy-tag zy-tag-danger" data-i18n="qt.listen_pick">听音选词</span><span class="zy-tag">EC 1.2.3</span><span class="zy-tag" data-zh="5 天前" data-trans-en="5 days ago" data-trans-vi="5 ngày trước" data-trans-th="5 วันก่อน" data-trans-id="5 hari lalu">5 天前</span></div>
+      <div style="font-size: 15px;" data-zh="🔊 请选择听到的词语：____" data-trans-en="🔊 Pick the word you heard: ____" data-trans-vi="🔊 Chọn từ bạn nghe: ____" data-trans-th="🔊 เลือกคำที่ได้ยิน: ____" data-trans-id="🔊 Pilih kata yang didengar: ____">🔊 请选择听到的词语：____</div>
+      <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 6px;" data-zh="你的答案：再见 ❌   正确：谢谢" data-trans-en="Your answer: 再见 (goodbye) ❌   Correct: 谢谢 (thanks)" data-trans-vi="Câu trả lời: 再见 ❌   Đúng: 谢谢" data-trans-th="คำตอบ: 再见 ❌   ถูกต้อง: 谢谢" data-trans-id="Jawaban: 再见 ❌   Benar: 谢谢">你的答案：再见 ❌   正确：<span style="color:var(--success);">谢谢</span></div>
       <div class="zy-row" style="margin-top: 10px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="🔁 重新作答" data-i18n="btn.retry">重新作答</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/learn/lessons/ec-1-2-3" data-i18n="btn.viewKp">查看 KP</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mRemove" data-i18n="btn.remove">移除</button></div>
     </div>
 
     <div class="zy-card">
-      <div style="display:flex; gap: 8px; margin-bottom: 8px;"><span class="zy-tag zy-tag-danger" data-i18n="qt.cloze">完形填空</span><span class="zy-tag">EC 1.1.5</span><span class="zy-tag">12 天前</span></div>
-      <div style="font-size: 15px;">我 ____ 张三。</div>
-      <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 6px;">你的答案：是 ❌（重复）&nbsp; 正确：<span style="color:var(--success);">叫</span></div>
+      <div style="display:flex; gap: 8px; margin-bottom: 8px;"><span class="zy-tag zy-tag-danger" data-i18n="qt.cloze">完形填空</span><span class="zy-tag">EC 1.1.5</span><span class="zy-tag" data-zh="12 天前" data-trans-en="12 days ago" data-trans-vi="12 ngày trước" data-trans-th="12 วันก่อน" data-trans-id="12 hari lalu">12 天前</span></div>
+      <div style="font-size: 15px;" data-zh="我 ____ 张三。" data-trans-en="我 ____ 张三 (I ____ Zhang San)." data-trans-vi="我 ____ 张三." data-trans-th="我 ____ 张三." data-trans-id="我 ____ 张三.">我 ____ 张三。</div>
+      <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 6px;" data-zh="你的答案：是 ❌（重复）  正确：叫" data-trans-en="Your answer: 是 ❌ (repeated)   Correct: 叫" data-trans-vi="Câu trả lời: 是 ❌ (lặp)   Đúng: 叫" data-trans-th="คำตอบ: 是 ❌ (ซ้ำ)   ถูก: 叫" data-trans-id="Jawaban: 是 ❌ (berulang)   Benar: 叫">你的答案：是 ❌（重复）  正确：<span style="color:var(--success);">叫</span></div>
       <div class="zy-row" style="margin-top: 10px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.retry">重新作答</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.viewKp">查看 KP</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mRemove" data-i18n="btn.remove">移除</button></div>
     </div>
   </div>
 
   <div style="text-align: center; margin: 24px 0;">
-    <button class="zy-btn zy-btn-ghost" data-toast="加载下一页（page 2，限制 20/页）">加载更多（剩 24）</button>
+    <button class="zy-btn zy-btn-ghost" data-toast="加载下一页（page 2，限制 20/页）"><span data-zh="加载更多（剩 24）" data-trans-en="Load more (24 left)" data-trans-vi="Tải thêm (còn 24)" data-trans-th="โหลดเพิ่ม (เหลือ 24)" data-trans-id="Muat lagi (sisa 24)">加载更多（剩 24）</span></button>
   </div>
 </div>
 
@@ -79,9 +79,9 @@
 
 <div class="zy-modal-mask" id="mPractice">
   <div class="zy-modal size-md">
-    <div class="zy-modal-head"><div class="zy-modal-title">集中练习错题</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="集中练习错题" data-trans-en="Drill mistakes" data-trans-vi="Ôn tập câu sai" data-trans-th="ฝึกข้อผิด" data-trans-id="Latihan soal salah">集中练习错题</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      共 27 题。建议每次练 ≤ 15 题。<div class="zy-field" style="margin-top: 12px;"><label class="zy-label">题数</label><select class="zy-select"><option>10 题（推荐）</option><option>15 题</option><option>全部 27 题</option></select></div>
+      <span data-zh="共 27 题。建议每次练 ≤ 15 题。" data-trans-en="27 questions total. Recommend ≤ 15 per session." data-trans-vi="Tổng 27 câu. Nên ≤ 15 mỗi lần." data-trans-th="รวม 27 ข้อ แนะนำ ≤ 15 ต่อครั้ง" data-trans-id="Total 27 soal. Disarankan ≤ 15 per sesi.">共 27 题。建议每次练 ≤ 15 题。</span><div class="zy-field" style="margin-top: 12px;"><label class="zy-label" data-i18n="common.qty">题数</label><select class="zy-select"><option data-zh="10 题（推荐）" data-trans-en="10 (recommended)" data-trans-vi="10 (đề nghị)" data-trans-th="10 (แนะนำ)" data-trans-id="10 (rekomendasi)">10 题（推荐）</option><option data-zh="15 题" data-trans-en="15" data-trans-vi="15 câu" data-trans-th="15 ข้อ" data-trans-id="15 soal">15 题</option><option data-zh="全部 27 题" data-trans-en="All 27" data-trans-vi="Tất cả 27" data-trans-th="ทั้งหมด 27" data-trans-id="Semua 27">全部 27 题</option></select></div>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="开始集中练习" data-toast-type="success" data-i18n="btn.start">开始</button></div>
   </div>
@@ -89,8 +89,8 @@
 
 <div class="zy-modal-mask" id="mRemove">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">从错题本移除？</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">该题将不再出现在错题本，但仍保留答题记录。</div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="从错题本移除？" data-trans-en="Remove from mistake book?" data-trans-vi="Xoá khỏi sổ lỗi?" data-trans-th="ลบจากสมุดผิด？" data-trans-id="Hapus dari buku salah?">从错题本移除？</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body" data-zh="该题将不再出现在错题本，但仍保留答题记录。" data-trans-en="This question won’t appear in the mistake book again, but the answer record stays." data-trans-vi="Câu này sẽ không hiện trong sổ lỗi nữa, nhưng bản ghi vẫn giữ." data-trans-th="ข้อนี้จะไม่ปรากฏในสมุดผิดอีก แต่บันทึกยังอยู่" data-trans-id="Soal ini tidak muncul lagi di buku salah, tapi catatan jawaban tetap.">该题将不再出现在错题本，但仍保留答题记录。</div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="已从错题本移除" data-toast-type="success" data-i18n="btn.remove">移除</button></div>
   </div>
 </div>
