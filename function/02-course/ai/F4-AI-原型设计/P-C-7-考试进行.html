@@ -18,13 +18,13 @@
 
 <!-- 极简考试顶栏（移动端 wrap，避免长内容竖排） -->
 <header class="zy-topnav" style="justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-  <div style="font-weight: 600; min-width: 0;">📝 EC Stage 1 阶段考</div>
+  <div style="font-weight: 600; min-width: 0;" data-zh="📝 EC Stage 1 阶段考" data-trans-en="📝 EC Stage 1 exam" data-trans-vi="📝 Thi EC giai đoạn 1" data-trans-th="📝 สอบ EC ขั้น 1" data-trans-id="📝 Ujian EC Tahap 1">📝 EC Stage 1 阶段考</div>
   <div style="display:flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-    <span style="color: var(--zy-fg-mute); font-size: 13px;">已答&nbsp;7/30</span>
+    <span style="color: var(--zy-fg-mute); font-size: 13px;" data-zh="已答 7/30" data-trans-en="Answered 7/30" data-trans-vi="Đã trả lời 7/30" data-trans-th="ตอบแล้ว 7/30" data-trans-id="Dijawab 7/30">已答&nbsp;7/30</span>
     <strong style="color: var(--zy-brand); font-size: 18px; font-variant-numeric: tabular-nums;" id="cdTime">38:24</strong>
-    <button class="zy-lang-pill" data-open-modal="mLang" title="语言"><span data-icon="globe"></span><span data-lang-label>中文</span></button>
-    <button class="zy-icon-btn" data-open-drawer="dGrid" title="题号" aria-label="题号">⊞</button>
-    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mPause">⏸ 暂停</button>
+    <button class="zy-lang-pill" data-open-modal="mLang" title="语言" data-i18n-attr="title:modal.langTitle"><span data-icon="globe"></span><span data-lang-label>中文</span></button>
+    <button class="zy-icon-btn" data-open-drawer="dGrid" title="题号" aria-label="题号" data-i18n-attr="title:exam.questionNav;aria-label:exam.questionNav">⊞</button>
+    <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mPause" data-i18n="btn.pause">⏸ 暂停</button>
   </div>
 </header>
 
@@ -33,30 +33,30 @@
   <div class="zy-progress" style="margin-bottom: 16px;"><i style="width: 23%;"></i></div>
 
   <div class="zy-card" style="background: var(--zy-bg);">
-    <div class="zy-tag-row" style="margin-bottom: 12px;"><span class="zy-tag zy-tag-info">第&nbsp;7&nbsp;/&nbsp;30</span><span class="zy-tag" data-i18n="qt.listen_pick">听音选词</span><span class="zy-tag" data-toast="本题已自动保存">💾&nbsp;已保存</span></div>
+    <div class="zy-tag-row" style="margin-bottom: 12px;"><span class="zy-tag zy-tag-info" data-zh="第 7 / 30" data-trans-en="#7 / 30" data-trans-vi="#7 / 30" data-trans-th="#7 / 30" data-trans-id="#7 / 30">第&nbsp;7&nbsp;/&nbsp;30</span><span class="zy-tag" data-i18n="qt.listen_pick">听音选词</span><span class="zy-tag" data-toast="本题已自动保存" data-zh="💾 已保存" data-trans-en="💾 Saved" data-trans-vi="💾 Đã lưu" data-trans-th="💾 บันทึกแล้ว" data-trans-id="💾 Tersimpan">💾&nbsp;已保存</span></div>
     <div class="qz-stem">
-      <button class="zy-play-btn" data-toast="🔊 播放音频（剩余 2 次）" data-toast-type="info"><span data-icon="play"></span>播放&nbsp;2/3</button>
-      <span style="margin-left: 8px;">请选择正确写法：</span>
+      <button class="zy-play-btn" data-toast="🔊 播放音频（剩余 2 次）" data-toast-type="info"><span data-icon="play"></span><span data-zh="播放 2/3" data-trans-en="Play 2/3" data-trans-vi="Phát 2/3" data-trans-th="เล่น 2/3" data-trans-id="Putar 2/3">播放&nbsp;2/3</span></button>
+      <span style="margin-left: 8px;" data-zh="请选择正确写法：" data-trans-en="Choose the correct written form:" data-trans-vi="Chọn cách viết đúng:" data-trans-th="เลือกตัวเขียนที่ถูกต้อง:" data-trans-id="Pilih tulisan yang benar:">请选择正确写法：</span>
     </div>
     <div class="qz-options">
-      <div class="qz-opt" onclick="exPick(this)"><span class="key">A</span>谢谢</div>
-      <div class="qz-opt selected" onclick="exPick(this)"><span class="key">B</span>射射</div>
-      <div class="qz-opt" onclick="exPick(this)"><span class="key">C</span>谢射</div>
-      <div class="qz-opt" onclick="exPick(this)"><span class="key">D</span>射谢</div>
+      <div class="qz-opt" onclick="exPick(this)"><span class="key">A</span><span data-zh="谢谢" data-trans-en="谢谢" data-trans-vi="谢谢" data-trans-th="谢谢" data-trans-id="谢谢">谢谢</span></div>
+      <div class="qz-opt selected" onclick="exPick(this)"><span class="key">B</span><span data-zh="射射" data-trans-en="射射" data-trans-vi="射射" data-trans-th="射射" data-trans-id="射射">射射</span></div>
+      <div class="qz-opt" onclick="exPick(this)"><span class="key">C</span><span data-zh="谢射" data-trans-en="谢射" data-trans-vi="谢射" data-trans-th="谢射" data-trans-id="谢射">谢射</span></div>
+      <div class="qz-opt" onclick="exPick(this)"><span class="key">D</span><span data-zh="射谢" data-trans-en="射谢" data-trans-vi="射谢" data-trans-th="射谢" data-trans-id="射谢">射谢</span></div>
     </div>
   </div>
 
   <div style="display:flex; gap: 12px; justify-content: space-between; margin-top: 24px;">
-    <button class="zy-btn zy-btn-ghost" data-toast="← 上一题（已自动保存）">← 上一题</button>
+    <button class="zy-btn zy-btn-ghost" data-toast="← 上一题（已自动保存）"><span data-zh="← 上一题" data-trans-en="← Previous" data-trans-vi="← Câu trước" data-trans-th="← ข้อก่อนหน้า" data-trans-id="← Sebelumnya">← 上一题</span></button>
     <div class="zy-row">
-      <button class="zy-btn zy-btn-ghost" data-toast="🚩 已标记，可在题号面板筛选" data-toast-type="info">🚩 标记</button>
-      <button class="zy-btn zy-btn-primary" data-toast="第 8 / 30 题">下一题 →</button>
+      <button class="zy-btn zy-btn-ghost" data-toast="🚩 已标记，可在题号面板筛选" data-toast-type="info"><span data-zh="🚩 标记" data-trans-en="🚩 Mark" data-trans-vi="🚩 Đánh dấu" data-trans-th="🚩 ทำเครื่องหมาย" data-trans-id="🚩 Tandai">🚩 标记</span></button>
+      <button class="zy-btn zy-btn-primary" data-toast="第 8 / 30 题"><span data-zh="下一题 →" data-trans-en="Next →" data-trans-vi="Câu sau →" data-trans-th="ข้อถัดไป →" data-trans-id="Berikutnya →">下一题 →</span></button>
     </div>
   </div>
 
   <div style="text-align: center; margin-top: 24px;">
-    <button class="zy-btn zy-btn-danger" data-open-modal="mSubmitAll">📋 提交全部（已答 7 / 30）</button>
-    <button class="zy-btn zy-btn-ghost zy-btn-sm" style="margin-left: 8px;" data-open-modal="mResult">查看结果页（mock）</button>
+    <button class="zy-btn zy-btn-danger" data-open-modal="mSubmitAll"><span data-zh="📋 提交全部（已答 7 / 30）" data-trans-en="📋 Submit all (answered 7 / 30)" data-trans-vi="📋 Nộp tất cả (đã trả lời 7 / 30)" data-trans-th="📋 ส่งทั้งหมด (ตอบแล้ว 7 / 30)" data-trans-id="📋 Kirim semua (dijawab 7 / 30)">📋 提交全部（已答 7 / 30）</span></button>
+    <button class="zy-btn zy-btn-ghost zy-btn-sm" style="margin-left: 8px;" data-open-modal="mResult"><span data-zh="查看结果页（mock）" data-trans-en="View result page (mock)" data-trans-vi="Xem trang kết quả (mock)" data-trans-th="ดูหน้าผลลัพธ์ (mock)" data-trans-id="Lihat halaman hasil (mock)">查看结果页（mock）</span></button>
   </div>
 </div>
 
@@ -65,13 +65,13 @@
 <!-- 题号 Drawer（桌面：右侧 sm；移动：底部 xl 100% width） -->
 <div class="zy-drawer-mask" id="dGrid">
   <aside class="zy-drawer size-sm">
-    <div class="zy-drawer-head"><div class="zy-drawer-title">题号导航 · 7 / 30</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-drawer-head"><div class="zy-drawer-title" data-zh="题号导航 · 7 / 30" data-trans-en="Question navigation · 7 / 30" data-trans-vi="Điều hướng câu hỏi · 7 / 30" data-trans-th="นำทางข้อสอบ · 7 / 30" data-trans-id="Navigasi soal · 7 / 30">题号导航 · 7 / 30</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
       <div class="zy-row" style="margin-bottom: 12px; font-size: 12px; color: var(--zy-fg-mute);">
-        <span><i style="display:inline-block; width:10px;height:10px;background:var(--zy-brand);border-radius:50%; vertical-align:middle;"></i> 当前</span>
-        <span><i style="display:inline-block; width:10px;height:10px;background:var(--zy-bg-elev);border:1px solid var(--zy-border);border-radius:50%; vertical-align:middle;"></i> 未答</span>
-        <span><i style="display:inline-block; width:10px;height:10px;background:var(--success);border-radius:50%; vertical-align:middle;"></i> 已答</span>
-        <span>🚩 已标记</span>
+        <span><i style="display:inline-block; width:10px;height:10px;background:var(--zy-brand);border-radius:50%; vertical-align:middle;"></i> <span data-zh="当前" data-trans-en="Current" data-trans-vi="Hiện tại" data-trans-th="ปัจจุบัน" data-trans-id="Saat ini">当前</span></span>
+        <span><i style="display:inline-block; width:10px;height:10px;background:var(--zy-bg-elev);border:1px solid var(--zy-border);border-radius:50%; vertical-align:middle;"></i> <span data-zh="未答" data-trans-en="Unanswered" data-trans-vi="Chưa trả lời" data-trans-th="ยังไม่ตอบ" data-trans-id="Belum dijawab">未答</span></span>
+        <span><i style="display:inline-block; width:10px;height:10px;background:var(--success);border-radius:50%; vertical-align:middle;"></i> <span data-zh="已答" data-trans-en="Answered" data-trans-vi="Đã trả lời" data-trans-th="ตอบแล้ว" data-trans-id="Dijawab">已答</span></span>
+        <span data-zh="🚩 已标记" data-trans-en="🚩 Marked" data-trans-vi="🚩 Đã đánh dấu" data-trans-th="🚩 ทำเครื่องหมายแล้ว" data-trans-id="🚩 Ditandai">🚩 已标记</span>
       </div>
       <div id="qGrid" style="display:grid; grid-template-columns: repeat(6, 1fr); gap: 8px;"></div>
     </div>
@@ -82,8 +82,8 @@
 <!-- 暂停 -->
 <div class="zy-modal-mask" id="mPause">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">考试无法暂停</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">倒计时持续运行。如需离开，点击「保存并退出」，进度保留 24 小时；或点击「继续」回到考试。</div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="考试无法暂停" data-trans-en="Exam cannot be paused" data-trans-vi="Không thể tạm dừng bài thi" data-trans-th="ไม่สามารถหยุดสอบชั่วคราวได้" data-trans-id="Ujian tidak dapat dijeda">考试无法暂停</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body" data-zh="倒计时持续运行。如需离开，点击「保存并退出」，进度保留 24 小时；或点击「继续」回到考试。" data-trans-en="The countdown keeps running. To leave, choose ‘Save and exit’; progress is kept for 24 hours. Or choose ‘Continue’ to return to the exam." data-trans-vi="Đồng hồ vẫn chạy. Nếu cần rời đi, bấm ‘Lưu và thoát’; tiến độ được giữ 24 giờ. Hoặc bấm ‘Tiếp tục’ để quay lại bài thi." data-trans-th="เวลานับถอยหลังยังเดินต่อ หากต้องออก ให้กด ‘บันทึกและออก’ ความคืบหน้าจะเก็บ 24 ชั่วโมง หรือกด ‘ต่อ’ เพื่อกลับสู่ข้อสอบ" data-trans-id="Hitung mundur tetap berjalan. Untuk keluar, pilih ‘Simpan dan keluar’; progres disimpan 24 jam. Atau pilih ‘Lanjutkan’ untuk kembali ke ujian.">倒计时持续运行。如需离开，点击「保存并退出」，进度保留 24 小时；或点击「继续」回到考试。</div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-danger" data-close-modal data-nav="/learn/exams" data-i18n="btn.saveExit">保存并退出</button><button class="zy-btn zy-btn-primary" data-close-modal data-i18n="btn.continue">继续</button></div>
   </div>
 </div>
@@ -91,9 +91,9 @@
 <!-- 提交确认 -->
 <div class="zy-modal-mask" id="mSubmitAll">
   <div class="zy-modal size-md">
-    <div class="zy-modal-head"><div class="zy-modal-title">提交全部？</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="提交全部？" data-trans-en="Submit all?" data-trans-vi="Nộp tất cả?" data-trans-th="ส่งทั้งหมดหรือไม่?" data-trans-id="Kirim semua?">提交全部？</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      已答 <strong>7 / 30</strong>，<strong style="color:var(--zy-brand);">还有 23 题未答</strong>。<br>提交后立即结算成绩，未答题计 0 分，无法再修改。
+      <span data-zh="已答 7 / 30，还有 23 题未答。提交后立即结算成绩，未答题计 0 分，无法再修改。" data-trans-en="Answered 7 / 30; 23 questions remain unanswered. Submitting will grade immediately; unanswered questions count as 0 and cannot be changed." data-trans-vi="Đã trả lời 7 / 30; còn 23 câu chưa trả lời. Sau khi nộp sẽ tính điểm ngay; câu chưa trả lời tính 0 và không thể sửa." data-trans-th="ตอบแล้ว 7 / 30; ยังไม่ตอบ 23 ข้อ เมื่อส่งจะคำนวณคะแนนทันที ข้อที่ยังไม่ตอบนับเป็น 0 และแก้ไขไม่ได้" data-trans-id="Dijawab 7 / 30; 23 soal belum dijawab. Setelah dikirim, nilai langsung dihitung; soal kosong bernilai 0 dan tidak bisa diubah.">已答 <strong>7 / 30</strong>，<strong style="color:var(--zy-brand);">还有 23 题未答</strong>。<br>提交后立即结算成绩，未答题计 0 分，无法再修改。</span>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.continueExam">继续答题</button><button class="zy-btn zy-btn-danger" data-close-modal data-open-modal="mResult" data-i18n="btn.confirmSubmit">确认提交</button></div>
   </div>
@@ -102,22 +102,22 @@
 <!-- 结果页（含听/读/写/口分布） -->
 <div class="zy-modal-mask" id="mResult">
   <div class="zy-modal size-lg">
-    <div class="zy-modal-head"><div class="zy-modal-title">📊 考试结果 · EC Stage 1</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="📊 考试结果 · EC Stage 1" data-trans-en="📊 Exam result · EC Stage 1" data-trans-vi="📊 Kết quả thi · EC giai đoạn 1" data-trans-th="📊 ผลสอบ · EC ขั้น 1" data-trans-id="📊 Hasil ujian · EC Tahap 1">📊 考试结果 · EC Stage 1</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <div style="text-align:center; padding: 12px 0 20px;">
         <div style="font-size: 56px; font-weight:700; color: var(--success);">85</div>
-        <div style="color: var(--zy-fg-mute);">通过线 80 · 用时 32:14 · 排名 Top 22%</div>
-        <div class="zy-tag zy-tag-success" style="margin-top: 8px;">✓ 已通过 · 解锁 Stage 2</div>
+        <div style="color: var(--zy-fg-mute);" data-zh="通过线 80 · 用时 32:14 · 排名 Top 22%" data-trans-en="Pass line 80 · Time 32:14 · Rank Top 22%" data-trans-vi="Điểm đỗ 80 · Thời gian 32:14 · Top 22%" data-trans-th="เกณฑ์ผ่าน 80 · เวลา 32:14 · อันดับ Top 22%" data-trans-id="Batas lulus 80 · Waktu 32:14 · Peringkat Top 22%">通过线 80 · 用时 32:14 · 排名 Top 22%</div>
+        <div class="zy-tag zy-tag-success" style="margin-top: 8px;" data-zh="✓ 已通过 · 解锁 Stage 2" data-trans-en="✓ Passed · Stage 2 unlocked" data-trans-vi="✓ Đã đỗ · Mở giai đoạn 2" data-trans-th="✓ ผ่านแล้ว · ปลดล็อกขั้น 2" data-trans-id="✓ Lulus · Tahap 2 terbuka">✓ 已通过 · 解锁 Stage 2</div>
       </div>
-      <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;">能力分布</div>
+      <div style="font-size: 14px; font-weight: 600; margin-bottom: 12px;" data-zh="能力分布" data-trans-en="Skill distribution" data-trans-vi="Phân bố kỹ năng" data-trans-th="สัดส่วนทักษะ" data-trans-id="Distribusi kemampuan">能力分布</div>
       <div class="zy-stack">
-        <div><div style="display:flex; justify-content:space-between; font-size: 13px;"><span>👂 听力</span><span>92 / 100</span></div><div class="zy-progress"><i style="width:92%;"></i></div></div>
-        <div><div style="display:flex; justify-content:space-between; font-size: 13px;"><span>📖 阅读</span><span>88 / 100</span></div><div class="zy-progress"><i style="width:88%;"></i></div></div>
-        <div><div style="display:flex; justify-content:space-between; font-size: 13px;"><span>✍ 书写</span><span>76 / 100</span></div><div class="zy-progress"><i style="width:76%;"></i></div></div>
-        <div><div style="display:flex; justify-content:space-between; font-size: 13px;"><span>🗣 口语</span><span>78 / 100</span></div><div class="zy-progress"><i style="width:78%;"></i></div></div>
+        <div><div style="display:flex; justify-content:space-between; font-size: 13px;"><span data-zh="👂 听力" data-trans-en="👂 Listening" data-trans-vi="👂 Nghe" data-trans-th="👂 การฟัง" data-trans-id="👂 Menyimak">👂 听力</span><span>92 / 100</span></div><div class="zy-progress"><i style="width:92%;"></i></div></div>
+        <div><div style="display:flex; justify-content:space-between; font-size: 13px;"><span data-zh="📖 阅读" data-trans-en="📖 Reading" data-trans-vi="📖 Đọc" data-trans-th="📖 การอ่าน" data-trans-id="📖 Membaca">📖 阅读</span><span>88 / 100</span></div><div class="zy-progress"><i style="width:88%;"></i></div></div>
+        <div><div style="display:flex; justify-content:space-between; font-size: 13px;"><span data-zh="✍ 书写" data-trans-en="✍ Writing" data-trans-vi="✍ Viết" data-trans-th="✍ การเขียน" data-trans-id="✍ Menulis">✍ 书写</span><span>76 / 100</span></div><div class="zy-progress"><i style="width:76%;"></i></div></div>
+        <div><div style="display:flex; justify-content:space-between; font-size: 13px;"><span data-zh="🗣 口语" data-trans-en="🗣 Speaking" data-trans-vi="🗣 Nói" data-trans-th="🗣 การพูด" data-trans-id="🗣 Berbicara">🗣 口语</span><span>78 / 100</span></div><div class="zy-progress"><i style="width:78%;"></i></div></div>
       </div>
       <div class="zy-divider"></div>
-      <div style="font-size: 13px; color: var(--zy-fg-mute);">错题（5）已加入错题本，建议在「我的 → 错题本」集中练习。</div>
+      <div style="font-size: 13px; color: var(--zy-fg-mute);" data-zh="错题（5）已加入错题本，建议在「我的 → 错题本」集中练习。" data-trans-en="Mistakes (5) were added to the mistake book. Practice them in Me → Mistake Book." data-trans-vi="Câu sai (5) đã thêm vào sổ lỗi. Nên luyện trong Tôi → Sổ lỗi." data-trans-th="ข้อผิด (5) ถูกเพิ่มในสมุดข้อผิดแล้ว แนะนำให้ฝึกที่ ฉัน → สมุดข้อผิด" data-trans-id="Kesalahan (5) ditambahkan ke buku salah. Latih di Saya → Buku Salah.">错题（5）已加入错题本，建议在「我的 → 错题本」集中练习。</div>
     </div>
     <div class="zy-modal-foot">
       <button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn/wrong" data-i18n="btn.viewWrong">查看错题本</button>
@@ -132,13 +132,13 @@ function exPick(el){ el.parentNode.querySelectorAll('.qz-opt').forEach(function(
 // 倒计时
 (function(){ var sec = 38*60+24; setInterval(function(){ if(sec<=0) return; sec--; var m=Math.floor(sec/60), s=sec%60; var t=document.getElementById('cdTime'); if(t) t.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s; if(sec<=300 && t) t.style.color='#dc2626'; },1000); })();
 // 题号 grid
-(function(){ var g = document.getElementById('qGrid'); if(!g) return; var html=''; for(var i=1;i<=30;i++){ var st = i<7?'background:rgba(34,197,94,0.18); border-color:var(--success);':(i===7?'background:var(--zy-brand); color:#fff; border-color:var(--zy-brand);':'background:var(--zy-bg);'); html += '<button class="zy-btn zy-btn-sm" style="height:38px; padding:0; '+st+'" data-close-modal data-toast="跳转到第 '+i+' 题">'+i+'</button>'; } g.innerHTML = html; })();
+(function(){ var g = document.getElementById('qGrid'); if(!g) return; var html=''; for(var i=1;i<=30;i++){ var st = i<7?'background:rgba(34,197,94,0.18); border-color:var(--success);':(i===7?'background:var(--zy-brand); color:#fff; border-color:var(--zy-brand);':'background:var(--zy-bg);'); html += '<button class="zy-btn zy-btn-sm" style="height:38px; padding:0; '+st+'" data-close-modal data-toast="跳转到第 '+i+' 题" data-zh="'+i+'" data-trans-en="'+i+'" data-trans-vi="'+i+'" data-trans-th="'+i+'" data-trans-id="'+i+'">'+i+'</button>'; } g.innerHTML = html; if(window.zyI18n){ window.zyI18n.apply(); } })();
 </script>
 <script src="_assets/prototype.js"></script>
 
 <div class="zy-modal-mask" id="mLang">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">界面语言</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-i18n="modal.langTitle">界面语言</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <div class="zy-stack">
         <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="zh" checked /> 简体中文</label>

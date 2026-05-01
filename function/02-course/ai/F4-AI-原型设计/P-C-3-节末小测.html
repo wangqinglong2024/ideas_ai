@@ -23,7 +23,7 @@
     <a class="zy-topnav-link" data-nav="/learn/me" data-i18n="nav.me">我的</a>
   </nav>
   <div class="zy-topnav-actions">
-    <button class="zy-lang-pill" data-open-modal="mLang" title="语言"><span data-icon="globe"></span><span data-lang-label>中文</span></button>
+    <button class="zy-lang-pill" data-open-modal="mLang" title="语言" data-i18n-attr="title:modal.langTitle"><span data-icon="globe"></span><span data-lang-label>中文</span></button>
     <button class="zy-icon-btn" data-open-modal="mExit" title="退出">✕</button>
   </div>
 </header>
@@ -45,10 +45,10 @@
       <span style="margin-left: 12px;" data-zh="请选择你听到的词语：" data-trans-en="Pick the word you heard:" data-trans-vi="Chọn từ bạn nghe được:" data-trans-th="เลือกคำที่คุณได้ยิน：" data-trans-id="Pilih kata yang Anda dengar:">请选择你听到的词语：</span>
     </div>
     <div class="qz-options" id="qzOpts">
-      <div class="qz-opt" onclick="pickAns(this,0,false)"><span class="key">A</span>晚上 wǎn shang</div>
-      <div class="qz-opt selected correct" onclick="pickAns(this,1,true)"><span class="key">B</span>早上 zǎo shang</div>
-      <div class="qz-opt" onclick="pickAns(this,2,false)"><span class="key">C</span>中午 zhōng wǔ</div>
-      <div class="qz-opt" onclick="pickAns(this,3,false)"><span class="key">D</span>下午 xià wǔ</div>
+      <div class="qz-opt" onclick="pickAns(this,0,false)"><span class="key">A</span><span data-zh="晚上 wǎn shang" data-trans-en="晚上 wǎn shang" data-trans-vi="晚上 wǎn shang" data-trans-th="晚上 wǎn shang" data-trans-id="晚上 wǎn shang">晚上 wǎn shang</span></div>
+      <div class="qz-opt selected correct" onclick="pickAns(this,1,true)"><span class="key">B</span><span data-zh="早上 zǎo shang" data-trans-en="早上 zǎo shang" data-trans-vi="早上 zǎo shang" data-trans-th="早上 zǎo shang" data-trans-id="早上 zǎo shang">早上 zǎo shang</span></div>
+      <div class="qz-opt" onclick="pickAns(this,2,false)"><span class="key">C</span><span data-zh="中午 zhōng wǔ" data-trans-en="中午 zhōng wǔ" data-trans-vi="中午 zhōng wǔ" data-trans-th="中午 zhōng wǔ" data-trans-id="中午 zhōng wǔ">中午 zhōng wǔ</span></div>
+      <div class="qz-opt" onclick="pickAns(this,3,false)"><span class="key">D</span><span data-zh="下午 xià wǔ" data-trans-en="下午 xià wǔ" data-trans-vi="下午 xià wǔ" data-trans-th="下午 xià wǔ" data-trans-id="下午 xià wǔ">下午 xià wǔ</span></div>
     </div>
     <div class="qz-feedback ok" id="qzFb">
       <strong data-zh="✓ 答对了" data-trans-en="✓ Correct" data-trans-vi="✓ Đúng" data-trans-th="✓ ถูกต้อง" data-trans-id="✓ Benar">✓ 答对了</strong><span data-zh="「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。" data-trans-en=" ‘早上’ zǎo shang means morning, often paired with ‘好’ as a greeting." data-trans-vi=" ‘早上’ zǎo shang nghĩa là buổi sáng, thường đi với ‘好’ để chào." data-trans-th=" ‘早上’ zǎo shang แปลว่าตอนเช้า มักคู่กับ ‘好’ เป็นคำทักทาย." data-trans-id=" ‘早上’ zǎo shang berarti pagi, sering dipasangkan dengan ‘好’ sebagai sapaan.">「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。</span>
@@ -125,9 +125,16 @@ function pickAns(el, idx, ok){
   el.classList.add(ok ? 'correct' : 'wrong');
   var fb = document.getElementById('qzFb');
   fb.className = 'qz-feedback ' + (ok ? 'ok' : 'no');
-  fb.innerHTML = ok
-    ? '<strong>✓ 答对了</strong>「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。'
-    : '<strong>✗ 答错了</strong>正确答案 B：早上 zǎo shang。下一题继续努力～';
+  var lang = (window.zyI18n && window.zyI18n.current && window.zyI18n.current()) || 'zh';
+  var copy = {
+    zh: { ok: '✓ 答对了', okBody: '「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。', no: '✗ 答错了', noBody: '正确答案 B：早上 zǎo shang。下一题继续努力～' },
+    en: { ok: '✓ Correct', okBody: '早上 zǎo shang means morning and is often paired with 好 as a greeting.', no: '✗ Incorrect', noBody: 'Correct answer: B, 早上 zǎo shang. Keep going on the next question.' },
+    vi: { ok: '✓ Đúng', okBody: '早上 zǎo shang nghĩa là buổi sáng, thường đi với 好 để chào hỏi.', no: '✗ Sai', noBody: 'Đáp án đúng: B, 早上 zǎo shang. Tiếp tục câu sau nhé.' },
+    th: { ok: '✓ ถูก', okBody: '早上 zǎo shang แปลว่าตอนเช้า มักใช้คู่กับ 好 เป็นคำทักทาย', no: '✗ ผิด', noBody: 'คำตอบที่ถูก: B, 早上 zǎo shang ไปต่อข้อถัดไป' },
+    id: { ok: '✓ Benar', okBody: '早上 zǎo shang berarti pagi dan sering dipasangkan dengan 好 sebagai sapaan.', no: '✗ Salah', noBody: 'Jawaban benar: B, 早上 zǎo shang. Lanjut ke soal berikutnya.' }
+  };
+  var text = copy[lang] || copy.zh;
+  fb.innerHTML = ok ? '<strong>' + text.ok + '</strong>' + text.okBody : '<strong>' + text.no + '</strong>' + text.noBody;
 }
 </script>
 <script src="_assets/prototype.js"></script>

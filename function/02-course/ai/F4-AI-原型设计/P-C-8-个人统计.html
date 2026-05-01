@@ -23,29 +23,29 @@
     <a class="zy-topnav-link active" data-i18n="nav.me">我的</a>
   </nav>
   <div class="zy-topnav-actions">
-    <button class="zy-lang-pill" data-open-drawer="dSetting" title="语言"><span data-icon="globe"></span><span data-lang-label>中文</span></button>
-    <button class="zy-icon-btn" data-open-drawer="dSetting" title="设置">⚙</button>
+    <button class="zy-lang-pill" data-open-drawer="dSetting" title="语言" data-i18n-attr="title:modal.langTitle"><span data-icon="globe"></span><span data-lang-label>中文</span></button>
+    <button class="zy-icon-btn" data-open-drawer="dSetting" title="设置" data-i18n-attr="title:settings.title">⚙</button>
     <span class="zy-avatar">小</span>
   </div>
 </header>
 
 <div class="zy-container">
-  <h1 class="zy-page-title">📊 我的学习</h1>
-  <p class="zy-page-sub">小明 · ec_member · 已学习 <strong>23</strong> 天 · 当前主题 EC（电商）</p>
+  <h1 class="zy-page-title" data-zh="📊 我的学习" data-trans-en="📊 My Learning" data-trans-vi="📊 Việc học của tôi" data-trans-th="📊 การเรียนของฉัน" data-trans-id="📊 Pembelajaran Saya">📊 我的学习</h1>
+  <p class="zy-page-sub" data-zh="小明 · ec_member · 已学习 23 天 · 当前主题 EC（电商）" data-trans-en="Xiaoming · ec_member · studied 23 days · current theme EC (E-commerce)" data-trans-vi="Xiaoming · ec_member · đã học 23 ngày · chủ đề hiện tại EC (TMĐT)" data-trans-th="Xiaoming · ec_member · เรียนแล้ว 23 วัน · ธีมปัจจุบัน EC (อีคอมเมิร์ซ)" data-trans-id="Xiaoming · ec_member · belajar 23 hari · tema saat ini EC (E-commerce)">小明 · ec_member · 已学习 <strong>23</strong> 天 · 当前主题 EC（电商）</p>
 
   <!-- 总览 4 卡 -->
   <div class="zy-grid cols-md-2 cols-lg-3 cols-xl-4" style="margin: 16px 0 24px;">
-    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">已掌握 KP</div><div style="font-size: 28px; font-weight: 700;">186</div><div style="font-size: 12px; color: var(--success);">+12 本周</div></div>
-    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">完成节</div><div style="font-size: 28px; font-weight: 700;">26 <span style="font-size: 14px; color: var(--zy-fg-mute);">/ 156</span></div><div style="font-size: 12px;">进度 17%</div></div>
-    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">连续打卡</div><div style="font-size: 28px; font-weight: 700;">7 天 🔥</div><div style="font-size: 12px; color: var(--zy-fg-mute);">最长 14 天</div></div>
-    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">SRS 待复习</div><div style="font-size: 28px; font-weight: 700; color: var(--zy-brand);">12</div><div><button class="zy-btn zy-btn-sm zy-btn-primary" style="margin-top: 4px;" data-nav="/learn/srs" data-i18n="me.openSrs">立即复习</button></div></div>
+    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;" data-i18n="me.kpMastered">已掌握 KP</div><div style="font-size: 28px; font-weight: 700;">186</div><div style="font-size: 12px; color: var(--success);" data-zh="+12 本周" data-trans-en="+12 this week" data-trans-vi="+12 tuần này" data-trans-th="+12 สัปดาห์นี้" data-trans-id="+12 minggu ini">+12 本周</div></div>
+    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;" data-i18n="me.lessonsDone">完成节</div><div style="font-size: 28px; font-weight: 700;">26 <span style="font-size: 14px; color: var(--zy-fg-mute);">/ 156</span></div><div style="font-size: 12px;" data-zh="进度 17%" data-trans-en="Progress 17%" data-trans-vi="Tiến độ 17%" data-trans-th="ความคืบหน้า 17%" data-trans-id="Progres 17%">进度 17%</div></div>
+    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;" data-i18n="me.streak">连续打卡</div><div style="font-size: 28px; font-weight: 700;" data-zh="7 天 🔥" data-trans-en="7 days 🔥" data-trans-vi="7 ngày 🔥" data-trans-th="7 วัน 🔥" data-trans-id="7 hari 🔥">7 天 🔥</div><div style="font-size: 12px; color: var(--zy-fg-mute);" data-zh="最长 14 天" data-trans-en="Longest 14 days" data-trans-vi="Dài nhất 14 ngày" data-trans-th="นานสุด 14 วัน" data-trans-id="Terpanjang 14 hari">最长 14 天</div></div>
+    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;" data-i18n="me.srsDue">SRS 待复习</div><div style="font-size: 28px; font-weight: 700; color: var(--zy-brand);">12</div><div><button class="zy-btn zy-btn-sm zy-btn-primary" style="margin-top: 4px;" data-nav="/learn/srs" data-i18n="me.openSrs">立即复习</button></div></div>
   </div>
 
   <!-- 7 天折线 -->
   <div class="zy-card" style="margin-bottom: 16px;">
     <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 12px;">
-      <strong>📈 近 7 天活跃</strong>
-      <span style="font-size: 12px; color: var(--zy-fg-mute);">每日学习时长 + KP 数</span>
+      <strong data-i18n="me.heat7">📈 近 7 天活跃</strong>
+      <span style="font-size: 12px; color: var(--zy-fg-mute);" data-zh="每日学习时长 + KP 数" data-trans-en="Daily study time + KP count" data-trans-vi="Thời lượng học mỗi ngày + số KP" data-trans-th="เวลาเรียนรายวัน + จำนวน KP" data-trans-id="Durasi belajar harian + jumlah KP">每日学习时长 + KP 数</span>
     </div>
     <svg viewBox="0 0 600 180" width="100%" height="180" style="display:block;">
       <defs>
@@ -65,28 +65,28 @@
   <!-- 30 天热力图 -->
   <div class="zy-card" style="margin-bottom: 16px;">
     <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 12px;">
-      <strong>🗓 近 30 天打卡</strong>
-      <span style="font-size: 12px; color: var(--zy-fg-mute);">深色 = 学习强度高</span>
+      <strong data-i18n="me.heat30">🗓 近 30 天打卡</strong>
+      <span style="font-size: 12px; color: var(--zy-fg-mute);" data-zh="深色 = 学习强度高" data-trans-en="Darker = higher study intensity" data-trans-vi="Màu đậm = cường độ học cao" data-trans-th="สีเข้ม = ความเข้มข้นการเรียนสูง" data-trans-id="Lebih gelap = intensitas belajar lebih tinggi">深色 = 学习强度高</span>
     </div>
     <div class="heatmap" id="hm"></div>
     <div style="display:flex; gap: 4px; align-items:center; justify-content: flex-end; margin-top: 10px; font-size: 12px; color: var(--zy-fg-mute);">
-      少 <i style="display:inline-block; width:12px; height:12px; background:var(--zy-bg-elev); border-radius:3px;"></i><i style="display:inline-block; width:12px; height:12px; background:rgba(255,36,66,0.15); border-radius:3px;"></i><i style="display:inline-block; width:12px; height:12px; background:rgba(255,36,66,0.35); border-radius:3px;"></i><i style="display:inline-block; width:12px; height:12px; background:rgba(255,36,66,0.6); border-radius:3px;"></i><i style="display:inline-block; width:12px; height:12px; background:#ff2442; border-radius:3px;"></i> 多
+      <span data-zh="少" data-trans-en="Less" data-trans-vi="Ít" data-trans-th="น้อย" data-trans-id="Sedikit">少</span> <i style="display:inline-block; width:12px; height:12px; background:var(--zy-bg-elev); border-radius:3px;"></i><i style="display:inline-block; width:12px; height:12px; background:rgba(255,36,66,0.15); border-radius:3px;"></i><i style="display:inline-block; width:12px; height:12px; background:rgba(255,36,66,0.35); border-radius:3px;"></i><i style="display:inline-block; width:12px; height:12px; background:rgba(255,36,66,0.6); border-radius:3px;"></i><i style="display:inline-block; width:12px; height:12px; background:#ff2442; border-radius:3px;"></i> <span data-zh="多" data-trans-en="More" data-trans-vi="Nhiều" data-trans-th="มาก" data-trans-id="Banyak">多</span>
     </div>
   </div>
 
   <!-- 最近考试 -->
   <div class="zy-card">
     <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 12px;">
-      <strong>📝 最近考试</strong>
+      <strong data-zh="📝 最近考试" data-trans-en="📝 Recent exams" data-trans-vi="📝 Bài thi gần đây" data-trans-th="📝 การสอบล่าสุด" data-trans-id="📝 Ujian terbaru">📝 最近考试</strong>
       <button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/learn/exams" data-i18n="btn.viewAll">全部 →</button>
     </div>
     <div class="zy-table-wrap">
       <table class="zy-table zy-table-stack">
-        <thead><tr><th data-i18n="common.type">类型</th><th data-i18n="common.name">名称</th><th data-i18n="common.score">得分</th><th data-i18n="common.duration">用时</th><th data-i18n="common.result">结果</th><th></th></tr></thead>
+        <thead><tr><th data-i18n="common.type">类型</th><th data-i18n="common.name">名称</th><th data-i18n="common.score">得分</th><th data-i18n="common.duration">用时</th><th data-i18n="common.result">结果</th><th data-i18n="common.action">操作</th></tr></thead>
         <tbody>
-          <tr><td data-label="类型"><span class="zy-tag zy-tag-info">阶段</span></td><td data-label="名称">EC Stage 1 阶段考</td><td data-label="得分">85</td><td data-label="用时">32:14</td><td data-label="结果"><span class="zy-tag zy-tag-success">通过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="查看详情解析" data-i18n="btn.detail">详情</button></td></tr>
-          <tr><td data-label="类型"><span class="zy-tag" data-i18n="exam.chapter">章测</span></td><td data-label="名称">EC 1.2 寒暄</td><td data-label="得分">76</td><td data-label="用时">11:32</td><td data-label="结果"><span class="zy-tag zy-tag-warn">未过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button></td></tr>
-          <tr><td data-label="类型"><span class="zy-tag zy-tag-brand">HSK</span></td><td data-label="名称">HSK 1 模考</td><td data-label="得分">178/200</td><td data-label="用时">34:00</td><td data-label="结果"><span class="zy-tag zy-tag-success">通过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button></td></tr>
+          <tr><td data-label="类型" data-i18n-attr="data-label:common.type"><span class="zy-tag zy-tag-info" data-zh="阶段" data-trans-en="Stage" data-trans-vi="Giai đoạn" data-trans-th="ขั้น" data-trans-id="Tahap">阶段</span></td><td data-label="名称" data-i18n-attr="data-label:common.name" data-zh="EC Stage 1 阶段考" data-trans-en="EC Stage 1 exam" data-trans-vi="Thi EC giai đoạn 1" data-trans-th="สอบ EC ขั้น 1" data-trans-id="Ujian EC Tahap 1">EC Stage 1 阶段考</td><td data-label="得分" data-i18n-attr="data-label:common.score">85</td><td data-label="用时" data-i18n-attr="data-label:common.duration">32:14</td><td data-label="结果" data-i18n-attr="data-label:common.result"><span class="zy-tag zy-tag-success" data-zh="通过" data-trans-en="Passed" data-trans-vi="Đã đỗ" data-trans-th="ผ่าน" data-trans-id="Lulus">通过</span></td><td data-label="操作" data-i18n-attr="data-label:common.action"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="查看详情解析" data-i18n="btn.detail">详情</button></td></tr>
+          <tr><td data-label="类型" data-i18n-attr="data-label:common.type"><span class="zy-tag" data-i18n="exam.chapter">章测</span></td><td data-label="名称" data-i18n-attr="data-label:common.name" data-zh="EC 1.2 寒暄" data-trans-en="EC 1.2 Small talk" data-trans-vi="EC 1.2 Xã giao" data-trans-th="EC 1.2 ทักทาย" data-trans-id="EC 1.2 Basa-basi">EC 1.2 寒暄</td><td data-label="得分" data-i18n-attr="data-label:common.score">76</td><td data-label="用时" data-i18n-attr="data-label:common.duration">11:32</td><td data-label="结果" data-i18n-attr="data-label:common.result"><span class="zy-tag zy-tag-warn" data-zh="未过" data-trans-en="Not passed" data-trans-vi="Chưa đỗ" data-trans-th="ยังไม่ผ่าน" data-trans-id="Belum lulus">未过</span></td><td data-label="操作" data-i18n-attr="data-label:common.action"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button></td></tr>
+          <tr><td data-label="类型" data-i18n-attr="data-label:common.type"><span class="zy-tag zy-tag-brand">HSK</span></td><td data-label="名称" data-i18n-attr="data-label:common.name" data-zh="HSK 1 模考" data-trans-en="HSK 1 mock" data-trans-vi="Thi thử HSK 1" data-trans-th="HSK 1 ทดลอง" data-trans-id="Simulasi HSK 1">HSK 1 模考</td><td data-label="得分" data-i18n-attr="data-label:common.score">178/200</td><td data-label="用时" data-i18n-attr="data-label:common.duration">34:00</td><td data-label="结果" data-i18n-attr="data-label:common.result"><span class="zy-tag zy-tag-success" data-zh="通过" data-trans-en="Passed" data-trans-vi="Đã đỗ" data-trans-th="ผ่าน" data-trans-id="Lulus">通过</span></td><td data-label="操作" data-i18n-attr="data-label:common.action"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button></td></tr>
         </tbody>
       </table>
     </div>
@@ -94,9 +94,9 @@
 
   <!-- 入口卡 -->
   <div class="zy-grid cols-md-2 cols-lg-3" style="margin-top: 24px;">
-    <a class="zy-card" data-nav="/learn/srs"><strong>📚 SRS 复习</strong><div class="zy-helper" style="margin-top:4px;">12 题待复习</div></a>
-    <a class="zy-card" data-nav="/learn/wrong"><strong>❌ 错题本</strong><div class="zy-helper" style="margin-top:4px;">27 道题</div></a>
-    <a class="zy-card" data-nav="/learn/exams"><strong>📝 考试中心</strong><div class="zy-helper" style="margin-top:4px;">章测 / 阶段考 / HSK</div></a>
+    <a class="zy-card" data-nav="/learn/srs"><strong data-i18n="srs.title">📚 SRS 复习</strong><div class="zy-helper" style="margin-top:4px;" data-zh="12 题待复习" data-trans-en="12 due for review" data-trans-vi="12 câu cần ôn" data-trans-th="12 ข้อรอทบทวน" data-trans-id="12 soal perlu ditinjau">12 题待复习</div></a>
+    <a class="zy-card" data-nav="/learn/wrong"><strong data-i18n="nav.wrong">❌ 错题本</strong><div class="zy-helper" style="margin-top:4px;" data-zh="27 道题" data-trans-en="27 questions" data-trans-vi="27 câu" data-trans-th="27 ข้อ" data-trans-id="27 soal">27 道题</div></a>
+    <a class="zy-card" data-nav="/learn/exams"><strong data-i18n="nav.exams">📝 考试中心</strong><div class="zy-helper" style="margin-top:4px;" data-zh="章测 / 阶段考 / HSK" data-trans-en="Chapter tests / stage exams / HSK" data-trans-vi="Kiểm tra chương / thi giai đoạn / HSK" data-trans-th="สอบบท / สอบขั้น / HSK" data-trans-id="Tes bab / ujian tahap / HSK">章测 / 阶段考 / HSK</div></a>
   </div>
 </div>
 
@@ -110,9 +110,9 @@
 <!-- 设置 Drawer -->
 <div class="zy-drawer-mask" id="dSetting">
   <aside class="zy-drawer size-sm">
-    <div class="zy-drawer-head"><div class="zy-drawer-title">个人设置</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-drawer-head"><div class="zy-drawer-title" data-zh="个人设置" data-trans-en="Personal settings" data-trans-vi="Cài đặt cá nhân" data-trans-th="การตั้งค่าส่วนตัว" data-trans-id="Pengaturan pribadi">个人设置</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
-      <div class="zy-field"><label class="zy-label">界面语言</label>
+      <div class="zy-field"><label class="zy-label" data-i18n="modal.langTitle">界面语言</label>
         <div class="zy-stack">
           <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="zh" checked /> 简体中文</label>
           <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="en" /> English</label>
@@ -121,11 +121,11 @@
           <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="id" /> Bahasa Indonesia</label>
         </div>
       </div>
-      <div class="zy-field"><label class="zy-label">学习主题</label><select class="zy-select"><option>电商 EC</option><option>工厂 FC</option><option>HSK</option><option>日常 DL</option><option>共享 SH</option></select></div>
-      <div class="zy-field"><label class="zy-label">每日 SRS 上限</label><select class="zy-select"><option>30</option><option selected>50</option><option>80</option></select></div>
-      <div class="zy-field"><label class="zy-label">主题</label><select class="zy-select"><option>跟随系统</option><option>浅色</option><option>暗色</option></select></div>
+      <div class="zy-field"><label class="zy-label" data-zh="学习主题" data-trans-en="Learning theme" data-trans-vi="Chủ đề học" data-trans-th="ธีมการเรียน" data-trans-id="Tema belajar">学习主题</label><select class="zy-select"><option data-i18n="theme.ec">电商 EC</option><option data-i18n="theme.fc">工厂 FC</option><option data-i18n="theme.hsk">HSK</option><option data-i18n="theme.dl">日常 DL</option><option data-i18n="theme.share">共享 SH</option></select></div>
+      <div class="zy-field"><label class="zy-label" data-zh="每日 SRS 上限" data-trans-en="Daily SRS limit" data-trans-vi="Giới hạn SRS mỗi ngày" data-trans-th="ขีดจำกัด SRS ต่อวัน" data-trans-id="Batas SRS harian">每日 SRS 上限</label><select class="zy-select"><option>30</option><option selected>50</option><option>80</option></select></div>
+      <div class="zy-field"><label class="zy-label" data-zh="主题" data-trans-en="Theme" data-trans-vi="Giao diện" data-trans-th="ธีม" data-trans-id="Tema">主题</label><select class="zy-select"><option data-zh="跟随系统" data-trans-en="Follow system" data-trans-vi="Theo hệ thống" data-trans-th="ตามระบบ" data-trans-id="Ikuti sistem">跟随系统</option><option data-zh="浅色" data-trans-en="Light" data-trans-vi="Sáng" data-trans-th="สว่าง" data-trans-id="Terang">浅色</option><option data-zh="暗色" data-trans-en="Dark" data-trans-vi="Tối" data-trans-th="มืด" data-trans-id="Gelap">暗色</option></select></div>
       <div class="zy-divider"></div>
-      <button class="zy-btn zy-btn-danger" style="width: 100%;" data-open-modal="mLogout">↪ 退出登录</button>
+      <button class="zy-btn zy-btn-danger" style="width: 100%;" data-open-modal="mLogout" data-zh="↪ 退出登录" data-trans-en="↪ Log out" data-trans-vi="↪ Đăng xuất" data-trans-th="↪ ออกจากระบบ" data-trans-id="↪ Keluar">↪ 退出登录</button>
     </div>
     <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="设置已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
   </aside>
@@ -133,8 +133,8 @@
 
 <div class="zy-modal-mask" id="mLogout">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">退出登录？</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">退出后需重新登录才能访问学习数据。</div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-zh="退出登录？" data-trans-en="Log out?" data-trans-vi="Đăng xuất?" data-trans-th="ออกจากระบบหรือไม่?" data-trans-id="Keluar?">退出登录？</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body" data-zh="退出后需重新登录才能访问学习数据。" data-trans-en="After logging out, you must log in again to access learning data." data-trans-vi="Sau khi đăng xuất, bạn cần đăng nhập lại để truy cập dữ liệu học tập." data-trans-th="หลังออกจากระบบ ต้องเข้าสู่ระบบอีกครั้งเพื่อเข้าถึงข้อมูลการเรียน" data-trans-id="Setelah keluar, Anda harus masuk lagi untuk mengakses data belajar.">退出后需重新登录才能访问学习数据。</div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="已退出登录" data-toast-type="info" data-i18n="btn.exit">退出</button></div>
   </div>
 </div>

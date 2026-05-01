@@ -100,7 +100,7 @@
 
 - **样式与组件**：所有 UI 严格遵循 [G2-视觉与交互风格](../../../../grules/G2-视觉与交互风格/)；本文件不重复描述按钮颜色、字号等基础视觉。
 - **路由模式**：纯 CSR / SPA（[G1-05 §二](../../../../grules/G1-架构与技术规范/05-编码规范.md)），客户端只渲染单一 HTML 入口。
-- **多语言**：所有 `_i18n` jsonb 5 key（`zh / vi / th / id / en`，[F1-12-Q10](../F1-AI-数据模型规范/12-待确认问题清单.md) 封板）。学员端按 `course_user_settings.ui_lang` 取对应 key，缺失回退 `en` → `zh`；学习目标本体的中文原文额外固定显示（`title_zh / sentence_zh`）。
+- **多语言**：应用端所有可见 UI 与展示内容适配 5 语言（`zh / en / vi / th / id`，[F1-12-Q10](../F1-AI-数据模型规范/12-待确认问题清单.md) 封板）。学员端按 `course_user_settings.ui_lang` 取对应 key，缺失回退 `zh`；学习目标本体的中文原文额外固定显示（`title_zh / sentence_zh`）。管理端 UI 保持中文，后台多语言仅指内容编辑字段五语言录入。
 - **学员当前主题**：从 `course_user_settings.current_track` 读取；切换 Tab 同步写回（[F2-Q13](../F2-AI-接口规范/12-待确认问题清单.md)）。share Stage 0 完成前所有主题主题入口锁定（[temp/01 §1.6](../../../temp/01-课程目录骨架.md)）。
 - **数量基线**（[temp/01 §1.7](../../../temp/01-课程目录骨架.md)）：5 主题、25 stage、148 chapter、888 lesson、~12 000 KP；每 stage **固定 6 章**（share Stage 0 例外为 4 章）、每章 **固定 6 节**、每节 **固定 12 KP**、节末小测 **固定 6 题**（[F3-Q8 封板](./13-待确认问题清单.md)）。所有 UI 文案 / 进度计算 / 占位骨架均按此基线渲染。
 - **节末小测可跳过**（[F1-12-Q4](../F1-AI-数据模型规范/12-待确认问题清单.md)）：默认 `is_quiz_required=false`；学员可跳过，跳过后该节 `progress.status` 保持 `in_progress`，仍可解锁下一节。

@@ -22,7 +22,7 @@
     <a class="zy-topnav-link" data-nav="/learn" data-i18n="nav.learn">学习</a>
     <a class="zy-topnav-link active" data-nav="/learn/me" data-i18n="nav.me">我的</a>
   </nav>
-  <div class="zy-topnav-actions"><button class="zy-lang-pill" data-open-modal="mLang" title="语言"><span data-icon="globe"></span><span data-lang-label>中文</span></button><span class="zy-avatar">小</span></div>
+  <div class="zy-topnav-actions"><button class="zy-lang-pill" data-open-modal="mLang" title="语言" data-i18n-attr="title:modal.langTitle"><span data-icon="globe"></span><span data-lang-label>中文</span></button><span class="zy-avatar">小</span></div>
 </header>
 
 <div class="zy-container" style="max-width: 720px;">
@@ -98,7 +98,7 @@ function srsPick(el,ok){ el.parentNode.querySelectorAll('.qz-opt').forEach(funct
 
 <div class="zy-modal-mask" id="mLang">
   <div class="zy-modal size-sm">
-    <div class="zy-modal-head"><div class="zy-modal-title">界面语言</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-i18n="modal.langTitle">界面语言</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <div class="zy-stack">
         <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="zh" checked /> 简体中文</label>

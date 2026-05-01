@@ -22,6 +22,64 @@
   window.zyDevice = setDevice;
   window.zyTheme  = setTheme;
 
+  function currentUiLang(){
+    try { if(window.zyI18n && window.zyI18n.current) return window.zyI18n.current(); } catch(e){}
+    try { return localStorage.getItem('zy.uiLang') || document.documentElement.getAttribute('data-ui-lang') || 'zh'; } catch(e){ return 'zh'; }
+  }
+
+  var TOAST_COPY = {
+    'C9 overwrite=true：上一题答案可改写': ['C9 overwrite=true: previous answer can be edited', 'C9 overwrite=true: có thể sửa đáp án trước', 'C9 overwrite=true: แก้คำตอบข้อก่อนหน้าได้', 'C9 overwrite=true: jawaban sebelumnya bisa diubah'],
+    'POST /lessons/:id/kp/:id/done → 进入第 9 个 KP': ['POST /lessons/:id/kp/:id/done -> go to KP 9', 'POST /lessons/:id/kp/:id/done -> sang KP 9', 'POST /lessons/:id/kp/:id/done -> ไป KP 9', 'POST /lessons/:id/kp/:id/done -> ke KP 9'],
+    'POST /srs/answer → 第 6/32 题': ['POST /srs/answer -> question 6/32', 'POST /srs/answer -> câu 6/32', 'POST /srs/answer -> ข้อ 6/32', 'POST /srs/answer -> soal 6/32'],
+    '← 上一个 KP': ['← Previous KP', '← KP trước', '← KP ก่อนหน้า', '← KP sebelumnya'],
+    '← 上一题（已自动保存）': ['← Previous question (autosaved)', '← Câu trước (đã tự lưu)', '← ข้อก่อนหน้า (บันทึกอัตโนมัติแล้ว)', '← Soal sebelumnya (tersimpan otomatis)'],
+    '举报已提交，将由内容运营审核': ['Report submitted. Content operations will review it.', 'Đã gửi báo cáo. Nhóm nội dung sẽ kiểm tra.', 'ส่งรายงานแล้ว ทีมเนื้อหาจะตรวจสอบ', 'Laporan dikirim. Tim konten akan meninjau.'],
+    '切换主题：DL': ['Theme switched: DL', 'Đã đổi chủ đề: DL', 'สลับธีม: DL', 'Tema diganti: DL'],
+    '切换主题：EC': ['Theme switched: EC', 'Đã đổi chủ đề: EC', 'สลับธีม: EC', 'Tema diganti: EC'],
+    '切换主题：EC（写回 course_user_settings.current_track）': ['Theme switched: EC (saved to course_user_settings.current_track)', 'Đã đổi chủ đề: EC (lưu vào course_user_settings.current_track)', 'สลับธีม: EC (บันทึกใน course_user_settings.current_track)', 'Tema diganti: EC (disimpan ke course_user_settings.current_track)'],
+    '切换主题：FC': ['Theme switched: FC', 'Đã đổi chủ đề: FC', 'สลับธีม: FC', 'Tema diganti: FC'],
+    '切换主题：HSK': ['Theme switched: HSK', 'Đã đổi chủ đề: HSK', 'สลับธีม: HSK', 'Tema diganti: HSK'],
+    '切换主题：share（基础公共）': ['Theme switched: share (shared basics)', 'Đã đổi chủ đề: share (cơ bản chung)', 'สลับธีม: share (พื้นฐานร่วม)', 'Tema diganti: share (dasar bersama)'],
+    '切换主题：share（基础公共内容）': ['Theme switched: share (shared basics)', 'Đã đổi chủ đề: share (cơ bản chung)', 'สลับธีม: share (พื้นฐานร่วม)', 'Tema diganti: share (dasar bersama)'],
+    '加载下一页（page 2，限制 20/页）': ['Load next page (page 2, 20 per page)', 'Tải trang tiếp theo (trang 2, 20 mỗi trang)', 'โหลดหน้าถัดไป (หน้า 2, 20 รายการต่อหน้า)', 'Muat halaman berikutnya (halaman 2, 20 per halaman)'],
+    '已从错题本移除': ['Removed from mistake book', 'Đã xóa khỏi sổ lỗi', 'ลบออกจากสมุดข้อผิดแล้ว', 'Dihapus dari buku salah'],
+    '已切换主题': ['Theme switched', 'Đã đổi chủ đề', 'สลับธีมแล้ว', 'Tema diganti'],
+    '已切换语言（PATCH /me/settings）': ['Language saved (PATCH /me/settings)', 'Đã lưu ngôn ngữ (PATCH /me/settings)', 'บันทึกภาษาแล้ว (PATCH /me/settings)', 'Bahasa disimpan (PATCH /me/settings)'],
+    '⭐ 已加入收藏（POST /me/favorites）': ['⭐ Added to favorites (POST /me/favorites)', '⭐ Đã thêm vào yêu thích (POST /me/favorites)', '⭐ เพิ่มในรายการโปรดแล้ว (POST /me/favorites)', '⭐ Ditambahkan ke favorit (POST /me/favorites)'],
+    '🚩 已标记，可在题号面板筛选': ['🚩 Marked. Filter it in the question panel.', '🚩 Đã đánh dấu. Có thể lọc trong bảng câu hỏi.', '🚩 ทำเครื่องหมายแล้ว กรองได้ในแผงข้อสอบ', '🚩 Ditandai. Bisa difilter di panel soal.'],
+    '已退出登录': ['Logged out', 'Đã đăng xuất', 'ออกจากระบบแล้ว', 'Sudah keluar'],
+    '开始集中练习': ['Focused practice started', 'Bắt đầu luyện tập tập trung', 'เริ่มฝึกแบบรวมแล้ว', 'Latihan fokus dimulai'],
+    '提交答题事件 → 进入下一题（4/6）': ['Answer submitted -> next question (4/6)', 'Đã gửi đáp án -> câu tiếp theo (4/6)', 'ส่งคำตอบแล้ว -> ข้อถัดไป (4/6)', 'Jawaban dikirim -> soal berikutnya (4/6)'],
+    '播放 TTS（cdn://media/zaoshang.mp3）': ['Play TTS (cdn://media/zaoshang.mp3)', 'Phát TTS (cdn://media/zaoshang.mp3)', 'เล่น TTS (cdn://media/zaoshang.mp3)', 'Putar TTS (cdn://media/zaoshang.mp3)'],
+    '播放例句 1': ['Play example 1', 'Phát ví dụ 1', 'เล่นตัวอย่าง 1', 'Putar contoh 1'],
+    '播放例句 2': ['Play example 2', 'Phát ví dụ 2', 'เล่นตัวอย่าง 2', 'Putar contoh 2'],
+    '🔊 播放音频': ['🔊 Play audio', '🔊 Phát âm thanh', '🔊 เล่นเสียง', '🔊 Putar audio'],
+    '🔊 播放音频（剩余 2 次）': ['🔊 Play audio (2 left)', '🔊 Phát âm thanh (còn 2)', '🔊 เล่นเสียง (เหลือ 2)', '🔊 Putar audio (sisa 2)'],
+    '本题已自动保存': ['This question was autosaved', 'Câu này đã tự lưu', 'ข้อนี้บันทึกอัตโนมัติแล้ว', 'Soal ini tersimpan otomatis'],
+    '查看详情解析': ['View detailed analysis', 'Xem phân tích chi tiết', 'ดูคำอธิบายละเอียด', 'Lihat analisis detail'],
+    '第 8 / 30 题': ['Question 8 / 30', 'Câu 8 / 30', 'ข้อ 8 / 30', 'Soal 8 / 30'],
+    '筛选已应用': ['Filter applied', 'Đã áp dụng bộ lọc', 'ใช้ตัวกรองแล้ว', 'Filter diterapkan'],
+    '设置已保存': ['Settings saved', 'Đã lưu cài đặt', 'บันทึกการตั้งค่าแล้ว', 'Pengaturan disimpan'],
+    '详细解析（含每题答案）': ['Detailed analysis (with every answer)', 'Phân tích chi tiết (kèm đáp án từng câu)', 'คำอธิบายละเอียด (รวมคำตอบทุกข้อ)', 'Analisis detail (termasuk jawaban tiap soal)'],
+    '跳过：本题不计入升降盒，重新入队': ['Skipped: this question does not affect the SRS box and is queued again', 'Bỏ qua: câu này không ảnh hưởng hộp SRS và được đưa lại vào hàng đợi', 'ข้ามแล้ว: ข้อนี้ไม่กระทบกล่อง SRS และจะเข้าคิวใหม่', 'Dilewati: soal ini tidak memengaruhi kotak SRS dan masuk antrean lagi'],
+    '🔁 重新作答': ['🔁 Retry', '🔁 Làm lại', '🔁 ทำอีกครั้ง', '🔁 Kerjakan ulang']
+  };
+
+  function localizeToastMessage(msg){
+    var lang = currentUiLang();
+    var row = TOAST_COPY[msg];
+    if(row){ return ({ zh: msg, en: row[0], vi: row[1], th: row[2], id: row[3] })[lang] || msg; }
+    var jump = String(msg || '').match(/^跳转到第\s*(\d+)\s*题$/);
+    if(jump){
+      return ({ zh: '跳转到第 ' + jump[1] + ' 题', en: 'Jump to question ' + jump[1], vi: 'Chuyển đến câu ' + jump[1], th: 'ไปที่ข้อ ' + jump[1], id: 'Lompat ke soal ' + jump[1] })[lang] || msg;
+    }
+    var nav = String(msg || '').match(/^原型链接：(.+)$/);
+    if(nav){
+      return ({ zh: '原型链接：' + nav[1], en: 'Prototype link: ' + nav[1], vi: 'Liên kết prototype: ' + nav[1], th: 'ลิงก์ต้นแบบ: ' + nav[1], id: 'Tautan prototipe: ' + nav[1] })[lang] || msg;
+    }
+    return msg;
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
     // 初始化设备 / 主题
     var d = 'desktop'; var t = 'light';
@@ -82,7 +140,7 @@
     type = type || 'info';
     var stack = document.getElementById('zyToastStack');
     if(!stack){ stack = document.createElement('div'); stack.id='zyToastStack'; stack.className='zy-toast-stack'; document.body.appendChild(stack); }
-    var t = document.createElement('div'); t.className='zy-toast '+type; t.textContent = msg;
+    var t = document.createElement('div'); t.className='zy-toast '+type; t.textContent = localizeToastMessage(msg);
     stack.appendChild(t);
     setTimeout(function(){ t.style.opacity='0'; t.style.transform='translateX(20px)'; t.style.transition='.25s'; }, 2500);
     setTimeout(function(){ t.remove(); }, 2900);
@@ -179,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'page.learnMap':'学习地图','page.lesson':'节学习','page.quiz':'节末小测',
       'page.srs':'SRS 复习','page.wrong':'错题本','page.exams':'考试中心',
       'page.exam':'考试进行','page.me':'我的学习',
-      'exam.chapter':'章测','exam.stage':'阶段考','exam.hsk':'HSK 模考','exam.lesson':'节末小测',
+      'exam.chapter':'章测','exam.stage':'阶段考','exam.hsk':'HSK 模考','exam.lesson':'节末小测','exam.questionNav':'题号',
       'exam.startTip1':'本次考试 10 题 / 15 分钟，倒计时一旦开始不可暂停。',
       'exam.startTip2':'每题作答后可改答；提交后无法修改。',
       'exam.startTip3':'断网会自动保存草稿，恢复后可继续。',
@@ -189,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'settings.logout':'↪ 退出登录',
       'theme.share':'🌱 基础','theme.ec':'🛒 电商','theme.fc':'🏭 工厂','theme.hsk':'📘 HSK','theme.dl':'☕ 日常',
       'srs.title':'SRS · 今日复习','wrong.title':'错题本',
-      'wrong.sub':'最近 90 天答错的题目','wrong.dynTip':'筛选项为动态生成：当某主题 / 题型下存在错题才会出现。',
+      'wrong.sub':'最近 90 天答错的题目','wrong.dynTip':'筛选项为动态生成：当某主题 / 题型下存在错题才会出现。','wrong.searchPh':'🔍 搜索题面 / KP',
       'me.title':'📊 我的学习','me.kpMastered':'已掌握 KP','me.lessonsDone':'完成节',
       'me.streak':'连续打卡','me.srsDue':'SRS 待复习','me.recentExam':'📝 最近考试',
       'me.heat7':'📈 近 7 天活跃','me.heat30':'🗓 近 30 天打卡','me.studyDays':'已学习',
@@ -224,7 +282,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'page.learnMap':'Learning Map','page.lesson':'Lesson','page.quiz':'Lesson Quiz',
       'page.srs':'SRS Review','page.wrong':'Mistake Book','page.exams':'Exam Center',
       'page.exam':'Exam','page.me':'My Learning',
-      'exam.chapter':'Chapter test','exam.stage':'Stage exam','exam.hsk':'HSK mock','exam.lesson':'Lesson quiz',
+      'exam.chapter':'Chapter test','exam.stage':'Stage exam','exam.hsk':'HSK mock','exam.lesson':'Lesson quiz','exam.questionNav':'Question numbers',
       'exam.startTip1':'10 questions / 15 minutes. Timer cannot be paused once started.',
       'exam.startTip2':'You can change answers before submitting; locked after submit.',
       'exam.startTip3':'Offline drafts auto-save and resume on reconnect.',
@@ -234,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'settings.logout':'↪ Log out',
       'theme.share':'🌱 Basics','theme.ec':'🛒 E-commerce','theme.fc':'🏭 Factory','theme.hsk':'📘 HSK','theme.dl':'☕ Daily',
       'srs.title':'SRS · Today','wrong.title':'Mistake Book',
-      'wrong.sub':'Wrong answers from last 90 days','wrong.dynTip':'Filters appear only when mistakes exist for that theme / type.',
+      'wrong.sub':'Wrong answers from last 90 days','wrong.dynTip':'Filters appear only when mistakes exist for that theme / type.','wrong.searchPh':'🔍 Search stem / KP',
       'me.title':'📊 My Learning','me.kpMastered':'KP mastered','me.lessonsDone':'Lessons done',
       'me.streak':'Streak','me.srsDue':'SRS due','me.recentExam':'📝 Recent exams',
       'me.heat7':'📈 Last 7 days','me.heat30':'🗓 Last 30 days','me.studyDays':'studied',
@@ -269,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'page.learnMap':'Lộ trình','page.lesson':'Bài học','page.quiz':'Kiểm tra bài',
       'page.srs':'Ôn SRS','page.wrong':'Sổ lỗi','page.exams':'Trung tâm thi',
       'page.exam':'Đang thi','page.me':'Học tập của tôi',
-      'exam.chapter':'KT chương','exam.stage':'Thi giai đoạn','exam.hsk':'HSK thử','exam.lesson':'KT bài',
+      'exam.chapter':'KT chương','exam.stage':'Thi giai đoạn','exam.hsk':'HSK thử','exam.lesson':'KT bài','exam.questionNav':'Số câu hỏi',
       'exam.startTip1':'10 câu / 15 phút. Đồng hồ chạy thì không thể tạm dừng.',
       'exam.startTip2':'Có thể đổi đáp án trước khi nộp; sau khi nộp không sửa được.',
       'exam.startTip3':'Khi mất mạng tự lưu nháp, có thể tiếp tục.',
@@ -279,7 +337,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'settings.logout':'↪ Đăng xuất',
       'theme.share':'🌱 Cơ bản','theme.ec':'🛒 TMĐT','theme.fc':'🏭 Nhà máy','theme.hsk':'📘 HSK','theme.dl':'☕ Hằng ngày',
       'srs.title':'SRS · Hôm nay','wrong.title':'Sổ lỗi',
-      'wrong.sub':'Câu sai trong 90 ngày qua','wrong.dynTip':'Bộ lọc chỉ hiện khi có lỗi cho chủ đề / loại đó.',
+      'wrong.sub':'Câu sai trong 90 ngày qua','wrong.dynTip':'Bộ lọc chỉ hiện khi có lỗi cho chủ đề / loại đó.','wrong.searchPh':'🔍 Tìm câu hỏi / KP',
       'me.title':'📊 Học tập','me.kpMastered':'KP đã thuộc','me.lessonsDone':'Bài đã học',
       'me.streak':'Chuỗi','me.srsDue':'SRS chờ ôn','me.recentExam':'📝 Thi gần đây',
       'me.heat7':'📈 7 ngày qua','me.heat30':'🗓 30 ngày qua','me.studyDays':'đã học',
@@ -314,7 +372,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'page.learnMap':'แผนการเรียน','page.lesson':'บทเรียน','page.quiz':'ทดสอบบท',
       'page.srs':'ทบทวน','page.wrong':'สมุดผิด','page.exams':'ศูนย์สอบ',
       'page.exam':'กำลังสอบ','page.me':'การเรียนของฉัน',
-      'exam.chapter':'สอบบท','exam.stage':'สอบขั้น','exam.hsk':'HSK ทดลอง','exam.lesson':'สอบย่อย',
+      'exam.chapter':'สอบบท','exam.stage':'สอบขั้น','exam.hsk':'HSK ทดลอง','exam.lesson':'สอบย่อย','exam.questionNav':'เลขข้อ',
       'exam.startTip1':'10 ข้อ / 15 นาที เริ่มแล้วหยุดไม่ได้',
       'exam.startTip2':'แก้คำตอบได้ก่อนส่ง; ส่งแล้วแก้ไม่ได้',
       'exam.startTip3':'ออฟไลน์บันทึกอัตโนมัติ ต่อได้เมื่อกลับมา',
@@ -324,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'settings.logout':'↪ ออกจากระบบ',
       'theme.share':'🌱 พื้นฐาน','theme.ec':'🛒 อีคอม','theme.fc':'🏭 โรงงาน','theme.hsk':'📘 HSK','theme.dl':'☕ ชีวิตประจำวัน',
       'srs.title':'SRS · วันนี้','wrong.title':'สมุดผิด',
-      'wrong.sub':'ข้อผิด 90 วันล่าสุด','wrong.dynTip':'ตัวกรองจะแสดงเฉพาะธีม/ประเภทที่มีข้อผิด',
+      'wrong.sub':'ข้อผิด 90 วันล่าสุด','wrong.dynTip':'ตัวกรองจะแสดงเฉพาะธีม/ประเภทที่มีข้อผิด','wrong.searchPh':'🔍 ค้นหาโจทย์ / KP',
       'me.title':'📊 การเรียนของฉัน','me.kpMastered':'KP เชี่ยวชาญ','me.lessonsDone':'บทที่ทำ',
       'me.streak':'ติดต่อกัน','me.srsDue':'SRS รอทบทวน','me.recentExam':'📝 สอบล่าสุด',
       'me.heat7':'📈 7 วันล่าสุด','me.heat30':'🗓 30 วันล่าสุด','me.studyDays':'เรียนแล้ว',
@@ -359,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'page.learnMap':'Peta Belajar','page.lesson':'Pelajaran','page.quiz':'Kuis Pelajaran',
       'page.srs':'SRS','page.wrong':'Buku Salah','page.exams':'Pusat Ujian',
       'page.exam':'Sedang Ujian','page.me':'Belajar Saya',
-      'exam.chapter':'Tes Bab','exam.stage':'Ujian Tahap','exam.hsk':'HSK Latihan','exam.lesson':'Kuis',
+      'exam.chapter':'Tes Bab','exam.stage':'Ujian Tahap','exam.hsk':'HSK Latihan','exam.lesson':'Kuis','exam.questionNav':'Nomor soal',
       'exam.startTip1':'10 soal / 15 menit. Timer mulai tidak bisa dijeda.',
       'exam.startTip2':'Jawaban dapat diubah sebelum dikirim; setelah dikirim terkunci.',
       'exam.startTip3':'Saat offline draft tersimpan otomatis, lanjut saat tersambung.',
@@ -369,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function(){
       'settings.logout':'↪ Keluar',
       'theme.share':'🌱 Dasar','theme.ec':'🛒 E-commerce','theme.fc':'🏭 Pabrik','theme.hsk':'📘 HSK','theme.dl':'☕ Harian',
       'srs.title':'SRS · Hari ini','wrong.title':'Buku Salah',
-      'wrong.sub':'Salah 90 hari terakhir','wrong.dynTip':'Filter muncul hanya saat ada kesalahan untuk tema / tipe.',
+      'wrong.sub':'Salah 90 hari terakhir','wrong.dynTip':'Filter muncul hanya saat ada kesalahan untuk tema / tipe.','wrong.searchPh':'🔍 Cari soal / KP',
       'me.title':'📊 Belajar Saya','me.kpMastered':'KP dikuasai','me.lessonsDone':'Pelajaran selesai',
       'me.streak':'Streak','me.srsDue':'SRS menunggu','me.recentExam':'📝 Ujian terbaru',
       'me.heat7':'📈 7 hari','me.heat30':'🗓 30 hari','me.studyDays':'belajar',

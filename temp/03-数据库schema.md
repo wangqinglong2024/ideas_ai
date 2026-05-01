@@ -9,7 +9,7 @@
 
 ```
                 ┌──────────┐
-                │  tracks  │  4 条静态：ec / fc / hk / dl / share
+                │  tracks  │  5 条静态：share / ec / fc / hsk / dl
                 └────┬─────┘
                      │
                 ┌────▼─────┐
@@ -58,9 +58,9 @@
 ### 3.2.1 `tracks` —— 主题
 ```sql
 CREATE TABLE tracks (
-  code        TEXT PRIMARY KEY,                -- ec / fc / hk / dl / share
+  code        TEXT PRIMARY KEY,                -- share / ec / fc / hsk / dl
   name_zh     TEXT NOT NULL,
-  name_i18n   JSONB NOT NULL,                  -- {vi,th,id,en}
+  name_i18n   JSONB NOT NULL,                  -- {zh,en,vi,th,id}
   icon_url    TEXT,
   sort_order  INT  DEFAULT 0,
   is_enabled  BOOLEAN DEFAULT TRUE
@@ -216,7 +216,7 @@ CREATE TABLE users (
   phone           TEXT UNIQUE,
   email           TEXT UNIQUE,
   password_hash   TEXT,
-  ui_lang         TEXT NOT NULL DEFAULT 'vi',   -- vi/th/id/en
+  ui_lang         TEXT NOT NULL DEFAULT 'zh',   -- zh/en/vi/th/id
   native_lang     TEXT NOT NULL DEFAULT 'vi',   -- 影响题目翻译
   current_track   TEXT REFERENCES tracks(code),
   shared_stage_done BOOLEAN DEFAULT FALSE,      -- 共享 Stage 0 是否已完成
@@ -409,7 +409,7 @@ CREATE TABLE admin_audit_log (
 
 ## 3.8 一份"最小种子数据"清单（上线前必须有）
 
-1. `tracks` 5 条（ec/fc/hk/dl/share）
+1. `tracks` 5 条（share/ec/fc/hsk/dl）
 2. `stages` 25 条（共享 Stage 0 + 4 × 6）
 3. `ai_prompts` 21 条（7 类 KP + 12 类题型 各 1 条 + 配音/配图各 1 条）
 4. `admins` 至少 1 个 super 账号
