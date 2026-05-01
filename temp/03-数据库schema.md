@@ -411,7 +411,7 @@ CREATE TABLE admin_audit_log (
 
 1. `tracks` 5 条（ec/fc/hk/dl/share）
 2. `stages` 25 条（共享 Stage 0 + 4 × 6）
-3. `ai_prompts` 18 条（7 类 KP + 12 类题型 各 1 条 + 配音/配图各 1 条）
+3. `ai_prompts` 21 条（7 类 KP + 12 类题型 各 1 条 + 配音/配图各 1 条）
 4. `admins` 至少 1 个 super 账号
 5. `media_assets` 一套默认占位音/图
 
