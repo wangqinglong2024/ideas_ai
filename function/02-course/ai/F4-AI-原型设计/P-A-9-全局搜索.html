@@ -28,7 +28,7 @@
   <!-- 搜索条 -->
   <div class="zy-card" style="padding: 18px; margin-bottom: 16px;">
     <div class="zy-row">
-      <input class="zy-input" value="早上" placeholder="🔍 搜索 KP / 题目 / 节 / Prompt …" style="flex:1; font-size: 16px; height: 44px;" />
+      <input class="zy-input" value="早上" placeholder="🔍 搜索 KP / 题目 / 节 …" style="flex:1; font-size: 16px; height: 44px;" />
       <button class="zy-btn zy-btn-primary" style="height: 44px;" data-toast="搜索已执行">搜索</button>
       <button class="zy-btn zy-btn-ghost" style="height: 44px;" data-open-drawer="dAdv">⚙ 高级</button>
     </div>
@@ -51,13 +51,13 @@
     <h3 style="margin: 8px 0 6px; font-size: 13px; color: var(--zy-fg-mute);">KP（前 3）</h3>
     <div class="zy-grid cols-md-2">
       <div class="zy-card zy-glass" data-nav="/admin/course/kps/kp-zaoshang" style="cursor: pointer;">
-        <div class="zy-row" style="justify-content: space-between;"><strong style="font-size: 16px;"><em class="hl">早上</em></strong><span class="zy-tag zy-tag-success">已审</span></div>
+        <div class="zy-row" style="justify-content: space-between;"><strong style="font-size: 16px;"><em class="hl">早上</em></strong><span class="zy-tag zy-tag-success">已发布</span></div>
         <div style="color: var(--zy-fg-mute); font-size: 13px;">zǎo shang · 词 · EC · HSK 1</div>
         <div style="font-size: 12px; margin-top: 6px;">🌍 morning / buổi sáng / ตอนเช้า / pagi</div>
         <div style="font-size: 12px; color: var(--zy-fg-mute); margin-top: 4px;">引用：1 节 / 5 题</div>
       </div>
       <div class="zy-card zy-glass" data-nav="/admin/course/kps/kp-zaoshanghao" style="cursor: pointer;">
-        <div class="zy-row" style="justify-content: space-between;"><strong style="font-size: 16px;"><em class="hl">早上</em>好</strong><span class="zy-tag zy-tag-warn">待审</span></div>
+        <div class="zy-row" style="justify-content: space-between;"><strong style="font-size: 16px;"><em class="hl">早上</em>好</strong><span class="zy-tag zy-tag-warn">待发布</span></div>
         <div style="color: var(--zy-fg-mute); font-size: 13px;">zǎo shang hǎo · 词组 · EC</div>
         <div style="font-size: 12px; margin-top: 6px;">🌍 Good morning</div>
       </div>
@@ -138,7 +138,7 @@
     <div class="zy-drawer-body">
       <div class="zy-field"><label class="zy-label">主题</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> EC</label><label><input type="checkbox" /> FC</label><label><input type="checkbox" checked /> HSK</label><label><input type="checkbox" /> DL</label><label><input type="checkbox" checked /> SH</label></div></div>
       <div class="zy-field"><label class="zy-label">HSK 等级</label><select class="zy-select"><option data-i18n="common.all">全部</option><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option></select></div>
-      <div class="zy-field"><label class="zy-label" data-i18n="common.status">状态</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> 已审</label><label><input type="checkbox" /> 待审</label><label><input type="checkbox" /> 草稿</label><label><input type="checkbox" /> 归档</label></div></div>
+      <div class="zy-field"><label class="zy-label" data-i18n="common.status">状态</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> 已发布</label><label><input type="checkbox" /> 待发布</label></div></div>
       <div class="zy-field"><label class="zy-label" data-i18n="common.type">类型</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> 词</label><label><input type="checkbox" /> 词组</label><label><input type="checkbox" /> 句子</label><label><input type="checkbox" /> 语法点</label></div></div>
       <div class="zy-field"><label class="zy-label">题型（仅题目搜索）</label><select class="zy-select"><option data-i18n="common.all">全部</option><option>听音选词</option><option>完形填空</option></select></div>
       <div class="zy-field"><label class="zy-label">更新时间</label><select class="zy-select"><option>不限</option><option>最近 7 天</option><option>最近 30 天</option></select></div>

@@ -46,9 +46,9 @@
                    │  user_srs (KP 粒度) │   │ user_exam_attempt│
                    └────────────────────┘   └─────────────────┘
 
-   ┌──────────────┐  ┌──────────────────┐  ┌────────────────┐
-   │  ai_prompts  │  │ ai_generation_jobs│  │ media_assets   │
-   └──────────────┘  └──────────────────┘  └────────────────┘
+  ┌────────────────┐  ┌────────────────────┐  ┌────────────────┐
+  │ import_batches │  │ content_action_log │  │ media_assets   │
+  └────────────────┘  └────────────────────┘  └────────────────┘
 ```
 
 ---
@@ -133,16 +133,16 @@ CREATE TABLE knowledge_points (
   audio_url     TEXT,
   image_url     TEXT,
   tags          TEXT[],
-  status        TEXT NOT NULL DEFAULT 'draft',   -- draft/reviewing/approved/archived
+  is_published  BOOLEAN NOT NULL DEFAULT FALSE,  -- TRUE=已发布，FALSE=待发布
   version       INT NOT NULL DEFAULT 1,
   source_batch_id BIGINT,                        -- 来自哪个导入批次
-  reviewed_by   BIGINT,                          -- admin user id
-  reviewed_at   TIMESTAMPTZ,
+  published_by  BIGINT,                          -- admin user id
+  published_at  TIMESTAMPTZ,
   created_at    TIMESTAMPTZ DEFAULT now(),
   updated_at    TIMESTAMPTZ DEFAULT now()
 );
 CREATE INDEX idx_kp_type     ON knowledge_points(kp_type);
-CREATE INDEX idx_kp_status   ON knowledge_points(status);
+CREATE INDEX idx_kp_published ON knowledge_points(is_published);
 CREATE INDEX idx_kp_tags_gin ON knowledge_points USING GIN(tags);
 CREATE INDEX idx_kp_content_gin ON knowledge_points USING GIN(content);
 ```
@@ -170,16 +170,16 @@ CREATE TABLE questions (
   payload     JSONB NOT NULL,                   -- stem/options/answer/explanation
   audio_url   TEXT,
   image_url   TEXT,
-  status      TEXT NOT NULL DEFAULT 'draft',
+  is_published BOOLEAN NOT NULL DEFAULT FALSE,
   version     INT DEFAULT 1,
-  ai_job_id   BIGINT,
-  reviewed_by BIGINT,
-  reviewed_at TIMESTAMPTZ,
+  source_batch_id BIGINT,
+  published_by BIGINT,
+  published_at TIMESTAMPTZ,
   created_at  TIMESTAMPTZ DEFAULT now()
 );
 CREATE INDEX idx_q_kp     ON questions(kp_id);
 CREATE INDEX idx_q_type   ON questions(q_type);
-CREATE INDEX idx_q_status ON questions(status);
+CREATE INDEX idx_q_published ON questions(is_published);
 ```
 
 ### 3.2.8 `exams` —— 节末/章/阶段考的"试卷模板"
@@ -291,41 +291,35 @@ CREATE INDEX idx_uea_user ON user_exam_attempts(user_id, exam_id);
 
 ---
 
-## 3.4 AI 生产 / 审核侧表
+## 3.4 内容导入 / 操作留痕 / 媒资表
 
-### 3.4.1 `ai_prompts`
+### 3.4.1 `import_batches` —— 批量导入批次
 ```sql
-CREATE TABLE ai_prompts (
+CREATE TABLE import_batches (
   id          BIGSERIAL PRIMARY KEY,
-  prompt_code TEXT UNIQUE NOT NULL,            -- prompt_v3_word
-  scope       TEXT NOT NULL,                   -- kp_word / q_mcq_meaning / ...
-  template    TEXT NOT NULL,
-  variables   JSONB,                           -- 模板里的占位说明
-  version     INT NOT NULL DEFAULT 1,
-  is_active   BOOLEAN DEFAULT TRUE,
+  import_type TEXT NOT NULL,                   -- kp / question / lesson / exam
+  source_name TEXT,
+  payload_hash TEXT NOT NULL,
+  status      TEXT NOT NULL DEFAULT 'ready',   -- ready/imported/failed
+  summary     JSONB,
   created_by  BIGINT,
   created_at  TIMESTAMPTZ DEFAULT now()
 );
 ```
 
-### 3.4.2 `ai_generation_jobs`
+### 3.4.2 `content_action_log` —— 内容操作与举报留痕
 ```sql
-CREATE TABLE ai_generation_jobs (
+CREATE TABLE content_action_log (
   id           BIGSERIAL PRIMARY KEY,
-  job_type     TEXT NOT NULL,                  -- gen_kp_batch / gen_q_batch / gen_audio / gen_image
-  prompt_id    BIGINT REFERENCES ai_prompts(id),
-  model        TEXT NOT NULL,                  -- gpt-5-pro / claude-... 等
-  params       JSONB,                          -- {temperature, top_p, ...}
-  input        JSONB,                          -- 输入上下文：track/stage/词表/已存在 KP 等
-  output       JSONB,                          -- 原始输出（用于审计）
-  generated_count INT DEFAULT 0,
-  status       TEXT NOT NULL DEFAULT 'queued', -- queued/running/done/failed/partial
-  cost_usd     NUMERIC(10,4),
-  created_by   BIGINT,
-  started_at   TIMESTAMPTZ,
-  finished_at  TIMESTAMPTZ
+  target_type  TEXT NOT NULL,                  -- kp / question / lesson / exam
+  target_id    BIGINT NOT NULL,
+  action       TEXT NOT NULL,                  -- edit/publish/unpublish/report/dismiss/adopt
+  actor_id     BIGINT,
+  actor_role   TEXT NOT NULL,                  -- learner/content_admin/super
+  reason       TEXT,
+  diff         JSONB,
+  created_at   TIMESTAMPTZ DEFAULT now()
 );
-CREATE INDEX idx_aij_status ON ai_generation_jobs(status);
 ```
 
 ### 3.4.3 `media_assets` —— 音/图/视频统一资产表
@@ -344,22 +338,6 @@ CREATE TABLE media_assets (
 CREATE INDEX idx_media_hash ON media_assets(hash);
 ```
 
-### 3.4.4 `content_review_log` —— 审核留痕
-```sql
-CREATE TABLE content_review_log (
-  id           BIGSERIAL PRIMARY KEY,
-  target_type  TEXT NOT NULL,                  -- kp / question
-  target_id    BIGINT NOT NULL,
-  action       TEXT NOT NULL,                  -- approve/reject/edit/regen
-  reviewer_id  BIGINT,
-  reason       TEXT,
-  diff         JSONB,                          -- 修改前后差异
-  created_at   TIMESTAMPTZ DEFAULT now()
-);
-```
-
----
-
 ## 3.5 管理端用户表（与学员 users 完全分库分表）
 
 ```sql
@@ -367,7 +345,7 @@ CREATE TABLE admins (
   id           BIGSERIAL PRIMARY KEY,
   username     TEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,
-  role         TEXT NOT NULL,                  -- super / content_admin / reviewer / ai_operator / readonly
+  role         TEXT NOT NULL,                  -- super / content_admin / readonly
   tracks_scope TEXT[],                          -- 该管理员能管哪几个主题，空=全部
   is_enabled   BOOLEAN DEFAULT TRUE,
   created_at   TIMESTAMPTZ DEFAULT now()
@@ -390,11 +368,11 @@ CREATE TABLE admin_audit_log (
 
 | 表 | 谁写 | 谁读 |
 |---|---|---|
-| tracks/stages/chapters/lessons/knowledge_points/questions/exams/media_assets | **管理端**（审核通过后才 published） | 用户端**只读** |
+| tracks/stages/chapters/lessons/knowledge_points/questions/exams/media_assets | **管理端**（发布后学员端可见） | 用户端**只读** |
 | user_*（progress/answers/srs/exam_attempts） | **用户端** | 管理端 BI 只读统计 |
-| ai_*（prompts/jobs）、content_review_log、admin_* | **管理端** | 管理端自用 |
+| import_batches、content_action_log、admin_* | **管理端** | 管理端自用 |
 
-> 用户端**永远不直接 SELECT 草稿 KP**——通过视图 `v_published_*` 或 API 层 `WHERE status='approved' AND is_published=true` 强制过滤。
+> 用户端**永远不直接 SELECT 待发布 KP**——通过视图 `v_published_*` 或 API 层 `WHERE is_published=true` 强制过滤。
 
 ---
 
@@ -411,7 +389,7 @@ CREATE TABLE admin_audit_log (
 
 1. `tracks` 5 条（share/ec/fc/hsk/dl）
 2. `stages` 25 条（共享 Stage 0 + 4 × 6）
-3. `ai_prompts` 21 条（7 类 KP + 12 类题型 各 1 条 + 配音/配图各 1 条）
+3. `import_batches` 至少 1 条示例批次（验证导入追溯）
 4. `admins` 至少 1 个 super 账号
 5. `media_assets` 一套默认占位音/图
 

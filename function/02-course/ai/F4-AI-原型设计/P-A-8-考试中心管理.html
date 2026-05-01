@@ -32,7 +32,7 @@
   </div>
 
   <div class="zy-row" style="justify-content: space-between; margin-bottom: 12px;">
-    <div><h1 class="zy-page-title">📊 考试中心管理</h1><p class="zy-page-sub">主题 → 阶段（阶段考）→ 章（章测）逐级配置；题目从绑定范围内「抽取」生成，可与节末小测共池。</p></div>
+    <div><h1 class="zy-page-title">📊 考试中心管理</h1><p class="zy-page-sub">主题 → 阶段（阶段考）→ 章（章测）→ 节（节测）逐级配置；所有测试内容统一在本页编辑，题目从绑定范围内抽取。</p></div>
   </div>
 
   <!-- Level 1: 主题 -->
@@ -63,7 +63,7 @@
       <div class="zy-card zy-level-card" data-drill-stage="DL" data-name="日常">
         <div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
           <div><div class="zy-level-card-title">🏡 日常 DL</div><div class="zy-helper">2 阶段 · 8 章 · 32 节</div></div>
-          <span class="zy-tag">草稿</span>
+          <span class="zy-tag zy-tag-warn">待发布</span>
         </div>
         <div class="zy-helper" style="margin-top:6px;">已配置：阶段考 ×1 · 章测 ×4 · 节末小测 ×30</div>
       </div>
@@ -95,13 +95,13 @@
     <div class="zy-grid cols-md-2" id="chapList"></div>
   </section>
 
-  <!-- Level 4: 节（只读） -->
+  <!-- Level 4: 节 -->
   <section id="lvLesson" style="display:none;">
     <div class="zy-row" style="justify-content:space-between;margin:8px 0 12px;">
-      <h2 class="zy-section-title" style="margin:0;">节列表（只读）· <span id="lvLessonChap"></span></h2>
+      <h2 class="zy-section-title" style="margin:0;">节列表 · <span id="lvLessonChap"></span></h2>
       <button class="zy-btn zy-btn-ghost" data-back="chap">← 返回章</button>
     </div>
-    <p class="zy-helper" style="margin-bottom:12px;">节末小测在 <a href="P-A-3-节编辑.html">P-A-3 节编辑</a> 中配置（每个节自带一个小测题包）。本页仅展示。</p>
+    <p class="zy-helper" style="margin-bottom:12px;">节测与阶段考、章测一样在考试中心配置；P-A-3 只维护节内容和 KP 绑定。</p>
     <div class="zy-grid cols-md-2" id="lessonList"></div>
   </section>
 </div>
@@ -227,6 +227,62 @@
   </aside>
 </div>
 
+<!-- 配置节测 Drawer -->
+<div class="zy-drawer-mask" id="dLessonExam">
+  <aside class="zy-drawer">
+    <div class="zy-drawer-head"><div class="zy-drawer-title">配置节测</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-drawer-body">
+      <label class="zy-label zy-required" style="display:block;margin:0 0 6px;">节测名称（内容多语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:12px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="1.3.4 早上好 · 节测" /></div>
+        <div class="zy-field"><label class="zy-label">英文</label><input class="zy-input" value="1.3.4 Good Morning · Quiz" /></div>
+        <div class="zy-field"><label class="zy-label">越南语</label><input class="zy-input" value="1.3.4 Chào buổi sáng · Kiểm tra" /></div>
+        <div class="zy-field"><label class="zy-label">泰语</label><input class="zy-input" value="1.3.4 อรุณสวัสดิ์ · แบบทดสอบ" /></div>
+        <div class="zy-field"><label class="zy-label">印尼语</label><input class="zy-input" value="1.3.4 Selamat pagi · Kuis" /></div>
+      </div>
+      <div class="zy-grid cols-md-2">
+        <div class="zy-field"><label class="zy-label zy-required" data-i18n="common.qty">题量</label><input class="zy-input" type="number" value="6" id="leQty" /></div>
+        <div class="zy-field"><label class="zy-label zy-required">时长（分钟）</label><input class="zy-input" type="number" value="8" /></div>
+        <div class="zy-field"><label class="zy-label">及格分（%）</label><input class="zy-input" type="number" value="60" /></div>
+        <div class="zy-field"><label class="zy-label">是否必做</label><select class="zy-select"><option selected>可跳过</option><option>必做后进入下一节</option></select></div>
+      </div>
+      <div class="zy-field"><label class="zy-label">抽取方式</label><select class="zy-select"><option selected>按题型权重自动抽取</option><option>按固定题型数量抽取</option><option>人工指定题目后补足随机题</option></select></div>
+      <div class="zy-field"><label class="zy-label">抽取范围</label>
+        <div class="zy-row" style="flex-wrap:wrap;gap:8px;">
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 本节绑定 KP 关联题目</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 本章前序节复习题</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" /> SH 共享题库</label>
+        </div>
+        <div class="zy-helper">仅抽选勾选了「可抽层级=节末小测」的题目；试抽只做预览，不影响学员答卷。</div>
+      </div>
+      <div class="zy-field"><label class="zy-label">题型分布（权重 %）</label>
+        <div class="zy-grid cols-md-3" style="gap:8px;">
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.listen_pick">听音选词</label><input class="zy-input" type="number" value="35" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.tone_pick">选声调</label><input class="zy-input" type="number" value="15" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.cloze">完形填空</label><input class="zy-input" type="number" value="15" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.match">配对</label><input class="zy-input" type="number" value="15" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.order">排序</label><input class="zy-input" type="number" value="20" style="width:64px;" /></div>
+        </div>
+      </div>
+      <div class="zy-divider"></div>
+      <div class="zy-row" style="justify-content:space-between;align-items:center;">
+        <strong>试抽预览</strong>
+        <button class="zy-btn zy-btn-sm zy-btn-ghost" onclick="document.getElementById('leDraw').textContent='✓ 已重抽 1 套节测预览（共 '+document.getElementById('leQty').value+' 题）。';return false;">🎲 重抽一份</button>
+      </div>
+      <p class="zy-helper" id="leDraw" style="margin-top:8px;">✓ 已从本节绑定 KP 和前序复习题中生成 6 题预览，按权重命中：听音选词 2 / 选声调 1 / 完形填空 1 / 配对 1 / 排序 1。</p>
+      <div class="zy-stack" style="margin-top: 10px;">
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 1 题 · 听音选词 · "请选择听到的词" → 早上 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 2 题 · 听音选词 · "请选择听到的词" → 好 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 3 题 · 选声调 · "早" 的声调？ → 第 3 声 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 4 题 · 完形填空 · "____ 好，老板！" → 早上 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 5 题 · 配对 · 早上 / 谢谢 / 再见 / 晚上 4 组配对</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 6 题 · 排序 · "早 / 上 / 好" → 「早上好」</div>
+      </div>
+    </div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="节测已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
+  </aside>
+</div>
+
 <script src="_assets/prototype.js"></script>
 <script>
 (function(){
@@ -306,14 +362,15 @@
             const lc = document.createElement('div');
             lc.className = 'zy-card zy-level-card';
             lc.innerHTML = `<div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
-              <div><div class="zy-level-card-title">${j}. 示例节名</div><div class="zy-helper">已绑定 8 个 KP · 自带节末小测</div></div>
+              <div><div class="zy-level-card-title">${j}. 示例节名</div><div class="zy-helper">已绑定 8 个 KP · ${j<=3?'<span class="zy-tag zy-tag-success">已配置节测</span>':'<span class="zy-tag">待配置节测</span>'}</div></div>
               <span class="zy-tag zy-tag-success">已发布</span>
             </div>
             <div class="zy-row" style="margin-top:10px;gap:8px;">
-              <a class="zy-btn zy-btn-sm zy-btn-ghost" href="P-A-3-节编辑.html">去节编辑 →</a>
+              <button class="zy-btn zy-btn-sm zy-btn-primary" data-stop>${j<=3?'编辑节测':'➕ 配置节测'}</button>
             </div>`;
             ll.appendChild(lc);
           }
+          ll.querySelectorAll('[data-stop]').forEach(b3=>b3.addEventListener('click', ev3=>{ev3.stopPropagation(); document.getElementById('dLessonExam').classList.add('open');}));
           show('lesson');
         }));
         show('chap');

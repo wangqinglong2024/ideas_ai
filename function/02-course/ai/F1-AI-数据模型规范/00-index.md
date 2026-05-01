@@ -19,15 +19,15 @@
 | 一 | [02-表定义-知识点与题目.md](./02-表定义-知识点与题目.md) | `course_knowledge_points` / `course_lesson_kp` / `course_questions` |
 | 一 | [03-表定义-考试与作答.md](./03-表定义-考试与作答.md) | `course_exams`（试卷模板） |
 | 一 | [04-表定义-学员进度.md](./04-表定义-学员进度.md) | `course_user_progress` / `course_user_answers` / `course_user_srs` / `course_user_exam_attempts` |
-| 一 | [05-表定义-内容导入与媒资.md](./05-表定义-内容导入与媒资.md) | `course_import_batches` / `course_content_review_log` / `course_media_assets` |
+| 一 | [05-表定义-内容导入与媒资.md](./05-表定义-内容导入与媒资.md) | `course_import_batches` / `course_content_action_log` / `course_media_assets` |
 | 二 | [06-枚举定义.md](./06-枚举定义.md) | KP 类型、题型、内容状态、SRS 盒、考试范围、导入批次状态等 |
 | 三 | [07-表关系.md](./07-表关系.md) | ER 图、外键、级联策略、跨域副作用 |
-| 四 | [08-状态机.md](./08-状态机.md) | 内容点检状态机 + 导入批次状态机 + 节级发布状态机 |
+| 四 | [08-状态机.md](./08-状态机.md) | 内容发布状态机 + 导入批次状态机 + 节级发布状态机 |
 | 五 | [09-校验规则汇总.md](./09-校验规则汇总.md) | 前后端共用 Zod 规则与错误码 |
 | 六 | — | 计算规则（详见 [04 §SRS 调度](./04-表定义-学员进度.md) 与 [03 §试卷抽题](./03-表定义-考试与作答.md)，无独立计算公式） |
 | 七 | [10-编号生成规则.md](./10-编号生成规则.md) | `kp_code` / `q_code` / `lesson_code` 生成规则 |
 | 八 | [11-种子数据.md](./11-种子数据.md) | 5 主题 + 25 阶段 + 1 super 管理员 + 占位媒资 + 导入模板样例 |
-| — | [12-待确认问题清单.md](./12-待确认问题清单.md) | 需 PM 拍板的开放问题（含与 temp/07 的差异） |
+| — | [12-待确认问题清单.md](./12-待确认问题清单.md) | F1 已封板数据模型决策 |
 
 ---
 
@@ -43,7 +43,7 @@
 - **内容编码**：`kp_<track>_<type>_<6位序号>`、`q_<track>_<8位序号>`（[详见 10-编号生成规则.md](./10-编号生成规则.md)）
 - **软删**：所有"内容侧"表（`course_knowledge_points` / `course_questions` / `course_lessons` 等）启用 `deleted_at`，30 天后由 cron 物理清理；用户进度类不软删（直接物理删，但有审计）
 - **主键策略**：✅ 全表统一 `uuid`（[12-Q1](./12-待确认问题清单.md) 已封板，与 [grules/G1-03 §一](../../../grules/G1-架构与技术规范/03-数据库规范.md) + china 域一致），业务唯一键（如 `code`、`kp_code`）独立列；流水表索引膨胀通过月分区控制（[12-Q8](./12-待确认问题清单.md)）
-- **可见性**：用户端**永远不查草稿**——通过 RLS 强制 `status='approved' AND is_published=true`
+- **可见性**：用户端**永远不查待发布内容**——通过 RLS 强制 `is_published=true`
 
 ---
 
@@ -60,7 +60,7 @@
 
 ---
 
-## PM 审核要点
+## PM 检查要点
 
 - ✅ 14 个核心表是否覆盖 temp/03 全部对象
 - ✅ KP 内容字段（按 7 类差异）是否完整可生成

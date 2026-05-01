@@ -26,9 +26,8 @@
   <div class="zy-bread"><span data-nav="/admin/course">课程</span><span class="sep">›</span><span data-nav="/admin/course/tracks/ec">EC</span><span class="sep">›</span><span>1.3 见面与问候</span><span class="sep">›</span><span class="cur">1.3.4 早上好</span></div>
 
   <div class="zy-row" style="justify-content: space-between; margin-bottom: 16px;">
-    <div><h1 class="zy-page-title">编辑节 · 1.3.4 早上好</h1><p class="zy-page-sub"><code>ec-1-3-4</code> · 12 KP / 约 50 题 · 状态：<span class="zy-tag zy-tag-warn">草稿</span></p></div>
+    <div><h1 class="zy-page-title">编辑节 · 1.3.4 早上好</h1><p class="zy-page-sub"><code>ec-1-3-4</code> · 12 KP / 约 50 题 · 状态：<span class="zy-tag zy-tag-warn">待发布</span></p></div>
     <div class="zy-row">
-      <button class="zy-btn zy-btn-ghost" data-open-modal="mTryQuiz">🎯 试抽 6 题</button>
       <button class="zy-btn zy-btn-ghost" data-open-modal="mDelLesson">🗑 删除</button>
       <button class="zy-btn zy-btn-ghost" data-toast="节已保存">💾 保存</button>
       <button class="zy-btn zy-btn-primary" data-open-modal="mPublish">📢 发布</button>
@@ -46,8 +45,8 @@
       <div class="zy-field"><label class="zy-label">节名（印尼语）</label><input class="zy-input" value="Selamat pagi" /></div>
     </div>
     <div class="zy-grid cols-md-2" style="margin-top: 8px;">
-      <div class="zy-field"><label class="zy-label">通过线（小测）</label><input class="zy-input" type="number" value="80" /></div>
       <div class="zy-field"><label class="zy-label">建议时长（分钟）</label><input class="zy-input" type="number" value="15" /></div>
+      <div class="zy-field"><label class="zy-label">目标 KP 数</label><input class="zy-input" type="number" value="12" /></div>
     </div>
   </div>
 
@@ -140,25 +139,6 @@
   </div>
 </div>
 
-<!-- 试抽 6 题 -->
-<div class="zy-modal-mask" id="mTryQuiz">
-  <div class="zy-modal size-lg">
-    <div class="zy-modal-head"><div class="zy-modal-title">🎯 试抽节末小测（6 题）</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">
-      <div class="zy-helper" style="margin-bottom: 12px;">基于本节 12 KP 与候选题库（约 50 题），按蓝图分布抽取 6 题：听音选词 × 2、选声调 × 1、完形填空 × 1、配对 × 1、排序 × 1。</div>
-      <div class="zy-stack">
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 1 题 · 听音选词 · "请选择听到的词" → 早上 ✓</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 2 题 · 听音选词 · "请选择听到的词" → 好 ✓</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 3 题 · 选声调 · "「早」声调？" → 第 3 声 ✓</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 4 题 · 完形填空 · "____ 好，老板！" → 早上 ✓</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 5 题 · 配对 · "中文 ↔ 英文" 4 配对</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 6 题 · 排序 · 排序"早 / 上 / 好"成「早上好」</div>
-      </div>
-    </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-toast="重新抽题" data-toast-type="info">🔄 重抽</button><button class="zy-btn zy-btn-primary" data-close-modal data-i18n="btn.close">关闭</button></div>
-  </div>
-</div>
-
 <!-- AI 生成相关模态已移除 -->
 
 <!-- 解绑 -->
@@ -195,7 +175,7 @@
 <div class="zy-modal-mask" id="mPublish">
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">发布本节？</div><button class="zy-modal-close" data-close-modal>×</button></div>
-    <div class="zy-modal-body">发布后学员可见本节 12 KP 与节末小测（6 题蓝图）。请确认所有 KP 已审核通过。</div>
+    <div class="zy-modal-body">发布后学员可见本节内容；节测配置统一在 P-A-8 考试中心管理中维护。</div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="节已发布" data-toast-type="success">发布</button></div>
   </div>
 </div>
