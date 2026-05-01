@@ -135,7 +135,7 @@ CREATE TABLE knowledge_points (
   tags          TEXT[],
   status        TEXT NOT NULL DEFAULT 'draft',   -- draft/reviewing/approved/archived
   version       INT NOT NULL DEFAULT 1,
-  ai_job_id     BIGINT,                          -- 来自哪个 AI Job
+  source_batch_id BIGINT,                        -- 来自哪个导入批次
   reviewed_by   BIGINT,                          -- admin user id
   reviewed_at   TIMESTAMPTZ,
   created_at    TIMESTAMPTZ DEFAULT now(),

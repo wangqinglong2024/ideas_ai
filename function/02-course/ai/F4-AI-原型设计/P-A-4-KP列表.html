@@ -45,7 +45,7 @@
       <button class="zy-btn zy-btn-ghost" data-toast="筛选已应用">应用</button>
       <button class="zy-btn zy-btn-ghost" data-toast="重置筛选">重置</button>
     </div>
-    <div class="zy-helper" style="margin-top:8px;">ℹ KP 不携带 HSK 等级字段；HSK 等级仅在主题 = HSK 下按 6 个「阶段」划分（stage 1..6 对应 HSK 1..6）。</div></div>
+    <div class="zy-helper" style="margin-top:8px;">ℹ KP 不携带 HSK 等级字段；HSK 等级仅在主题 = HSK 下按 6 个「阶段」划分（阶段 1..6 对应 HSK 1..6）。</div></div>
   </div>
 
   <!-- 批量操作栏 -->
@@ -104,10 +104,10 @@
       <h3 style="margin: 0 0 8px;">i18n 翻译（5 语言）</h3>
       <div class="zy-i18n-grid" style="margin-bottom:12px;">
         <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="早上" /></div>
-        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="morning" /></div>
-        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="buổi sáng" /></div>
-        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="ตอนเช้า" /></div>
-        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="pagi" /></div>
+        <div class="zy-field"><label class="zy-label">英文</label><input class="zy-input" value="morning" /></div>
+        <div class="zy-field"><label class="zy-label">越南语</label><input class="zy-input" value="buổi sáng" /></div>
+        <div class="zy-field"><label class="zy-label">泰语</label><input class="zy-input" value="ตอนเช้า" /></div>
+        <div class="zy-field"><label class="zy-label">印尼语</label><input class="zy-input" value="pagi" /></div>
       </div>
       <div class="zy-field"><label class="zy-label zy-required">拼音</label><input class="zy-input" value="zǎo shang" /></div>
       <div class="zy-divider"></div>
@@ -122,12 +122,12 @@
         <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">
           <div style="font-size: 14px;">早上好，老板！</div>
           <div style="font-size: 12px; color: var(--zy-fg-mute);">zǎo shang hǎo, lǎo bǎn! / Good morning, boss!</div>
-          <div class="zy-row" style="margin-top: 6px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger">删</button></div>
+          <div class="zy-row" style="margin-top: 6px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger">删除</button></div>
         </div>
         <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">
           <div style="font-size: 14px;">每天早上我喝茶。</div>
           <div style="font-size: 12px; color: var(--zy-fg-mute);">měi tiān zǎo shang wǒ hē chá. / I drink tea every morning.</div>
-          <div class="zy-row" style="margin-top: 6px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger">删</button></div>
+          <div class="zy-row" style="margin-top: 6px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger">删除</button></div>
         </div>
         <button class="zy-btn zy-btn-ghost" data-toast="新增例句行">➕ 增加例句</button>
       </div>
@@ -161,7 +161,7 @@
       <div class="zy-field"><label class="zy-label zy-required">文件</label><div style="border: 2px dashed var(--zy-border); border-radius: 12px; padding: 32px; text-align: center;">📁 拖入 .json / .csv（≤ 50MB）</div></div>
       <div class="zy-field"><label class="zy-label">冲突策略</label><select class="zy-select"><option>跳过</option><option>覆盖</option></select></div>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="导入 Job 已提交" data-toast-type="success">导入</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="导入任务已提交" data-toast-type="success">导入</button></div>
   </div>
 </div>
 
@@ -186,7 +186,7 @@
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">批量重生 TTS（3 项）</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">将为已选 3 个 KP 重新生成主音频，旧音频保留 30 天。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="3 个 TTS Job 已入队" data-toast-type="success" data-i18n="btn.submit">提交</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="3 个语音合成任务已入队" data-toast-type="success" data-i18n="btn.submit">提交</button></div>
   </div>
 </div>
 <div class="zy-modal-mask" id="mBulkAudit">
@@ -200,14 +200,14 @@
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">批量删除（3 项）</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">将软删除 3 个 KP；引用次数 > 0 的会先解绑。可在 7 天内恢复。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="已删除 3 项（recycle 7 天）" data-toast-type="info" data-i18n="btn.delete">删除</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="已删除 3 项，移入回收站保留 7 天" data-toast-type="info" data-i18n="btn.delete">删除</button></div>
   </div>
 </div>
 <div class="zy-modal-mask" id="mDel">
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">删除 KP？</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">该 KP 仍被 23 节 / 142 题引用，删除前会自动解绑。可在 7 天内恢复。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="已删除（recycle 7 天）" data-toast-type="info" data-i18n="btn.delete">删除</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="已移入回收站，保留 7 天" data-toast-type="info" data-i18n="btn.delete">删除</button></div>
   </div>
 </div>
 

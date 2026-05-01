@@ -30,20 +30,20 @@
     <div class="zy-row">
       <button class="zy-btn zy-btn-ghost" data-open-modal="mTryQuiz">🎯 试抽 6 题</button>
       <button class="zy-btn zy-btn-ghost" data-open-modal="mDelLesson">🗑 删除</button>
-      <button class="zy-btn zy-btn-ghost" data-toast="POST /lessons/:id/save">💾 保存</button>
+      <button class="zy-btn zy-btn-ghost" data-toast="节已保存">💾 保存</button>
       <button class="zy-btn zy-btn-primary" data-open-modal="mPublish">📢 发布</button>
     </div>
   </div>
 
   <!-- 基本信息 -->
   <div class="zy-card" style="margin-bottom: 16px;">
-    <h3 style="margin: 0 0 12px;">基本信息（i18n）</h3>
+    <h3 style="margin: 0 0 12px;">基本信息（内容多语言）</h3>
     <div class="zy-grid cols-md-2">
-      <div class="zy-field"><label class="zy-label zy-required">节名（zh）</label><input class="zy-input" value="早上好" /></div>
-      <div class="zy-field"><label class="zy-label">节名（en）</label><input class="zy-input" value="Good Morning" /></div>
-      <div class="zy-field"><label class="zy-label">节名（vi）</label><input class="zy-input" value="Chào buổi sáng" /></div>
-      <div class="zy-field"><label class="zy-label">节名（th）</label><input class="zy-input" value="อรุณสวัสดิ์" /></div>
-      <div class="zy-field"><label class="zy-label">节名（id）</label><input class="zy-input" value="Selamat pagi" /></div>
+      <div class="zy-field"><label class="zy-label zy-required">节名（中文）</label><input class="zy-input" value="早上好" /></div>
+      <div class="zy-field"><label class="zy-label">节名（英文）</label><input class="zy-input" value="Good Morning" /></div>
+      <div class="zy-field"><label class="zy-label">节名（越南语）</label><input class="zy-input" value="Chào buổi sáng" /></div>
+      <div class="zy-field"><label class="zy-label">节名（泰语）</label><input class="zy-input" value="อรุณสวัสดิ์" /></div>
+      <div class="zy-field"><label class="zy-label">节名（印尼语）</label><input class="zy-input" value="Selamat pagi" /></div>
     </div>
     <div class="zy-grid cols-md-2" style="margin-top: 8px;">
       <div class="zy-field"><label class="zy-label">通过线（小测）</label><input class="zy-input" type="number" value="80" /></div>
@@ -84,13 +84,13 @@
   <aside class="zy-drawer">
     <div class="zy-drawer-head"><div class="zy-drawer-title">编辑 KP · kp-zaoshang</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
-      <label class="zy-label zy-required" style="display:block;margin-bottom:6px;">主词 & 翻译（5 语言）</label>
+      <label class="zy-label zy-required" style="display:block;margin-bottom:6px;">主词与翻译（内容多语言）</label>
       <div class="zy-i18n-grid" style="margin-bottom:12px;">
         <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="早上" /></div>
-        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="morning" /></div>
-        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="buổi sáng" /></div>
-        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="ตอนเช้า" /></div>
-        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="pagi" /></div>
+        <div class="zy-field"><label class="zy-label">英文</label><input class="zy-input" value="morning" /></div>
+        <div class="zy-field"><label class="zy-label">越南语</label><input class="zy-input" value="buổi sáng" /></div>
+        <div class="zy-field"><label class="zy-label">泰语</label><input class="zy-input" value="ตอนเช้า" /></div>
+        <div class="zy-field"><label class="zy-label">印尼语</label><input class="zy-input" value="pagi" /></div>
       </div>
       <div class="zy-grid cols-md-2">
         <div class="zy-field"><label class="zy-label">拼音</label><input class="zy-input" value="zǎo shang" /></div>
@@ -145,14 +145,14 @@
   <div class="zy-modal size-lg">
     <div class="zy-modal-head"><div class="zy-modal-title">🎯 试抽节末小测（6 题）</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      <div class="zy-helper" style="margin-bottom: 12px;">基于本节 12 KP 与候选题库（约 50 题），按蓝图分布抽取 6 题：listen_pick × 2、tone_pick × 1、cloze × 1、match × 1、order × 1。</div>
+      <div class="zy-helper" style="margin-bottom: 12px;">基于本节 12 KP 与候选题库（约 50 题），按蓝图分布抽取 6 题：听音选词 × 2、选声调 × 1、完形填空 × 1、配对 × 1、排序 × 1。</div>
       <div class="zy-stack">
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 1 题 · listen_pick · "请选择听到的词" → 早上 ✓</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 2 题 · listen_pick · "请选择听到的词" → 好 ✓</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 3 题 · tone_pick · "「早」声调？" → 第 3 声 ✓</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 4 题 · cloze · "____ 好，老板！" → 早上 ✓</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 5 题 · match · "中文 ↔ 英文" 4 配对</div>
-        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 6 题 · order · 排序"早 / 上 / 好"成「早上好」</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 1 题 · 听音选词 · "请选择听到的词" → 早上 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 2 题 · 听音选词 · "请选择听到的词" → 好 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 3 题 · 选声调 · "「早」声调？" → 第 3 声 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 4 题 · 完形填空 · "____ 好，老板！" → 早上 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 5 题 · 配对 · "中文 ↔ 英文" 4 配对</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 6 题 · 排序 · 排序"早 / 上 / 好"成「早上好」</div>
       </div>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-toast="重新抽题" data-toast-type="info">🔄 重抽</button><button class="zy-btn zy-btn-primary" data-close-modal data-i18n="btn.close">关闭</button></div>
@@ -178,7 +178,7 @@
       <div class="zy-field"><label class="zy-label">音色</label><select class="zy-select"><option>女声 普通话（默认）</option><option>男声 普通话</option><option>儿童</option></select></div>
       <div class="zy-field"><label class="zy-label">语速</label><select class="zy-select"><option>0.9x</option><option selected>1.0x</option><option>1.1x</option></select></div>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="TTS Job 已入队" data-toast-type="success">生成</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="语音合成任务已入队" data-toast-type="success">生成</button></div>
   </div>
 </div>
 
@@ -187,7 +187,7 @@
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">删除节？</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">将删除本节及其下属 12 KP 关联（KP 本身保留）、约 50 题（软删 7 天）。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="节已删除（recycle 7 天）" data-toast-type="info" data-i18n="btn.delete">删除</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="节已移入回收站，保留 7 天" data-toast-type="info" data-i18n="btn.delete">删除</button></div>
   </div>
 </div>
 
@@ -196,7 +196,7 @@
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">发布本节？</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">发布后学员可见本节 12 KP 与节末小测（6 题蓝图）。请确认所有 KP 已审核通过。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="节已发布（status=published）" data-toast-type="success">发布</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="节已发布" data-toast-type="success">发布</button></div>
   </div>
 </div>
 

@@ -22,7 +22,18 @@
   window.zyDevice = setDevice;
   window.zyTheme  = setTheme;
 
+  function isAdminZhOnly(){
+    try {
+      var path = decodeURIComponent(window.location.pathname || '');
+      if(/\/P-A-\d+-/.test(path) || /^P-A-\d+/.test(document.title || '')) return true;
+      var brand = document.querySelector('.zy-topnav-brand');
+      return !!(brand && brand.textContent.indexOf('管理后台') !== -1);
+    } catch(e){ return false; }
+  }
+  window.zyIsAdminZhOnly = isAdminZhOnly;
+
   function currentUiLang(){
+    if(isAdminZhOnly()) return 'zh';
     try { if(window.zyI18n && window.zyI18n.current) return window.zyI18n.current(); } catch(e){}
     try { return localStorage.getItem('zy.uiLang') || document.documentElement.getAttribute('data-ui-lang') || 'zh'; } catch(e){ return 'zh'; }
   }
@@ -204,6 +215,13 @@ document.addEventListener('DOMContentLoaded', function(){
 /* 占位用 */
 /* ============== 全局 i18n 字典 ============== */
 (function(){
+  function isAdminZhOnly(){
+    try {
+      if(window.zyIsAdminZhOnly) return window.zyIsAdminZhOnly();
+      var path = decodeURIComponent(window.location.pathname || '');
+      return /\/P-A-\d+-/.test(path) || /^P-A-\d+/.test(document.title || '');
+    } catch(e){ return false; }
+  }
   var Z = {
     zh: '中文', en: 'English', vi: 'Tiếng Việt', th: 'ภาษาไทย', id: 'Bahasa Indonesia'
   };
@@ -436,7 +454,10 @@ document.addEventListener('DOMContentLoaded', function(){
   };
   window.zyI18nDict = DICT;
 
-  function getLang(){ try { return localStorage.getItem('zy.uiLang') || 'zh'; } catch(e){ return 'zh'; } }
+  function getLang(){
+    if(isAdminZhOnly()) return 'zh';
+    try { return localStorage.getItem('zy.uiLang') || 'zh'; } catch(e){ return 'zh'; }
+  }
 
   function applyAttrs(el, lang, dict, fb){
     var a = el.getAttribute('data-i18n-attr'); if(!a) return;
@@ -452,7 +473,8 @@ document.addEventListener('DOMContentLoaded', function(){
     langLabels: Z,
     current: getLang,
     set: function(lang){
-      try { localStorage.setItem('zy.uiLang', lang); } catch(e){}
+      if(isAdminZhOnly()) lang = 'zh';
+      try { if(!isAdminZhOnly()) localStorage.setItem('zy.uiLang', lang); } catch(e){}
       document.documentElement.setAttribute('data-ui-lang', lang);
       this.apply(lang);
       // 同步所有 [data-set-lang] radio 的勾选状态（任意页面、任意位置）

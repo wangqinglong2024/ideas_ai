@@ -113,13 +113,13 @@
   <aside class="zy-drawer">
     <div class="zy-drawer-head"><div class="zy-drawer-title">配置阶段考试</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
-      <label class="zy-label zy-required" style="display:block;margin:0 0 6px;">考试名称（5 语言）</label>
+      <label class="zy-label zy-required" style="display:block;margin:0 0 6px;">考试名称（内容多语言）</label>
       <div class="zy-i18n-grid" style="margin-bottom:12px;">
         <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="电商 · 阶段一阶段考" /></div>
-        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="EC · Stage 1 Exam" /></div>
-        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="EC · Bài thi giai đoạn 1" /></div>
-        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="EC · ข้อสอบระยะที่ 1" /></div>
-        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="EC · Ujian Tahap 1" /></div>
+        <div class="zy-field"><label class="zy-label">英文</label><input class="zy-input" value="EC · Stage 1 Exam" /></div>
+        <div class="zy-field"><label class="zy-label">越南语</label><input class="zy-input" value="EC · Bài thi giai đoạn 1" /></div>
+        <div class="zy-field"><label class="zy-label">泰语</label><input class="zy-input" value="EC · ข้อสอบระยะที่ 1" /></div>
+        <div class="zy-field"><label class="zy-label">印尼语</label><input class="zy-input" value="EC · Ujian Tahap 1" /></div>
       </div>
       <div class="zy-grid cols-md-2">
         <div class="zy-field"><label class="zy-label zy-required" data-i18n="common.qty">题量</label><input class="zy-input" type="number" value="40" id="seQty" /></div>
@@ -151,9 +151,21 @@
       <div class="zy-divider"></div>
       <div class="zy-row" style="justify-content:space-between;align-items:center;">
         <strong>试抽预览</strong>
-        <button class="zy-btn zy-btn-sm zy-btn-ghost" onclick="document.getElementById('seDraw').textContent='✓ 已从抽取池抽取 '+document.getElementById('seQty').value+' 题（示意：听音选词 8 / 选声调 4 / 完形填空 6 / 配对 4 / 排序 4 / 中译外 4 / 阅读选择 4 / 跟读 2 / 听写 4）。';return false;">🎲 试抽一份</button>
+        <button class="zy-btn zy-btn-sm zy-btn-ghost" onclick="document.getElementById('seDraw').textContent='✓ 已重抽 1 套阶段考预览（共 '+document.getElementById('seQty').value+' 题，下面展示前 10 题）。';return false;">🎲 重抽一份</button>
       </div>
-      <p class="zy-helper" id="seDraw" style="margin-top:8px;">点击「试抽一份」生成一套预览（不保存），验证抽题池是否足够。</p>
+      <p class="zy-helper" id="seDraw" style="margin-top:8px;">✓ 已从本阶段抽取池生成 40 题预览，按权重命中：听音选词 8 / 选声调 4 / 完形填空 6 / 配对 4 / 排序 4 / 中译外 4 / 阅读选择 4 / 跟读 2 / 听写 4。</p>
+      <div class="zy-stack" style="margin-top: 10px;">
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 1 题 · 听音选词 · "请选择听到的词" → 早上 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 2 题 · 听音选词 · "请选择听到的句子" → 我想下单 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 3 题 · 选声调 · "价" 的声调？ → 第 4 声 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 4 题 · 完形填空 · "这个____多少钱？" → 商品 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 5 题 · 配对 · 订单 / 发货 / 退款 / 优惠券 4 组配对</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 6 题 · 排序 · "我 / 想 / 下单" → 「我想下单」</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 7 题 · 中译外 · "请帮我退款" → Please help me refund it.</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 8 题 · 阅读选择 · 读客服对话，选择订单状态</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 9 题 · 跟读 · "这个可以包邮吗？" → 录音提示与拼音对照</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 10 题 · 听写 · 听音输入「优惠券」</div>
+      </div>
     </div>
     <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="阶段考已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
   </aside>
@@ -164,13 +176,13 @@
   <aside class="zy-drawer">
     <div class="zy-drawer-head"><div class="zy-drawer-title">配置章测</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
-      <label class="zy-label zy-required" style="display:block;margin:0 0 6px;">章测名称（5 语言）</label>
+      <label class="zy-label zy-required" style="display:block;margin:0 0 6px;">章测名称（内容多语言）</label>
       <div class="zy-i18n-grid" style="margin-bottom:12px;">
         <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="第 1 章 · 章测" /></div>
-        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="Chapter 1 · Test" /></div>
-        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="Chương 1 · Kiểm tra" /></div>
-        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="บทที่ 1 · ทดสอบ" /></div>
-        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="Bab 1 · Tes" /></div>
+        <div class="zy-field"><label class="zy-label">英文</label><input class="zy-input" value="Chapter 1 · Test" /></div>
+        <div class="zy-field"><label class="zy-label">越南语</label><input class="zy-input" value="Chương 1 · Kiểm tra" /></div>
+        <div class="zy-field"><label class="zy-label">泰语</label><input class="zy-input" value="บทที่ 1 · ทดสอบ" /></div>
+        <div class="zy-field"><label class="zy-label">印尼语</label><input class="zy-input" value="Bab 1 · Tes" /></div>
       </div>
       <div class="zy-grid cols-md-2">
         <div class="zy-field"><label class="zy-label zy-required" data-i18n="common.qty">题量</label><input class="zy-input" type="number" value="20" id="chQty" /></div>
@@ -197,9 +209,19 @@
       <div class="zy-divider"></div>
       <div class="zy-row" style="justify-content:space-between;align-items:center;">
         <strong>试抽预览</strong>
-        <button class="zy-btn zy-btn-sm zy-btn-ghost" onclick="document.getElementById('chDraw').textContent='✓ 已从抽取池抽取 '+document.getElementById('chQty').value+' 题（示意：听音选词 6 / 选声调 3 / 完形填空 4 / 配对 3 / 中译外 2 / 听写 2）。';return false;">🎲 试抽一份</button>
+        <button class="zy-btn zy-btn-sm zy-btn-ghost" onclick="document.getElementById('chDraw').textContent='✓ 已重抽 1 套章测预览（共 '+document.getElementById('chQty').value+' 题，下面展示前 8 题）。';return false;">🎲 重抽一份</button>
       </div>
-      <p class="zy-helper" id="chDraw" style="margin-top:8px;">题目从「本章下属节关联的题目」中抽取，与节末小测、阶段考共池。</p>
+      <p class="zy-helper" id="chDraw" style="margin-top:8px;">✓ 已从本章下属节关联题目中抽取 20 题，按权重命中：听音选词 6 / 选声调 3 / 完形填空 4 / 配对 3 / 中译外 2 / 听写 2。</p>
+      <div class="zy-stack" style="margin-top: 10px;">
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 1 题 · 听音选词 · "请选择听到的词" → 老板 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 2 题 · 听音选词 · "请选择听到的问候语" → 早上好 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 3 题 · 选声调 · "谢" 的声调？ → 第 4 声 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 4 题 · 完形填空 · "____ 好，老板！" → 早上 ✓</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 5 题 · 配对 · 你好 / 谢谢 / 再见 / 晚安 4 组配对</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 6 题 · 中译外 · "谢谢你" → Thank you.</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 7 题 · 听写 · 听音输入「早上好」</div>
+        <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 8 题 · 完形填空 · "明天____" → 见 ✓</div>
+      </div>
     </div>
     <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="章测已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
   </aside>
