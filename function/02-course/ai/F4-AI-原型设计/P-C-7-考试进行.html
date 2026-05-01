@@ -33,7 +33,7 @@
   <div class="zy-progress" style="margin-bottom: 16px;"><i style="width: 23%;"></i></div>
 
   <div class="zy-card" style="background: var(--zy-bg);">
-    <div class="zy-tag-row" style="margin-bottom: 12px;"><span class="zy-tag zy-tag-info">第&nbsp;7&nbsp;/&nbsp;30</span><span class="zy-tag">听音选词</span><span class="zy-tag" data-toast="本题已自动保存">💾&nbsp;已保存</span></div>
+    <div class="zy-tag-row" style="margin-bottom: 12px;"><span class="zy-tag zy-tag-info">第&nbsp;7&nbsp;/&nbsp;30</span><span class="zy-tag" data-i18n="qt.listen_pick">听音选词</span><span class="zy-tag" data-toast="本题已自动保存">💾&nbsp;已保存</span></div>
     <div class="qz-stem">
       <button class="zy-play-btn" data-toast="🔊 播放音频（剩余 2 次）" data-toast-type="info"><span data-icon="play"></span>播放&nbsp;2/3</button>
       <span style="margin-left: 8px;">请选择正确写法：</span>
@@ -75,7 +75,7 @@
       </div>
       <div id="qGrid" style="display:grid; grid-template-columns: repeat(6, 1fr); gap: 8px;"></div>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>关闭</button><button class="zy-btn zy-btn-primary" data-close-modal data-open-modal="mSubmitAll">提交全部</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.close">关闭</button><button class="zy-btn zy-btn-primary" data-close-modal data-open-modal="mSubmitAll" data-i18n="btn.submitAll">提交全部</button></div>
   </aside>
 </div>
 
@@ -84,7 +84,7 @@
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">考试无法暂停</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">倒计时持续运行。如需离开，点击「保存并退出」，进度保留 24 小时；或点击「继续」回到考试。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-danger" data-close-modal data-nav="/learn/exams">保存并退出</button><button class="zy-btn zy-btn-primary" data-close-modal>继续</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-danger" data-close-modal data-nav="/learn/exams" data-i18n="btn.saveExit">保存并退出</button><button class="zy-btn zy-btn-primary" data-close-modal data-i18n="btn.continue">继续</button></div>
   </div>
 </div>
 
@@ -95,7 +95,7 @@
     <div class="zy-modal-body">
       已答 <strong>7 / 30</strong>，<strong style="color:var(--zy-brand);">还有 23 题未答</strong>。<br>提交后立即结算成绩，未答题计 0 分，无法再修改。
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>继续答题</button><button class="zy-btn zy-btn-danger" data-close-modal data-open-modal="mResult">确认提交</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.continueExam">继续答题</button><button class="zy-btn zy-btn-danger" data-close-modal data-open-modal="mResult" data-i18n="btn.confirmSubmit">确认提交</button></div>
   </div>
 </div>
 
@@ -120,9 +120,9 @@
       <div style="font-size: 13px; color: var(--zy-fg-mute);">错题（5）已加入错题本，建议在「我的 → 错题本」集中练习。</div>
     </div>
     <div class="zy-modal-foot">
-      <button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn/wrong">查看错题本</button>
-      <button class="zy-btn zy-btn-ghost" data-close-modal data-toast="详细解析（含每题答案）">查看解析</button>
-      <button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn">返回学习</button>
+      <button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn/wrong" data-i18n="btn.viewWrong">查看错题本</button>
+      <button class="zy-btn zy-btn-ghost" data-close-modal data-toast="详细解析（含每题答案）" data-i18n="btn.viewAnalysis">查看解析</button>
+      <button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn" data-i18n="btn.backLearn">返回学习</button>
     </div>
   </div>
 </div>
@@ -148,7 +148,7 @@ function exPick(el){ el.parentNode.querySelectorAll('.qz-opt').forEach(function(
         <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="id" /> Bahasa Indonesia</label>
       </div>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal>关闭</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal data-i18n="btn.close">关闭</button></div>
   </div>
 </div>
 </body></html>

@@ -137,13 +137,13 @@
     <div class="zy-drawer-head"><div class="zy-drawer-title">⚙ 高级筛选</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
       <div class="zy-field"><label class="zy-label">主题</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> EC</label><label><input type="checkbox" /> FC</label><label><input type="checkbox" checked /> HSK</label><label><input type="checkbox" /> DL</label><label><input type="checkbox" checked /> SH</label></div></div>
-      <div class="zy-field"><label class="zy-label">HSK 等级</label><select class="zy-select"><option>全部</option><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option></select></div>
-      <div class="zy-field"><label class="zy-label">状态</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> 已审</label><label><input type="checkbox" /> 待审</label><label><input type="checkbox" /> 草稿</label><label><input type="checkbox" /> 归档</label></div></div>
-      <div class="zy-field"><label class="zy-label">类型</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> word</label><label><input type="checkbox" /> phrase</label><label><input type="checkbox" /> sentence</label><label><input type="checkbox" /> grammar</label></div></div>
-      <div class="zy-field"><label class="zy-label">题型（仅题目搜索）</label><select class="zy-select"><option>全部</option><option>listen_pick</option><option>cloze</option></select></div>
+      <div class="zy-field"><label class="zy-label">HSK 等级</label><select class="zy-select"><option data-i18n="common.all">全部</option><option>HSK 1</option><option>HSK 2</option><option>HSK 3</option></select></div>
+      <div class="zy-field"><label class="zy-label" data-i18n="common.status">状态</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> 已审</label><label><input type="checkbox" /> 待审</label><label><input type="checkbox" /> 草稿</label><label><input type="checkbox" /> 归档</label></div></div>
+      <div class="zy-field"><label class="zy-label" data-i18n="common.type">类型</label><div class="zy-row" style="flex-wrap: wrap; gap: 8px;"><label><input type="checkbox" checked /> word</label><label><input type="checkbox" /> phrase</label><label><input type="checkbox" /> sentence</label><label><input type="checkbox" /> grammar</label></div></div>
+      <div class="zy-field"><label class="zy-label">题型（仅题目搜索）</label><select class="zy-select"><option data-i18n="common.all">全部</option><option>listen_pick</option><option>cloze</option></select></div>
       <div class="zy-field"><label class="zy-label">更新时间</label><select class="zy-select"><option>不限</option><option>最近 7 天</option><option>最近 30 天</option></select></div>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-ghost" data-toast="已重置">重置</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="筛选已应用，更新结果" data-toast-type="success">应用</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-ghost" data-toast="已重置">重置</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="筛选已应用，更新结果" data-toast-type="success">应用</button></div>
   </aside>
 </div>
 

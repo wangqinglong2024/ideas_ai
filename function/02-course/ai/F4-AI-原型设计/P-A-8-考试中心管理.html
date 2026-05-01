@@ -25,14 +25,14 @@
 <div class="zy-container">
   <div class="zy-bread">
     <span data-nav="/admin/course">课程</span><span class="sep">›</span>
-    <span class="cur" id="bcRoot">考试中心</span>
+    <span class="cur" id="bcRoot" data-i18n="nav.exams">考试中心</span>
     <span class="sep" id="bcSep1" style="display:none;">›</span><span id="bcTheme" style="display:none;"></span>
     <span class="sep" id="bcSep2" style="display:none;">›</span><span id="bcStage" style="display:none;"></span>
     <span class="sep" id="bcSep3" style="display:none;">›</span><span id="bcChap" style="display:none;"></span>
   </div>
 
   <div class="zy-row" style="justify-content: space-between; margin-bottom: 12px;">
-    <div><h1 class="zy-page-title">📊 考试中心管理</h1><p class="zy-page-sub">按主题 → 阶段 → 章 逐级配置考试 · 题目可在多层级共享抽取</p></div>
+    <div><h1 class="zy-page-title">📊 考试中心管理</h1><p class="zy-page-sub">主题 → 阶段（阶段考）→ 章（章测）逐级配置；题目从绑定范围内「抽取」生成，可与节末小测共池。</p></div>
   </div>
 
   <!-- Level 1: 主题 -->
@@ -55,10 +55,10 @@
       </div>
       <div class="zy-card zy-level-card" data-drill-stage="HSK" data-name="HSK 应试">
         <div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
-          <div><div class="zy-level-card-title">🎓 HSK 应试</div><div class="zy-helper">6 阶段 · 30 章 · 180 节</div></div>
+          <div><div class="zy-level-card-title">🎓 HSK 应试</div><div class="zy-helper">6 阶段（HSK 1..6）· 30 章 · 180 节</div></div>
           <span class="zy-tag zy-tag-success">已发布</span>
         </div>
-        <div class="zy-helper" style="margin-top:6px;">含 HSK 模考 ×6（仅本主题可见）</div>
+        <div class="zy-helper" style="margin-top:6px;">HSK 主题下的「阶段考」即 HSK 1..6 模考（不独立抽题）。</div>
       </div>
       <div class="zy-card zy-level-card" data-drill-stage="DL" data-name="日常">
         <div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
@@ -122,30 +122,40 @@
         <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="EC · Ujian Tahap 1" /></div>
       </div>
       <div class="zy-grid cols-md-2">
-        <div class="zy-field"><label class="zy-label zy-required">题量</label><input class="zy-input" type="number" value="40" /></div>
+        <div class="zy-field"><label class="zy-label zy-required" data-i18n="common.qty">题量</label><input class="zy-input" type="number" value="40" id="seQty" /></div>
         <div class="zy-field"><label class="zy-label zy-required">时长（分钟）</label><input class="zy-input" type="number" value="60" /></div>
         <div class="zy-field"><label class="zy-label">及格分（%）</label><input class="zy-input" type="number" value="60" /></div>
         <div class="zy-field"><label class="zy-label">是否必考</label><select class="zy-select"><option selected>必考（解锁下一阶段）</option><option>选考</option></select></div>
       </div>
-      <div class="zy-field"><label class="zy-label">题型分布（自动按题型平衡）</label>
+      <div class="zy-field"><label class="zy-label">抽取范围</label>
         <div class="zy-row" style="flex-wrap:wrap;gap:8px;">
-          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 听音选词</label>
-          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 选声调</label>
-          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 完形填空</label>
-          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 配对</label>
-          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 排序</label>
-          <label class="zy-row"><input type="checkbox" class="zy-check" /> 中译外</label>
-          <label class="zy-row"><input type="checkbox" class="zy-check" /> 阅读选择</label>
-          <label class="zy-row"><input type="checkbox" class="zy-check" /> 跟读</label>
-          <label class="zy-row"><input type="checkbox" class="zy-check" /> 听写</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 本阶段所有章下的节</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" /> 含本阶段所引用的 SH 共享题</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" /> 允许跨阶段（已学过的上一阶段）</label>
+        </div>
+        <div class="zy-helper">与节末小测/章测共池，仅抽选勾选了「可抽层级=阶段考」的题目。</div>
+      </div>
+      <div class="zy-field"><label class="zy-label">题型分布（权重 %，合计 100）</label>
+        <div class="zy-grid cols-md-3" style="gap:8px;">
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.listen_pick">听音选词</label><input class="zy-input" type="number" value="20" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.tone_pick">选声调</label><input class="zy-input" type="number" value="10" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.cloze">完形填空</label><input class="zy-input" type="number" value="15" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.match">配对</label><input class="zy-input" type="number" value="10" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.order">排序</label><input class="zy-input" type="number" value="10" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.trans_zh_en">中译外</label><input class="zy-input" type="number" value="10" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.read_choice">阅读选择</label><input class="zy-input" type="number" value="10" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.speak_repeat">跟读</label><input class="zy-input" type="number" value="5" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.write_dict">听写</label><input class="zy-input" type="number" value="10" style="width:64px;" /></div>
         </div>
       </div>
-      <div class="zy-field"><label class="zy-label">抽取范围</label>
-        <select class="zy-select"><option selected>本阶段所有章/节的题目</option><option>跨阶段允许（含已学过的）</option></select>
-        <div class="zy-helper">题目允许同时被节末小测/章测/阶段考/HSK 模考共池抽取，不再单独维护题库。</div>
+      <div class="zy-divider"></div>
+      <div class="zy-row" style="justify-content:space-between;align-items:center;">
+        <strong>试抽预览</strong>
+        <button class="zy-btn zy-btn-sm zy-btn-ghost" onclick="document.getElementById('seDraw').textContent='✓ 已从抽取池抽取 '+document.getElementById('seQty').value+' 题（示意：听音选词 8 / 选声调 4 / 完形填空 6 / 配对 4 / 排序 4 / 中译外 4 / 阅读选择 4 / 跟读 2 / 听写 4）。';return false;">🎲 试抽一份</button>
       </div>
+      <p class="zy-helper" id="seDraw" style="margin-top:8px;">点击「试抽一份」生成一套预览（不保存），验证抽题池是否足够。</p>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="阶段考已保存" data-toast-type="success">保存</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="阶段考已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
   </aside>
 </div>
 
@@ -163,14 +173,35 @@
         <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="Bab 1 · Tes" /></div>
       </div>
       <div class="zy-grid cols-md-2">
-        <div class="zy-field"><label class="zy-label zy-required">题量</label><input class="zy-input" type="number" value="20" /></div>
+        <div class="zy-field"><label class="zy-label zy-required" data-i18n="common.qty">题量</label><input class="zy-input" type="number" value="20" id="chQty" /></div>
         <div class="zy-field"><label class="zy-label zy-required">时长（分钟）</label><input class="zy-input" type="number" value="25" /></div>
         <div class="zy-field"><label class="zy-label">及格分（%）</label><input class="zy-input" type="number" value="60" /></div>
         <div class="zy-field"><label class="zy-label">解锁条件</label><select class="zy-select"><option selected>本章所有节完成</option><option>无</option></select></div>
       </div>
-      <p class="zy-helper">题目从「本章下属节关联的题目」中抽取，与节末小测、阶段考共池。</p>
+      <div class="zy-field"><label class="zy-label">抽取范围</label>
+        <div class="zy-row" style="flex-wrap:wrap;gap:8px;">
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 本章下属节关联的题目</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" /> 含 SH 共享题库</label>
+        </div>
+      </div>
+      <div class="zy-field"><label class="zy-label">题型分布（权重 %）</label>
+        <div class="zy-grid cols-md-3" style="gap:8px;">
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.listen_pick">听音选词</label><input class="zy-input" type="number" value="30" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.tone_pick">选声调</label><input class="zy-input" type="number" value="15" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.cloze">完形填空</label><input class="zy-input" type="number" value="20" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.match">配对</label><input class="zy-input" type="number" value="15" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.trans_zh_en">中译外</label><input class="zy-input" type="number" value="10" style="width:64px;" /></div>
+          <div class="zy-row"><label style="flex:1;" data-i18n="qt.write_dict">听写</label><input class="zy-input" type="number" value="10" style="width:64px;" /></div>
+        </div>
+      </div>
+      <div class="zy-divider"></div>
+      <div class="zy-row" style="justify-content:space-between;align-items:center;">
+        <strong>试抽预览</strong>
+        <button class="zy-btn zy-btn-sm zy-btn-ghost" onclick="document.getElementById('chDraw').textContent='✓ 已从抽取池抽取 '+document.getElementById('chQty').value+' 题（示意：听音选词 6 / 选声调 3 / 完形填空 4 / 配对 3 / 中译外 2 / 听写 2）。';return false;">🎲 试抽一份</button>
+      </div>
+      <p class="zy-helper" id="chDraw" style="margin-top:8px;">题目从「本章下属节关联的题目」中抽取，与节末小测、阶段考共池。</p>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="章测已保存" data-toast-type="success">保存</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="章测已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
   </aside>
 </div>
 

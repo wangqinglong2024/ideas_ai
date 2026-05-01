@@ -26,7 +26,7 @@
 </header>
 
 <div class="zy-container">
-  <div class="zy-bread"><span data-nav="/learn/me">我的</span><span class="sep">›</span><span class="cur">考试中心</span></div>
+  <div class="zy-bread"><span data-nav="/learn/me" data-i18n="nav.me">我的</span><span class="sep">›</span><span class="cur" data-i18n="nav.exams">考试中心</span></div>
 
   <h1 class="zy-page-title">📝 考试中心</h1>
   <p class="zy-page-sub">先选主题 → 进入后选择章测 / 阶段考；HSK 仅在「HSK 主题」内提供模考。通过线 80 · 章测可重考 ≤ 3 次</p>
@@ -56,7 +56,7 @@
       <div class="zy-row" style="margin-top: 12px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mHistory">历史 (2)</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mStart">重考 (剩 1)</button></div>
     </div>
     <div class="zy-card">
-      <div style="display:flex; gap:8px; margin-bottom:8px;"><span class="zy-tag zy-tag-warn">未通过</span><span class="zy-tag">EC 1.2</span></div>
+      <div style="display:flex; gap:8px; margin-bottom:8px;"><span class="zy-tag zy-tag-warn" data-i18n="common.notPassed">未通过</span><span class="zy-tag">EC 1.2</span></div>
       <div style="font-size: 16px; font-weight: 600;">第 2 章 章测 · 寒暄</div>
       <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 4px;">10 题 · 15 分钟 · 最高 76 分</div>
       <div class="zy-row" style="margin-top: 12px;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mHistory">历史 (1)</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-open-modal="mStart">重考 (剩 2)</button></div>
@@ -65,7 +65,7 @@
       <div style="display:flex; gap:8px; margin-bottom:8px;"><span class="zy-tag zy-tag-info">可参加</span><span class="zy-tag">EC 1.3</span></div>
       <div style="font-size: 16px; font-weight: 600;">第 3 章 章测 · 见面与问候</div>
       <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 4px;">10 题 · 15 分钟 · 完成 1.3.6 后开放</div>
-      <div class="zy-row" style="margin-top: 12px;"><button class="zy-btn zy-btn-sm zy-btn-primary" data-open-modal="mStart">开始考试</button></div>
+      <div class="zy-row" style="margin-top: 12px;"><button class="zy-btn zy-btn-sm zy-btn-primary" data-open-modal="mStart" data-i18n="btn.startExam">开始考试</button></div>
     </div>
     <div class="zy-card" style="opacity: 0.6;">
       <div style="display:flex; gap:8px; margin-bottom:8px;"><span class="zy-tag">🔒 锁定</span></div>
@@ -80,7 +80,7 @@
       <div style="display:flex; gap:8px; margin-bottom:8px;"><span class="zy-tag zy-tag-info">可参加</span><span class="zy-tag">EC Stage 1</span></div>
       <div style="font-size: 16px; font-weight: 600;">Stage 1 阶段考 · 入门</div>
       <div style="font-size: 13px; color: var(--zy-fg-mute); margin-top: 4px;">30 题 · 40 分钟 · 通过后解锁 Stage 2</div>
-      <div class="zy-row" style="margin-top: 12px;"><button class="zy-btn zy-btn-sm zy-btn-primary" data-open-modal="mStart">开始考试</button></div>
+      <div class="zy-row" style="margin-top: 12px;"><button class="zy-btn zy-btn-sm zy-btn-primary" data-open-modal="mStart" data-i18n="btn.startExam">开始考试</button></div>
     </div>
     <div class="zy-card" style="opacity: 0.6;">
       <div style="display:flex; gap:8px; margin-bottom:8px;"><span class="zy-tag">🔒 锁定</span></div>
@@ -114,7 +114,7 @@
 <!-- 开始确认 -->
 <div class="zy-modal-mask" id="mStart">
   <div class="zy-modal size-md">
-    <div class="zy-modal-head"><div class="zy-modal-title">开始考试</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-head"><div class="zy-modal-title" data-i18n="btn.startExam">开始考试</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <ul style="margin:0; padding-left: 20px; line-height: 1.8;">
         <li>本次考试 <strong>10 题 / 15 分钟</strong>，倒计时一旦开始不可暂停。</li>
@@ -122,7 +122,7 @@
         <li>断网会自动保存草稿，恢复后可继续。</li>
       </ul>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/exams/atmp_xxx">开始（POST /exams/start）</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/exams/atmp_xxx">开始（POST /exams/start）</button></div>
   </div>
 </div>
 
@@ -131,14 +131,14 @@
     <div class="zy-modal-head"><div class="zy-modal-title">考试历史</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <table class="zy-table">
-        <thead><tr><th>开始时间</th><th>得分</th><th>耗时</th><th>状态</th></tr></thead>
+        <thead><tr><th>开始时间</th><th data-i18n="common.score">得分</th><th>耗时</th><th data-i18n="common.status">状态</th></tr></thead>
         <tbody>
           <tr><td>2025-11-20 10:31</td><td><strong>92</strong></td><td>11:24</td><td><span class="zy-tag zy-tag-success">通过</span></td></tr>
           <tr><td>2025-11-15 09:02</td><td>74</td><td>14:08</td><td><span class="zy-tag zy-tag-warn">未过</span></td></tr>
         </tbody>
       </table>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal>关闭</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal data-i18n="btn.close">关闭</button></div>
   </div>
 </div>
 
@@ -164,7 +164,7 @@
         <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="id" /> Bahasa Indonesia</label>
       </div>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal>关闭</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal data-i18n="btn.close">关闭</button></div>
   </div>
 </div>
 <script>

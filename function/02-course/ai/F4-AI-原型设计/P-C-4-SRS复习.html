@@ -26,7 +26,7 @@
 </header>
 
 <div class="zy-container" style="max-width: 720px;">
-  <div class="zy-bread"><span data-nav="/learn/me">我的</span><span class="sep">›</span><span class="cur">SRS 复习</span></div>
+  <div class="zy-bread"><span data-nav="/learn/me" data-i18n="nav.me">我的</span><span class="sep">›</span><span class="cur" data-i18n="nav.srs">SRS 复习</span></div>
 
   <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 20px;">
     <div>
@@ -38,7 +38,7 @@
   <div class="zy-progress" style="margin-bottom: 24px;"><i style="width: 15%;"></i></div>
 
   <div class="zy-card" style="background: var(--zy-bg);">
-    <div class="zy-tag-row" style="margin-bottom: 8px;"><span class="zy-tag zy-tag-info">完形填空</span><span class="zy-tag">第&nbsp;5&nbsp;/&nbsp;32</span><span class="zy-tag">盒&nbsp;2&nbsp;→&nbsp;3</span></div>
+    <div class="zy-tag-row" style="margin-bottom: 8px;"><span class="zy-tag zy-tag-info" data-i18n="qt.cloze">完形填空</span><span class="zy-tag">第&nbsp;5&nbsp;/&nbsp;32</span><span class="zy-tag">盒&nbsp;2&nbsp;→&nbsp;3</span></div>
     <div class="qz-stem">请补全句子：____ 好，老板！</div>
     <div class="qz-options">
       <div class="qz-opt" onclick="srsPick(this,false)"><span class="key">A</span>晚上</div>
@@ -71,7 +71,7 @@
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">暂停 SRS？</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">已答记录将保存，下次进入继续未完成的 27 题。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>继续</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/me">返回我的</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.continue">继续</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/me">返回我的</button></div>
   </div>
 </div>
 
@@ -87,7 +87,7 @@
       <div class="zy-divider"></div>
       <div style="font-size: 13px; color: var(--zy-fg-mute);">明日预计 <strong>18</strong> 题待复习；4 题答错已加入错题本。</div>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn">返回学习</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/wrong">查看错题本</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-nav="/learn" data-i18n="btn.backLearn">返回学习</button><button class="zy-btn zy-btn-primary" data-close-modal data-nav="/learn/wrong" data-i18n="btn.viewWrong">查看错题本</button></div>
   </div>
 </div>
 
@@ -108,7 +108,7 @@ function srsPick(el,ok){ el.parentNode.querySelectorAll('.qz-opt').forEach(funct
         <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="id" /> Bahasa Indonesia</label>
       </div>
     </div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal>关闭</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal data-i18n="btn.close">关闭</button></div>
   </div>
 </div>
 </body></html>

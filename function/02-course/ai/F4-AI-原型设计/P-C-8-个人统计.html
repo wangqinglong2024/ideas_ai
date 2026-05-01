@@ -38,7 +38,7 @@
     <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">已掌握 KP</div><div style="font-size: 28px; font-weight: 700;">186</div><div style="font-size: 12px; color: var(--success);">+12 本周</div></div>
     <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">完成节</div><div style="font-size: 28px; font-weight: 700;">26 <span style="font-size: 14px; color: var(--zy-fg-mute);">/ 156</span></div><div style="font-size: 12px;">进度 17%</div></div>
     <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">连续打卡</div><div style="font-size: 28px; font-weight: 700;">7 天 🔥</div><div style="font-size: 12px; color: var(--zy-fg-mute);">最长 14 天</div></div>
-    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">SRS 待复习</div><div style="font-size: 28px; font-weight: 700; color: var(--zy-brand);">12</div><div><button class="zy-btn zy-btn-sm zy-btn-primary" style="margin-top: 4px;" data-nav="/learn/srs">立即复习</button></div></div>
+    <div class="zy-card"><div style="color: var(--zy-fg-mute); font-size: 12px;">SRS 待复习</div><div style="font-size: 28px; font-weight: 700; color: var(--zy-brand);">12</div><div><button class="zy-btn zy-btn-sm zy-btn-primary" style="margin-top: 4px;" data-nav="/learn/srs" data-i18n="me.openSrs">立即复习</button></div></div>
   </div>
 
   <!-- 7 天折线 -->
@@ -78,15 +78,15 @@
   <div class="zy-card">
     <div style="display:flex; align-items:center; justify-content: space-between; margin-bottom: 12px;">
       <strong>📝 最近考试</strong>
-      <button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/learn/exams">全部 →</button>
+      <button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/learn/exams" data-i18n="btn.viewAll">全部 →</button>
     </div>
     <div class="zy-table-wrap">
       <table class="zy-table zy-table-stack">
-        <thead><tr><th>类型</th><th>名称</th><th>得分</th><th>用时</th><th>结果</th><th></th></tr></thead>
+        <thead><tr><th data-i18n="common.type">类型</th><th data-i18n="common.name">名称</th><th data-i18n="common.score">得分</th><th data-i18n="common.duration">用时</th><th data-i18n="common.result">结果</th><th></th></tr></thead>
         <tbody>
-          <tr><td data-label="类型"><span class="zy-tag zy-tag-info">阶段</span></td><td data-label="名称">EC Stage 1 阶段考</td><td data-label="得分">85</td><td data-label="用时">32:14</td><td data-label="结果"><span class="zy-tag zy-tag-success">通过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="查看详情解析">详情</button></td></tr>
-          <tr><td data-label="类型"><span class="zy-tag">章测</span></td><td data-label="名称">EC 1.2 寒暄</td><td data-label="得分">76</td><td data-label="用时">11:32</td><td data-label="结果"><span class="zy-tag zy-tag-warn">未过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost">详情</button></td></tr>
-          <tr><td data-label="类型"><span class="zy-tag zy-tag-brand">HSK</span></td><td data-label="名称">HSK 1 模考</td><td data-label="得分">178/200</td><td data-label="用时">34:00</td><td data-label="结果"><span class="zy-tag zy-tag-success">通过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost">详情</button></td></tr>
+          <tr><td data-label="类型"><span class="zy-tag zy-tag-info">阶段</span></td><td data-label="名称">EC Stage 1 阶段考</td><td data-label="得分">85</td><td data-label="用时">32:14</td><td data-label="结果"><span class="zy-tag zy-tag-success">通过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="查看详情解析" data-i18n="btn.detail">详情</button></td></tr>
+          <tr><td data-label="类型"><span class="zy-tag" data-i18n="exam.chapter">章测</span></td><td data-label="名称">EC 1.2 寒暄</td><td data-label="得分">76</td><td data-label="用时">11:32</td><td data-label="结果"><span class="zy-tag zy-tag-warn">未过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button></td></tr>
+          <tr><td data-label="类型"><span class="zy-tag zy-tag-brand">HSK</span></td><td data-label="名称">HSK 1 模考</td><td data-label="得分">178/200</td><td data-label="用时">34:00</td><td data-label="结果"><span class="zy-tag zy-tag-success">通过</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button></td></tr>
         </tbody>
       </table>
     </div>
@@ -127,7 +127,7 @@
       <div class="zy-divider"></div>
       <button class="zy-btn zy-btn-danger" style="width: 100%;" data-open-modal="mLogout">↪ 退出登录</button>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="设置已保存" data-toast-type="success">保存</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="设置已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
   </aside>
 </div>
 
@@ -135,7 +135,7 @@
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">退出登录？</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">退出后需重新登录才能访问学习数据。</div>
-    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="已退出登录" data-toast-type="info">退出</button></div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="已退出登录" data-toast-type="info" data-i18n="btn.exit">退出</button></div>
   </div>
 </div>
 
