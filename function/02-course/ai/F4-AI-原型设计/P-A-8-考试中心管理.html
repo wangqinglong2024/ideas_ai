@@ -32,7 +32,7 @@
   </div>
 
   <div class="zy-row" style="justify-content: space-between; margin-bottom: 12px;">
-    <div><h1 class="zy-page-title">📊 考试中心管理</h1><p class="zy-page-sub">主题 → 阶段（阶段考）→ 章（章测）→ 节（节测）逐级配置；所有测试内容统一在本页编辑，题目从绑定范围内抽取。</p></div>
+    <div><h1 class="zy-page-title">📊 考试中心管理</h1><p class="zy-page-sub">主题 → 阶段（阶段考）→ 章（章测）→ 节（节测）逐级配置；保存只是待发布配置，发布后才会在应用端可见。</p></div>
   </div>
 
   <!-- Level 1: 主题 -->
@@ -133,7 +133,7 @@
           <label class="zy-row"><input type="checkbox" class="zy-check" /> 含本阶段所引用的 SH 共享题</label>
           <label class="zy-row"><input type="checkbox" class="zy-check" /> 允许跨阶段（已学过的上一阶段）</label>
         </div>
-        <div class="zy-helper">与节末小测/章测共池，仅抽选勾选了「可抽层级=阶段考」的题目。</div>
+        <div class="zy-helper">与节末小测/章测共池，仅抽选勾选了「可抽层级=阶段考」且已发布的题目；下架题目会被排除，满分 100 按有效题数动态均分。</div>
       </div>
       <div class="zy-field"><label class="zy-label">题型分布（权重 %，合计 100）</label>
         <div class="zy-grid cols-md-3" style="gap:8px;">
@@ -167,7 +167,7 @@
         <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 10 题 · 听写 · 听音输入「优惠券」</div>
       </div>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="阶段考已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-ghost" data-close-modal data-toast="阶段考已保存为待发布配置" data-toast-type="info" data-i18n="btn.save">保存</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="阶段考已下架" data-toast-type="info">下架</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="阶段考已发布" data-toast-type="success">发布</button></div>
   </aside>
 </div>
 
@@ -195,6 +195,7 @@
           <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 本章下属节关联的题目</label>
           <label class="zy-row"><input type="checkbox" class="zy-check" /> 含 SH 共享题库</label>
         </div>
+        <div class="zy-helper">仅抽取已发布题目；下架题目不参与本章测，满分 100 按有效题数动态均分。</div>
       </div>
       <div class="zy-field"><label class="zy-label">题型分布（权重 %）</label>
         <div class="zy-grid cols-md-3" style="gap:8px;">
@@ -223,7 +224,7 @@
         <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 8 题 · 完形填空 · "明天____" → 见 ✓</div>
       </div>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="章测已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-ghost" data-close-modal data-toast="章测已保存为待发布配置" data-toast-type="info" data-i18n="btn.save">保存</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="章测已下架" data-toast-type="info">下架</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="章测已发布" data-toast-type="success">发布</button></div>
   </aside>
 </div>
 
@@ -253,7 +254,7 @@
           <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 本章前序节复习题</label>
           <label class="zy-row"><input type="checkbox" class="zy-check" /> SH 共享题库</label>
         </div>
-        <div class="zy-helper">仅抽选勾选了「可抽层级=节末小测」的题目；试抽只做预览，不影响学员答卷。</div>
+        <div class="zy-helper">仅抽选勾选了「可抽层级=节末小测」且已发布的题目；试抽只做预览，不影响学员答卷。下架题目会被排除，满分 100 按有效题数动态均分。</div>
       </div>
       <div class="zy-field"><label class="zy-label">题型分布（权重 %）</label>
         <div class="zy-grid cols-md-3" style="gap:8px;">
@@ -279,7 +280,7 @@
         <div class="zy-card" style="padding: 12px; background: var(--zy-bg);">第 6 题 · 排序 · "早 / 上 / 好" → 「早上好」</div>
       </div>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="节测已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-ghost" data-close-modal data-toast="节测已保存为待发布配置" data-toast-type="info" data-i18n="btn.save">保存</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="节测已下架" data-toast-type="info">下架</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="节测已发布" data-toast-type="success">发布</button></div>
   </aside>
 </div>
 
@@ -288,10 +289,10 @@
 (function(){
   // 简化的 mock 数据
   const stages = {
-    EC: [{id:'EC-S1', name:'阶段一 · 基础', cn:3, hasExam:true},{id:'EC-S2', name:'阶段二 · 进阶', cn:5, hasExam:true},{id:'EC-S3', name:'阶段三 · 高阶', cn:4, hasExam:false}],
-    FC: [{id:'FC-S1', name:'阶段一 · 入厂常用', cn:4, hasExam:true},{id:'FC-S2', name:'阶段二 · 安全规范', cn:4, hasExam:true},{id:'FC-S3', name:'阶段三 · 设备与流程', cn:3, hasExam:false}],
-    HSK: [{id:'HSK-1', name:'HSK 1', cn:5, hasExam:true},{id:'HSK-2', name:'HSK 2', cn:5, hasExam:true},{id:'HSK-3', name:'HSK 3', cn:5, hasExam:true},{id:'HSK-4', name:'HSK 4', cn:5, hasExam:true},{id:'HSK-5', name:'HSK 5', cn:5, hasExam:true},{id:'HSK-6', name:'HSK 6', cn:5, hasExam:true}],
-    DL: [{id:'DL-S1', name:'阶段一 · 日常对话', cn:4, hasExam:true},{id:'DL-S2', name:'阶段二 · 出行/购物', cn:4, hasExam:false}],
+    EC: [{id:'EC-S1', name:'阶段一 · 基础', cn:3, hasExam:true, examPublished:true},{id:'EC-S2', name:'阶段二 · 进阶', cn:5, hasExam:true, examPublished:false},{id:'EC-S3', name:'阶段三 · 高阶', cn:4, hasExam:false, examPublished:false}],
+    FC: [{id:'FC-S1', name:'阶段一 · 入厂常用', cn:4, hasExam:true, examPublished:true},{id:'FC-S2', name:'阶段二 · 安全规范', cn:4, hasExam:true, examPublished:false},{id:'FC-S3', name:'阶段三 · 设备与流程', cn:3, hasExam:false, examPublished:false}],
+    HSK: [{id:'HSK-1', name:'HSK 1', cn:5, hasExam:true, examPublished:true},{id:'HSK-2', name:'HSK 2', cn:5, hasExam:true, examPublished:true},{id:'HSK-3', name:'HSK 3', cn:5, hasExam:true, examPublished:false},{id:'HSK-4', name:'HSK 4', cn:5, hasExam:true, examPublished:false},{id:'HSK-5', name:'HSK 5', cn:5, hasExam:true, examPublished:false},{id:'HSK-6', name:'HSK 6', cn:5, hasExam:true, examPublished:false}],
+    DL: [{id:'DL-S1', name:'阶段一 · 日常对话', cn:4, hasExam:true, examPublished:false},{id:'DL-S2', name:'阶段二 · 出行/购物', cn:4, hasExam:false, examPublished:false}],
     SH: []
   };
   const themeName = {EC:'电商 EC', FC:'工厂 FC', HSK:'HSK 应试', DL:'日常 DL', SH:'共享 SH'};
@@ -323,10 +324,11 @@
         const c = document.createElement('div');
         c.className = 'zy-card zy-level-card';
         c.innerHTML = `<div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
-          <div><div class="zy-level-card-title">${s.name}</div><div class="zy-helper">${s.cn} 章 · ${s.hasExam?'<span class="zy-tag zy-tag-success">已配置阶段考</span>':'<span class="zy-tag">未配置</span>'}</div></div>
+          <div><div class="zy-level-card-title">${s.name}</div><div class="zy-helper">${s.cn} 章 · ${s.hasExam?(s.examPublished?'<span class="zy-tag zy-tag-success">阶段考已发布</span>':'<span class="zy-tag zy-tag-warn">阶段考待发布</span>'):'<span class="zy-tag">未配置</span>'}</div></div>
         </div>
         <div class="zy-row" style="margin-top:10px;gap:8px;">
           <button class="zy-btn zy-btn-sm zy-btn-primary" data-stop>${s.hasExam?'编辑阶段考':'➕ 配置阶段考'}</button>
+          ${s.hasExam?`<button class="zy-btn zy-btn-sm ${s.examPublished?'zy-btn-danger':'zy-btn-primary'}" data-toast="${s.examPublished?'阶段考已下架':'阶段考已发布'}" data-toast-type="${s.examPublished?'info':'success'}">${s.examPublished?'下架阶段考':'发布阶段考'}</button>`:''}
           <button class="zy-btn zy-btn-sm zy-btn-ghost" data-drill="chap" data-stage="${s.id}" data-name="${s.name}">查看章 →</button>
         </div>`;
         list.appendChild(c);
@@ -342,11 +344,13 @@
           const cc = document.createElement('div');
           cc.className = 'zy-card zy-level-card';
           const has = i<=2;
+          const published = i===1;
           cc.innerHTML = `<div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
-            <div><div class="zy-level-card-title">第 ${i} 章 · 示例章名</div><div class="zy-helper">5 节 · ${has?'<span class="zy-tag zy-tag-success">已配置章测</span>':'<span class="zy-tag">未配置</span>'}</div></div>
+            <div><div class="zy-level-card-title">第 ${i} 章 · 示例章名</div><div class="zy-helper">5 节 · ${has?(published?'<span class="zy-tag zy-tag-success">章测已发布</span>':'<span class="zy-tag zy-tag-warn">章测待发布</span>'):'<span class="zy-tag">未配置</span>'}</div></div>
           </div>
           <div class="zy-row" style="margin-top:10px;gap:8px;">
             <button class="zy-btn zy-btn-sm zy-btn-primary" data-stop>${has?'编辑章测':'➕ 配置章测'}</button>
+            ${has?`<button class="zy-btn zy-btn-sm ${published?'zy-btn-danger':'zy-btn-primary'}" data-toast="${published?'章测已下架':'章测已发布'}" data-toast-type="${published?'info':'success'}">${published?'下架章测':'发布章测'}</button>`:''}
             <button class="zy-btn zy-btn-sm zy-btn-ghost" data-drill="lesson" data-name="第 ${i} 章">查看节 →</button>
           </div>`;
           cl.appendChild(cc);
@@ -361,12 +365,15 @@
           for(let j=1;j<=5;j++){
             const lc = document.createElement('div');
             lc.className = 'zy-card zy-level-card';
+            const configured = j<=3;
+            const published = j<=2;
             lc.innerHTML = `<div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
-              <div><div class="zy-level-card-title">${j}. 示例节名</div><div class="zy-helper">已绑定 8 个 KP · ${j<=3?'<span class="zy-tag zy-tag-success">已配置节测</span>':'<span class="zy-tag">待配置节测</span>'}</div></div>
-              <span class="zy-tag zy-tag-success">已发布</span>
+              <div><div class="zy-level-card-title">${j}. 示例节名</div><div class="zy-helper">已绑定 8 个 KP · ${configured?(published?'<span class="zy-tag zy-tag-success">节测已发布</span>':'<span class="zy-tag zy-tag-warn">节测待发布</span>'):'<span class="zy-tag">待配置节测</span>'}</div></div>
+              <span class="zy-tag zy-tag-success">节已发布</span>
             </div>
             <div class="zy-row" style="margin-top:10px;gap:8px;">
-              <button class="zy-btn zy-btn-sm zy-btn-primary" data-stop>${j<=3?'编辑节测':'➕ 配置节测'}</button>
+              <button class="zy-btn zy-btn-sm zy-btn-primary" data-stop>${configured?'编辑节测':'➕ 配置节测'}</button>
+              ${configured?`<button class="zy-btn zy-btn-sm ${published?'zy-btn-danger':'zy-btn-primary'}" data-toast="${published?'节测已下架':'节测已发布'}" data-toast-type="${published?'info':'success'}">${published?'下架节测':'发布节测'}</button>`:''}
             </div>`;
             ll.appendChild(lc);
           }

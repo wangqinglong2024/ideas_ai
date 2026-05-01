@@ -2,7 +2,7 @@
 <html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>P-A-2 主题-阶段-章 · F4 原型</title>
+<title>P-A-2 主题-阶段-章-节 · F4 原型</title>
 <link rel="stylesheet" href="_assets/styles.css" />
 </head><body>
 <div class="proto-bar">
@@ -29,7 +29,7 @@
   <div class="zy-bread"><span data-nav="/admin/course">课程目录</span><span class="sep">›</span><span class="cur">🛒 EC · 电商主题</span></div>
 
   <div class="zy-row" style="justify-content: space-between; margin-bottom: 16px;">
-    <div><h1 class="zy-page-title">🛒 EC · 电商主题</h1><p class="zy-page-sub">3 阶段 / 18 章 / 108 节 · 1,302 KP · 已发布</p></div>
+    <div><h1 class="zy-page-title">🛒 EC · 电商主题</h1><p class="zy-page-sub">3 阶段 / 18 章 / 108 节 · 1,302 KP · 已发布；发布 / 下架均在列表直接操作</p></div>
     <div class="zy-row">
       <button class="zy-btn zy-btn-ghost" data-open-modal="mTrackEdit">⚙ 编辑主题</button>
       <button class="zy-btn zy-btn-primary" data-open-drawer="dNewStage">➕ 新建阶段</button>
@@ -42,6 +42,7 @@
       <div data-collapse="st1Body" style="cursor:pointer; display:flex; align-items:center; gap:8px;"><span class="caret">▼</span><strong>阶段一 · 入门</strong><span class="zy-tag zy-tag-success">已发布</span><span class="zy-tag">6 章</span></div>
       <div class="zy-row">
         <button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mStageEdit" data-i18n="btn.edit">编辑</button>
+        <button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="阶段已下架，学员端不可见" data-toast-type="info">下架阶段</button>
         <button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mReorder">调整顺序</button>
         <button class="zy-btn zy-btn-sm zy-btn-primary" data-open-drawer="dNewChap">➕ 新建章</button>
       </div>
@@ -53,27 +54,47 @@
         <select class="zy-select" style="width: 140px;"><option>全部状态</option><option>已发布</option><option>待发布</option></select>
         <div style="margin-left: auto;" class="zy-row">
           <button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="已勾选 0 项">批量发布</button>
+          <button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="已勾选 0 项">批量下架</button>
           <button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mBulkDel">批量删除</button>
         </div>
       </div>
 
       <div class="zy-table-wrap">
         <table class="zy-table">
-          <thead><tr><th style="width: 40px;"><input type="checkbox" class="zy-check" /></th><th style="width: 60px;">序</th><th>编码</th><th>章名（zh）<span class="zy-helper" style="font-weight:400;">点击编辑可填写 5 语言 zh/en/vi/th/id</span></th><th>节数</th><th data-i18n="common.status">状态</th><th>更新时间</th><th style="width: 200px;" data-i18n="common.action">操作</th></tr></thead>
+          <thead><tr><th style="width: 40px;"><input type="checkbox" class="zy-check" /></th><th style="width: 60px;">序</th><th>编码</th><th>章名（zh）<span class="zy-helper" style="font-weight:400;">点击编辑可填写 5 语言 zh/en/vi/th/id</span></th><th>节数</th><th data-i18n="common.status">状态</th><th>更新时间</th><th style="width: 300px;" data-i18n="common.action">操作</th></tr></thead>
           <tbody>
             <tr><td><input type="checkbox" class="zy-check"/></td><td>1</td><td><code>ec-1-1</code></td><td>自我介绍</td><td>6 / 6</td><td><span class="zy-tag zy-tag-success">已发布</span></td><td>2025-11-12</td>
-              <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/chapters/ec-1-1" data-i18n="btn.detail">详情</button>
+                <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit">查看节</button>
                   <button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit" data-i18n="btn.edit">编辑</button>
+                  <button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="章已下架，章下 6 节默认同步下架" data-toast-type="info">下架</button>
                   <button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDelChap" data-i18n="btn.delete">删除</button></td></tr>
             <tr><td><input type="checkbox" class="zy-check"/></td><td>2</td><td><code>ec-1-2</code></td><td>寒暄</td><td>6 / 6</td><td><span class="zy-tag zy-tag-success">已发布</span></td><td>2025-11-13</td>
-              <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDelChap" data-i18n="btn.delete">删除</button></td></tr>
+              <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit">查看节</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="章已下架，章下 6 节默认同步下架" data-toast-type="info">下架</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDelChap" data-i18n="btn.delete">删除</button></td></tr>
             <tr><td><input type="checkbox" class="zy-check"/></td><td>3</td><td><code>ec-1-3</code></td><td>见面与问候</td><td>4 / 6</td><td><span class="zy-tag zy-tag-warn">待发布</span></td><td>2025-11-22</td>
-              <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDelChap" data-i18n="btn.delete">删除</button></td></tr>
+              <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit">查看节</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="章已发布，章下 6 节默认同步发布" data-toast-type="success">发布</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDelChap" data-i18n="btn.delete">删除</button></td></tr>
             <tr><td><input type="checkbox" class="zy-check"/></td><td>4</td><td><code>ec-1-4</code></td><td>节日礼貌</td><td>0 / 6</td><td><span class="zy-tag zy-tag-warn">待发布</span></td><td>2025-11-24</td>
-              <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-i18n="btn.detail">详情</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDelChap" data-i18n="btn.delete">删除</button></td></tr>
+              <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit">查看节</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mChapEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="章已发布，章下 6 节默认同步发布" data-toast-type="success">发布</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDelChap" data-i18n="btn.delete">删除</button></td></tr>
           </tbody>
         </table>
       </div>
+    </div>
+  </div>
+
+  <div class="zy-card" style="margin-bottom: 16px;">
+    <div class="zy-row" style="justify-content: space-between; margin-bottom: 12px;">
+      <div><h2 class="zy-section-title" style="margin:0;">章 · 1.3 见面与问候 / 节列表</h2><p class="zy-helper" style="margin-top:4px;">编辑章时直接展示本章 6 节；章发布默认发布全部节，章下架默认下架全部节，单个节可再单独调整。</p></div>
+      <button class="zy-btn zy-btn-sm zy-btn-primary" data-open-drawer="dNewLesson">➕ 新建节</button>
+    </div>
+    <div class="zy-table-wrap">
+      <table class="zy-table zy-table-stack">
+        <thead><tr><th style="width:60px;">序</th><th>编码</th><th>节名（zh）</th><th>KP</th><th>题目</th><th data-i18n="common.status">状态</th><th>更新时间</th><th style="width:260px;" data-i18n="common.action">操作</th></tr></thead>
+        <tbody>
+          <tr><td data-label="序">1</td><td data-label="编码"><code>ec-1-3-1</code></td><td data-label="节名">你好</td><td data-label="KP">12</td><td data-label="题目">48</td><td data-label="状态"><span class="zy-tag zy-tag-success">已发布</span></td><td data-label="更新时间">2025-11-20</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/lessons/ec-1-3-1">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="节已下架，学员端不可见" data-toast-type="info">下架</button></td></tr>
+          <tr><td data-label="序">2</td><td data-label="编码"><code>ec-1-3-2</code></td><td data-label="节名">谢谢</td><td data-label="KP">12</td><td data-label="题目">51</td><td data-label="状态"><span class="zy-tag zy-tag-success">已发布</span></td><td data-label="更新时间">2025-11-20</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/lessons/ec-1-3-2">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="节已下架，学员端不可见" data-toast-type="info">下架</button></td></tr>
+          <tr><td data-label="序">3</td><td data-label="编码"><code>ec-1-3-3</code></td><td data-label="节名">再见</td><td data-label="KP">12</td><td data-label="题目">44</td><td data-label="状态"><span class="zy-tag zy-tag-warn">待发布</span></td><td data-label="更新时间">2025-11-21</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/lessons/ec-1-3-3">编辑</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="节已发布，节下 KP 和题目默认同步发布" data-toast-type="success">发布</button></td></tr>
+          <tr><td data-label="序">4</td><td data-label="编码"><code>ec-1-3-4</code></td><td data-label="节名">早上好</td><td data-label="KP">12</td><td data-label="题目">50</td><td data-label="状态"><span class="zy-tag zy-tag-warn">待发布</span></td><td data-label="更新时间">2025-11-22</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/lessons/ec-1-3-4">编辑</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="节已发布，节下 KP 和题目默认同步发布" data-toast-type="success">发布</button></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 
@@ -83,6 +104,7 @@
       <div data-collapse="st2Body" style="cursor:pointer; display:flex; align-items:center; gap:8px;"><span class="caret">▶</span><strong>阶段二 · 进阶</strong><span class="zy-tag zy-tag-warn">待发布</span><span class="zy-tag">6 章</span></div>
       <div class="zy-row">
         <button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mStageEdit" data-i18n="btn.edit">编辑</button>
+        <button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="阶段已发布" data-toast-type="success">发布阶段</button>
         <button class="zy-btn zy-btn-sm zy-btn-primary" data-open-drawer="dNewChap">➕ 新建章</button>
       </div>
     </div>
@@ -93,7 +115,7 @@
   <div class="zy-card">
     <div class="zy-row" style="justify-content: space-between;">
       <div data-collapse="st3Body" style="cursor:pointer; display:flex; align-items:center; gap:8px;"><span class="caret">▶</span><strong>阶段三 · 精通</strong><span class="zy-tag zy-tag-warn">待发布</span><span class="zy-tag">6 章</span></div>
-      <button class="zy-btn zy-btn-sm zy-btn-primary" data-open-drawer="dNewChap">➕ 新建章</button>
+      <div class="zy-row"><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="阶段已发布" data-toast-type="success">发布阶段</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-open-drawer="dNewChap">➕ 新建章</button></div>
     </div>
     <div id="st3Body" style="display:none; margin-top: 12px; color: var(--zy-fg-mute); font-size: 13px;">点击展开 ...</div>
   </div>
@@ -176,7 +198,7 @@
 
 <!-- 编辑章（5 语言：zh/en/vi/th/id） -->
 <div class="zy-modal-mask" id="mChapEdit">
-  <div class="zy-modal size-md">
+  <div class="zy-modal size-lg">
     <div class="zy-modal-head"><div class="zy-modal-title">编辑章 · ec-1-3</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
       <div class="zy-grid cols-md-2">
@@ -187,10 +209,45 @@
         <div class="zy-field"><label class="zy-label">章名（id）</label><input class="zy-input" value="Bertemu &amp; Menyapa" /></div>
       </div>
       <div class="zy-helper" style="margin-top:8px;">⚠ 仅填写 zh 也可保存；应用端会按用户选择的应用 UI 语言优先显示，未填写时 fallback 到 en → zh。对照语言跟随系统 UI（参考 system/web-app china 模块的 pickI18n 逻辑）。</div>
-      <div class="zy-field" style="margin-top:12px;"><label class="zy-label" data-i18n="common.status">状态</label><select class="zy-select"><option>已发布</option><option selected>待发布</option></select></div>
+      <div class="zy-divider"></div>
+      <div class="zy-row" style="justify-content:space-between;margin-bottom:8px;"><strong>本章节列表</strong><button class="zy-btn zy-btn-sm zy-btn-primary" data-open-drawer="dNewLesson">➕ 新建节</button></div>
+      <div class="zy-table-wrap">
+        <table class="zy-table zy-table-stack">
+          <thead><tr><th style="width:50px;">序</th><th>编码</th><th>节名</th><th>KP</th><th data-i18n="common.status">状态</th><th style="width:210px;" data-i18n="common.action">操作</th></tr></thead>
+          <tbody>
+            <tr><td data-label="序">1</td><td data-label="编码"><code>ec-1-3-1</code></td><td data-label="节名">你好</td><td data-label="KP">12</td><td data-label="状态"><span class="zy-tag zy-tag-success">已发布</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/lessons/ec-1-3-1">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="节已下架" data-toast-type="info">下架</button></td></tr>
+            <tr><td data-label="序">2</td><td data-label="编码"><code>ec-1-3-2</code></td><td data-label="节名">谢谢</td><td data-label="KP">12</td><td data-label="状态"><span class="zy-tag zy-tag-success">已发布</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/lessons/ec-1-3-2">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="节已下架" data-toast-type="info">下架</button></td></tr>
+            <tr><td data-label="序">3</td><td data-label="编码"><code>ec-1-3-3</code></td><td data-label="节名">再见</td><td data-label="KP">12</td><td data-label="状态"><span class="zy-tag zy-tag-warn">待发布</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/lessons/ec-1-3-3">编辑</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="节已发布，节下 KP 和题目默认同步发布" data-toast-type="success">发布</button></td></tr>
+            <tr><td data-label="序">4</td><td data-label="编码"><code>ec-1-3-4</code></td><td data-label="节名">早上好</td><td data-label="KP">12</td><td data-label="状态"><span class="zy-tag zy-tag-warn">待发布</span></td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-nav="/admin/course/lessons/ec-1-3-4">编辑</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="节已发布，节下 KP 和题目默认同步发布" data-toast-type="success">发布</button></td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="已保存" data-toast-type="success" data-i18n="btn.save">保存</button></div>
   </div>
+</div>
+
+<!-- 新建节 -->
+<div class="zy-drawer-mask" id="dNewLesson">
+  <aside class="zy-drawer size-md">
+    <div class="zy-drawer-head"><div class="zy-drawer-title">新建节 · ec-1-3</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-drawer-body">
+      <div class="zy-grid cols-md-2">
+        <div class="zy-field"><label class="zy-label zy-required">节编码</label><input class="zy-input" value="ec-1-3-5" /></div>
+        <div class="zy-field"><label class="zy-label zy-required">序号</label><input class="zy-input" type="number" value="5" /></div>
+      </div>
+      <label class="zy-label zy-required" style="display:block;margin:10px 0 6px;">节名（5 语言）</label>
+      <div class="zy-i18n-grid">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" placeholder="如：晚上好" /></div>
+        <div class="zy-field"><label class="zy-label">英文</label><input class="zy-input" placeholder="Good Evening" /></div>
+        <div class="zy-field"><label class="zy-label">越南语</label><input class="zy-input" /></div>
+        <div class="zy-field"><label class="zy-label">泰语</label><input class="zy-input" /></div>
+        <div class="zy-field"><label class="zy-label">印尼语</label><input class="zy-input" /></div>
+      </div>
+      <div class="zy-helper" style="margin-top:8px;">创建后默认待发布。节发布会默认发布节下 KP 和题目，之后仍可单独下架某个 KP 或题目。</div>
+    </div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="节已创建，状态为待发布" data-toast-type="success">创建</button></div>
+  </aside>
 </div>
 
 <!-- D-1 删除章 -->

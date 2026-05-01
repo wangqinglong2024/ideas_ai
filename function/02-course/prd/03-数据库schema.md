@@ -372,7 +372,7 @@ CREATE TABLE admin_audit_log (
 | user_*（progress/answers/srs/exam_attempts） | **用户端** | 管理端 BI 只读统计 |
 | import_batches、content_action_log、admin_* | **管理端** | 管理端自用 |
 
-> 用户端**永远不直接 SELECT 待发布 KP**——通过视图 `v_published_*` 或 API 层 `WHERE is_published=true` 强制过滤。
+> 用户端**永远不直接 SELECT 待发布内容**——通过视图 `v_published_*` 或 API 层强制过滤。目录类必须同时满足 stage / chapter / lesson 均 `is_published=true`；题目必须 `is_published=true` 才可被新测试抽取。
 
 ---
 

@@ -26,7 +26,7 @@
   <div class="zy-bread"><span data-nav="/admin/course">课程</span><span class="sep">›</span><span class="cur">题目</span></div>
 
   <div class="zy-row" style="justify-content: space-between; margin-bottom: 12px;">
-    <div><h1 class="zy-page-title">📝 题目列表</h1><p class="zy-page-sub">14,236 题 · 9 种题型 · payload_hash 自动去重 · 题目可被多个层级同时抽取</p></div>
+    <div><h1 class="zy-page-title">📝 题目列表</h1><p class="zy-page-sub">14,236 题 · 9 种题型 · payload_hash 自动去重 · 题目可被节测、章测、阶段测同时引用</p></div>
     <div class="zy-row">
       <button class="zy-btn zy-btn-ghost" data-toast="导出当前筛选结果（json）">⬇ 导出</button>
       <button class="zy-btn zy-btn-primary" data-open-drawer="dQEdit">➕ 新建题</button>
@@ -42,23 +42,28 @@
       <select class="zy-select" style="width: 130px;"><option>全部状态</option><option>已发布</option><option>待发布</option></select>
       <button class="zy-btn zy-btn-ghost" data-toast="筛选已应用">应用</button>
     </div>
-    <div class="zy-helper" style="margin-top:8px;">ℹ 题目可被节末小测 / 章测 / 阶段考共享抽取（允许重复出现）。HSK 主题下的阶段考即其「6 个等级」模考，不单独抽题。</div>
+    <div class="zy-helper" style="margin-top:8px;">ℹ 题目可被节末小测 / 章测 / 阶段考共享抽取（允许重复出现）。下架题目不再进入抽题池；满分仍为 100，系统按当前已发布题目数动态均分。</div>
+  </div>
+
+  <div class="zy-row" style="margin-bottom: 8px; padding: 8px 12px; background: var(--zy-bg-elev); border-radius: 8px;">
+    <span style="font-size:13px;">题目发布状态直接决定抽题可用性</span>
+    <div class="zy-row-end" style="margin-left:auto;"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="已勾选 0 题">批量发布</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-toast="已勾选 0 题">批量下架</button></div>
   </div>
 
   <div class="zy-table-wrap">
     <table class="zy-table zy-table-stack">
-      <thead><tr><th style="width:40px;"><input type="checkbox" class="zy-check" /></th><th>ID</th><th>题型</th><th>题面摘要</th><th>所属 KP</th><th>主题</th><th>可抽层级</th><th data-i18n="common.status">状态</th><th style="width:160px;" data-i18n="common.action">操作</th></tr></thead>
+      <thead><tr><th style="width:40px;"><input type="checkbox" class="zy-check" /></th><th>ID</th><th>题型</th><th>题面摘要</th><th>所属 KP</th><th>主题</th><th>可抽层级</th><th data-i18n="common.status">状态</th><th style="width:240px;" data-i18n="common.action">操作</th></tr></thead>
       <tbody>
         <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8821</code></td><td data-label="题型"><span class="zy-tag zy-tag-info" data-i18n="qt.listen_pick">听音选词</span></td><td data-label="题面">请选择听到的词：早上 / 晚上 / 中午 / 下午</td><td data-label="KP">kp-zaoshang</td><td data-label="主题">EC</td><td data-label="可抽层级"><span class="zy-tag">节末</span><span class="zy-tag" data-i18n="exam.chapter">章测</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已发布</span></td>
-          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="题目已下架，动态计分已重算" data-toast-type="info">下架</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
         <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8822</code></td><td data-label="题型"><span class="zy-tag" data-i18n="qt.tone_pick">选声调</span></td><td data-label="题面">「早」的声调？1/2/3/4 声</td><td data-label="KP">kp-zaoshang</td><td data-label="主题">EC</td><td data-label="可抽层级"><span class="zy-tag">节末</span><span class="zy-tag" data-i18n="exam.chapter">章测</span><span class="zy-tag" data-i18n="exam.stage">阶段考</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已发布</span></td>
-          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="题目已下架，动态计分已重算" data-toast-type="info">下架</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
         <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8823</code></td><td data-label="题型"><span class="zy-tag" data-i18n="qt.cloze">完形填空</span></td><td data-label="题面">____ 好，老板！（早上）</td><td data-label="KP">kp-zaoshanghao</td><td data-label="主题">EC</td><td data-label="可抽层级"><span class="zy-tag" data-i18n="exam.stage">阶段考</span></td><td data-label="状态"><span class="zy-tag zy-tag-warn">待发布</span></td>
-          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="题目已发布，可被勾选层级抽取" data-toast-type="success">发布</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
         <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8824</code></td><td data-label="题型"><span class="zy-tag" data-i18n="qt.match">配对</span></td><td data-label="题面">中文 ↔ 英文 配对（早上 / 谢谢 / 再见 / 晚上）</td><td data-label="KP">kp-share</td><td data-label="主题">SH</td><td data-label="可抽层级"><span class="zy-tag">节末</span><span class="zy-tag" data-i18n="exam.chapter">章测</span><span class="zy-tag" data-i18n="exam.stage">阶段考</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已发布</span></td>
-          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-toast="题目已下架，动态计分已重算" data-toast-type="info">下架</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
         <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8825</code></td><td data-label="题型"><span class="zy-tag" data-i18n="qt.order">排序</span></td><td data-label="题面">排序：早 / 上 / 好 → 早上好</td><td data-label="KP">kp-zaoshanghao</td><td data-label="主题">HSK</td><td data-label="可抽层级"><span class="zy-tag" data-i18n="exam.stage">阶段考</span></td><td data-label="状态"><span class="zy-tag zy-tag-warn">待发布</span></td>
-          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit" data-i18n="btn.edit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-primary" data-toast="题目已发布，可被勾选层级抽取" data-toast-type="success">发布</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删除</button></td></tr>
       </tbody>
     </table>
   </div>
@@ -119,6 +124,7 @@
         <div class="zy-helper">以 zh 为主词；其他语种为空时运行时 fallback 到 zh。</div></div>
 
       <div class="zy-divider"></div>
+      <div class="zy-helper" style="margin-top:8px;">保存只更新题目内容，不改变学员端可见性；下架后所有引用该题的测试都会按剩余已发布题动态重新均分。</div>
       <div class="zy-row" style="font-size: 12px; color: var(--zy-fg-mute);">
         <span>payload_hash: <code>a3f9...c8e2</code></span>
         <span>最近更新：2025-11-22</span>
@@ -127,7 +133,7 @@
         <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mPreview">预览效果</button>
       </div>
     </div>
-    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="题目已保存" data-toast-type="success" data-i18n="btn.save">保存</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="题目已发布" data-toast-type="success">发布</button></div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal data-i18n="btn.cancel">取消</button><button class="zy-btn zy-btn-ghost" data-close-modal data-toast="题目已保存，发布状态不变" data-toast-type="info" data-i18n="btn.save">保存</button><button class="zy-btn zy-btn-danger" data-close-modal data-toast="题目已下架，动态计分已重算" data-toast-type="info">下架</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="题目已发布" data-toast-type="success">发布</button></div>
   </aside>
 </div>
 

@@ -4,7 +4,7 @@
 > 详见 [./CHANGELOG-2025-11.md](../CHANGELOG-2025-11.md)。
 
 > **功能**：课程学习引擎（中文学习 · 4 大主题 · 共享预备阶段）
-> **来源**：[../../../temp/05-用户端模块设计.md](../../../temp/05-用户端模块设计.md) · [../../../temp/04-管理端模块设计.md](../../../temp/04-管理端模块设计.md) · [../../../temp/06-关键业务流程.md](../../../temp/06-关键业务流程.md) · [../F1-AI-数据模型规范/](../F1-AI-数据模型规范/)
+> **来源**：[../../prd/05-用户端模块设计.md](../../prd/05-用户端模块设计.md) · [../../prd/04-管理端模块设计.md](../../prd/04-管理端模块设计.md) · [../../prd/06-关键业务流程.md](../../prd/06-关键业务流程.md) · [../F1-AI-数据模型规范/](../F1-AI-数据模型规范/)
 > **遵循规范**：[../../../grules/G1-架构与技术规范/04-API接口规范.md](../../../grules/G1-架构与技术规范/04-API接口规范.md)
 > **基础路径**：C 端 `/api/v1/course`、管理端 `/admin/v1/course`、内部 `/internal/v1/course`
 > **拆分原则**：按"应用端 / 管理端 / 横切"分组，每文件 ≤ 1200 行
@@ -37,54 +37,54 @@
 
 | # | 名称 | 方法 | 路径 | 权限 | 对应需求 |
 |---|------|------|------|------|---------|
-| C1 | 列出 5 主题 | GET | `/api/v1/course/tracks` | 公开 | [temp/05 §5.2](../../../temp/05-用户端模块设计.md) |
-| C2 | 切换/选择当前主题 | POST | `/api/v1/course/me/select-track` | 登录 | [temp/05 §5.2](../../../temp/05-用户端模块设计.md) |
-| C3 | 学习地图（主题下全部 stage/chapter/lesson + 进度） | GET | `/api/v1/course/tracks/:track/map` | 登录 | [temp/05 §5.4](../../../temp/05-用户端模块设计.md) |
-| C4 | 进入节（取节卡片列表 + 上次断点） | GET | `/api/v1/course/lessons/:lesson_id` | 登录 | [temp/05 §5.5](../../../temp/05-用户端模块设计.md) |
-| C5 | 获取 KP 详情（含 7 类差异内容） | GET | `/api/v1/course/kps/:kp_id` | 登录 | [temp/05 §5.5.1](../../../temp/05-用户端模块设计.md) |
-| C6 | 触发/获取 KP 朗读音频 | POST | `/api/v1/course/kps/:kp_id/audio` | 登录 | [temp/05 §5.5.2](../../../temp/05-用户端模块设计.md) |
-| C7 | 上报节内位置（断点续学） | PUT | `/api/v1/course/lessons/:lesson_id/checkpoint` | 登录 | [temp/05 §5.5.3](../../../temp/05-用户端模块设计.md) |
-| C8 | 取节末小测题目 | GET | `/api/v1/course/lessons/:lesson_id/quiz` | 登录 | [temp/05 §5.6](../../../temp/05-用户端模块设计.md) |
-| C9 | 提交单题答案（练习/小测/复习） | POST | `/api/v1/course/answers` | 登录 | [temp/06 §6.7 流程 F](../../../temp/06-关键业务流程.md) |
-| C10 | 提交节末小测（汇总打分） | POST | `/api/v1/course/lessons/:lesson_id/quiz:submit` | 登录 | [temp/06 §6.7 流程 F](../../../temp/06-关键业务流程.md) |
-| C11 | 取 SRS 复习队列（今日待复习） | GET | `/api/v1/course/srs/queue` | 登录 | [temp/06 §6.8 流程 G](../../../temp/06-关键业务流程.md) |
-| C12 | 错题本列表 | GET | `/api/v1/course/me/wrong-questions` | 登录 | [temp/05 §5.8](../../../temp/05-用户端模块设计.md) |
-| C13 | 列出可参加的考试（章/阶段/HSK） | GET | `/api/v1/course/exams` | 登录 | [temp/05 §5.7](../../../temp/05-用户端模块设计.md) |
-| C14 | 开始考试（抽题 + 创建 attempt） | POST | `/api/v1/course/exams/:exam_id:start` | 登录 | [temp/06 §6.9 流程 H](../../../temp/06-关键业务流程.md) |
+| C1 | 列出 5 主题 | GET | `/api/v1/course/tracks` | 公开 | [prd/05 §5.2](../../prd/05-用户端模块设计.md) |
+| C2 | 切换/选择当前主题 | POST | `/api/v1/course/me/select-track` | 登录 | [prd/05 §5.2](../../prd/05-用户端模块设计.md) |
+| C3 | 学习地图（主题下全部 stage/chapter/lesson + 进度） | GET | `/api/v1/course/tracks/:track/map` | 登录 | [prd/05 §5.4](../../prd/05-用户端模块设计.md) |
+| C4 | 进入节（取节卡片列表 + 上次断点） | GET | `/api/v1/course/lessons/:lesson_id` | 登录 | [prd/05 §5.5](../../prd/05-用户端模块设计.md) |
+| C5 | 获取 KP 详情（含 7 类差异内容） | GET | `/api/v1/course/kps/:kp_id` | 登录 | [prd/05 §5.5.1](../../prd/05-用户端模块设计.md) |
+| C6 | 触发/获取 KP 朗读音频 | POST | `/api/v1/course/kps/:kp_id/audio` | 登录 | [prd/05 §5.5.2](../../prd/05-用户端模块设计.md) |
+| C7 | 上报节内位置（断点续学） | PUT | `/api/v1/course/lessons/:lesson_id/checkpoint` | 登录 | [prd/05 §5.5.3](../../prd/05-用户端模块设计.md) |
+| C8 | 取节末小测题目 | GET | `/api/v1/course/lessons/:lesson_id/quiz` | 登录 | [prd/05 §5.6](../../prd/05-用户端模块设计.md) |
+| C9 | 提交单题答案（练习/小测/复习） | POST | `/api/v1/course/answers` | 登录 | [prd/06 §6.7 流程 F](../../prd/06-关键业务流程.md) |
+| C10 | 提交节末小测（汇总打分） | POST | `/api/v1/course/lessons/:lesson_id/quiz:submit` | 登录 | [prd/06 §6.7 流程 F](../../prd/06-关键业务流程.md) |
+| C11 | 取 SRS 复习队列（今日待复习） | GET | `/api/v1/course/srs/queue` | 登录 | [prd/06 §6.8 流程 G](../../prd/06-关键业务流程.md) |
+| C12 | 错题本列表 | GET | `/api/v1/course/me/wrong-questions` | 登录 | [prd/05 §5.8](../../prd/05-用户端模块设计.md) |
+| C13 | 列出可参加的考试（章/阶段/HSK） | GET | `/api/v1/course/exams` | 登录 | [prd/05 §5.7](../../prd/05-用户端模块设计.md) |
+| C14 | 开始考试（抽题 + 创建 attempt） | POST | `/api/v1/course/exams/:exam_id:start` | 登录 | [prd/06 §6.9 流程 H](../../prd/06-关键业务流程.md) |
 | C15 | 取当前 attempt 题目 | GET | `/api/v1/course/exam-attempts/:attempt_id` | 登录 | 同上 |
 | C16 | 提交考试 | POST | `/api/v1/course/exam-attempts/:attempt_id:submit` | 登录 | 同上 |
 | C17 | 主动放弃考试 | POST | `/api/v1/course/exam-attempts/:attempt_id:abandon` | 登录 | 同上 |
-| C18 | 举报题目内容错误 | POST | `/api/v1/course/questions/:q_id:report` | 登录 | [temp/05 §5.9](../../../temp/05-用户端模块设计.md) |
-| C19 | 个人学习统计 | GET | `/api/v1/course/me/stats` | 登录 | [temp/05 §5.10](../../../temp/05-用户端模块设计.md) |
+| C18 | 举报题目内容错误 | POST | `/api/v1/course/questions/:q_id:report` | 登录 | [prd/05 §5.9](../../prd/05-用户端模块设计.md) |
+| C19 | 个人学习统计 | GET | `/api/v1/course/me/stats` | 登录 | [prd/05 §5.10](../../prd/05-用户端模块设计.md) |
 
 ### 管理端（`/admin/v1/course`）
 
 | # | 名称 | 方法 | 路径 | 权限 | 对应需求 |
 |---|------|------|------|------|---------|
-| A1 | 列出主题 | GET | `/admin/v1/course/tracks` | content_admin+ | [temp/04 §4.2](../../../temp/04-管理端模块设计.md) |
+| A1 | 列出主题 | GET | `/admin/v1/course/tracks` | content_admin+ | [prd/04 §4.2](../../prd/04-管理端模块设计.md) |
 | A2 | 阶段 CRUD | GET/POST/PATCH/DELETE | `/admin/v1/course/stages[/:id]` | content_admin+ | 同上 |
-| A3 | 章节 CRUD + 调序 | GET/POST/PATCH/DELETE | `/admin/v1/course/chapters[/:id]` `/...:reorder` | content_admin+ | [temp/04 §4.3](../../../temp/04-管理端模块设计.md) |
-| A4 | 节 CRUD + 调序 + 关联 KP | GET/POST/PATCH/DELETE | `/admin/v1/course/lessons[/:id]` `/...:reorder` `/...:bind-kps` | content_admin+ | [temp/04 §4.3](../../../temp/04-管理端模块设计.md) |
-| A5 | KP 列表（多筛选） | GET | `/admin/v1/course/kps` | content_admin+ | [temp/04 §4.4](../../../temp/04-管理端模块设计.md) |
+| A3 | 章节 CRUD + 调序 | GET/POST/PATCH/DELETE | `/admin/v1/course/chapters[/:id]` `/...:reorder` | content_admin+ | [prd/04 §4.3](../../prd/04-管理端模块设计.md) |
+| A4 | 节 CRUD + 调序 + 关联 KP | GET/POST/PATCH/DELETE | `/admin/v1/course/lessons[/:id]` `/...:reorder` `/...:bind-kps` | content_admin+ | [prd/04 §4.3](../../prd/04-管理端模块设计.md) |
+| A5 | KP 列表（多筛选） | GET | `/admin/v1/course/kps` | content_admin+ | [prd/04 §4.4](../../prd/04-管理端模块设计.md) |
 | A6 | KP 详情 | GET | `/admin/v1/course/kps/:id` | content_admin+ | 同上 |
 | A7 | 新建 KP（人工） | POST | `/admin/v1/course/kps` | content_admin+ | 同上 |
 | A8 | 编辑 KP | PATCH | `/admin/v1/course/kps/:id` | content_admin+ | 同上 |
 | A9 | 软删 KP | DELETE | `/admin/v1/course/kps/:id` | content_admin+ | 同上 |
-| A10 | 题目列表 | GET | `/admin/v1/course/questions` | content_admin+ | [temp/04 §4.5](../../../temp/04-管理端模块设计.md) |
+| A10 | 题目列表 | GET | `/admin/v1/course/questions` | content_admin+ | [prd/04 §4.5](../../prd/04-管理端模块设计.md) |
 | A11 | 题目详情 | GET | `/admin/v1/course/questions/:id` | content_admin+ | 同上 |
 | A12 | 编辑题目 | PATCH | `/admin/v1/course/questions/:id` | content_admin+ | 同上 |
 | A13 | 新建题目 | POST | `/admin/v1/course/questions` | content_admin+ | 同上 |
 | A14 | 软删题目 | DELETE | `/admin/v1/course/questions/:id` | content_admin+ | 同上 |
-| A15 | 内容导入批次 | GET/POST | `/admin/v1/course/import-batches[/:id]` | content_admin+ | [temp/04 §4.6](../../../temp/04-管理端模块设计.md) |
-| A16 | 发布 / 下架（KP/Q/Lesson/Exam） | POST | `/admin/v1/course/:target_type/:id:publish` `:unpublish` | content_admin+ | [F2/07](./07-管理端-发布与举报处理.md) |
+| A15 | 内容导入批次 | GET/POST | `/admin/v1/course/import-batches[/:id]` | content_admin+ | [prd/04 §4.6](../../prd/04-管理端模块设计.md) |
+| A16 | 发布 / 下架（Stage/Chapter/Lesson/KP/Q/Exam） | POST | `/admin/v1/course/:target_type/:id:publish` `:unpublish` | content_admin+ | [F2/07](./07-管理端-发布与举报处理.md) |
 | A17 | 内容操作日志 | GET | `/admin/v1/course/action-log` | content_admin+ | 同上 |
 | A18 | 学员举报列表 | GET | `/admin/v1/course/reports` | content_admin+ | 同上 |
 | A19 | 处理举报（忽略 / 采纳） | POST | `/admin/v1/course/reports/:id:dismiss` `:adopt` | content_admin+ | 同上 |
-| A20 | 媒资库（去重上传 / 列表 / 删除） | GET/POST/DELETE | `/admin/v1/course/media[/:id]` | content_admin+ | [temp/04 §4.8](../../../temp/04-管理端模块设计.md) |
-| A21 | 考试中心配置 CRUD | GET/POST/PATCH/DELETE | `/admin/v1/course/exams[/:id]` | content_admin+ | [temp/04 §4.9](../../../temp/04-管理端模块设计.md) |
+| A20 | 媒资库（去重上传 / 列表 / 删除） | GET/POST/DELETE | `/admin/v1/course/media[/:id]` | content_admin+ | [prd/04 §4.8](../../prd/04-管理端模块设计.md) |
+| A21 | 考试中心配置 CRUD | GET/POST/PATCH/DELETE | `/admin/v1/course/exams[/:id]` | content_admin+ | [prd/04 §4.9](../../prd/04-管理端模块设计.md) |
 | A22 | 考试试抽预览 | POST | `/admin/v1/course/exams/:id:preview` | content_admin+ | 同上 |
-| A23 | 全局搜索（KP/Q/Lesson 聚合） | GET | `/admin/v1/course/search` | content_admin+ | [temp/04 §4.10](../../../temp/04-管理端模块设计.md) |
-| A24 | 统计大屏 | GET | `/admin/v1/course/stats/overview` `/stats/track/:track` | readonly+ | [temp/04 §4.11](../../../temp/04-管理端模块设计.md) |
+| A23 | 全局搜索（KP/Q/Lesson 聚合） | GET | `/admin/v1/course/search` | content_admin+ | [prd/04 §4.10](../../prd/04-管理端模块设计.md) |
+| A24 | 统计大屏 | GET | `/admin/v1/course/stats/overview` `/stats/track/:track` | readonly+ | [prd/04 §4.11](../../prd/04-管理端模块设计.md) |
 
 ### 横切（内部 / 集成）
 

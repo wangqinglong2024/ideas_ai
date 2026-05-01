@@ -137,6 +137,8 @@
 
 **响应 200**：与 A5 类似，含 `q_code / q_type / kp_id / kp_title_zh / is_published / wrong_rate（最近 30 天，便于发现"问题题"）`。
 
+**引用关系**：同一道题可同时被节测、章测、阶段测引用；是否参与某类测试由题目 `exam_scope` 与对应考试配置的抽题范围共同决定。题目下架后立即从所有新抽题池排除，历史 attempt snapshot 不回溯修改。
+
 ---
 
 ## A11 · 题目详情
@@ -184,6 +186,21 @@
 **权限**：`content_admin+`
 
 **业务校验**：题被流水（course_user_answers）引用即可软删；物理清理由 cron 在 30 天后处理。
+
+---
+
+## KP / 题目发布与下架（通过 A16）
+
+KP 与题目的发布 / 下架统一通过 [07-管理端-发布与举报处理.md](./07-管理端-发布与举报处理.md) 的 A16 完成：
+
+| Target | 路径 | 行为 |
+|---|---|---|
+| kp | `/admin/v1/course/kp/:id:publish` / `:unpublish` | KP 可单独发布或下架；下架后不在学员端展示 |
+| question | `/admin/v1/course/question/:id:publish` / `:unpublish` | 题目可单独发布或下架；下架后不再进入节测、章测、阶段测抽题池 |
+
+节发布会默认发布节下绑定 KP 与这些 KP 下可抽层级合法的题目；之后运营仍可在 P-A-4 / P-A-5 单独下架某个 KP 或题目。列表页必须提供行内「发布 / 下架」按钮，编辑抽屉里的「保存」不改变 `is_published`。
+
+题目下架后的分数由考试运行时动态重算：试卷满分保持 `total_score`（默认 100），有效题数为当前抽中的已发布题数，单题分 `total_score / effective_question_count`。
 
 ---
 
