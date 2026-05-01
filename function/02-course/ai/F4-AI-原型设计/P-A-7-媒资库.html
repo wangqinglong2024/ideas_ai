@@ -2,11 +2,11 @@
 <html lang="zh-CN" data-theme="light">
 <head>
 <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>P-A-10 媒资库 · F4 原型</title>
+<title>P-A-7 媒资库 · F4 原型</title>
 <link rel="stylesheet" href="_assets/styles.css" />
 </head><body>
 <div class="proto-bar">
-  <div class="proto-bar-title"><span class="pid">P-A-10</span>管理端 · 媒资库（/admin/course/media）</div>
+  <div class="proto-bar-title"><span class="pid">P-A-7</span>管理端 · 媒资库（/admin/course/media）</div>
   <div class="proto-bar-actions">
     <a href="index.html">← 索引</a>
     <span class="dev-toggle"><button data-device="desktop" class="active">🖥 桌面</button><button data-device="mobile">📱 移动</button></span>
@@ -52,31 +52,31 @@
   </div>
 
   <div class="zy-table-wrap">
-    <table class="zy-table">
+    <table class="zy-table zy-table-stack">
       <thead><tr><th style="width:40px;"><input type="checkbox" class="zy-check" /></th><th style="width:70px;">缩略</th><th>类型</th><th>文件名</th><th>绑定 KP</th><th>大小</th><th>CDN</th><th>状态</th><th>上传时间</th><th style="width: 200px;">操作</th></tr></thead>
       <tbody>
-        <tr><td><input type="checkbox" class="zy-check" checked /></td>
-          <td><div style="width: 48px; height: 48px; background: linear-gradient(135deg,#a3d8ff,#5fa8d3); border-radius: 6px; display: grid; place-items: center; color: #fff;">🔊</div></td>
-          <td>音频</td><td><strong>zaoshang.mp3</strong><br><span style="font-size: 11px; color: var(--zy-fg-mute);">tts · gpt-4o · zh-CN</span></td>
-          <td>kp-zaoshang</td><td>32 KB</td><td>✅</td><td><span class="zy-tag zy-tag-success">已分发</span></td><td>11-22 10:30</td>
-          <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dReplace">替换</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
-        <tr><td><input type="checkbox" class="zy-check" checked /></td>
-          <td><div style="width: 48px; height: 48px; background: linear-gradient(135deg,#ffd58a,#ff7b54); border-radius: 6px;"></div></td>
-          <td>图片</td><td><strong>sunrise.jpg</strong><br><span style="font-size: 11px; color: var(--zy-fg-mute);">800×600 · jpg</span></td>
-          <td>kp-zaoshang</td><td>108 KB</td><td>✅</td><td><span class="zy-tag zy-tag-success">已分发</span></td><td>11-20 14:22</td>
-          <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dReplace">替换</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
-        <tr><td><input type="checkbox" class="zy-check" /></td>
-          <td><div style="width: 48px; height: 48px; background: linear-gradient(135deg,#cdeac0,#8db580); border-radius: 6px; display: grid; place-items: center; color: #fff;">🔊</div></td>
-          <td>音频</td><td>xiexie.mp3</td><td>kp-xiexie</td><td>28 KB</td><td>✅</td><td><span class="zy-tag zy-tag-success">已分发</span></td><td>11-19 09:55</td>
-          <td><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dReplace">替换</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
-        <tr><td><input type="checkbox" class="zy-check" /></td>
-          <td><div style="width: 48px; height: 48px; background: var(--zy-bg-elev); border-radius: 6px; display: grid; place-items: center;">⏳</div></td>
-          <td>音频</td><td>laoban.mp3</td><td>kp-laoban</td><td>—</td><td>—</td><td><span class="zy-tag zy-tag-warn">处理中</span></td><td>11-23 10:30</td>
-          <td><button class="zy-btn zy-btn-sm zy-btn-ghost">查看 Job</button></td></tr>
-        <tr><td><input type="checkbox" class="zy-check" /></td>
-          <td><div style="width: 48px; height: 48px; background: #fee; border-radius: 6px; display: grid; place-items: center;">⚠</div></td>
-          <td>音频</td><td>orphan_001.mp3</td><td><span style="color:#ef4444;">未绑定（孤儿）</span></td><td>40 KB</td><td>✅</td><td><span class="zy-tag zy-tag-danger">待清理</span></td><td>10-12 11:00</td>
-          <td><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">清理</button></td></tr>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check" checked /></td>
+          <td data-label="缩略"><div style="width: 48px; height: 48px; background: linear-gradient(135deg,#a3d8ff,#5fa8d3); border-radius: 6px; display: grid; place-items: center; color: #fff;">🔊</div></td>
+          <td data-label="类型">音频</td><td data-label="文件名"><strong>zaoshang.mp3</strong><br><span style="font-size: 11px; color: var(--zy-fg-mute);">tts · gpt-4o · zh-CN</span></td>
+          <td data-label="绑定 KP">kp-zaoshang</td><td data-label="大小">32 KB</td><td data-label="CDN">✅</td><td data-label="状态"><span class="zy-tag zy-tag-success">已分发</span></td><td data-label="上传时间">11-22 10:30</td>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dReplace">替换</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check" checked /></td>
+          <td data-label="缩略"><div style="width: 48px; height: 48px; background: linear-gradient(135deg,#ffd58a,#ff7b54); border-radius: 6px;"></div></td>
+          <td data-label="类型">图片</td><td data-label="文件名"><strong>sunrise.jpg</strong><br><span style="font-size: 11px; color: var(--zy-fg-mute);">800×600 · jpg</span></td>
+          <td data-label="绑定 KP">kp-zaoshang</td><td data-label="大小">108 KB</td><td data-label="CDN">✅</td><td data-label="状态"><span class="zy-tag zy-tag-success">已分发</span></td><td data-label="上传时间">11-20 14:22</td>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dReplace">替换</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check" /></td>
+          <td data-label="缩略"><div style="width: 48px; height: 48px; background: linear-gradient(135deg,#cdeac0,#8db580); border-radius: 6px; display: grid; place-items: center; color: #fff;">🔊</div></td>
+          <td data-label="类型">音频</td><td data-label="文件名">xiexie.mp3</td><td data-label="绑定 KP">kp-xiexie</td><td data-label="大小">28 KB</td><td data-label="CDN">✅</td><td data-label="状态"><span class="zy-tag zy-tag-success">已分发</span></td><td data-label="上传时间">11-19 09:55</td>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dReplace">替换</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check" /></td>
+          <td data-label="缩略"><div style="width: 48px; height: 48px; background: var(--zy-bg-elev); border-radius: 6px; display: grid; place-items: center;">⏳</div></td>
+          <td data-label="类型">音频</td><td data-label="文件名">laoban.mp3</td><td data-label="绑定 KP">kp-laoban</td><td data-label="大小">—</td><td data-label="CDN">—</td><td data-label="状态"><span class="zy-tag zy-tag-warn">处理中</span></td><td data-label="上传时间">11-23 10:30</td>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost">查看 Job</button></td></tr>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check" /></td>
+          <td data-label="缩略"><div style="width: 48px; height: 48px; background: #fee; border-radius: 6px; display: grid; place-items: center;">⚠</div></td>
+          <td data-label="类型">音频</td><td data-label="文件名">orphan_001.mp3</td><td data-label="绑定 KP"><span style="color:#ef4444;">未绑定（孤儿）</span></td><td data-label="大小">40 KB</td><td data-label="CDN">✅</td><td data-label="状态"><span class="zy-tag zy-tag-danger">待清理</span></td><td data-label="上传时间">10-12 11:00</td>
+          <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">清理</button></td></tr>
       </tbody>
     </table>
   </div>

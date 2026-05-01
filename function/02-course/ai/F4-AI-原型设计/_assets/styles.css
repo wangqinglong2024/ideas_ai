@@ -480,3 +480,107 @@ em.hl { background: #fff3a8; color: inherit; font-style: normal; font-weight: 60
 
 /* 防止移动端短宽下，多 tag 行被压缩成竖排 */
 .zy-tag-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+/* ============== 移动端通用：禁止任何文字竖排 ==============
+ * 强制规则：移动端任何 .zy-row / 工具栏 / 按钮组 都 wrap 而不收缩，
+ * 文本节点保持横向（writing-mode 显式 horizontal-tb），按钮保持 nowrap。
+ */
+html, body { writing-mode: horizontal-tb; }
+.zy-row, .zy-row-end, .qz-tags, .zy-tag-row { flex-wrap: wrap; }
+.proto-frame.mobile .zy-row,
+.proto-frame.mobile .zy-row-end,
+.proto-frame.mobile .qz-tags,
+.proto-frame.mobile .zy-tag-row { flex-wrap: wrap; row-gap: 6px; }
+.proto-frame.mobile .zy-btn { white-space: nowrap; flex-shrink: 0; }
+.proto-frame.mobile .zy-tag { white-space: nowrap; flex-shrink: 0; }
+.proto-frame.mobile .zy-page-title { font-size: 18px; }
+.proto-frame.mobile .zy-page-sub { font-size: 12px; }
+.proto-frame.mobile .zy-bread { font-size: 12px; word-break: break-word; }
+.proto-frame.mobile .zy-card { padding: 14px; }
+.proto-frame.mobile .zy-modal { width: 100% !important; max-width: 100%; }
+.proto-frame.mobile .zy-drawer { width: 100% !important; max-width: 100%; }
+.proto-frame.mobile .zy-pills { flex-wrap: wrap; max-width: 100%; }
+.proto-frame.mobile .zy-pill { white-space: nowrap; }
+
+/* 全局：所有表格在移动端都默认转为卡片式（即使没加 .zy-table-stack） */
+.proto-frame.mobile .zy-table-wrap { overflow-x: hidden; border: 0; }
+.proto-frame.mobile .zy-table { display: block; }
+.proto-frame.mobile .zy-table thead { display: none; }
+.proto-frame.mobile .zy-table tbody { display: block; }
+.proto-frame.mobile .zy-table tr {
+  display: block; border: 1px solid var(--zy-border); border-radius: 12px;
+  margin-bottom: 10px; padding: 10px 12px; background: var(--zy-bg);
+}
+.proto-frame.mobile .zy-table td {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 5px 0; border: 0; font-size: 13px; gap: 10px; min-width: 0;
+  text-align: right; flex-wrap: wrap;
+}
+.proto-frame.mobile .zy-table td > * { flex-shrink: 0; }
+.proto-frame.mobile .zy-table td::before {
+  content: attr(data-label); color: var(--zy-fg-mute); font-size: 12px;
+  flex-shrink: 0; text-align: left; white-space: nowrap;
+}
+.proto-frame.mobile .zy-table td:not([data-label])::before { content: ""; display: none; }
+.proto-frame.mobile .zy-table td[colspan] { display: block; text-align: left; }
+.proto-frame.mobile .zy-table td[colspan]::before { display: none; }
+/* 第一格作为卡片标题 */
+.proto-frame.mobile .zy-table tr td:first-child {
+  display: block; font-weight: 600; padding-bottom: 6px;
+  border-bottom: 1px solid var(--zy-border); margin-bottom: 6px;
+  text-align: left;
+}
+.proto-frame.mobile .zy-table tr td:first-child::before { display: none; }
+.proto-frame.mobile .zy-pagination { padding: 8px; }
+.proto-frame.mobile .zy-pagination .zy-page-btn { min-width: 28px; height: 28px; font-size: 12px; }
+
+/* 顶栏移动端：i18n / globe / avatar 一行排，搜索框被隐藏后 actions 不挤压 */
+.proto-frame.mobile .zy-topnav { padding: 0 10px; gap: 6px; height: 52px; }
+.proto-frame.mobile .zy-topnav-brand { font-size: 15px; }
+.proto-frame.mobile .zy-lang-pill { padding: 0 8px; height: 26px; font-size: 11px; }
+
+/* 表单：移动端 grid 强制单列 */
+.proto-frame.mobile .zy-grid.cols-md-2,
+.proto-frame.mobile .zy-grid.cols-lg-3,
+.proto-frame.mobile .zy-grid.cols-xl-4 { grid-template-columns: 1fr !important; }
+
+/* 应用端 KP 卡：拼音强制在中文之上（顺序由 HTML 决定，但兜底通过 flex order） */
+.kp-card .examples .ex .text { display: flex; flex-direction: column; }
+.kp-card .examples .ex .text .pn { order: 1; font-size: 12px; color: var(--zy-fg-mute); letter-spacing: 0.04em; }
+.kp-card .examples .ex .text .zh { order: 2; font-size: 16px; }
+.kp-card .examples .ex .text .tr { order: 3; font-size: 13px; color: var(--zy-fg-soft); }
+
+/* ============== i18n 全局机制 ==============
+ * 1) 系统 UI 文本通过 [data-i18n] 属性切换：内容会被 zyI18n.apply(lang) 替换。
+ * 2) 学习内容翻译统一打 .zy-trans-only：当 UI 语言 = zh 时全部隐藏（用户已能看懂中文）。
+ * 3) 当前 UI 语言挂在 <html data-ui-lang>，由 prototype.js 在 init 时读取 localStorage。
+ */
+html[data-ui-lang="zh"] .zy-trans-only { display: none !important; }
+/* 在 .ex 中 .tr 是英文翻译，按规则在 zh 语言下隐藏 */
+html[data-ui-lang="zh"] .kp-card .ex .text .tr { display: none; }
+
+/* zy-pills 顶部容器在移动端可横向滚动 */
+.proto-frame.mobile .zy-pills { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* 旧版 .zy-tabs（P-A-9 全局搜索使用）补样式 */
+.zy-tabs { display: inline-flex; gap: 4px; padding: 4px; background: var(--zy-bg-elev); border-radius: 10px; border: 1px solid var(--zy-border); flex-wrap: wrap; margin-bottom: 12px; }
+.zy-tab { padding: 6px 14px; height: 32px; border: 0; border-radius: 6px; background: transparent; color: var(--zy-fg-soft); cursor: pointer; font-weight: 500; font-size: 13px; line-height: 1; }
+.zy-tab.active { background: var(--zy-bg); color: var(--zy-fg); box-shadow: 0 1px 2px rgba(0,0,0,0.06); }
+
+/* 层级展示（管理端考试中心）面包屑卡 */
+.zy-level-stack { display: grid; gap: 12px; }
+.zy-level-card {
+  border: 1px solid var(--zy-border); border-radius: var(--zy-radius-lg);
+  padding: 14px; background: var(--zy-bg);
+}
+.zy-level-card .head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.zy-level-card .head .title { font-weight: 600; }
+.zy-level-card .body { margin-top: 10px; }
+
+/* 多语言并排输入：5 列 grid（桌面）/ 1 列（移动） */
+.zy-i18n-grid { display: grid; gap: 10px; grid-template-columns: 1fr; }
+@media (min-width: 720px) { .zy-i18n-grid { grid-template-columns: repeat(5, 1fr); } }
+.proto-frame.mobile .zy-i18n-grid { grid-template-columns: 1fr !important; }
+.zy-i18n-grid .zy-field { margin-bottom: 0; }
+.zy-i18n-grid .zy-label { font-size: 12px; }
+.zy-i18n-grid .zy-input, .zy-i18n-grid .zy-textarea { font-size: 13px; }

@@ -17,12 +17,12 @@
 <div class="proto-stage"><div class="proto-frame desktop" id="protoFrame">
 
 <header class="zy-topnav">
-  <div class="zy-topnav-brand">📚 学中文</div>
+  <div class="zy-topnav-brand">📚 <span data-i18n="brand.learn">学中文</span></div>
   <nav class="zy-topnav-links">
-    <a class="zy-topnav-link" data-nav="/learn">学习</a>
-    <a class="zy-topnav-link active" data-nav="/learn/me">我的</a>
+    <a class="zy-topnav-link" data-nav="/learn" data-i18n="nav.learn">学习</a>
+    <a class="zy-topnav-link active" data-nav="/learn/me" data-i18n="nav.me">我的</a>
   </nav>
-  <div class="zy-topnav-actions"><span class="zy-avatar">小</span></div>
+  <div class="zy-topnav-actions"><button class="zy-lang-pill" data-open-modal="mLang" title="语言"><span data-icon="globe"></span><span data-lang-label>中文</span></button><span class="zy-avatar">小</span></div>
 </header>
 
 <div class="zy-container">
@@ -106,8 +106,8 @@
 </div>
 
 <nav class="zy-bottom-tabs">
-  <div class="zy-bottom-tab" data-nav="/learn"><span class="ico">📚</span><span>学习</span></div>
-  <div class="zy-bottom-tab active" data-nav="/learn/me"><span class="ico">👤</span><span>我的</span></div>
+  <div class="zy-bottom-tab" data-nav="/learn"><span class="ico">📚</span><span data-i18n="nav.learn">学习</span></div>
+  <div class="zy-bottom-tab active" data-nav="/learn/me"><span class="ico">👤</span><span data-i18n="nav.me">我的</span></div>
 </nav>
 </div></div>
 
@@ -151,6 +151,22 @@
 </div>
 
 <script src="_assets/prototype.js"></script>
+
+<div class="zy-modal-mask" id="mLang">
+  <div class="zy-modal size-sm">
+    <div class="zy-modal-head"><div class="zy-modal-title">界面语言</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body">
+      <div class="zy-stack">
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="zh" checked /> 简体中文</label>
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="en" /> English</label>
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="vi" /> Tiếng Việt</label>
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="th" /> ภาษาไทย</label>
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="id" /> Bahasa Indonesia</label>
+      </div>
+    </div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal>关闭</button></div>
+  </div>
+</div>
 <script>
 // 主题 Tab 切换：仅 HSK 主题显示「HSK 模考」Tab；其他主题隐藏
 (function(){

@@ -65,9 +65,9 @@
       <table class="zy-table zy-table-stack">
         <thead><tr><th style="width:50px;">序</th><th>编码</th><th>主词（zh）</th><th>拼音</th><th>类型</th><th>音频</th><th>题目数</th><th style="width:160px;">操作</th></tr></thead>
         <tbody>
-          <tr><td data-label="序">1</td><td data-label="编码"><code>kp-zaoshang</code></td><td data-label="主词">早上</td><td data-label="拼音">zǎo shang</td><td data-label="类型"><span class="zy-tag">word</span></td><td data-label="音频" title="用户端缓存回显"><span data-icon="speaker"></span> 已缓存</td><td data-label="题目数">5</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dKPEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mUnbind">解绑</button></td></tr>
-          <tr><td data-label="序">2</td><td data-label="编码"><code>kp-hao</code></td><td data-label="主词">好</td><td data-label="拼音">hǎo</td><td data-label="类型"><span class="zy-tag">word</span></td><td data-label="音频"><span data-icon="speaker"></span> 已缓存</td><td data-label="题目数">4</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dKPEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mUnbind">解绑</button></td></tr>
-          <tr><td data-label="序">3</td><td data-label="编码"><code>kp-zaoshanghao</code></td><td data-label="主词">早上好</td><td data-label="拼音">zǎo shang hǎo</td><td data-label="类型"><span class="zy-tag zy-tag-info">phrase</span></td><td data-label="音频"><span data-icon="speaker"></span> 已缓存</td><td data-label="题目数">6</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dKPEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mUnbind">解绑</button></td></tr>
+          <tr><td data-label="序">1</td><td data-label="编码"><code>kp-zaoshang</code></td><td data-label="主词">早上</td><td data-label="拼音">zǎo shang</td><td data-label="类型"><span class="zy-tag">词</span></td><td data-label="音频" title="用户端缓存回显"><span data-icon="speaker"></span> 已缓存</td><td data-label="题目数">5</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dKPEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mUnbind">解绑</button></td></tr>
+          <tr><td data-label="序">2</td><td data-label="编码"><code>kp-hao</code></td><td data-label="主词">好</td><td data-label="拼音">hǎo</td><td data-label="类型"><span class="zy-tag">词</span></td><td data-label="音频"><span data-icon="speaker"></span> 已缓存</td><td data-label="题目数">4</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dKPEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mUnbind">解绑</button></td></tr>
+          <tr><td data-label="序">3</td><td data-label="编码"><code>kp-zaoshanghao</code></td><td data-label="主词">早上好</td><td data-label="拼音">zǎo shang hǎo</td><td data-label="类型"><span class="zy-tag zy-tag-info">词组</span></td><td data-label="音频"><span data-icon="speaker"></span> 已缓存</td><td data-label="题目数">6</td><td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dKPEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mUnbind">解绑</button></td></tr>
           <tr><td data-label="…">…</td><td colspan="7" style="color: var(--zy-fg-mute);">余下 9 项</td></tr>
         </tbody>
       </table>
@@ -84,13 +84,17 @@
   <aside class="zy-drawer">
     <div class="zy-drawer-head"><div class="zy-drawer-title">编辑 KP · kp-zaoshang</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
+      <label class="zy-label zy-required" style="display:block;margin-bottom:6px;">主词 & 翻译（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:12px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="早上" /></div>
+        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="morning" /></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="buổi sáng" /></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="ตอนเช้า" /></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="pagi" /></div>
+      </div>
       <div class="zy-grid cols-md-2">
-        <div class="zy-field"><label class="zy-label zy-required">主词（zh）</label><input class="zy-input" value="早上" /></div>
         <div class="zy-field"><label class="zy-label">拼音</label><input class="zy-input" value="zǎo shang" /></div>
-        <div class="zy-field"><label class="zy-label">英文</label><input class="zy-input" value="morning" /></div>
-        <div class="zy-field"><label class="zy-label">越南文</label><input class="zy-input" value="buổi sáng" /></div>
-        <div class="zy-field"><label class="zy-label">泰文</label><input class="zy-input" value="ตอนเช้า" /></div>
-        <div class="zy-field"><label class="zy-label">印尼文</label><input class="zy-input" value="pagi" /></div>
+        <div class="zy-field"><label class="zy-label">类型</label><select class="zy-select"><option selected>词</option><option>词组</option><option>句型</option><option>语法点</option></select></div>
       </div>
       <div class="zy-field"><label class="zy-label">音频（用户端缓存回显）</label><div class="zy-row"><input class="zy-input" value="cdn://media/zaoshang.mp3" readonly /><button class="zy-play-btn" data-toast="试听缓存音频"><span data-icon="speaker"></span>试听</button></div><div class="zy-helper">客户端首次访问时调用 TTS 生成并上传 CDN；本处仅为读取现有缓存。未生成者为空。</div></div>
       <div class="zy-field"><label class="zy-label">例句（2/3）</label>

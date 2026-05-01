@@ -22,6 +22,7 @@
   <div style="display:flex; gap: 12px; align-items: center; flex-wrap: wrap;">
     <span style="color: var(--zy-fg-mute); font-size: 13px;">已答&nbsp;7/30</span>
     <strong style="color: var(--zy-brand); font-size: 18px; font-variant-numeric: tabular-nums;" id="cdTime">38:24</strong>
+    <button class="zy-lang-pill" data-open-modal="mLang" title="语言"><span data-icon="globe"></span><span data-lang-label>中文</span></button>
     <button class="zy-icon-btn" data-open-drawer="dGrid" title="题号" aria-label="题号">⊞</button>
     <button class="zy-btn zy-btn-ghost zy-btn-sm" data-open-modal="mPause">⏸ 暂停</button>
   </div>
@@ -32,7 +33,7 @@
   <div class="zy-progress" style="margin-bottom: 16px;"><i style="width: 23%;"></i></div>
 
   <div class="zy-card" style="background: var(--zy-bg);">
-    <div class="zy-tag-row" style="margin-bottom: 12px;"><span class="zy-tag zy-tag-info">第&nbsp;7&nbsp;/&nbsp;30</span><span class="zy-tag">listen_pick</span><span class="zy-tag" data-toast="本题已自动保存">💾&nbsp;已保存</span></div>
+    <div class="zy-tag-row" style="margin-bottom: 12px;"><span class="zy-tag zy-tag-info">第&nbsp;7&nbsp;/&nbsp;30</span><span class="zy-tag">听音选词</span><span class="zy-tag" data-toast="本题已自动保存">💾&nbsp;已保存</span></div>
     <div class="qz-stem">
       <button class="zy-play-btn" data-toast="🔊 播放音频（剩余 2 次）" data-toast-type="info"><span data-icon="play"></span>播放&nbsp;2/3</button>
       <span style="margin-left: 8px;">请选择正确写法：</span>
@@ -134,4 +135,20 @@ function exPick(el){ el.parentNode.querySelectorAll('.qz-opt').forEach(function(
 (function(){ var g = document.getElementById('qGrid'); if(!g) return; var html=''; for(var i=1;i<=30;i++){ var st = i<7?'background:rgba(34,197,94,0.18); border-color:var(--success);':(i===7?'background:var(--zy-brand); color:#fff; border-color:var(--zy-brand);':'background:var(--zy-bg);'); html += '<button class="zy-btn zy-btn-sm" style="height:38px; padding:0; '+st+'" data-close-modal data-toast="跳转到第 '+i+' 题">'+i+'</button>'; } g.innerHTML = html; })();
 </script>
 <script src="_assets/prototype.js"></script>
+
+<div class="zy-modal-mask" id="mLang">
+  <div class="zy-modal size-sm">
+    <div class="zy-modal-head"><div class="zy-modal-title">界面语言</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-modal-body">
+      <div class="zy-stack">
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="zh" checked /> 简体中文</label>
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="en" /> English</label>
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="vi" /> Tiếng Việt</label>
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="th" /> ภาษาไทย</label>
+        <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="id" /> Bahasa Indonesia</label>
+      </div>
+    </div>
+    <div class="zy-modal-foot"><button class="zy-btn zy-btn-primary" data-close-modal>关闭</button></div>
+  </div>
+</div>
 </body></html>

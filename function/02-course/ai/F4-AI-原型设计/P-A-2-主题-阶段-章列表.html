@@ -101,44 +101,74 @@
 
 </div></div>
 
-<!-- 编辑主题 -->
+<!-- 编辑主题（5 语言：zh/en/vi/th/id） -->
 <div class="zy-modal-mask" id="mTrackEdit">
-  <div class="zy-modal size-md">
+  <div class="zy-modal size-lg">
     <div class="zy-modal-head"><div class="zy-modal-title">编辑主题 · ec</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      <div class="zy-field"><label class="zy-label zy-required">名称（zh）</label><input class="zy-input" value="电商主题" /></div>
-      <div class="zy-field"><label class="zy-label">名称（en）</label><input class="zy-input" value="E-commerce" /></div>
-      <div class="zy-field"><label class="zy-label">封面图</label><input class="zy-input" value="cdn://covers/ec.jpg" readonly /></div>
-      <div class="zy-field"><label class="zy-label">状态</label><select class="zy-select"><option selected>已发布</option><option>下架</option></select></div>
+      <label class="zy-label zy-required" style="display:block;margin-bottom:6px;">主题名（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:14px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="电商主题" /></div>
+        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="E-commerce" /></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="Thương mại điện tử" /></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="อีคอมเมิร์ซ" /></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="E-commerce" /></div>
+      </div>
+      <label class="zy-label" style="display:block;margin-bottom:6px;">主题描述（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:14px;">
+        <div class="zy-field"><label class="zy-label">中文</label><textarea class="zy-textarea">面向电商场景的中文学习</textarea></div>
+        <div class="zy-field"><label class="zy-label">English</label><textarea class="zy-textarea">Chinese for e-commerce</textarea></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><textarea class="zy-textarea"></textarea></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><textarea class="zy-textarea"></textarea></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><textarea class="zy-textarea"></textarea></div>
+      </div>
+      <div class="zy-grid cols-md-2">
+        <div class="zy-field"><label class="zy-label">封面图</label><input class="zy-input" value="cdn://covers/ec.jpg" readonly /></div>
+        <div class="zy-field"><label class="zy-label">状态</label><select class="zy-select"><option selected>已发布</option><option>下架</option></select></div>
+      </div>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="主题已更新" data-toast-type="success">保存</button></div>
   </div>
 </div>
 
-<!-- 编辑阶段 -->
+<!-- 编辑阶段（5 语言） -->
 <div class="zy-modal-mask" id="mStageEdit">
-  <div class="zy-modal size-md">
+  <div class="zy-modal size-lg">
     <div class="zy-modal-head"><div class="zy-modal-title">编辑阶段</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      <div class="zy-field"><label class="zy-label zy-required">阶段名（zh）</label><input class="zy-input" value="入门" /></div>
-      <div class="zy-field"><label class="zy-label">阶段名（en）</label><input class="zy-input" value="Beginner" /></div>
-      <div class="zy-field"><label class="zy-label">解锁条件</label><select class="zy-select"><option>无（首阶段）</option><option>通过上一阶段考</option></select></div>
+      <label class="zy-label zy-required" style="display:block;margin-bottom:6px;">阶段名（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:14px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="入门" /></div>
+        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="Beginner" /></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="Nhập môn" /></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="เริ่มต้น" /></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="Pemula" /></div>
+      </div>
+      <div class="zy-field"><label class="zy-label">解锁条件</label><select class="zy-select"><option selected>无（首阶段）</option><option>通过上一阶段考</option></select></div>
     </div>
     <div class="zy-modal-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="已保存" data-toast-type="success">保存</button></div>
   </div>
 </div>
 
-<!-- 新建章 -->
+<!-- 新建章（5 语言） -->
 <div class="zy-drawer-mask" id="dNewChap">
-  <aside class="zy-drawer size-sm">
+  <aside class="zy-drawer size-md">
     <div class="zy-drawer-head"><div class="zy-drawer-title">新建章</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
       <div class="zy-field"><label class="zy-label zy-required">章编码</label><input class="zy-input" placeholder="ec-1-7" /></div>
-      <div class="zy-field"><label class="zy-label zy-required">章名（zh）</label><input class="zy-input" placeholder="如：电话沟通" /></div>
-      <div class="zy-field"><label class="zy-label">章名（en/vi/th/id）</label><input class="zy-input" placeholder="可后续在编辑中补全 4 个翻译" /></div>
-      <div class="zy-field"><label class="zy-label">序号</label><input class="zy-input" type="number" value="7" /></div>
-      <div class="zy-field"><label class="zy-label zy-required">默认节数</label><select class="zy-select"><option>4</option><option selected>6</option><option>8</option></select></div>
-      <div class="zy-helper">默认 6；可选 4/6/8。创建后默认草稿，需手动发布。</div>
+      <label class="zy-label zy-required" style="display:block;margin-bottom:6px;">章名（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:14px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" placeholder="如：电话沟通" /></div>
+        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" placeholder="Phone Communication" /></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" placeholder="Giao tiếp qua điện thoại" /></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" placeholder="การสื่อสารทางโทรศัพท์" /></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" placeholder="Komunikasi Telepon" /></div>
+      </div>
+      <div class="zy-grid cols-md-2">
+        <div class="zy-field"><label class="zy-label">序号</label><input class="zy-input" type="number" value="7" /></div>
+        <div class="zy-field"><label class="zy-label zy-required">默认节数</label><select class="zy-select"><option>4</option><option selected>6</option><option>8</option></select></div>
+      </div>
+      <div class="zy-helper">默认 6；可选 4/6/8。创建后默认草稿，需手动发布。仅填中文也可保存，其他语言将 fallback 到 zh。</div>
     </div>
     <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="章已创建" data-toast-type="success">创建</button></div>
   </aside>
@@ -198,14 +228,20 @@
   </div>
 </div>
 
-<!-- 新建阶段 -->
+<!-- 新建阶段（5 语言） -->
 <div class="zy-drawer-mask" id="dNewStage">
-  <aside class="zy-drawer size-sm">
+  <aside class="zy-drawer size-md">
     <div class="zy-drawer-head"><div class="zy-drawer-title">新建阶段</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
       <div class="zy-field"><label class="zy-label zy-required">阶段编号</label><input class="zy-input" type="number" value="4" /></div>
-      <div class="zy-field"><label class="zy-label zy-required">阶段名（zh）</label><input class="zy-input" placeholder="如：高级" /></div>
-      <div class="zy-field"><label class="zy-label">阶段名（en）</label><input class="zy-input" /></div>
+      <label class="zy-label zy-required" style="display:block;margin-bottom:6px;">阶段名（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:14px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" placeholder="如：高级" /></div>
+        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" placeholder="Advanced" /></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" placeholder="Nâng cao" /></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" placeholder="ขั้นสูง" /></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" placeholder="Lanjutan" /></div>
+      </div>
       <div class="zy-field"><label class="zy-label">解锁条件</label><select class="zy-select"><option selected>通过 Stage 3 阶段考</option><option>无</option></select></div>
     </div>
     <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="阶段已创建" data-toast-type="success">创建</button></div>

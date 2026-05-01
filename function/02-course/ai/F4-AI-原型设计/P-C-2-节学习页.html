@@ -17,13 +17,13 @@
 <div class="proto-stage"><div class="proto-frame desktop" id="protoFrame">
 
 <header class="zy-topnav">
-  <div class="zy-topnav-brand">📚 学中文</div>
+  <div class="zy-topnav-brand">📚 <span data-i18n="brand.learn">学中文</span></div>
   <nav class="zy-topnav-links">
-    <a class="zy-topnav-link active" data-nav="/learn">学习</a>
-    <a class="zy-topnav-link" data-nav="/learn/me">我的</a>
+    <a class="zy-topnav-link active" data-nav="/learn" data-i18n="nav.learn">学习</a>
+    <a class="zy-topnav-link" data-nav="/learn/me" data-i18n="nav.me">我的</a>
   </nav>
   <div class="zy-topnav-actions">
-    <button class="zy-lang-pill" data-open-modal="mSettings" title="语言"><span data-icon="globe"></span>中文 <span class="zy-i18n-badge"></span></button>
+    <button class="zy-lang-pill" data-open-modal="mSettings" title="语言"><span data-icon="globe"></span><span data-lang-label>中文</span></button>
     <button class="zy-icon-btn" data-open-modal="mSettings" title="设置">⚙</button>
     <span class="zy-avatar">小</span>
   </div>
@@ -47,16 +47,16 @@
   <div class="kp-card">
     <div class="pinyin">zǎo shang</div>
     <h1>早上</h1>
-    <div class="trans">morning</div>
+    <div class="trans zy-trans-only" data-zh="早上" data-trans-en="morning" data-trans-vi="buổi sáng" data-trans-th="ตอนเช้า" data-trans-id="pagi">morning</div>
     <div class="actions">
       <button class="zy-play-btn" data-toast="播放 TTS（cdn://media/zaoshang.mp3）" data-toast-type="info"><span data-icon="speaker"></span>听音</button>
       <button class="zy-btn zy-btn-ghost zy-btn-sm" data-toast="⭐ 已加入收藏（POST /me/favorites）" data-toast-type="success">⭐ 收藏</button>
       <button class="zy-report-link" data-open-modal="mReportKP" title="举报内容问题"><span data-icon="flag"></span>举报</button>
     </div>
     <div class="examples">
-      <div style="font-size: 12px; color: var(--zy-fg-mute); margin-bottom: 8px;">例句 EXAMPLES</div>
-      <div class="ex"><span class="ico" data-toast="播放例句 1" data-toast-type="info" style="cursor:pointer; color:var(--zy-brand);" data-icon="speaker"></span><div class="text"><div class="zh">早上好，老板！</div><div class="pn">zǎo shang hǎo, lǎo bǎn!</div><div class="tr">Good morning, boss!</div></div></div>
-      <div class="ex"><span class="ico" data-toast="播放例句 2" data-toast-type="info" style="cursor:pointer; color:var(--zy-brand);" data-icon="speaker"></span><div class="text"><div class="zh">每天早上我喝茶。</div><div class="pn">měi tiān zǎo shang wǒ hē chá.</div><div class="tr">I drink tea every morning.</div></div></div>
+      <div style="font-size: 12px; color: var(--zy-fg-mute); margin-bottom: 8px;" data-i18n="common.examples">例句 EXAMPLES</div>
+      <div class="ex"><span class="ico" data-toast="播放例句 1" data-toast-type="info" style="cursor:pointer; color:var(--zy-brand);" data-icon="speaker"></span><div class="text"><div class="pn">zǎo shang hǎo, lǎo bǎn!</div><div class="zh">早上好，老板！</div><div class="tr zy-trans-only" data-zh="早上好，老板！" data-trans-en="Good morning, boss!" data-trans-vi="Chào buổi sáng, sếp!" data-trans-th="สวัสดีตอนเช้าครับเจ้านาย" data-trans-id="Selamat pagi, Bos!">Good morning, boss!</div></div></div>
+      <div class="ex"><span class="ico" data-toast="播放例句 2" data-toast-type="info" style="cursor:pointer; color:var(--zy-brand);" data-icon="speaker"></span><div class="text"><div class="pn">měi tiān zǎo shang wǒ hē chá.</div><div class="zh">每天早上我喝茶。</div><div class="tr zy-trans-only" data-zh="每天早上我喝茶。" data-trans-en="I drink tea every morning." data-trans-vi="Mỗi sáng tôi uống trà." data-trans-th="ทุกเช้าฉันดื่มชา" data-trans-id="Setiap pagi saya minum teh.">I drink tea every morning.</div></div></div>
     </div>
   </div>
 
@@ -73,8 +73,8 @@
 </div>
 
 <nav class="zy-bottom-tabs">
-  <div class="zy-bottom-tab active" data-nav="/learn"><span class="ico">📚</span><span>学习</span></div>
-  <div class="zy-bottom-tab" data-nav="/learn/me"><span class="ico">👤</span><span>我的</span></div>
+  <div class="zy-bottom-tab active" data-nav="/learn"><span class="ico">📚</span><span data-i18n="nav.learn">学习</span></div>
+  <div class="zy-bottom-tab" data-nav="/learn/me"><span class="ico">👤</span><span data-i18n="nav.me">我的</span></div>
 </nav>
 
 </div></div>
@@ -84,7 +84,15 @@
   <div class="zy-modal size-sm">
     <div class="zy-modal-head"><div class="zy-modal-title">学习设置</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-modal-body">
-      <div class="zy-field"><label class="zy-label">界面语言 <span class="zy-i18n-badge"></span></label><select class="zy-select"><option>简体中文 zh</option><option>English en</option><option>Tiếng Việt vi</option><option>ภาษาไทย th</option><option>Bahasa Indonesia id</option></select></div>
+      <div class="zy-field"><label class="zy-label">界面语言</label>
+        <div class="zy-stack">
+          <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="zh" checked /> 简体中文</label>
+          <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="en" /> English</label>
+          <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="vi" /> Tiếng Việt</label>
+          <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="th" /> ภาษาไทย</label>
+          <label class="zy-row" style="cursor:pointer;"><input type="radio" name="lang" data-set-lang="id" /> Bahasa Indonesia</label>
+        </div>
+      </div>
       <div class="zy-field"><label class="zy-label">音频自动播放</label><select class="zy-select"><option>开启</option><option>关闭</option></select></div>
       <div class="zy-field"><label class="zy-label">显示拼音</label><select class="zy-select"><option>始终显示</option><option>悬停显示</option></select></div>
     </div>

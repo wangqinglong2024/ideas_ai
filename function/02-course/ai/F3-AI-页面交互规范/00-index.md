@@ -1,9 +1,13 @@
 # F3-AI：页面交互规范 · 索引
 
-> ⚠️ **2025-11 变更**：P-A-6 / P-A-7 / P-A-8 已废弃并物理删除原型；术语 赛道→主题。
+> ⚠️ **2025-11 变更**：
+> - 术语：赛道 → 主题；AI 工作台/审核队列下线，原 P-A-6/P-A-7/P-A-8 位置重新分配。
+> - 以 F4 原型为准的管理端页面总数为 9 个：P-A-1..P-A-9。
+> - P-A-6=学员举报处理 / P-A-7=媒资库 / P-A-8=考试中心管理（分层展示：主题 → 阶段 → 章 → 节） / P-A-9=全局搜索。
+> - 考试题库不再区分独立题池，题目可被节末小测/章测/阶段考/HSK 模考共享抽取。
 > 详见 [./CHANGELOG-2025-11.md](../CHANGELOG-2025-11.md)。
 
-> **功能**：课程学习引擎 · 4 大主题主题 + share Stage 0
+> **功能**：课程学习引擎 · 5 主题（SH/EC/FC/HSK/DL）
 > **来源**：[../../prd/F3-用户-页面与交互描述.md](../../prd/F3-用户-页面与交互描述.md)（PM 主对话提供）+ [../F1-AI-数据模型规范/](../F1-AI-数据模型规范/) + [../F2-AI-接口规范/](../F2-AI-接口规范/) + [../../../temp/05-用户端模块设计.md](../../../temp/05-用户端模块设计.md) + [../../../temp/04-管理端模块设计.md](../../../temp/04-管理端模块设计.md)
 > **设计系统**：[../../../../grules/G2-视觉与交互风格/](../../../../grules/G2-视觉与交互风格/)
 > **权限规范**：[../../../../grules/G3-权限与认证规范/](../../../../grules/G3-权限与认证规范/)
@@ -60,17 +64,14 @@
 | ID | 页面名称 | 路由 | 权限 | 说明 |
 |----|---------|------|------|------|
 | P-A-1 | 课程目录总览页 | `/admin/course` | editor+ | 5 主题卡片 + 全局统计 + 进入各主题 |
-| P-A-2 | 主题-阶段-章列表页 | `/admin/course/tracks/:track_code` | editor+ | stage / chapter 列表 + 调序 + CRUD |
+| P-A-2 | 主题-阶段-章列表页 | `/admin/course/themes/:theme_code` | editor+ | stage / chapter 列表 + 调序 + CRUD（全部多语编辑） |
 | P-A-3 | 节编辑页 | `/admin/course/lessons/:lesson_id` | editor+ | 节基本信息 + 绑定 KP 列表 + 调序 |
-| P-A-4 | KP 列表与详情页 | `/admin/course/kps` | editor+ | KP 列表（按 track/type 筛选）+ 详情侧栏 |
-| P-A-5 | 题目列表与编辑页 | `/admin/course/questions` | editor+ | 题目列表 + 编辑 Drawer + 重生 |
-| P-A-6 | Prompt 库管理页 | `/admin/course/prompts` | editor+ | 21 Prompt CRUD + 版本切换 + 一键试跑 |
-| P-A-7 | AI 工作台页 | `/admin/course/ai-jobs` | editor+ | 创建 Job + Job 列表 + 监控 + 重试 + 进度详情 |
-| P-A-8 | 内容审核队列页 | `/admin/course/review` | reviewer+ | 待审 KP / Q 列表 + 详情 + 批准/驳回/编辑 |
-| P-A-9 | 学员举报处理页 | `/admin/course/reports` | reviewer+ | 举报列表 + dismiss / 转审核队列 |
-| P-A-10 | 媒资库页 | `/admin/course/media` | editor+ | 媒资列表 + 命中统计 + 软删 |
-| P-A-11 | 考试中心管理页 | `/admin/course/exams` | editor+ | 考试模板 CRUD + blueprint 试抽 + 启用/归档 |
-| P-A-12 | 全局搜索结果页 | `/admin/course/search?q=...` | editor+ | 顶部 🔍 输入跳转；KP / Question / Lesson 三段聚合命中 + 高亮（与 china 风格一致）|
+| P-A-4 | KP 列表与详情页 | `/admin/course/kps` | editor+ | KP 列表（主题/类型筛选、后台中文枚举） |
+| P-A-5 | 题目列表与编辑页 | `/admin/course/questions` | editor+ | 题目列表 + 编辑 Drawer（8 语言题面） |
+| P-A-6 | 学员举报处理页 | `/admin/course/reports` | reviewer+ | 举报列表 + 跳到对应编辑抽屉手动调整后手动采纳 |
+| P-A-7 | 媒资库页 | `/admin/course/media` | editor+ | 媒资列表 + 命中统计 + 软删 + CDN |
+| P-A-8 | 考试中心管理页 | `/admin/course/exams` | editor+ | 主题 → 阶段（阶段考配置）→ 章（章测配置）→ 节（只读）逐级下钻；HSK 模考仅 HSK 主题可见 |
+| P-A-9 | 全局搜索页 | `/admin/course/search?q=...` | editor+ | KP / Question / Lesson 三段聚合命中 + 高亮 |
 
 ### 弹窗 / 面板（详见 [11-弹窗与公共组件.md](./11-弹窗与公共组件.md)）
 

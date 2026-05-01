@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>P-A-8 考试中心管理 · F4 原型</title>
+<link rel="stylesheet" href="_assets/styles.css" />
+</head><body>
+<div class="proto-bar">
+  <div class="proto-bar-title"><span class="pid">P-A-8</span>管理端 · 考试中心管理（/admin/course/exams）</div>
+  <div class="proto-bar-actions">
+    <a href="index.html">← 索引</a>
+    <span class="dev-toggle"><button data-device="desktop" class="active">🖥 桌面</button><button data-device="mobile">📱 移动</button></span>
+    <button id="themeBtn" class="theme-toggle">🌙 暗色</button>
+  </div>
+</div>
+
+<div class="proto-stage"><div class="proto-frame desktop" id="protoFrame">
+
+<header class="zy-topnav">
+  <div class="zy-topnav-brand">⚙ 智语 · 管理后台</div>
+  <nav class="zy-topnav-links"><a class="zy-topnav-link active">课程</a><a class="zy-topnav-link">用户</a><a class="zy-topnav-link">系统</a></nav>
+  <div class="zy-topnav-actions"><input class="zy-input" placeholder="🔍 全局搜索…" data-nav="/admin/course/search" readonly style="cursor:pointer;" /><span class="zy-avatar">A</span></div>
+</header>
+
+<div class="zy-container">
+  <div class="zy-bread">
+    <span data-nav="/admin/course">课程</span><span class="sep">›</span>
+    <span class="cur" id="bcRoot">考试中心</span>
+    <span class="sep" id="bcSep1" style="display:none;">›</span><span id="bcTheme" style="display:none;"></span>
+    <span class="sep" id="bcSep2" style="display:none;">›</span><span id="bcStage" style="display:none;"></span>
+    <span class="sep" id="bcSep3" style="display:none;">›</span><span id="bcChap" style="display:none;"></span>
+  </div>
+
+  <div class="zy-row" style="justify-content: space-between; margin-bottom: 12px;">
+    <div><h1 class="zy-page-title">📊 考试中心管理</h1><p class="zy-page-sub">按主题 → 阶段 → 章 逐级配置考试 · 题目可在多层级共享抽取</p></div>
+  </div>
+
+  <!-- Level 1: 主题 -->
+  <section id="lvTheme">
+    <h2 class="zy-section-title">选择主题</h2>
+    <div class="zy-grid cols-md-3">
+      <div class="zy-card zy-level-card" data-drill-stage="EC" data-name="电商">
+        <div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
+          <div><div class="zy-level-card-title">🛒 电商 EC</div><div class="zy-helper">3 阶段 · 12 章 · 56 节</div></div>
+          <span class="zy-tag zy-tag-success">已发布</span>
+        </div>
+        <div class="zy-helper" style="margin-top:6px;">已配置：阶段考 ×3 · 章测 ×8 · 节末小测 ×56</div>
+      </div>
+      <div class="zy-card zy-level-card" data-drill-stage="FC" data-name="工厂">
+        <div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
+          <div><div class="zy-level-card-title">🏭 工厂 FC</div><div class="zy-helper">3 阶段 · 11 章 · 48 节</div></div>
+          <span class="zy-tag zy-tag-success">已发布</span>
+        </div>
+        <div class="zy-helper" style="margin-top:6px;">已配置：阶段考 ×3 · 章测 ×7 · 节末小测 ×48</div>
+      </div>
+      <div class="zy-card zy-level-card" data-drill-stage="HSK" data-name="HSK 应试">
+        <div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
+          <div><div class="zy-level-card-title">🎓 HSK 应试</div><div class="zy-helper">6 阶段 · 30 章 · 180 节</div></div>
+          <span class="zy-tag zy-tag-success">已发布</span>
+        </div>
+        <div class="zy-helper" style="margin-top:6px;">含 HSK 模考 ×6（仅本主题可见）</div>
+      </div>
+      <div class="zy-card zy-level-card" data-drill-stage="DL" data-name="日常">
+        <div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
+          <div><div class="zy-level-card-title">🏡 日常 DL</div><div class="zy-helper">2 阶段 · 8 章 · 32 节</div></div>
+          <span class="zy-tag">草稿</span>
+        </div>
+        <div class="zy-helper" style="margin-top:6px;">已配置：阶段考 ×1 · 章测 ×4 · 节末小测 ×30</div>
+      </div>
+      <div class="zy-card zy-level-card" data-drill-stage="SH" data-name="共享 SH">
+        <div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
+          <div><div class="zy-level-card-title">🌐 共享 SH</div><div class="zy-helper">基础知识池（无阶段考）</div></div>
+          <span class="zy-tag zy-tag-info">题库</span>
+        </div>
+        <div class="zy-helper" style="margin-top:6px;">仅作为题库被其他主题引用，本主题不直接配置考试。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Level 2: 阶段 -->
+  <section id="lvStage" style="display:none;">
+    <div class="zy-row" style="justify-content:space-between;margin:8px 0 12px;">
+      <h2 class="zy-section-title" style="margin:0;">阶段列表 · <span id="lvStageTheme"></span></h2>
+      <button class="zy-btn zy-btn-ghost" data-back="theme">← 返回主题</button>
+    </div>
+    <div class="zy-grid cols-md-2" id="stageList"></div>
+  </section>
+
+  <!-- Level 3: 章 -->
+  <section id="lvChap" style="display:none;">
+    <div class="zy-row" style="justify-content:space-between;margin:8px 0 12px;">
+      <h2 class="zy-section-title" style="margin:0;">章列表 · <span id="lvChapStage"></span></h2>
+      <button class="zy-btn zy-btn-ghost" data-back="stage">← 返回阶段</button>
+    </div>
+    <div class="zy-grid cols-md-2" id="chapList"></div>
+  </section>
+
+  <!-- Level 4: 节（只读） -->
+  <section id="lvLesson" style="display:none;">
+    <div class="zy-row" style="justify-content:space-between;margin:8px 0 12px;">
+      <h2 class="zy-section-title" style="margin:0;">节列表（只读）· <span id="lvLessonChap"></span></h2>
+      <button class="zy-btn zy-btn-ghost" data-back="chap">← 返回章</button>
+    </div>
+    <p class="zy-helper" style="margin-bottom:12px;">节末小测在 <a href="P-A-3-节编辑.html">P-A-3 节编辑</a> 中配置（每个节自带一个小测题包）。本页仅展示。</p>
+    <div class="zy-grid cols-md-2" id="lessonList"></div>
+  </section>
+</div>
+
+</div></div>
+
+<!-- 配置阶段考试 Drawer -->
+<div class="zy-drawer-mask" id="dStageExam">
+  <aside class="zy-drawer">
+    <div class="zy-drawer-head"><div class="zy-drawer-title">配置阶段考试</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-drawer-body">
+      <label class="zy-label zy-required" style="display:block;margin:0 0 6px;">考试名称（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:12px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="电商 · 阶段一阶段考" /></div>
+        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="EC · Stage 1 Exam" /></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="EC · Bài thi giai đoạn 1" /></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="EC · ข้อสอบระยะที่ 1" /></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="EC · Ujian Tahap 1" /></div>
+      </div>
+      <div class="zy-grid cols-md-2">
+        <div class="zy-field"><label class="zy-label zy-required">题量</label><input class="zy-input" type="number" value="40" /></div>
+        <div class="zy-field"><label class="zy-label zy-required">时长（分钟）</label><input class="zy-input" type="number" value="60" /></div>
+        <div class="zy-field"><label class="zy-label">及格分（%）</label><input class="zy-input" type="number" value="60" /></div>
+        <div class="zy-field"><label class="zy-label">是否必考</label><select class="zy-select"><option selected>必考（解锁下一阶段）</option><option>选考</option></select></div>
+      </div>
+      <div class="zy-field"><label class="zy-label">题型分布（自动按题型平衡）</label>
+        <div class="zy-row" style="flex-wrap:wrap;gap:8px;">
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 听音选词</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 选声调</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 完形填空</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 配对</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 排序</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" /> 中译外</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" /> 阅读选择</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" /> 跟读</label>
+          <label class="zy-row"><input type="checkbox" class="zy-check" /> 听写</label>
+        </div>
+      </div>
+      <div class="zy-field"><label class="zy-label">抽取范围</label>
+        <select class="zy-select"><option selected>本阶段所有章/节的题目</option><option>跨阶段允许（含已学过的）</option></select>
+        <div class="zy-helper">题目允许同时被节末小测/章测/阶段考/HSK 模考共池抽取，不再单独维护题库。</div>
+      </div>
+    </div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="阶段考已保存" data-toast-type="success">保存</button></div>
+  </aside>
+</div>
+
+<!-- 配置章测 Drawer -->
+<div class="zy-drawer-mask" id="dChapExam">
+  <aside class="zy-drawer">
+    <div class="zy-drawer-head"><div class="zy-drawer-title">配置章测</div><button class="zy-modal-close" data-close-modal>×</button></div>
+    <div class="zy-drawer-body">
+      <label class="zy-label zy-required" style="display:block;margin:0 0 6px;">章测名称（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:12px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="第 1 章 · 章测" /></div>
+        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="Chapter 1 · Test" /></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="Chương 1 · Kiểm tra" /></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="บทที่ 1 · ทดสอบ" /></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="Bab 1 · Tes" /></div>
+      </div>
+      <div class="zy-grid cols-md-2">
+        <div class="zy-field"><label class="zy-label zy-required">题量</label><input class="zy-input" type="number" value="20" /></div>
+        <div class="zy-field"><label class="zy-label zy-required">时长（分钟）</label><input class="zy-input" type="number" value="25" /></div>
+        <div class="zy-field"><label class="zy-label">及格分（%）</label><input class="zy-input" type="number" value="60" /></div>
+        <div class="zy-field"><label class="zy-label">解锁条件</label><select class="zy-select"><option selected>本章所有节完成</option><option>无</option></select></div>
+      </div>
+      <p class="zy-helper">题目从「本章下属节关联的题目」中抽取，与节末小测、阶段考共池。</p>
+    </div>
+    <div class="zy-drawer-foot"><button class="zy-btn zy-btn-ghost" data-close-modal>取消</button><button class="zy-btn zy-btn-primary" data-close-modal data-toast="章测已保存" data-toast-type="success">保存</button></div>
+  </aside>
+</div>
+
+<script src="_assets/prototype.js"></script>
+<script>
+(function(){
+  // 简化的 mock 数据
+  const stages = {
+    EC: [{id:'EC-S1', name:'阶段一 · 基础', cn:3, hasExam:true},{id:'EC-S2', name:'阶段二 · 进阶', cn:5, hasExam:true},{id:'EC-S3', name:'阶段三 · 高阶', cn:4, hasExam:false}],
+    FC: [{id:'FC-S1', name:'阶段一 · 入厂常用', cn:4, hasExam:true},{id:'FC-S2', name:'阶段二 · 安全规范', cn:4, hasExam:true},{id:'FC-S3', name:'阶段三 · 设备与流程', cn:3, hasExam:false}],
+    HSK: [{id:'HSK-1', name:'HSK 1', cn:5, hasExam:true},{id:'HSK-2', name:'HSK 2', cn:5, hasExam:true},{id:'HSK-3', name:'HSK 3', cn:5, hasExam:true},{id:'HSK-4', name:'HSK 4', cn:5, hasExam:true},{id:'HSK-5', name:'HSK 5', cn:5, hasExam:true},{id:'HSK-6', name:'HSK 6', cn:5, hasExam:true}],
+    DL: [{id:'DL-S1', name:'阶段一 · 日常对话', cn:4, hasExam:true},{id:'DL-S2', name:'阶段二 · 出行/购物', cn:4, hasExam:false}],
+    SH: []
+  };
+  const themeName = {EC:'电商 EC', FC:'工厂 FC', HSK:'HSK 应试', DL:'日常 DL', SH:'共享 SH'};
+
+  function show(level){
+    ['lvTheme','lvStage','lvChap','lvLesson'].forEach(id=>document.getElementById(id).style.display='none');
+    document.getElementById('lv'+level[0].toUpperCase()+level.slice(1)).style.display='block';
+    // breadcrumb
+    const map = {theme:1, stage:2, chap:3, lesson:4};
+    const lv = map[level];
+    ['bcSep1','bcTheme','bcSep2','bcStage','bcSep3','bcChap'].forEach(id=>document.getElementById(id).style.display='none');
+    if(lv>=2){document.getElementById('bcSep1').style.display=''; document.getElementById('bcTheme').style.display='';}
+    if(lv>=3){document.getElementById('bcSep2').style.display=''; document.getElementById('bcStage').style.display='';}
+    if(lv>=4){document.getElementById('bcSep3').style.display=''; document.getElementById('bcChap').style.display='';}
+  }
+
+  // 主题点击
+  document.querySelectorAll('[data-drill-stage]').forEach(card=>{
+    card.addEventListener('click', e=>{
+      const t = card.getAttribute('data-drill-stage');
+      const name = card.getAttribute('data-name');
+      document.getElementById('bcTheme').textContent = name;
+      document.getElementById('lvStageTheme').textContent = name;
+      const list = document.getElementById('stageList');
+      list.innerHTML = '';
+      const arr = stages[t] || [];
+      if(!arr.length){ list.innerHTML = '<div class="zy-card"><p class="zy-helper">本主题无阶段（仅作为共享题库）。</p></div>'; }
+      arr.forEach(s=>{
+        const c = document.createElement('div');
+        c.className = 'zy-card zy-level-card';
+        c.innerHTML = `<div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
+          <div><div class="zy-level-card-title">${s.name}</div><div class="zy-helper">${s.cn} 章 · ${s.hasExam?'<span class="zy-tag zy-tag-success">已配置阶段考</span>':'<span class="zy-tag">未配置</span>'}</div></div>
+        </div>
+        <div class="zy-row" style="margin-top:10px;gap:8px;">
+          <button class="zy-btn zy-btn-sm zy-btn-primary" data-stop>${s.hasExam?'编辑阶段考':'➕ 配置阶段考'}</button>
+          <button class="zy-btn zy-btn-sm zy-btn-ghost" data-drill="chap" data-stage="${s.id}" data-name="${s.name}">查看章 →</button>
+        </div>`;
+        list.appendChild(c);
+      });
+      list.querySelectorAll('[data-stop]').forEach(b=>b.addEventListener('click', ev=>{ev.stopPropagation(); document.getElementById('dStageExam').classList.add('open');}));
+      list.querySelectorAll('[data-drill="chap"]').forEach(b=>b.addEventListener('click', ev=>{
+        ev.stopPropagation();
+        document.getElementById('bcStage').textContent = b.getAttribute('data-name');
+        document.getElementById('lvChapStage').textContent = b.getAttribute('data-name');
+        const cl = document.getElementById('chapList');
+        cl.innerHTML = '';
+        for(let i=1;i<=4;i++){
+          const cc = document.createElement('div');
+          cc.className = 'zy-card zy-level-card';
+          const has = i<=2;
+          cc.innerHTML = `<div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
+            <div><div class="zy-level-card-title">第 ${i} 章 · 示例章名</div><div class="zy-helper">5 节 · ${has?'<span class="zy-tag zy-tag-success">已配置章测</span>':'<span class="zy-tag">未配置</span>'}</div></div>
+          </div>
+          <div class="zy-row" style="margin-top:10px;gap:8px;">
+            <button class="zy-btn zy-btn-sm zy-btn-primary" data-stop>${has?'编辑章测':'➕ 配置章测'}</button>
+            <button class="zy-btn zy-btn-sm zy-btn-ghost" data-drill="lesson" data-name="第 ${i} 章">查看节 →</button>
+          </div>`;
+          cl.appendChild(cc);
+        }
+        cl.querySelectorAll('[data-stop]').forEach(b2=>b2.addEventListener('click', ev2=>{ev2.stopPropagation(); document.getElementById('dChapExam').classList.add('open');}));
+        cl.querySelectorAll('[data-drill="lesson"]').forEach(b2=>b2.addEventListener('click', ev2=>{
+          ev2.stopPropagation();
+          document.getElementById('bcChap').textContent = b2.getAttribute('data-name');
+          document.getElementById('lvLessonChap').textContent = b2.getAttribute('data-name');
+          const ll = document.getElementById('lessonList');
+          ll.innerHTML = '';
+          for(let j=1;j<=5;j++){
+            const lc = document.createElement('div');
+            lc.className = 'zy-card zy-level-card';
+            lc.innerHTML = `<div class="zy-row" style="justify-content:space-between;align-items:flex-start;">
+              <div><div class="zy-level-card-title">${j}. 示例节名</div><div class="zy-helper">已绑定 8 个 KP · 自带节末小测</div></div>
+              <span class="zy-tag zy-tag-success">已发布</span>
+            </div>
+            <div class="zy-row" style="margin-top:10px;gap:8px;">
+              <a class="zy-btn zy-btn-sm zy-btn-ghost" href="P-A-3-节编辑.html">去节编辑 →</a>
+            </div>`;
+            ll.appendChild(lc);
+          }
+          show('lesson');
+        }));
+        show('chap');
+      }));
+      show('stage');
+    });
+  });
+
+  // 返回
+  document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click', ()=>{
+    show(b.getAttribute('data-back'));
+  }));
+
+  // 面包屑根点击
+  document.getElementById('bcRoot').style.cursor='pointer';
+  document.getElementById('bcRoot').addEventListener('click', ()=>show('theme'));
+})();
+</script>
+</body></html>

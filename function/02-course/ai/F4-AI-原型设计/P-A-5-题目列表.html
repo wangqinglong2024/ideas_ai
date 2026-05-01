@@ -26,7 +26,7 @@
   <div class="zy-bread"><span data-nav="/admin/course">课程</span><span class="sep">›</span><span class="cur">题目</span></div>
 
   <div class="zy-row" style="justify-content: space-between; margin-bottom: 12px;">
-    <div><h1 class="zy-page-title">📝 题目列表</h1><p class="zy-page-sub">14,236 题 · 9 种题型 · payload_hash 自动去重 · 题目可同时隶属多个 <code>exam_scope</code></p></div>
+    <div><h1 class="zy-page-title">📝 题目列表</h1><p class="zy-page-sub">14,236 题 · 9 种题型 · payload_hash 自动去重 · 题目可被多个层级同时抽取</p></div>
     <div class="zy-row">
       <button class="zy-btn zy-btn-ghost" data-toast="导出当前筛选结果（json）">⬇ 导出</button>
       <button class="zy-btn zy-btn-primary" data-open-drawer="dQEdit">➕ 新建题</button>
@@ -36,28 +36,28 @@
   <div class="zy-card" style="margin-bottom: 16px;">
     <div class="zy-row">
       <input class="zy-input" placeholder="🔍 搜索题面 / KP 编码" style="flex:1; min-width: 220px;" />
-      <select class="zy-select" style="width: 140px;"><option>全部题型</option><option>listen_pick</option><option>tone_pick</option><option>cloze</option><option>match</option><option>order</option><option>trans_zh_en</option><option>read_choice</option><option>speak_repeat</option><option>write_dict</option></select>
+      <select class="zy-select" style="width: 140px;"><option>全部题型</option><option>听音选词</option><option>选声调</option><option>完形填空</option><option>配对</option><option>排序</option><option>中译外</option><option>阅读选择</option><option>跟读</option><option>听写</option></select>
       <select class="zy-select" style="width: 140px;"><option>全部主题</option><option>SH</option><option>EC</option><option>FC</option><option>HSK</option><option>DL</option></select>
-      <select class="zy-select" style="width: 160px;"><option>全部使用范围</option><option>practice 练习池</option><option>lesson_quiz 节末测</option><option>chapter_test 章测</option><option>stage_exam 阶段考</option><option>hsk_mock HSK模考</option></select>
+      <select class="zy-select" style="width: 160px;"><option>全部使用层级</option><option>节末小测</option><option>章测</option><option>阶段考</option><option>HSK 模考</option></select>
       <select class="zy-select" style="width: 130px;"><option>全部状态</option><option>已审</option><option>草稿</option></select>
       <button class="zy-btn zy-btn-ghost" data-toast="筛选已应用">应用</button>
     </div>
-    <div class="zy-helper" style="margin-top:8px;">⚠ <strong>exam_scope</strong> 决定题目在哪些场景被抽取：<code>practice</code>+<code>lesson_quiz</code> 共享题池；<code>chapter_test</code> / <code>stage_exam</code> / <code>hsk_mock</code> 各自独立题池，避免高阶考试与日常练习题重复。</div>
+    <div class="zy-helper" style="margin-top:8px;">ℹ 题目可被节末小测 / 章测 / 阶段考 / HSK 模考 共享抽取（允许重复出现）。不再区分独立题池，管理上只需勾选该题可被哪些层级抽到。</div>
   </div>
 
   <div class="zy-table-wrap">
     <table class="zy-table zy-table-stack">
-      <thead><tr><th style="width:40px;"><input type="checkbox" class="zy-check" /></th><th>ID</th><th>题型<span class="zy-i18n-badge" title="应用端需多语显示"></span></th><th>题面摘要</th><th>所属 KP</th><th>主题</th><th>exam_scope</th><th>状态</th><th style="width:160px;">操作</th></tr></thead>
+      <thead><tr><th style="width:40px;"><input type="checkbox" class="zy-check" /></th><th>ID</th><th>题型</th><th>题面摘要</th><th>所属 KP</th><th>主题</th><th>可抽层级</th><th>状态</th><th style="width:160px;">操作</th></tr></thead>
       <tbody>
-        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8821</code></td><td data-label="题型"><span class="zy-tag zy-tag-info">listen_pick</span></td><td data-label="题面">请选择听到的词：早上 / 晚上 / 中午 / 下午</td><td data-label="KP">kp-zaoshang</td><td data-label="主题">EC</td><td data-label="exam_scope"><span class="zy-tag" title="practice">P</span><span class="zy-tag" title="lesson_quiz">L</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已审</span></td>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8821</code></td><td data-label="题型"><span class="zy-tag zy-tag-info">听音选词</span></td><td data-label="题面">请选择听到的词：早上 / 晚上 / 中午 / 下午</td><td data-label="KP">kp-zaoshang</td><td data-label="主题">EC</td><td data-label="可抽层级"><span class="zy-tag">节末</span><span class="zy-tag">章测</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已审</span></td>
           <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
-        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8822</code></td><td data-label="题型"><span class="zy-tag">tone_pick</span></td><td data-label="题面">「早」的声调？1/2/3/4 声</td><td data-label="KP">kp-zaoshang</td><td data-label="主题">EC</td><td data-label="exam_scope"><span class="zy-tag" title="practice">P</span><span class="zy-tag" title="chapter_test">C</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已审</span></td>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8822</code></td><td data-label="题型"><span class="zy-tag">选声调</span></td><td data-label="题面">「早」的声调？1/2/3/4 声</td><td data-label="KP">kp-zaoshang</td><td data-label="主题">EC</td><td data-label="可抽层级"><span class="zy-tag">节末</span><span class="zy-tag">章测</span><span class="zy-tag">阶段考</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已审</span></td>
           <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
-        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8823</code></td><td data-label="题型"><span class="zy-tag">cloze</span></td><td data-label="题面">____ 好，老板！（早上）</td><td data-label="KP">kp-zaoshanghao</td><td data-label="主题">EC</td><td data-label="exam_scope"><span class="zy-tag" title="stage_exam">S</span></td><td data-label="状态"><span class="zy-tag">草稿</span></td>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8823</code></td><td data-label="题型"><span class="zy-tag">完形填空</span></td><td data-label="题面">____ 好，老板！（早上）</td><td data-label="KP">kp-zaoshanghao</td><td data-label="主题">EC</td><td data-label="可抽层级"><span class="zy-tag">阶段考</span></td><td data-label="状态"><span class="zy-tag">草稿</span></td>
           <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
-        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8824</code></td><td data-label="题型"><span class="zy-tag">match</span></td><td data-label="题面">中文 ↔ 英文 配对（早上 / 谢谢 / 再见 / 晚上）</td><td data-label="KP">kp-share</td><td data-label="主题">SH</td><td data-label="exam_scope"><span class="zy-tag" title="practice">P</span><span class="zy-tag" title="lesson_quiz">L</span><span class="zy-tag" title="chapter_test">C</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已审</span></td>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8824</code></td><td data-label="题型"><span class="zy-tag">配对</span></td><td data-label="题面">中文 ↔ 英文 配对（早上 / 谢谢 / 再见 / 晚上）</td><td data-label="KP">kp-share</td><td data-label="主题">SH</td><td data-label="可抽层级"><span class="zy-tag">节末</span><span class="zy-tag">章测</span><span class="zy-tag">阶段考</span></td><td data-label="状态"><span class="zy-tag zy-tag-success">已审</span></td>
           <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
-        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8825</code></td><td data-label="题型"><span class="zy-tag">order</span></td><td data-label="题面">排序：早 / 上 / 好 → 早上好</td><td data-label="KP">kp-zaoshanghao</td><td data-label="主题">HSK</td><td data-label="exam_scope"><span class="zy-tag" title="hsk_mock">H</span></td><td data-label="状态"><span class="zy-tag">草稿</span></td>
+        <tr><td data-label="选"><input type="checkbox" class="zy-check"/></td><td data-label="ID"><code>q_8825</code></td><td data-label="题型"><span class="zy-tag">排序</span></td><td data-label="题面">排序：早 / 上 / 好 → 早上好</td><td data-label="KP">kp-zaoshanghao</td><td data-label="主题">HSK</td><td data-label="可抽层级"><span class="zy-tag">HSK 模考</span></td><td data-label="状态"><span class="zy-tag">草稿</span></td>
           <td data-label="操作"><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-drawer="dQEdit">编辑</button><button class="zy-btn zy-btn-sm zy-btn-ghost" data-open-modal="mPreview">预览</button><button class="zy-btn zy-btn-sm zy-btn-danger" data-open-modal="mDel">删</button></td></tr>
       </tbody>
     </table>
@@ -77,20 +77,26 @@
     <div class="zy-drawer-head"><div class="zy-drawer-title">编辑题目 · q_8821</div><button class="zy-modal-close" data-close-modal>×</button></div>
     <div class="zy-drawer-body">
       <div class="zy-grid cols-md-2">
-        <div class="zy-field"><label class="zy-label zy-required">题型</label><select class="zy-select"><option selected>listen_pick</option><option>tone_pick</option><option>cloze</option><option>match</option></select></div>
+        <div class="zy-field"><label class="zy-label zy-required">题型</label><select class="zy-select"><option selected>听音选词</option><option>选声调</option><option>完形填空</option><option>配对</option><option>排序</option><option>中译外</option><option>阅读选择</option><option>跟读</option><option>听写</option></select></div>
         <div class="zy-field"><label class="zy-label zy-required">所属 KP</label><input class="zy-input" value="kp-zaoshang" /></div>
         <div class="zy-field"><label class="zy-label zy-required">主题</label><select class="zy-select"><option>SH</option><option selected>EC</option><option>FC</option><option>HSK</option><option>DL</option></select></div>
-        <div class="zy-field"><label class="zy-label zy-required">使用范围 exam_scope <span class="zy-helper">可多选</span></label>
+        <div class="zy-field"><label class="zy-label zy-required">可抽层级 <span class="zy-helper">可多选，表示本题允许出现在哪些层级</span></label>
           <div class="zy-row" style="flex-wrap:wrap;gap:8px;">
-            <label class="zy-row"><input type="checkbox" class="zy-check" checked /> practice</label>
-            <label class="zy-row"><input type="checkbox" class="zy-check" checked /> lesson_quiz</label>
-            <label class="zy-row"><input type="checkbox" class="zy-check" /> chapter_test</label>
-            <label class="zy-row"><input type="checkbox" class="zy-check" /> stage_exam</label>
-            <label class="zy-row"><input type="checkbox" class="zy-check" /> hsk_mock</label>
+            <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 节末小测</label>
+            <label class="zy-row"><input type="checkbox" class="zy-check" checked /> 章测</label>
+            <label class="zy-row"><input type="checkbox" class="zy-check" /> 阶段考</label>
+            <label class="zy-row"><input type="checkbox" class="zy-check" /> HSK 模考</label>
           </div>
         </div>
       </div>
-      <div class="zy-field"><label class="zy-label zy-required">题面（zh）</label><input class="zy-input" value="请选择你听到的词语：" /></div>
+      <label class="zy-label zy-required" style="display:block;margin:8px 0 6px;">题面（5 语言）</label>
+      <div class="zy-i18n-grid" style="margin-bottom:12px;">
+        <div class="zy-field"><label class="zy-label">中文</label><input class="zy-input" value="请选择你听到的词语：" /></div>
+        <div class="zy-field"><label class="zy-label">English</label><input class="zy-input" value="Pick the word you hear:" /></div>
+        <div class="zy-field"><label class="zy-label">Tiếng Việt</label><input class="zy-input" value="Chọn từ bạn nghe được:" /></div>
+        <div class="zy-field"><label class="zy-label">ภาษาไทย</label><input class="zy-input" value="เลือกคำที่คุณได้ยิน:" /></div>
+        <div class="zy-field"><label class="zy-label">Bahasa Indonesia</label><input class="zy-input" value="Pilih kata yang Anda dengar:" /></div>
+      </div>
 
       <h3 style="margin: 16px 0 8px; font-size: 14px;">payload (JSON 配置)</h3>
       <div class="zy-field"><label class="zy-label">音频</label><div class="zy-row"><input class="zy-input" value="cdn://media/zaoshang.mp3" /><button class="zy-btn zy-btn-ghost" data-toast="🔊 播放">🔊</button></div></div>
@@ -103,7 +109,8 @@
           <button class="zy-btn zy-btn-ghost zy-btn-sm" data-toast="增加选项">➕ 增加选项</button>
         </div>
       </div>
-      <div class="zy-field"><label class="zy-label">解析（feedback）</label><textarea class="zy-textarea">「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。</textarea></div>
+      <div class="zy-field"><label class="zy-label">解析 feedback（5 语言，本例仅示中文）</label><textarea class="zy-textarea">「早上」zǎo shang 表示早晨（morning），常和「好」搭配作问候语。</textarea>
+        <div class="zy-helper">其他语言 fallback 到 zh；可点击「为 4 语言生成」后手工调整。</div></div>
 
       <div class="zy-divider"></div>
       <div class="zy-row" style="font-size: 12px; color: var(--zy-fg-mute);">
