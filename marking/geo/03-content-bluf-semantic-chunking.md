@@ -279,7 +279,7 @@ Sources: Hanban Official Vocabulary List (2024), CTCSOL Standard (2024)
 |------|-----|------|
 | Hub 页 (HSK/Hanzi/Discover/Courses) | 4 | 最高优先 |
 | HSK 1-9 Pillar | 9 | 关键词承接 |
-| 文化 12 类目 Pillar | 12 | GEO 引用源 |
+| 文化 12 类目 Pillar | 12 | GEO 引用源；下挂发现中国无限滚动文章池 |
 | 高流量长文 | 50 | 已有流量页优先 |
 | 高流量词条 | 100 | Top 100 词 |
 | 课程介绍页 | 4 | 转化页 |

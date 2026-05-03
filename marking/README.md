@@ -61,8 +61,8 @@
 
 ### 1.1 产品现状（2026 Q2）
 
-- **正在上线**：发现中国（12 类目、首期每类目 12 篇，后续按热点持续滚动更新）+ 系统课程（4 轨 × 12 阶段 × 12 章 × 12 节 × 12 知识点 ≈ 5-6 万独立内容）
-- **未来 12 个月扩展**：小说专区（12 大类）+ 游戏专区（12 款）
+- **正在上线**：发现中国（12 类目、首期每类目 12 篇、每篇 120 句，后续按热点持续滚动更新）+ 系统课程（4 轨 × 12 阶段 × 12 章 × 12 节 × 12 知识点 ≈ 5-6 万独立内容）
+- **未来 12 个月扩展**：小说专区（未来按内容池滚动规划，不设固定总量）+ 游戏专区（12 款）
 - **技术栈**：Next.js + React + Supabase + Tencent Cloud（参见 [system/](../system/)）
 
 ### 1.2 目标用户画像（按地区分层）
@@ -100,7 +100,7 @@
   ▼    ▼    ▼                ▼      ▼      ▼              ▼     ▼     ▼
  程序化 文化  HSK/词条        BLUF  llms.txt 第三方        UGC   挑战  Reddit
  SEO    长文  字典页          短答  + Schema 协同          模板  赛   AMA
- 5万页  滚动文化库 1万页                     维基/PR
+ 5万页  滚动文化库                         维基/PR
        │                            │                            │
        └────────────────────────────┼────────────────────────────┘
                                     ▼
@@ -122,7 +122,7 @@
 
 #### 第二层：GEO AI 引擎引用（占预期流量 50%、转化率 5×）
 
-- **打法**：把发现中国滚动文化文章 + 5 万词条页全部按 BLUF + 事实密度 + Schema 标准重写，并在 Reddit/Wikipedia/YouTube 三大引用源建立"实体协同"
+- **打法**：把发现中国滚动文化文章 + 5 万词条页全部按 BLUF + 事实密度 + Schema 标准生成，并在 Reddit/Wikipedia/YouTube 三大引用源建立"实体协同"；文化与课程内容默认避开东南亚市场敏感议题和成人性内容
 - **代表场景**：用户在 ChatGPT 问 `best app to learn HSK 4 vocabulary 2026` → 答案中引用 Zhiyu
 - **关键文档**：[geo/03-content-bluf-semantic-chunking.md](./geo/03-content-bluf-semantic-chunking.md)、[geo/04-citation-platforms-reddit-wikipedia.md](./geo/04-citation-platforms-reddit-wikipedia.md)
 

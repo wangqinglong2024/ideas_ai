@@ -35,7 +35,7 @@
 |---------|------|------|
 | 首页、品牌页 | **SSG** | 静态、CDN 缓存极快 |
 | 词条页（5 万）| **SSG + ISR** (revalidate: 7d) | 量大、低频更新 |
-| 发现中国文化文章（首期 144，持续更新） | **SSG + ISR** (revalidate: 1d) | 中频更新 |
+| 发现中国文化文章（首期 144 冷启动，持续滚动更新） | **SSG + ISR** (revalidate: 1d) | 中频更新 |
 | 课程目录页 | **SSG + ISR** (revalidate: 1h) | 半动态 |
 | 个人中心、学习记录 | **CSR** (no SEO) | 用户私有 |
 | 搜索结果页 | **SSR** + noindex | 动态 + 不索引 |
@@ -121,7 +121,7 @@ https://zhiyu.app/th/hsk/4/               # 泰语版
 ```
 /sitemap.xml              ← Sitemap Index
   ├── /sitemap-pages.xml          (静态页 ~50)
-  ├── /sitemap-discover.xml       (发现中国文化文章，首期 144 + 持续更新)
+  ├── /sitemap-discover.xml       (发现中国文化文章，首期 144 冷启动 + 持续滚动更新)
   ├── /sitemap-hsk.xml            (HSK 词条 ~10000)
   ├── /sitemap-hanzi.xml          (汉字页 ~8000)
   ├── /sitemap-hanzi-2.xml        (汉字页第二批)

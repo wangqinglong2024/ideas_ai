@@ -40,7 +40,8 @@ china_categories（固定 12 个主题）
 | 文章 code | AI 不生成，由 `fn_gen_article_code()` 入库时生成 12 位稳定编码 |
 | 句子顺序 | JSON 写 `seq_in_article`，导入脚本按顺序写入 DB `seq_no` |
 | 多语言 | `zh/en/vi/th/id` 5 语言全齐；中文用简体和全角标点 |
-| SEO/GEO | 每篇 JSON 必带 `seo` 与 `geo` 元数据；第 1 句必须是 BLUF 答案句 |
+| SEO/GEO | 每篇 JSON 内嵌 `seo` 与 `geo` 元数据；第 1 句必须是 BLUF 答案句；不得另拆外置 GEO 内容包 |
+| 内容安全 | 面向东南亚首发市场，避开政治、宗教、民族、领土争议、成人性内容和色情暗示 |
 
 ### 3. 输出位置
 
