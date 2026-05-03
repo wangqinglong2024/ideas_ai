@@ -90,17 +90,4 @@ content/01-china/data/articles/<类目编码>-<英文名>/
 
 ---
 
-## 任务模板（PM 派发给生成 AI 时用）
-
-```
-任务：为知语·发现中国生成数据
-范围：类目 [02 中国美食] 第 1 批，5 篇文章
-风格：每篇 8–12 句，第 1 句必须是 BLUF（一句话答案）
-输出：content/01-china/data/articles/02-cuisine/batch_<日期>_001.{articles,sentences,manifest}.{jsonl,json}
-约束：
-  - 文章主体围绕"八大菜系"，5 篇分别覆盖鲁/川/粤/苏/闽/浙/湘/徽 中的 5 个
-  - 标题 30% 用问句式（GEO 友好）
-  - 每条 sentence 中文 ≤ 80 字（GEO 引用单位）
-  - 5 语言全齐，越南语/泰语/印尼语必须本地口语化（不是直译）
-规范：严格遵守 content/00-总览-数据生成规范.md 与 content/01-china/dataspec/*
 ```
