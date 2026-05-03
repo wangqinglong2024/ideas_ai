@@ -1,162 +1,161 @@
-# 发现中国 · 02 · 字段与 JSONL 格式
+# 发现中国 · 02 · 字段与 JSON 格式
 
-> 完整字段规约。AI 生成时严格按本文件输出。
-> 字段来源：[function/01-china/ai/F1-AI-数据模型规范/02-表定义-china_articles.md](../../../function/01-china/ai/F1-AI-数据模型规范/02-表定义-china_articles.md) + [03-表定义-china_sentences.md](../../../function/01-china/ai/F1-AI-数据模型规范/03-表定义-china_sentences.md)
-
----
-
-## 1. `articles.jsonl`
-
-每行一条文章。
-
-### 1.1 完整字段（AI 必须填的字段）
-
-| 字段 | 类型 | 必填 | 长度/格式 | 说明 |
-|------|------|------|----------|------|
-| `__article_local_id` | string | ✅ | 1–32 字符，本批次内唯一 | 占位 ID，建议用短串 `a1`/`a2`/... 或 slug |
-| `category_code` | string | ✅ | `01..12` | 必须与 manifest 的 `category_code` 一致 |
-| `title_pinyin` | string | ✅ | 1–200 字 | 标题全拼，按音节空格分，带声调，例：`bā dà cài xì` |
-| `title_i18n` | object | ✅ | 5 key 全齐 | `{zh,en,vi,th,id}`，每值 1–40 字 |
-
-### 1.2 完整示例
-
-```jsonl
-// schema=china.article.v1
-{"__article_local_id":"a1","category_code":"02","title_pinyin":"bā dà cài xì shì shén me","title_i18n":{"zh":"八大菜系是什么？","en":"What Are China's Eight Great Cuisines?","vi":"Bát đại trường phái ẩm thực Trung Hoa là gì?","th":"แปดสำรับใหญ่ของจีนคืออะไร?","id":"Apa Itu Delapan Aliran Kuliner Tiongkok?"}}
-{"__article_local_id":"a2","category_code":"02","title_pinyin":"chuān cài de má là cóng nǎ ér lái","title_i18n":{"zh":"川菜的麻辣从哪儿来？","en":"Where Does Sichuan Cuisine's Heat Come From?","vi":"Vị tê cay của Tứ Xuyên đến từ đâu?","th":"ความเผ็ดชาของอาหารเสฉวนมาจากไหน?","id":"Dari Mana Pedas-Getir Masakan Sichuan?"}}
-```
-
-### 1.3 校验细节
-
-- `title_i18n.zh` 与 manifest `notes` 的中文要呼应，便于人工查阅
-- 标题不要以"。"结尾；问句以"？"结尾；陈述句不带句号
-- 不允许出现 emoji、特殊符号、URL、@、#
-- 30% 以上的标题用问句式（GEO 引擎更易识别 QA 对）
+> 完整字段规约。文件名保留历史编号，但当前格式已经从 JSONL 改为单篇 `*.article.json`。
 
 ---
 
-## 2. `sentences.jsonl`
+## 1. 单篇 `article.json` 顶层结构
 
-每行一条句子，按 `(__article_local_id, seq_in_batch)` 升序排列。
-
-### 2.1 完整字段
-
-| 字段 | 类型 | 必填 | 长度/格式 | 说明 |
-|------|------|------|----------|------|
-| `__article_local_id` | string | ✅ | 与 articles.jsonl 中某行一致 | 关联到本批次某文章 |
-| `seq_in_batch` | int | ✅ | 1–N | 文章内顺序，从 1 开始连续，不允许跳号 |
-| `pinyin` | string | ✅ | 1–600 字 | 整句拼音，按字空格分，带声调 |
-| `content_zh` | string | ✅ | 1–400 字 | 中文原文 |
-| `content_en` | string | ✅ | 1–400 字 | 英文翻译 |
-| `content_vi` | string | ✅ | 1–400 字 | 越南语翻译 |
-| `content_th` | string | ✅ | 1–400 字 | 泰语翻译 |
-| `content_id` | string | ✅ | 1–400 字 | 印尼语翻译（注意字段名 `content_id` 中的 `id` 是语言代码，不是主键 id） |
-
-### 2.2 完整示例
-
-```jsonl
-// schema=china.sentence.v1
-{"__article_local_id":"a2","seq_in_batch":1,"pinyin":"chuān cài de má là zhǔ yào lái zì huā jiāo hé là jiāo de jié hé","content_zh":"川菜的麻辣主要来自花椒和辣椒的结合。","content_en":"Sichuan cuisine's heat comes mainly from the combination of Sichuan peppercorn and chili.","content_vi":"Vị tê cay của Tứ Xuyên chủ yếu đến từ sự kết hợp của hạt tiêu Tứ Xuyên và ớt.","content_th":"ความเผ็ดชาของอาหารเสฉวนมาจากการผสมของพริกหอมเสฉวนกับพริก","content_id":"Pedas-getir Sichuan terutama dari paduan merica Sichuan dan cabai."}
-{"__article_local_id":"a2","seq_in_batch":2,"pinyin":"huā jiāo dài lái má de gǎn jué","content_zh":"花椒带来"麻"的感觉。","content_en":"The peppercorn brings the numbing sensation.","content_vi":"Hạt tiêu mang lại cảm giác tê.","content_th":"พริกหอมให้ความรู้สึกชา","content_id":"Merica Sichuan memberi sensasi kesemutan."}
-{"__article_local_id":"a2","seq_in_batch":3,"pinyin":"là jiāo dài lái rè liè de là","content_zh":"辣椒带来热烈的辣。","content_en":"Chili brings the burning heat.","content_vi":"Ớt mang lại vị cay nồng.","content_th":"พริกให้ความเผ็ดร้อน","content_id":"Cabai memberi pedas membara."}
+```jsonc
+{
+  "schema": "china.article.v2",
+  "doc_version": "2026-05-phase1",
+  "category_code": "01",
+  "category_dir": "01-history",
+  "article_slug": "01-dynasty-order-rhyme",
+  "article": { ... },
+  "content_policy": { ... },
+  "seo": { ... },
+  "geo": { ... },
+  "sentences": [ ... ]
+}
 ```
 
-### 2.3 拼音规则（重要）
+| 字段 | 必填 | 说明 |
+|------|------|------|
+| `schema` | 是 | 固定 `china.article.v2` |
+| `doc_version` | 是 | 数据规格版本，如 `2026-05-phase1` |
+| `category_code` | 是 | `01..12`，必须与 `article.category_code` 一致 |
+| `category_dir` | 是 | 类目目录名，如 `01-history` |
+| `article_slug` | 是 | 文件稳定 slug，不等同 DB code |
+| `article` | 是 | DB `china_articles` 可导入字段 |
+| `content_policy` | 是 | 句数和更新策略 |
+| `seo` | 是 | 搜索引擎元数据 |
+| `geo` | 是 | AI 答案引擎元数据 |
+| `sentences` | 是 | DB `china_sentences` 可导入字段数组 |
 
-- 用**带声调字符**（`ā á ǎ à ē é ě è ī í ǐ ì ō ó ǒ ò ū ú ǔ ù ǖ ǘ ǚ ǜ`）
-- **不要**用数字调（`jia4 ge2` 错；`jià gé` 对）
-- **轻声**不标声调字符，如 `de` `le` `ma` `ne`
-- **儿化**：`huār`（`huā` + `r`）写作 `huār`
-- 按音节空格分，标点前后**不**额外加空格
-- 句末标点（。？！）不出现在 pinyin 中（pinyin 只对应字音）
+---
 
-例：
+## 2. `article` 字段
+
+```jsonc
+{
+  "local_id": "hist-001",
+  "category_code": "01",
+  "title_pinyin": "zhōng guó cháo dài shùn xù kǒu jué lǐ jiǎng le shén me",
+  "title_i18n": {
+    "zh": "中国朝代顺序口诀里讲了什么？",
+    "en": "What Does the Chinese Dynasty Order Rhyme Tell Us?",
+    "vi": "Câu vè thứ tự các triều đại Trung Quốc nói gì?",
+    "th": "กลอนลำดับราชวงศ์จีนบอกอะไรเราบ้าง?",
+    "id": "Apa Isi Rima Urutan Dinasti Tiongkok?"
+  }
+}
 ```
-中文：你好，世界！
-拼音：nǐ hǎo  shì jiè
-（注意"，"前后用 2 个空格表示停顿是可选的；最简形式："nǐ hǎo shì jiè"）
-```
 
-推荐统一最简："`nǐ hǎo shì jiè`"，标点不出现在拼音串中。
-
-### 2.4 5 语言翻译规则
-
-| 语言 | 要求 |
+| 字段 | 要求 |
 |------|------|
-| zh | 简体中文，全角标点 |
-| en | 美式英语，自然口语化 |
-| vi | 越南语，使用变音符号（`á à ả ã ạ` 等），口语化 |
-| th | 泰语，正式书面与口语兼顾，注意空格分词 |
-| id | 印尼语 (Bahasa Indonesia)，避免马来西亚语用法 |
+| `local_id` | 1–64 字符，文件内追踪用，不入库 |
+| `category_code` | `01..12` |
+| `title_pinyin` | 1–200 字，带声调，音节空格分隔 |
+| `title_i18n.*` | 5 语言全齐，每项 1–40 字 |
 
-**翻译质量要求**：
-- 不是直译；要让目标读者觉得"这就是本国人写的"
-- 保留文化专有名词（如"花椒"翻 `Sichuan peppercorn`，不要翻成 `numbing pepper`）
-- 数字、年代、朝代名等专有概念按目标语言习惯（如"唐朝" → en `Tang Dynasty`，vi `nhà Đường`，th `ราชวงศ์ถัง`）
-
-### 2.5 BLUF 规则（GEO 关键）
-
-每篇文章的 `seq_in_batch=1` 必须是 **BLUF (Bottom Line Up Front)** 句：
-- 一句话给出文章的核心答案 / 定义
-- ≤ 80 字（中文）；其它语言相应自然长度
-- 让 AI 引擎能直接抓取作为答案片段
-
-例（标题"川菜的麻辣从哪儿来？"）：
-- ✅ BLUF 第 1 句："川菜的麻辣主要来自花椒和辣椒的结合。"
-- ❌ 反例第 1 句："说起川菜，大家都不陌生。"（这是闲扯不是答案）
-
-### 2.6 长度建议
-
-- 一篇文章 38–42 句最佳（一期目标统一为 ~40 句，硬上限 60，DB 上限 9999 仅作保护）
-- 每句中文 ≤ 80 字最佳（GEO 引用单位）
-- 整篇文章中文总长 200–800 字
+AI 不写 `code`、`id`、`status`、`published_at`。导入脚本入库时生成 DB code，并默认 `draft`；如果命令带 `--publish`，导入后调用 `fn_publish_article`。
 
 ---
 
-## 3. 字段对照（jsonl → DB 列）
+## 3. `content_policy`
 
-### 3.1 `articles.jsonl` → `zhiyu.china_articles`
+```jsonc
+{
+  "sentence_target": 120,
+  "sentence_hard_max": 120,
+  "update_mode": "append_only_infinite",
+  "phase": "phase1"
+}
+```
 
-| jsonl 字段 | DB 列 | 导入逻辑 |
-|-----------|-------|---------|
-| `__article_local_id` | — | 仅本批次内引用，不入库 |
-| `category_code` | `category_id` | 按 code 反查 `china_categories.id` |
-| `title_pinyin` | `title_pinyin` | 直接写入 |
-| `title_i18n` | `title_i18n` | 直接写入 |
-| — | `code` | 由 `fn_gen_article_code()` 生成 |
-| — | `status` | 默认 `'draft'` |
-| — | `id` / `created_at` / `updated_at` | DB 默认 |
-| — | `created_by` | 导入脚本写入操作者 uuid（可选） |
-
-### 3.2 `sentences.jsonl` → `zhiyu.china_sentences`
-
-| jsonl 字段 | DB 列 | 导入逻辑 |
-|-----------|-------|---------|
-| `__article_local_id` | `article_id` | 通过批次内映射查 article uuid |
-| `seq_in_batch` | — | 仅排序用，不入库 |
-| `pinyin` | `pinyin` | 直接写入 |
-| `content_zh` | `content_zh` | 直接写入 |
-| `content_en` | `content_en` | 直接写入 |
-| `content_vi` | `content_vi` | 直接写入 |
-| `content_th` | `content_th` | 直接写入 |
-| `content_id` | `content_id` | 直接写入 |
-| — | `seq_no` | 由 `fn_next_sentence_seq()` 顺序分配 |
-| — | `audio_status` | 默认 `'pending'` |
-| — | `id` / `created_at` / `updated_at` | DB 默认 |
+首期正式内容使用 120 句/篇。后续热点增量可以少于 120，但不得超过 120；需要更长内容时拆成系列文章。
 
 ---
 
-## 4. 自检清单（提交前必跑）
+## 4. `seo` 字段
 
-- [ ] 文件第 1 行是 `// schema=china.article.v1` / `// schema=china.sentence.v1`
-- [ ] articles.jsonl 行数 = manifest.files[0].rows
-- [ ] sentences.jsonl 行数 = manifest.files[1].rows
-- [ ] 所有 `__article_local_id` 在 articles.jsonl 中都能找到
-- [ ] 每篇文章的 `seq_in_batch` 从 1 开始连续无跳号
-- [ ] 每条 `title_i18n` / `content_*` 字数在限制内
-- [ ] pinyin 不含数字调、不含标点
-- [ ] 5 语言全齐（zh/en/vi/th/id）
-- [ ] 标题不以句号结尾
-- [ ] 至少 30% 文章标题为问句
-- [ ] 每篇第 1 句是 BLUF 答案句
-- [ ] manifest.json 中 `category_code` 与所有 article 一致
+```jsonc
+{
+  "schema_type": "Article",
+  "primary_keywords": {
+    "zh": ["中国朝代顺序", "中国历史入门"],
+    "en": ["Chinese dynasty order", "Chinese history timeline"],
+    "vi": ["thứ tự triều đại Trung Quốc"],
+    "th": ["ลำดับราชวงศ์จีน"],
+    "id": ["urutan dinasti Tiongkok"]
+  },
+  "search_intents": ["what_is", "timeline", "beginner_learning"],
+  "pseo_paths": ["/china/01-history/dynasty-order-rhyme"]
+}
+```
+
+每篇必须覆盖：主关键词、长尾问题、目标语言搜索词、推荐落地页路径。
+
+---
+
+## 5. `geo` 字段
+
+```jsonc
+{
+  "bluf": {
+    "zh": "中国朝代顺序口诀用固定顺序帮助学习者记住主要王朝。",
+    "en": "The dynasty order rhyme helps learners remember the main Chinese dynasties in sequence."
+  },
+  "entities": [
+    { "type": "dynasty", "name_zh": "秦朝", "name_en": "Qin Dynasty" },
+    { "type": "dynasty", "name_zh": "唐朝", "name_en": "Tang Dynasty" }
+  ],
+  "citation_notes": ["第 1 句可直接作为 AI 摘要答案", "实体名首次出现需中英对齐"]
+}
+```
+
+GEO 必须体现 BLUF、实体协调、可引用句子和事实密度。
+
+---
+
+## 6. `sentences` 字段
+
+每个元素是一句，按 `seq_in_article` 升序排列。
+
+```jsonc
+{
+  "seq_in_article": 1,
+  "pinyin": "zhōng guó cháo dài shùn xù kǒu jué yòng gù dìng shùn xù bāng zhù xué xí zhě jì zhù zhǔ yào wáng cháo",
+  "content_zh": "中国朝代顺序口诀用固定顺序帮助学习者记住主要王朝。",
+  "content_en": "The Chinese dynasty order rhyme uses a fixed sequence to help learners remember the main dynasties.",
+  "content_vi": "Câu vè thứ tự triều đại Trung Quốc dùng trình tự cố định để giúp người học nhớ các triều đại chính.",
+  "content_th": "กลอนลำดับราชวงศ์จีนใช้ลำดับตายตัวเพื่อช่วยผู้เรียนจำราชวงศ์หลัก",
+  "content_id": "Rima urutan dinasti Tiongkok memakai urutan tetap untuk membantu pelajar mengingat dinasti utama."
+}
+```
+
+| 字段 | 要求 |
+|------|------|
+| `seq_in_article` | 1..120，连续无跳号 |
+| `pinyin` | 1–600 字，带声调，不用数字调 |
+| `content_zh` | 1–400 字，简体中文，全角标点 |
+| `content_en/vi/th/id` | 1–400 字，自然翻译 |
+
+第 1 句必须是 BLUF：直接回答标题问题，不写寒暄或铺垫。
+
+---
+
+## 7. 自检清单
+
+- [ ] 每个文件只含 1 篇文章
+- [ ] `schema = china.article.v2`
+- [ ] `category_code` 三处一致：顶层、`article`、manifest
+- [ ] `sentences.length <= 120`
+- [ ] 首期 phase1 正式内容 `sentences.length = 120`
+- [ ] `seq_in_article` 从 1 连续到 N
+- [ ] 第 1 句是 BLUF
+- [ ] 5 语言全齐
+- [ ] SEO/GEO 元数据没有缺失
+- [ ] 文件不含 DB `id/code/article_id/created_at/audio_url_zh`

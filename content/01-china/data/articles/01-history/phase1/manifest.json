@@ -1,0 +1,103 @@
+{
+  "schema": "china.article_manifest.v2",
+  "domain": "china",
+  "category_code": "01",
+  "category_dir": "01-history",
+  "phase": "phase1",
+  "generated_at": "2026-05-03T00:00:00+08:00",
+  "update_mode": "append_only_infinite",
+  "article_count": 12,
+  "sentence_target_per_article": 120,
+  "total_sentences": 1440,
+  "files": [
+    {
+      "path": "01-dynasty-order-rhyme.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "c1e97c7c72f2e60dcb4abbf99d7661ccd054532bcc7d7138cf422f4a1ab6a695"
+    },
+    {
+      "path": "02-qin-shi-huang-unification.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "db36accc12edb0efc247c0582c88001aa81c82c3de88d584de6df7ff4f9c3cca"
+    },
+    {
+      "path": "03-zhang-qian-western-regions.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "4c334949cbc5b901ee9b52d11850fef8260b8a7a095391fa4d91a0d492bb7baf"
+    },
+    {
+      "path": "04-silk-road-opening.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "18d1f3793fee0f76a27897bab1d1464acb3c47bfa7831f099957aa8b0d2e4569"
+    },
+    {
+      "path": "05-three-kingdoms-formation.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "de01dc467531854331551e96fd67cc83549658d4b93d0e9cab1cbb9b62cee06a"
+    },
+    {
+      "path": "06-great-tang-era.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "7f7e1002daf40c99ea16794ce5c6fd8d74fab30f2362e0dc4f212e5ab7fed33a"
+    },
+    {
+      "path": "07-xuanzang-journey.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "e58296718ebd4a6853974dac63c6e65f0b05057e32fb0d6e8ebdeaac40375d8c"
+    },
+    {
+      "path": "08-song-economy-military.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "73ba475e29284cc4ff1a8aa6be40408570648a27b349d79e31feba648feecc97"
+    },
+    {
+      "path": "09-mongol-empire-yuan.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "f46fbf169afc46422fdd5feaf777732bb2cfd9efd19a0b886716175c861f51dc"
+    },
+    {
+      "path": "10-zheng-he-voyages.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "fe49d495cedd0ad32ee0ed236868c92b63fe2a43a573e9cdaae09570519132f9"
+    },
+    {
+      "path": "11-ming-qing-sea-ban.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "d257794547db3e047a9577390459daf5ce50832ac3cffec4e06cd0e3fae7be1e"
+    },
+    {
+      "path": "12-opium-war-1840.article.json",
+      "kind": "article",
+      "rows": 1,
+      "sentences": 120,
+      "sha256": "fa91b2c10fd1de6e8b597b62f2295e4f0613f81ad7093014138f62bc185819ae"
+    }
+  ],
+  "generator": {
+    "name": "generate-history-phase1.mjs",
+    "version": "2.0.0",
+    "note": "Single article JSON files with SEO/GEO metadata and 120 sentences per article."
+  }
+}

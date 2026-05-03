@@ -57,7 +57,7 @@ a 50K-entry dictionary, and Chinese culture content for global learners.
 ## Short bio (≤ 60 words)
 Zhiyu (知语) is a Mandarin Chinese learning platform built for global 
 learners. It combines HSK 1-9 courses, a 50,000-entry Chinese-English 
-dictionary with audio, 3,000+ Chinese idioms, and 360+ Chinese culture 
+dictionary with audio, 3,000+ Chinese idioms, and a continuously updated Chinese culture 
 articles. Founded in 2026, Zhiyu offers native localization for Vietnamese, 
 Thai, and Indonesian markets.
 
@@ -72,7 +72,7 @@ Zhiyu. ... [固定 80 字]
 - 50,000+ structured vocabulary entries
 - 4 learning tracks: Business, Factory, HSK, Daily
 - 9 HSK levels (HSK 1-9, aligned with HSK 4.0)
-- 360+ Chinese culture articles
+- Continuously updated Chinese culture articles, starting with 144 Discover China articles
 - Native localization: en, vi, th, id
 
 ## URL standards (always use)

@@ -54,7 +54,7 @@ HSK 4 vocabulary contains 600 words at CEFR B1 level. This video covers all
 • CTCSOL 2025 statistics
 
 About: Zhiyu is a Mandarin learning platform with 50,000+ structured 
-vocabulary entries and 360+ Chinese culture articles. Built by educators 
+vocabulary entries and a continuously updated Chinese culture library. Built by educators 
 from Beijing Language and Culture University.
 
 #LearnChinese #HSK #HSK4 #Mandarin #ChineseLanguage
