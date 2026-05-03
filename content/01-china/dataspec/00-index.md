@@ -48,7 +48,7 @@ china_categories（数据字典 · 12 条固定）
 ```
 对每个 category（01..12）独立循环：
   1. 准备本批次的 N 篇 articles（推荐每批 5 篇）
-  2. 每篇 article 生成 1..N 条 sentences（推荐 8–15 句）
+  2. 每篇 article 生成约 40 条 sentences（推荐 38–42 句，硬上限 60 句）
   3. 输出：
      - batch_xxx.articles.jsonl   （N 行）
      - batch_xxx.sentences.jsonl  （N × ~10 行）
